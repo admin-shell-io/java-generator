@@ -1,0 +1,44 @@
+package fraunhofer.impl;
+
+import fraunhofer.Dataset;
+
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.net.URL;
+
+public class DatasetImpl implements Dataset {
+
+    private XMLGregorianCalendar creationDate;
+    private String version, format, mediaType;
+
+    public XMLGregorianCalendar getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(XMLGregorianCalendar creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
+    }
+
+    public String getMediaType() {
+        return mediaType;
+    }
+
+    public void setMediaType(String mediaType) {
+        this.mediaType = mediaType;
+    }
+}

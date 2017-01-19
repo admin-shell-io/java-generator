@@ -1,0 +1,159 @@
+@prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> .
+@prefix idsv_top: <http://industrialdataspace.org/2016/10/idsv/topics#> .
+@prefix idsv_std: <http://industrialdataspace.org/2016/10/idsv/standards#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+# Classes describing a dataset in the state of being transfered (aka Header)
+# --------------------------------------------------------------------------
+
+idsv:Dataset rdfs:subClassOf dcat:Dataset;
+    a owl:Class;
+    rdfs:label "Dataset"@en;
+    rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
+    idsv:validation [
+        owl:onProperty idsv:creationDate;
+        jsr303:constraint "@NotNull";
+    ];
+    idsv:validation [
+        owl:onProperty idsv:mediaType;
+        jsr303:constraint "@URL";
+    ].
+
+idsv:TransferredDataset rdfs:subClassOf idsv:Dataset;
+	a owl:Class;
+	rdfs:label "TransferredDataset"@en;
+	rdfs:comment "The class of resources that describe a dataset transfered by an IDS communication in a protocol frame."@en;
+    idsv:validation [
+        owl:onProperty idsv:customProperty;
+        jsr220:constraint "@OneToMany";
+    ];
+    idsv:validation [
+        owl:onProperty idsv:sender;
+        jsr303:constraint "@NotNull";
+    ];
+    idsv:validation [
+        owl:onProperty idsv:receiver;
+        jsr303:constraint "@NotNull";
+    ].
+
+idsv:TransferProperty
+	a owl:Class;
+	rdfs:label "TransferProperty"@en;
+	rdfs:comment "General property for additional description of security aspects of a data transfer."@en;
+    idsv:validation [
+        owl:onProperty idsv:transferPropertyKey;
+        jsr303:constraint "@NotNull";
+    ];
+    idsv:validation [
+        owl:onProperty idsv:transferPropertyValue;
+        jsr303:constraint "@NotNull";
+    ].
+
+idsv:AuthToken
+	a owl:Class;
+	rdfs:label "AuthToken"@en;
+	rdfs:comment "Authorization Token."@en;
+    idsv:validation [
+        owl:onProperty idsv:tokenValue;
+        jsr303:constraint "@NotNull";
+    ].
+
+# Properties for describing a Dataset
+# -----------------------------------
+
+idsv:creationDate rdfs:subPropertyOf dct:dateSubmitted;
+    a owl:DatatypeProperty;
+    rdfs:label "creationDate"@en;
+    rdfs:domain idsv:Dataset;
+    rdfs:range xsd:dateTime;
+    rdfs:comment "Date of creation of the InfrastructureComponent. SHOULD be asserted to resources of type InfrastructureComponent."@en.
+
+idsv:format rdfs:subPropertyOf dct:format;
+	a owl:DatatypeProperty;
+	rdfs:label "format"@en;
+	rdfs:domain idsv:Dataset;
+	rdfs:range xsd:string;
+	rdfs:comment "The file format of the dataset. idsv:mediaType SHOULD be used if the type of the distribution is defined by IANA. SHOULD be asserted to resources of type Dataset."@en.
+
+idsv:mediaType rdfs:subPropertyOf dcat:mediaType;
+	a owl:DatatypeProperty;
+	rdfs:label "mediaType"@en;
+	rdfs:domain idsv:Dataset;
+	rdfs:range xsd:string;
+	rdfs:comment "The media type of the dataset, as defined by IANA. SHOULD be asserted to resources of type Dataset."@en.
+
+idsv:version rdfs:subPropertyOf dct:hasVersion;
+    a owl:DatatypeProperty;
+    rdfs:label "version"@en;
+    rdfs:domain idsv:Dataset;
+    rdfs:range xsd:string;
+    rdfs:comment "Version identifier of the InfrastructureComponent. SHOULD be asserted to resources of type InfrastructureComponent."@en.
+
+
+# Properties for describing a TransferredDataset
+# ----------------------------------------------
+
+idsv:sender
+	a owl:ObjectProperty;
+	rdfs:label "sender"@en;
+	rdfs:domain idsv:TransferredDataset;
+	rdfs:range idsv:DataEndpoint;
+	rdfs:comment "The sender of the message."@en.
+
+idsv:receiver
+	a owl:ObjectProperty;
+	rdfs:label "receiver"@en;
+	rdfs:domain idsv:TransferredDataset;
+	rdfs:range idsv:DataEndpoint;
+	rdfs:comment "The receiver of the message."@en.
+
+idsv:authToken
+	a owl:ObjectProperty;
+	rdfs:label "authToken"@en;
+	rdfs:domain idsv:TransferredDataset;
+	rdfs:range idsv:AuthToken;
+	rdfs:comment "An authorization token like JSON Web Token."@en.
+
+idsv:payloadDigest
+	a owl:DatatypeProperty;
+	rdfs:label "digest"@en;
+	rdfs:domain idsv:TransferredDataset;
+	rdfs:range xsd:base64Binary;
+	rdfs:comment "The digest of the dataset being transfered."@en.
+
+idsv:customProperty
+	a owl:ObjectProperty;
+	rdfs:label "customProperty"@en;
+	rdfs:domain idsv:TransferredDataset;
+	rdfs:range idsv:TransferProperty;
+	rdfs:comment "The digest of the dataset being transfered."@en.
+
+idsv:tokenValue a owl:DatatypeProperty;
+	rdfs:label "tokenValue"@en;
+	rdfs:domain idsv:AuthToken;
+	rdfs:range xsd:string;
+	rdfs:comment "An authorization token value like JSON Web Token."@en.
+
+idsv:transferPropertyKey a owl:DatatypeProperty;
+	rdfs:label "transferPropertyKey"@en;
+	rdfs:domain idsv:TransferProperty;
+	rdfs:range xsd:string.
+
+idsv:transferPropertyValue a owl:DatatypeProperty;
+	rdfs:label "transferPropertyValue"@en;
+	rdfs:domain idsv:TransferProperty;
+	rdfs:range xsd:string.
