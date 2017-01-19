@@ -14,6 +14,10 @@ public class DatasetImpl implements Dataset {
     private XMLGregorianCalendar creationDate;
     private String version, format, mediaType;
 
+    // no "manual" construction
+    DatasetImpl() {
+    }
+
     @Override
     public XMLGregorianCalendar getCreationDate() {
         return creationDate;

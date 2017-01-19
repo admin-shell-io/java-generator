@@ -2,6 +2,8 @@ package de.fraunhofer.iais.eis.invoke;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.Dataset;
+import de.fraunhofer.iais.eis.impl.ConstraintViolationException;
+import de.fraunhofer.iais.eis.impl.DatasetBuilder;
 import de.fraunhofer.iais.eis.impl.DatasetImpl;
 
 import javax.validation.ConstraintViolation;
@@ -16,11 +18,13 @@ import java.util.Set;
 public class Invoke {
 
     public static void main(String[] args) {
-        Dataset dataset = new DatasetImpl();
+        DatasetBuilder datasetBuilder = new DatasetBuilder();
+        try {
+            datasetBuilder.creationDate(null).build();
+        } catch (ConstraintViolationException e) {
+            e.printStackTrace();
+        }
 
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<Dataset>> constraintViolations = validator.validate(dataset);
     }
 
 }
