@@ -1,14 +1,15 @@
-package fraunhofer;
+package de.fraunhofer.iais.eis;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 public interface Dataset {
 
-    @NotEmpty XMLGregorianCalendar getCreationDate();
-    void setCreationDate(@NotEmpty XMLGregorianCalendar creationDate);
+    @NotNull XMLGregorianCalendar getCreationDate();
+    void setCreationDate(@NotNull XMLGregorianCalendar creationDate);
 
     String getVersion();
     void setVersion(String version);

@@ -1,4 +1,4 @@
-package fraunhofer;
+package de.fraunhofer.iais.eis;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;

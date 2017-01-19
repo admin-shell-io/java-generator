@@ -1,9 +1,8 @@
-package fraunhofer.impl;
+package de.fraunhofer.iais.eis.impl;
 
-import fraunhofer.*;
+import de.fraunhofer.iais.eis.*;
 
 import javax.xml.datatype.XMLGregorianCalendar;
-import java.net.URL;
 import java.util.Collection;
 
 /**
