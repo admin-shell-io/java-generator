@@ -5,6 +5,8 @@ import org.hibernate.validator.constraints.URL;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.net.MalformedURLException;
+import java.util.UUID;
 
 /**
  * Created by christian on 19.01.17.
@@ -18,6 +20,12 @@ public class DatasetImpl implements Dataset {
 
     // no "manual" construction
     DatasetImpl() {
+        try {
+            url = new java.net.URL("http", "industrialdataspace.org", "/dataset/" + UUID.randomUUID());
+        }
+        catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

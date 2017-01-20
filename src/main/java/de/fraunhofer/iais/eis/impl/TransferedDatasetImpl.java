@@ -2,7 +2,9 @@ package de.fraunhofer.iais.eis.impl;
 
 import de.fraunhofer.iais.eis.*;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.net.URL;
 import java.util.Collection;
 
 /**
@@ -57,7 +59,22 @@ public class TransferedDatasetImpl implements TransferedDataset {
 
     }
 
-    
+
+    @Override
+    public URL getId() {
+        return null;
+    }
+
+    @Override
+    public void setId(@NotNull URL url) {
+
+    }
+
+    @Override
+    public void setReadOnly() {
+
+    }
+
     final public XMLGregorianCalendar getCreationDate() {
         return null;
     }
