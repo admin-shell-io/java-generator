@@ -1,9 +1,9 @@
 package de.fraunhofer.iais.eis.impl;
 
 import de.fraunhofer.iais.eis.Dataset;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
@@ -11,30 +11,45 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 public class DatasetImpl implements Dataset {
 
+    private java.net.URL url;
     private XMLGregorianCalendar creationDate;
     private String version, format, mediaType;
+    private boolean readOnly;
 
     // no "manual" construction
     DatasetImpl() {
     }
 
     @Override
-    public XMLGregorianCalendar getCreationDate() {
+    final public java.net.URL getId() {
+        return url;
+    }
+
+    @Override
+    final public void setId(@NotNull java.net.URL url) {
+        assertModifiable();
+        this.url = url;
+    }
+
+    @Override
+    final public XMLGregorianCalendar getCreationDate() {
         return creationDate;
     }
 
     @Override
-    public void setCreationDate(XMLGregorianCalendar creationDate) {
+    final public void setCreationDate(XMLGregorianCalendar creationDate) {
+        assertModifiable();
         this.creationDate = creationDate;
     }
 
     @Override
-    public String getVersion() {
+    final public String getVersion() {
         return version;
     }
 
     @Override
-    public void setVersion(String version) {
+    final public void setVersion(String version) {
+        assertModifiable();
         this.version = version;
     }
 
@@ -44,7 +59,8 @@ public class DatasetImpl implements Dataset {
     }
 
     @Override
-    public void setFormat(String format) {
+    final public void setFormat(String format) {
+        assertModifiable();
         this.format = format;
     }
 
@@ -54,7 +70,18 @@ public class DatasetImpl implements Dataset {
     }
 
     @Override
-    public void setMediaType(String mediaType) {
+    final public void setMediaType(String mediaType) {
+        assertModifiable();
         this.mediaType = mediaType;
+    }
+
+    final public void setReadOnly() {
+        readOnly = true;
+    }
+
+    private void assertModifiable() {
+        if (readOnly) {
+            throw new RuntimeException("object is built and cannot be modified");
+        }
     }
 }

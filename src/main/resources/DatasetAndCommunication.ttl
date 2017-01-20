@@ -17,6 +17,9 @@
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
+@prefix jsr303: <http://industrialdataspace.org/vocab/jsr303#> .
+@prefix jsr220: <http://industrialdataspace.org/vocab/jsr220#> .
+
 # Classes describing a dataset in the state of being transfered (aka Header)
 # --------------------------------------------------------------------------
 

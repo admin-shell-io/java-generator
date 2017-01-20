@@ -47,6 +47,7 @@ public class DatasetBuilder {
         if (!constraintViolations.isEmpty()) {
             throw new ConstraintViolationException();
         }
+        dataset.setReadOnly();
         return dataset;
     }
 
