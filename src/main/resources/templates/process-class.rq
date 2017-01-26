@@ -6,14 +6,14 @@ template idsv:process-class(?class, ?comment) {
     "/* " str(?comment) " */\n"
     "public interface " strafter(str(?class), "#") "{\n"
 
-        // standard methods
+        "\n\t// standard methods"
 
-        @NotNull java.net.URL getId();
-        void setId(@NotNull java.net.URL url);
+        "\n\t@NotNull java.net.URL getId();"
+        "\n\tvoid setId(@NotNull java.net.URL url);"
+        "\n"
+        "\n\tvoid setReadOnly();"
 
-        void setReadOnly();
-
-        // accessor methods as derived from vocabulary
+        "\n\t// accessor methods as derived from vocabulary"
         st:call-template(idsv:process-properties, ?class)
 
     "\n}\n"

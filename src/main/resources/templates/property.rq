@@ -3,14 +3,14 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 template idsv:property(?property) {
 
     # getter method
-    #todo: annotation, return type
+    #todo: annotation, return type xsd->java
 
-    "\n\t"  void concat("get", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
+    "\n\t" str(?range) concat("get", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
 
     # setter method
-    #todo: annotation, parameter type
+    #todo: annotation, parameter type xsd->java
 
-    "\n\t" void concat("set", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
+    "\n\tvoid" concat("set", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "(str(?range) str(?label));")
 
 
     # todo: should support

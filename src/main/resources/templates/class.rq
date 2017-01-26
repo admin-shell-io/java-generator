@@ -1,4 +1,5 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template{
 	# Write process result into an own file 
