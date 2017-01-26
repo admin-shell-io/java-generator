@@ -5,12 +5,12 @@ template idsv:property(?property) {
     # getter method
     #todo: annotation, return type xsd->java
 
-    "\n\t" str(?range) concat("get", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
+    "\n\t" str(?range) " " concat("get", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
 
     # setter method
     #todo: annotation, parameter type xsd->java
 
-    "\n\tvoid" concat("set", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "(str(?range) str(?label));")
+    "\n\tvoid " concat("set", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "(", str(?range), " ", str(?label), ");")
 
 
     # todo: should support
