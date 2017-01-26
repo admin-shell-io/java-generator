@@ -1,0 +1,22 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+
+template idsv:process-class(?class, ?comment) {
+
+    "package de.fraunhofer.iais.eis;\n"
+    "/* " str(?comment) " */\n"
+    "public interface " strafter(str(?class), "#") "{\n"
+
+        // standard methods
+
+        @NotNull java.net.URL getId();
+        void setId(@NotNull java.net.URL url);
+
+        void setReadOnly();
+
+        // accessor methods as derived from vocabulary
+        st:call-template(idsv:process-properties, ?class)
+
+    "\n}\n"
+
+}
+where{}

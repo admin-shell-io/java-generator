@@ -1,0 +1,11 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+
+template idsv:process-properties(?class) {
+
+	# Iterates on selected properties 
+	st:call-template(idsv:property, ?property)  
+
+}
+where  {   
+  ?property rdfs:domain ?class.
+}

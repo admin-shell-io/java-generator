@@ -1,0 +1,28 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+
+template idsv:property(?property) {
+
+    # getter method
+    #todo: annotation, return type
+
+    "\n\t"  void concat("get", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
+
+    # setter method
+    #todo: annotation, parameter type
+
+    "\n\t" void concat("set", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
+
+
+    # todo: should support
+    # @NotNull XMLGregorianCalendar getCreationDate();
+    # void setCreationDate(@NotNull XMLGregorianCalendar creationDate);
+
+
+	# Property value type, uppercase initial letter
+	# "\n\t" ucase(substr(strafter(str(?range), "#"),1,1)) substr(strafter(str(?range), "#"),2) " " strafter(str(?in), "#") ";"
+}
+where  {
+   ?property rdfs:range ?range;
+       rdfs:label ?label.
+
+} 

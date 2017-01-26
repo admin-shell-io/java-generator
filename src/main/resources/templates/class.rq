@@ -1,0 +1,12 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+
+template{
+	# Write process result into an own file 
+	kg:write(concat("/tmp/",strafter(str(?x), "#"), ".java"),
+		# Generate input 
+		st:call-template(idsv:process-class, ?class, ?comment))
+}
+where  {
+	?class rdfs:subClassOf* dcat:Dataset;
+	   rdfs:comment ?comment.
+}
