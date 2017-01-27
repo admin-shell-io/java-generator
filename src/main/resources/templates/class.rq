@@ -2,12 +2,12 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template{
-	# Write process result into an own file 
+
+	# Write process result into an own file
 	kg:write(concat("/tmp/",strafter(str(?class), "#"), ".java"),
 		# Generate input 
 		st:call-template(idsv:process-class, ?class, ?comment))
 }
 where  {
-	?class rdfs:subClassOf* dcat:Dataset;
-	   rdfs:comment ?comment.
+	?class rdfs:comment ?comment.
 }

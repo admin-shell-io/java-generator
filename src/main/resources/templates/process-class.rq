@@ -28,6 +28,7 @@ template idsv:process-class(?class, ?comment) {
 
 }
 where{
+    ?class a owl:Class.
     OPTIONAL {
         ?class rdfs:subClassOf ?superClass.
     }
