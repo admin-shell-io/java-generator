@@ -1,6 +1,6 @@
-package de.fraunhofer.iais.eis.impl;
+package de.fraunhofer.iais.eis.handcrafted.impl;
 
-import de.fraunhofer.iais.eis.Dataset;
+import de.fraunhofer.iais.eis.handcrafted.Dataset;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

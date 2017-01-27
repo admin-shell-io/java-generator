@@ -28,11 +28,11 @@ idsv:Dataset rdfs:subClassOf dcat:Dataset;
     rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
     idsv:validation [
         owl:onProperty idsv:creationDate;
-        valid:constraint "@NotNull";
+        valid:constraint "@javax.validation.constraints.NotNull";
     ];
     idsv:validation [
         owl:onProperty idsv:mediaType;
-        valid:constraint "@URL";
+        valid:constraint "@org.hibernate.validator.constraints.URL";
     ].
 
 idsv:TransferredDataset rdfs:subClassOf idsv:Dataset;
@@ -45,11 +45,11 @@ idsv:TransferredDataset rdfs:subClassOf idsv:Dataset;
     ];
     idsv:validation [
         owl:onProperty idsv:sender;
-        valid:constraint "@NotNull";
+        valid:constraint "@javax.validation.constraints.NotNull";
     ];
     idsv:validation [
         owl:onProperty idsv:receiver;
-        valid:constraint "@NotNull";
+        valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
 idsv:TransferProperty
@@ -58,11 +58,11 @@ idsv:TransferProperty
 	rdfs:comment "General property for additional description of security aspects of a data transfer."@en;
     idsv:validation [
         owl:onProperty idsv:transferPropertyKey;
-        valid:constraint "@NotNull";
+        valid:constraint "@javax.validation.constraints.NotNull";
     ];
     idsv:validation [
         owl:onProperty idsv:transferPropertyValue;
-        valid:constraint "@NotNull";
+        valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
 idsv:AuthToken
@@ -71,7 +71,7 @@ idsv:AuthToken
 	rdfs:comment "Authorization Token."@en;
     idsv:validation [
         owl:onProperty idsv:tokenValue;
-        valid:constraint "@NotNull";
+        valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
 # Properties for describing a Dataset

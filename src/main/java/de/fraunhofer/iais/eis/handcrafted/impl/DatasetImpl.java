@@ -1,7 +1,6 @@
-package de.fraunhofer.iais.eis.impl;
+package de.fraunhofer.iais.eis.handcrafted.impl;
 
-import de.fraunhofer.iais.eis.Dataset;
-import org.hibernate.validator.constraints.URL;
+import de.fraunhofer.iais.eis.handcrafted.Dataset;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.datatype.XMLGregorianCalendar;

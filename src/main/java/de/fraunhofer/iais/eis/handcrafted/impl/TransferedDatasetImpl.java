@@ -1,6 +1,9 @@
-package de.fraunhofer.iais.eis.impl;
+package de.fraunhofer.iais.eis.handcrafted.impl;
 
-import de.fraunhofer.iais.eis.*;
+import de.fraunhofer.iais.eis.handcrafted.AuthToken;
+import de.fraunhofer.iais.eis.handcrafted.DataEndpoint;
+import de.fraunhofer.iais.eis.handcrafted.TransferProperty;
+import de.fraunhofer.iais.eis.handcrafted.TransferedDataset;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -30,7 +33,7 @@ public class TransferedDatasetImpl implements TransferedDataset {
     }
 
     
-    final public AuthThoken getAuthToken() {
+    final public AuthToken getAuthToken() {
         return null;
     }
 

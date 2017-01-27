@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis;
+package de.fraunhofer.iais.eis.handcrafted;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.URL;
@@ -10,7 +10,7 @@ public interface Dataset {
 
     // standard methods
 
-    @NotNull java.net.URL getId();
+    @javax.validation.constraints.NotNull java.net.URL getId();
     void setId(@NotNull java.net.URL url);
 
     void setReadOnly();

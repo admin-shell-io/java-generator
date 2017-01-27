@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis;
+package de.fraunhofer.iais.eis.handcrafted;
 
 /**
  * Created by christian on 19.01.17.

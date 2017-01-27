@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis;
+package de.fraunhofer.iais.eis.handcrafted;
 
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
@@ -12,7 +12,7 @@ public interface TransferedDataset extends Dataset {
     @NotNull DataEndpoint getReceiver();
     void setReceiver(@NotNull DataEndpoint receiver);
 
-    AuthThoken getAuthToken();
+    AuthToken getAuthToken();
     void setAuthThoken(AuthToken authToken);
 
     byte[] getPayloadDigest();

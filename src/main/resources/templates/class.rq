@@ -9,5 +9,6 @@ template{
 		st:call-template(idsv:process-class, ?class, ?comment))
 }
 where  {
-	?class rdfs:comment ?comment.
+    ?class a owl:Class;
+	    rdfs:comment ?comment.
 }
