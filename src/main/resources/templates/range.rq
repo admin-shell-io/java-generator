@@ -15,6 +15,7 @@ template idsv:range(?range) {
 #xsd:double 	double
 #xsd:boolean 	boolean
 #xsd:byte 	byte
+#xsd:base64Binary 	byte[]
 #xsd:time 	javax.xml.datatype.XMLGregorianCalendar
 #xsd:date 	javax.xml.datatype.XMLGregorianCalendar
 
