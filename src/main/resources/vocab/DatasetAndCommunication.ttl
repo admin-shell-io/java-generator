@@ -17,8 +17,7 @@
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-@prefix jsr303: <http://industrialdataspace.org/vocab/jsr303#> .
-@prefix jsr220: <http://industrialdataspace.org/vocab/jsr220#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#> .
 
 # Classes describing a dataset in the state of being transfered (aka Header)
 # --------------------------------------------------------------------------
@@ -29,11 +28,11 @@ idsv:Dataset rdfs:subClassOf dcat:Dataset;
     rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
     idsv:validation [
         owl:onProperty idsv:creationDate;
-        jsr303:constraint "@NotNull";
+        valid:constraint "@NotNull";
     ];
     idsv:validation [
         owl:onProperty idsv:mediaType;
-        jsr303:constraint "@URL";
+        valid:constraint "@URL";
     ].
 
 idsv:TransferredDataset rdfs:subClassOf idsv:Dataset;
@@ -42,15 +41,15 @@ idsv:TransferredDataset rdfs:subClassOf idsv:Dataset;
 	rdfs:comment "The class of resources that describe a dataset transfered by an IDS communication in a protocol frame."@en;
     idsv:validation [
         owl:onProperty idsv:customProperty;
-        jsr220:constraint "@OneToMany";
+        valid:constraint "@OneToMany";
     ];
     idsv:validation [
         owl:onProperty idsv:sender;
-        jsr303:constraint "@NotNull";
+        valid:constraint "@NotNull";
     ];
     idsv:validation [
         owl:onProperty idsv:receiver;
-        jsr303:constraint "@NotNull";
+        valid:constraint "@NotNull";
     ].
 
 idsv:TransferProperty
@@ -59,11 +58,11 @@ idsv:TransferProperty
 	rdfs:comment "General property for additional description of security aspects of a data transfer."@en;
     idsv:validation [
         owl:onProperty idsv:transferPropertyKey;
-        jsr303:constraint "@NotNull";
+        valid:constraint "@NotNull";
     ];
     idsv:validation [
         owl:onProperty idsv:transferPropertyValue;
-        jsr303:constraint "@NotNull";
+        valid:constraint "@NotNull";
     ].
 
 idsv:AuthToken
@@ -72,7 +71,7 @@ idsv:AuthToken
 	rdfs:comment "Authorization Token."@en;
     idsv:validation [
         owl:onProperty idsv:tokenValue;
-        jsr303:constraint "@NotNull";
+        valid:constraint "@NotNull";
     ].
 
 # Properties for describing a Dataset

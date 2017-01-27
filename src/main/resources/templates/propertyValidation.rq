@@ -1,0 +1,12 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
+
+template idsv:propertyValidation(?property, ?class) {
+    str(?constraint)
+}
+where {
+    ?class idsv:validation ?validation.
+    ?validation owl:onProperty ?prop.
+    ?validation valid:constraint ?constraint;
+    FILTER (?prop = ?property)
+}

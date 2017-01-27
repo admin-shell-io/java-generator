@@ -3,7 +3,7 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 template idsv:process-properties(?class) {
 
 	# Iterates on selected properties 
-	st:call-template(idsv:property, ?property)  
+	st:call-template(idsv:property, ?property, ?class)
 
 }
 where  {   

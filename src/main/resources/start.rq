@@ -1,0 +1,6 @@
+prefix st: <http://ns.inria.fr/sparql-template/>
+prefix owl:    <http://www.w3.org/2002/07/owl#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+
+template{st:apply-templates-with("/home/christian/projects/ids/rdf-codegen/src/main/resources/templates")} where {}
