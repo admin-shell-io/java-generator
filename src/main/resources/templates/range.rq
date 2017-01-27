@@ -5,22 +5,21 @@ template idsv:range(?range) {
 
     if (str(?range) = str(<xsd:dateTime>), "javax.xml.datatype.XMLGregorianCalendar",
     if (str(?range) = str(<xsd:string>), "java.lang.String",
-
-#todo:
-#xsd:integer 	java.math.BigInteger
-#xsd:int 	int
-#xsd.long 	long
-#xsd:short 	short
-#xsd:float 	float
-#xsd:double 	double
-#xsd:boolean 	boolean
-#xsd:byte 	byte
-#xsd:base64Binary 	byte[]
-#xsd:time 	javax.xml.datatype.XMLGregorianCalendar
-#xsd:date 	javax.xml.datatype.XMLGregorianCalendar
+    if (str(?range) = str(<xsd:integer>), "java.math.BigInteger",
+    if (str(?range) = str(<xsd:int>), "int",
+    if (str(?range) = str(<xsd.long>), "long",
+    if (str(?range) = str(<xsd:short>), "short",
+    if (str(?range) = str(<xsd:float>), "float",
+    if (str(?range) = str(<xsd:double>), "double",
+    if (str(?range) = str(<xsd:boolean>), "boolean",
+    if (str(?range) = str(<xsd:byte>), "byte",
+    if (str(?range) = str(<xsd:base64Binary>), "byte[]",
+    if (str(?range) = str(<xsd:time>), "javax.xml.datatype.XMLGregorianCalendar",
+    if (str(?range) = str(<xsd:date>), "javax.xml.datatype.XMLGregorianCalendar",
 
     if (strstarts(str(?range), "http://industrialdataspace.org/"), concat("de.fraunhofer.iais.eis.", strafter(?range, "#")),
-    "!!unknownType!!")))
+
+    "!!unknownType!!"))))))))))))))
 
 }
 where {
