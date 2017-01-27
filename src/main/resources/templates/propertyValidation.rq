@@ -2,7 +2,7 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
 
 template idsv:propertyValidation(?property, ?class) {
-    str(?constraint)
+    str(?constraint) " "
 }
 where {
     ?class idsv:validation ?validation.

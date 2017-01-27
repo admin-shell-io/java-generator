@@ -3,28 +3,35 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 template idsv:property(?property, ?class) {
 
     # getter method
-    #todo: return type xsd->java
 
-    "\n\t" st:call-template(idsv:propertyValidation, ?property, ?class) " "
-    str(?range) " " concat("get", ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), "();")
+        # return type annotation
+        "\n\t" st:call-template(idsv:propertyValidation, ?property, ?class)
+
+        # return type
+        st:call-template(idsv:range, ?range) " "
+
+        # method name
+        "get" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2) "();"
 
     # setter method
-    #todo: parameter type xsd->java
 
-    "\n\tvoid set"
-    ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
-    "("
-        st:call-template(idsv:propertyValidation, ?property, ?class) " "
-        str(?range) " " str(?label)
-    ");"
+        # method name
+        "\n\tvoid set"
+        ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
 
-    # todo: should support
-    # @NotNull XMLGregorianCalendar getCreationDate();
-    # void setCreationDate(@NotNull XMLGregorianCalendar creationDate);
+        "("
+            # parameter annotation
+            st:call-template(idsv:propertyValidation, ?property, ?class)
+
+            # parameter type
+            st:call-template(idsv:range, ?range) " "
+
+            # parameter label
+            str(?label)
+        ");"
 
 }
 where  {
    ?property rdfs:range ?range;
        rdfs:label ?label.
-
 } 

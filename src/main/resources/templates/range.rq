@@ -1,0 +1,26 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+
+template idsv:range(?range) {
+
+    if (str(?range) = str(<xsd:dateTime>), "javax.xml.datatype.XMLGregorianCalendar",
+    if (str(?range) = str(<xsd:string>), "java.lang.String",
+
+#todo:
+#xsd:integer 	java.math.BigInteger
+#xsd:int 	int
+#xsd.long 	long
+#xsd:short 	short
+#xsd:float 	float
+#xsd:double 	double
+#xsd:boolean 	boolean
+#xsd:byte 	byte
+#xsd:time 	javax.xml.datatype.XMLGregorianCalendar
+#xsd:date 	javax.xml.datatype.XMLGregorianCalendar
+
+    if (strstarts(str(?range), "http://industrialdataspace.org/"), concat("de.fraunhofer.iais.eis.", strafter(?range, "#")),
+    "!!unknownType!!")))
+
+}
+where {
+}
