@@ -1,0 +1,10 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+
+template idsv:process-individuals(?class) {
+
+    "\n\t" strafter(str(?individual), "#") ","
+
+}
+where  {
+    ?individual a ?class.
+}

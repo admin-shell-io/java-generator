@@ -6,9 +6,8 @@ template{
 	# Write process result into an own file
 	kg:write(concat("/tmp/",strafter(str(?class), "#"), ".java"),
 		# Generate input 
-		st:call-template(idsv:process-class, ?class, ?comment))
+		st:call-template(idsv:process-class, ?class))
 }
 where  {
-    ?class a owl:Class;
-	    rdfs:comment ?comment.
+    ?class a owl:Class.
 }

@@ -1,0 +1,18 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idsv:process-class-to-enum(?class, ?comment) {
+
+    "package de.fraunhofer.iais.eis;\n"
+    "/* " str(?comment) " */\n"
+    "public enum " strafter(str(?class), "#") " {\n"
+
+        st:call-template(idsv:process-individuals, ?class)
+
+    "\n}\n"
+
+}
+where{
+    ?class a owl:Class.
+    FILTER EXISTS {?instance a ?class}
+}
