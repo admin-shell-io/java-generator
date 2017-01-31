@@ -1,6 +1,7 @@
 package de.fraunhofer.iais.eis.handcrafted.impl;
 
 import de.fraunhofer.iais.eis.handcrafted.Dataset;
+import de.fraunhofer.iais.eis.util.VocabUtil;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -19,12 +20,7 @@ public class DatasetImpl implements Dataset {
 
     // no "manual" construction
     DatasetImpl() {
-        try {
-            url = new java.net.URL("http", "industrialdataspace.org", "/dataset/" + UUID.randomUUID());
-        }
-        catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+        url = VocabUtil.createRandomUrl("dataset");
     }
 
     @Override
@@ -88,7 +84,7 @@ public class DatasetImpl implements Dataset {
 
     private void assertModifiable() {
         if (readOnly) {
-            throw new RuntimeException("object is built and cannot be modified");
+            throw new RuntimeException("object has been built and cannot be modified anymore");
         }
     }
 }

@@ -5,6 +5,7 @@ template idsv:process-class(?class) {
 
     st:call-template(idsv:process-class-to-enum, ?class, ?comment)
     st:call-template(idsv:process-class-to-interface, ?class, ?comment)
+    st:call-template(idsv:process-class-to-class, ?class, ?comment)
 
 }
 where{

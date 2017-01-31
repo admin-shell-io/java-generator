@@ -13,7 +13,9 @@ public class ConstraintViolationException extends Exception {
     public ConstraintViolationException() {
     }
 
-    public ConstraintViolationException(Set<ConstraintViolation<?>> violations) {
-        this.violations = violations;
+    public <T> void setViolations(Set<ConstraintViolation<T>> constraintViolations) {
+
     }
+
 }
+

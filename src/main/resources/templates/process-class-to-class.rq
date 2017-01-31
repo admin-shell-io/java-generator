@@ -1,0 +1,30 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idsv:process-class-to-class(?class, ?comment) {
+
+    "package de.fraunhofer.iais.eis;\n\n"
+    "/* " str(?comment) " */\n"
+    "public class " concat(strafter(str(?class), "#"), "Impl")
+    " implements de.fraunhofer.iais.eis." strafter(str(?class), "#")
+
+    " {\n"
+
+        "\n\t// standard method implementation\n"
+
+        "\n\t@javax.validation.constraints.NotNull java.net.URL getId();"
+        "\n\tvoid setId(@javax.validation.constraints.NotNull java.net.URL url);"
+        "\n"
+        "\n\tvoid setReadOnly();\n"
+
+        "\n\t// accessor methods as derived from vocabulary"
+        "\n"
+        # st:call-template(idsv:process-properties, ?class)
+
+    "\n}\n"
+
+}
+where{
+    ?class a owl:Class.
+    FILTER NOT EXISTS {?instance a ?class}
+}
