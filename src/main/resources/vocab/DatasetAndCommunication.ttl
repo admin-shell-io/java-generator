@@ -19,8 +19,8 @@
 
 @prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#> .
 
-# Classes describing a dataset in the state of being transfered (aka Header)
-# --------------------------------------------------------------------------
+# Classes describing datasets and datasets that are in the state of being transfered (aka Header)
+# -----------------------------------------------------------------------------------------------
 
 idsv:Dataset rdfs:subClassOf dcat:Dataset;
     a owl:Class;

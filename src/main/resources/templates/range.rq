@@ -17,10 +17,10 @@ template idsv:range(?range) {
     if (str(?range) = str(<xsd:time>), "javax.xml.datatype.XMLGregorianCalendar",
     if (str(?range) = str(<xsd:date>), "javax.xml.datatype.XMLGregorianCalendar",
     if (str(?range) = str(<xsd:anyURI>), "java.net.URL",
+    if (str(?range) = str(<rdfs:Literal>), "org.apache.jena.rdf.model.Literal",
 
     if (strstarts(str(?range), "http://industrialdataspace.org/"), concat("de.fraunhofer.iais.eis.", strafter(?range, "#")),
-
-    "!!unknownType!!")))))))))))))))
+    "!!unknownType!!"))))))))))))))))
 
 }
 where {

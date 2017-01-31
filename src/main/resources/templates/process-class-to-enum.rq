@@ -3,7 +3,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idsv:process-class-to-enum(?class, ?comment) {
 
-    "package de.fraunhofer.iais.eis;\n"
+    "package de.fraunhofer.iais.eis;\n\n"
     "/* " str(?comment) " */\n"
     "public enum " strafter(str(?class), "#") " {\n"
 
