@@ -44,7 +44,11 @@ idsv:BrokerRequestMessage a owl:Class;
 idsv:BrokerResponseMessage a owl:Class;
     rdfs:subClassOf idsv:BrokerMessage;
     rdfs:label "BrokerResponseMessage"@en ;
-    rdfs:comment "The class of all messages that represent responses of a Broker.".
+    rdfs:comment "The class of all messages that represent responses of a Broker.";
+    idsv:validation [
+        owl:onProperty idsv:correlationId;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
 
 idsv:BrokerDataRequest a owl:Class;
     rdfs:subClassOf idsv:BrokerDataMessage;
@@ -171,6 +175,7 @@ idsv:payload a owl:DatatypeProperty;
 idsv:correlationId a owl:DatatypeProperty;
     rdfs:label "correlationId";
     rdfs:domain idsv:BrokerResponseMessage;
+    rdfs:range xsd:anyURI;
     rdfs:comment "The unique ID of the source request which is referred to by a response message."@en.
 
 idsv:queryScope a owl:ObjectProperty;
