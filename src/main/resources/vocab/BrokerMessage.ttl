@@ -24,7 +24,11 @@
 
 idsv:BrokerMessage a owl:Class;
     rdfs:label "BrokerMessage"@en ;
-    rdfs:comment "The class of all messages to interact with a Broker." .
+    rdfs:comment "The class of all messages to interact with a Broker.";
+    idsv:validation [
+        owl:onProperty idsv:payload;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
 
 idsv:BrokerDataMessage a owl:Class;
     rdfs:subClassOf idsv:BrokerMessage;
@@ -34,7 +38,11 @@ idsv:BrokerDataMessage a owl:Class;
 idsv:BrokerQueryMessage a owl:Class;
     rdfs:subClassOf idsv:BrokerMessage;
     rdfs:label "BrokerQueryMessage"@en ;
-    rdfs:comment "The class of all messages that query the broker for data.".
+    rdfs:comment "The class of all messages that query the broker for data.";
+    idsv:validation [
+        owl:onProperty idsv:queryScope;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
 
 idsv:BrokerRequestMessage a owl:Class;
     rdfs:subClassOf idsv:BrokerMessage;
@@ -48,6 +56,10 @@ idsv:BrokerResponseMessage a owl:Class;
     idsv:validation [
         owl:onProperty idsv:correlationId;
         valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    idsv:validation [
+        owl:onProperty idsv:mediaType;
+        valid:constraint "@org.hibernate.validator.constraints.URL";
     ].
 
 idsv:BrokerDataRequest a owl:Class;
@@ -74,7 +86,15 @@ idsv:BrokerQueryRequest a owl:Class;
     rdfs:subClassOf idsv:BrokerRequestMessage;
     rdfs:subClassOf idsv:BrokerQueryMessage;
     rdfs:label "BrokerQueryRequest"@en ;
-    rdfs:comment "The class of all messages that represent query requests to a Broker.".
+    rdfs:comment "The class of all messages that represent query requests to a Broker.";
+    idsv:validation [
+        owl:onProperty idsv:queryRequestAction;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    idsv:validation [
+        owl:onProperty idsv:queryScope;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
 
 idsv:BrokerQueryResponse a owl:Class;
     rdfs:subClassOf idsv:BrokerQueryMessage;

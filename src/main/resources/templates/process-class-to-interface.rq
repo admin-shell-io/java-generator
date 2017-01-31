@@ -15,8 +15,8 @@ template idsv:process-class-to-interface(?class, ?comment) {
 
         "\n\t// standard methods\n"
 
-        "\n\t@NotNull java.net.URL getId();"
-        "\n\tvoid setId(@NotNull java.net.URL url);"
+        "\n\t@javax.validation.constraints.NotNull java.net.URL getId();"
+        "\n\tvoid setId(@javax.validation.constraints.NotNull java.net.URL url);"
         "\n"
         "\n\tvoid setReadOnly();\n"
 
