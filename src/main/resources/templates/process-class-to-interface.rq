@@ -8,7 +8,7 @@ template idsv:process-class-to-interface(?class, ?comment) {
     "public interface " strafter(str(?class), "#")
 
     if (bound(?superClass) && strstarts(str(?superClass), "http://industrialdataspace.org/"),
-        concat(" extends ", "de.fraunhofer.iais.eis.", strafter(str(?superClass), "#")),
+        concat(" extends ", strafter(st:call-template(idsv:process-subclass, ?class), ", ")),
         "")
 
     " {\n"
@@ -34,3 +34,4 @@ where{
     }
     FILTER NOT EXISTS {?instance a ?class}
 }
+GROUP BY ?class
