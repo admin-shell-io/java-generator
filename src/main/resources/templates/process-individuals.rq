@@ -2,9 +2,10 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 
 template idsv:process-individuals(?class) {
 
-    "\n\t" strafter(str(?individual), "#") ","
+    "\n\t" str(?label) ","
 
 }
 where  {
-    ?individual a ?class.
+    ?individual a ?class;
+        rdfs:label ?label.
 }

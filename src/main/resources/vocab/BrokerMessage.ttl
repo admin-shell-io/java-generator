@@ -85,34 +85,56 @@ idsv:BrokerDataRequestAction a owl:Class;
     rdfs:label "BrokerDataRequestAction"@en ;
     rdfs:comment "The class of all actions that can be issued to a broker in a data request message.".
 
-idsv:BrokerDataRegisterAction a idsv:BrokerDataRequestAction.
-idsv:BrokerDataUpdateAction a idsv:BrokerDataRequestAction.
-idsv:BrokerDataPassivateAction a idsv:BrokerDataRequestAction.
-idsv:BrokerDataActivateAction a idsv:BrokerDataRequestAction.
-idsv:BrokerDataRemoveAction a idsv:BrokerDataRequestAction.
+idsv:BrokerDataRegisterAction a idsv:BrokerDataRequestAction;
+    rdfs:label "REGISTER"@en.
+
+idsv:BrokerDataUpdateAction a idsv:BrokerDataRequestAction;
+    rdfs:label "UPDATE"@en.
+
+idsv:BrokerDataPassivateAction a idsv:BrokerDataRequestAction;
+    rdfs:label "PASSIVATE"@en.
+
+idsv:BrokerDataActivateAction a idsv:BrokerDataRequestAction;
+    rdfs:label "ACTIVATE"@en.
+
+idsv:BrokerDataRemoveAction a idsv:BrokerDataRequestAction;
+    rdfs:label "REMOVE"@en.
 
 idsv:BrokerQueryRequestAction a owl:Class;
     rdfs:label "BrokerQueryRequestAction"@en ;
     rdfs:comment "The class of all actions that can be issued to a broker in a query message.".
 
-idsv:BrokerQueryGetAction a idsv:BrokerQueryRequestAction.
-idsv:BrokerQueryListAction a idsv:BrokerQueryRequestAction.
+idsv:BrokerQueryGetAction a idsv:BrokerQueryRequestAction;
+    rdfs:label "GET"@en.
+
+idsv:BrokerQueryListAction a idsv:BrokerQueryRequestAction;
+    rdfs:label "LIST"@en.
 
 idsv:BrokerQueryMessageScope a owl:Class;
     rdfs:label "BrokerQueryMessageScope"@en ;
     rdfs:comment "The class of scopes that filter datasets by their states when queried.".
 
-idsv:BrokerQueryMessageScopeAll a idsv:BrokerQueryMessageScope.
-idsv:BrokerQueryMessageScopeActive a idsv:BrokerQueryMessageScope.
-idsv:BrokerQueryMessageScopeAccess a idsv:BrokerQueryMessageScope.
+idsv:BrokerQueryMessageScopeAll a idsv:BrokerQueryMessageScope;
+    rdfs:label "ALL"@en.
+
+idsv:BrokerQueryMessageScopeActive a idsv:BrokerQueryMessageScope;
+    rdfs:label "ACTIVE"@en.
+
+idsv:BrokerQueryMessageScopeAccess a idsv:BrokerQueryMessageScope;
+    rdfs:label "ACCESS"@en.
 
 idsv:EntityCoveredByDataRequest a owl:Class;
     rdfs:label "CoveredComponent"@en ;
     rdfs:comment "The class of IDS entities that are described in a BrokerDataRequest message.".
 
-idsv:CoveredParticipant a idsv:EntityCoveredByDataRequest.
-idsv:CoveredConnector a idsv:EntityCoveredByDataRequest.
-idsv:CoveredDataEndpoint a idsv:EntityCoveredByDataRequest.
+idsv:CoveredParticipant a idsv:EntityCoveredByDataRequest;
+    rdfs:label "PARTICIPANT"@en.
+
+idsv:CoveredConnector a idsv:EntityCoveredByDataRequest;
+    rdfs:label "CONNECTOR"@en.
+
+idsv:CoveredDataEndpoint a idsv:EntityCoveredByDataRequest;
+    rdfs:label "DATA_ENDPOINT"@en.
 
 # Properties for describing BrokerMessages
 # ----------------------------------------
