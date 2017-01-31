@@ -10,16 +10,42 @@ template idsv:process-class-to-class(?class, ?comment) {
 
     " {\n"
 
-        "\n\t// standard method implementation\n"
+    # boilerplate methods
 
-        "\n\t@javax.validation.constraints.NotNull java.net.URL getId();"
-        "\n\tvoid setId(@javax.validation.constraints.NotNull java.net.URL url);"
-        "\n"
-        "\n\tvoid setReadOnly();\n"
+    "\n\tprivate java.net.URL url;"
+    "\n\tprivate boolean readOnly;"
 
-        "\n\t// accessor methods as derived from vocabulary"
-        "\n"
-        # st:call-template(idsv:process-properties, ?class)
+    "\n\t// no manual construction"
+    "\n\tDatasetImpl() {
+        "\n\t\turl = VocabUtil.createRandomUrl("dataset");
+    "\n\t}
+
+    "\n\t@Override
+    "\n\tfinal public java.net.URL getId() {
+    "\n\t\treturn url;
+    "\n\t}
+
+"\n\t        @Override
+"\n\t        final public void setId(@NotNull java.net.URL url) {
+"\n\t\t            assertModifiable();
+"\n\t\t            this.url = url;
+"\n\t        }
+
+"\n\t        final public void setReadOnly() {
+"\n\t\t            readOnly = true;
+"\n\t        }
+
+"\n\t        private void assertModifiable() {
+"\n\t\t            if (readOnly) {
+"\n\t\t\ŧ                throw new RuntimeException("object has been built and cannot be modified anymore");
+"\n\t\t            }
+"\n\t        }
+
+    # method implementation
+
+    "\n\t// accessor method implementations as derived from vocabulary"
+    "\n"
+    # st:call-template(idsv:process-properties, ?class)
 
     "\n}\n"
 
