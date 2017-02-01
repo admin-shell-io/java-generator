@@ -4,8 +4,11 @@ prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
 template idsv:property-to-field(?property, ?class) {
 
     "\n\t"
-    "field: " str(?property)
-    "\n\t"
+    "private "
+    st:call-template(idsv:range, ?range)
+    " "
+    strafter(str(?property), "#")
+    ";"
 
 }
 where  {

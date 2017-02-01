@@ -2,7 +2,7 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 
 template idsv:properties-to-fields(?class) {
 
-	# Iterates on selected properties 
+	# Iterates on selected properties
 	st:call-template(idsv:property-to-field, ?property, ?class)
 
 }

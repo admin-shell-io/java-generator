@@ -16,7 +16,10 @@ template idsv:process-class-to-class(?class) {
     "\n\tprivate java.net.URL url;"
     "\n\tprivate boolean readOnly;"
     "\n"
+
+    "\n\t// instance fields as derived from vocabulary\n"
     st:call-template(idsv:properties-to-fields, ?class)
+
     "\n"
     "\n\t// no manual construction"
     "\n\t" strafter(str(?class), "#") "Impl() {"
