@@ -1,9 +1,10 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:process-class-to-class(?class, ?comment) {
+template idsv:process-class-to-class(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
+    "import de.fraunhofer.iais.eis.util.VocabUtil;\n\n"
     "/* " str(?comment) " */\n"
     "public class " concat(strafter(str(?class), "#"), "Impl")
     " implements de.fraunhofer.iais.eis." strafter(str(?class), "#")
@@ -14,32 +15,33 @@ template idsv:process-class-to-class(?class, ?comment) {
 
     "\n\tprivate java.net.URL url;"
     "\n\tprivate boolean readOnly;"
-
+    "\n"
     "\n\t// no manual construction"
-    "\n\tDatasetImpl() {
-        "\n\t\turl = VocabUtil.createRandomUrl("dataset");
-    "\n\t}
-
-    "\n\t@Override
-    "\n\tfinal public java.net.URL getId() {
-    "\n\t\treturn url;
-    "\n\t}
-
-"\n\t        @Override
-"\n\t        final public void setId(@NotNull java.net.URL url) {
-"\n\t\t            assertModifiable();
-"\n\t\t            this.url = url;
-"\n\t        }
-
-"\n\t        final public void setReadOnly() {
-"\n\t\t            readOnly = true;
-"\n\t        }
-
-"\n\t        private void assertModifiable() {
-"\n\t\t            if (readOnly) {
-"\n\t\t\ŧ                throw new RuntimeException("object has been built and cannot be modified anymore");
-"\n\t\t            }
-"\n\t        }
+    "\n\t" strafter(str(?class), "#") "Impl() {"
+    "\n\t\turl = VocabUtil.createRandomUrl(\"" lcase(strafter(str(?class), "#")) "\");"
+    "\n\t}"
+    "\n"
+    "\n\t@Override"
+    "\n\tfinal public java.net.URL getId() {"
+    "\n\t\treturn url;"
+    "\n\t}"
+    "\n"
+    "\n\t@Override"
+    "\n\tfinal public void setId(@javax.validation.constraints.NotNull java.net.URL url) {"
+    "\n\t\tassertModifiable();"
+    "\n\t\tthis.url = url;"
+    "\n\t}"
+    "\n"
+    "\n\tfinal public void setReadOnly() {"
+    "\n\t\treadOnly = true;"
+    "\n\t}"
+    "\n"
+    "\n\tprivate void assertModifiable() {"
+    "\n\t\tif (readOnly) {"
+    "\n\t\t\tthrow new RuntimeException(\"object has been built and cannot be modified anymore\");"
+    "\n\t\t}"
+    "\n\t}"
+    "\n"
 
     # method implementation
 
@@ -51,6 +53,7 @@ template idsv:process-class-to-class(?class, ?comment) {
 
 }
 where{
-    ?class a owl:Class.
+    ?class a owl:Class;
+        rdfs:comment ?comment.
     FILTER NOT EXISTS {?instance a ?class}
 }

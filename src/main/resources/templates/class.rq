@@ -5,8 +5,10 @@ template{
 
 	# Write process result into an own file
 	kg:write(concat("/tmp/",strafter(str(?class), "#"), ".java"),
-		# Generate input 
 		st:call-template(idsv:process-class, ?class))
+
+	kg:write(concat("/tmp/",strafter(str(?class), "#"), "Impl.java"),
+		st:call-template(idsv:process-class-to-class, ?class))
 }
 where  {
     ?class a owl:Class.
