@@ -1,9 +1,9 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
 
-template idsv:process-properties(?class) {
+template idsv:properties-to-methods(?class, ?syntax) {
 
 	# Iterates on selected properties 
-	st:call-template(idsv:property, ?property, ?class)
+	st:call-template(idsv:property-to-method, ?property, ?class, ?syntax)
 
 }
 where  {   

@@ -1,12 +1,16 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
 
-template idsv:property(?property, ?class) {
+template idsv:property-to-method(?property, ?class, ?syntax) {
+
+    "\n\t"
 
     # getter method
 
+        # visibility modifier
+        if (str(?syntax) = 'class', 'public ', '')
+
         # return type and annotation
-        "\n\t"
         if (bound(?constraint),
             st:call-template(idsv:propertyAnnotation, ?constraint, ?range),
             st:call-template(idsv:range, ?range))
@@ -14,12 +18,18 @@ template idsv:property(?property, ?class) {
         " "
 
         # method name
-        "get" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2) "();"
+        "get" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2) "()"
+
+    if (str(?syntax) = 'class', st:call-template(idsv:getter-method-body, ?property), ';')
+    "\n\t"
 
     # setter method
 
+        # visibility modifier
+        if (str(?syntax) = 'class', 'public ', '')
+
         # method name
-        "\n\tvoid set"
+        "void set"
         ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
 
         "("
@@ -32,7 +42,10 @@ template idsv:property(?property, ?class) {
 
             # parameter label
             str(?label)
-        ");"
+        ")"
+
+    if (str(?syntax) = 'class', st:call-template(idsv:setter-method-body, ?property), ';')
+    "\n\t"
 
 }
 where  {

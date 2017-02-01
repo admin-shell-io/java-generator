@@ -1,0 +1,15 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
+
+template idsv:property-to-field(?property, ?class) {
+
+    "\n\t"
+    "field: " str(?property)
+    "\n\t"
+
+}
+where  {
+   ?property rdfs:label ?label;
+        rdfs:range ?range.
+
+} 

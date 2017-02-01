@@ -22,7 +22,7 @@ template idsv:process-class-to-interface(?class, ?comment) {
 
         "\n\t// accessor methods as derived from vocabulary"
         "\n"
-        st:call-template(idsv:process-properties, ?class)
+        st:call-template(idsv:properties-to-methods, ?class, 'interface')
 
     "\n}\n"
 

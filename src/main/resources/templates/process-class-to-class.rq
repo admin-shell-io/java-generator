@@ -16,6 +16,8 @@ template idsv:process-class-to-class(?class) {
     "\n\tprivate java.net.URL url;"
     "\n\tprivate boolean readOnly;"
     "\n"
+    st:call-template(idsv:properties-to-fields, ?class)
+    "\n"
     "\n\t// no manual construction"
     "\n\t" strafter(str(?class), "#") "Impl() {"
     "\n\t\turl = VocabUtil.createRandomUrl(\"" lcase(strafter(str(?class), "#")) "\");"
@@ -47,7 +49,7 @@ template idsv:process-class-to-class(?class) {
 
     "\n\t// accessor method implementations as derived from vocabulary"
     "\n"
-    # st:call-template(idsv:process-properties, ?class)
+    st:call-template(idsv:properties-to-methods, ?class, 'class')
 
     "\n}\n"
 
