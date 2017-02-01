@@ -5,7 +5,11 @@ template idsv:property-to-field(?property, ?class) {
 
     "\n\t"
     "private "
-    st:call-template(idsv:range, ?range)
+
+    if (bound(?constraint),
+        st:call-template(idsv:propertyAnnotation, ?constraint, ?range),
+        st:call-template(idsv:range, ?range))
+
     " "
     strafter(str(?property), "#")
     ";"
@@ -15,4 +19,9 @@ where  {
    ?property rdfs:label ?label;
         rdfs:range ?range.
 
+    OPTIONAL {
+        ?class idsv:validation ?validation.
+        ?validation owl:onProperty ?property.
+        ?validation valid:constraint ?constraint.
+    }
 } 
