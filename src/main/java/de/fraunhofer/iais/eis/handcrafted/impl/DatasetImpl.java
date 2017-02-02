@@ -11,11 +11,24 @@ import java.util.UUID;
 /**
  * Created by christian on 19.01.17.
  */
+//@RdfType("http://industrialdataspace.org/2016/10/idsv/core#TransferredDataset")
 public class DatasetImpl implements Dataset {
 
+//    @RdfId(uriTemplate = "{RdfId}")
     private java.net.URL url;
+
+//    @RdfProperty("http://industrialdataspace.org/2016/10/idsv/core#creationDate")
     private XMLGregorianCalendar creationDate;
-    private String version, format, mediaType;
+
+//    @RdfProperty("http://industrialdataspace.org/2016/10/idsv/core#version")
+    private String version;
+
+//    @RdfProperty("http://industrialdataspace.org/2016/10/idsv/core#format")
+    String format;
+
+//    @RdfProperty("http://industrialdataspace.org/2016/10/idsv/core#mediaType")
+    String mediaType;
+
     private boolean readOnly;
 
     // no "manual" construction

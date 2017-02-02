@@ -1,6 +1,7 @@
 package de.fraunhofer.iais.eis.handcrafted.impl;
 
 import de.fraunhofer.iais.eis.handcrafted.Dataset;
+import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.VocabUtil;
 
 import javax.xml.datatype.XMLGregorianCalendar;

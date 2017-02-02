@@ -1,14 +1,13 @@
 package de.fraunhofer.iais.eis.util;
 
-import de.fraunhofer.iais.eis.handcrafted.Dataset;
-import de.fraunhofer.iais.eis.handcrafted.impl.ConstraintViolationException;
-
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 import java.util.UUID;
 
@@ -35,8 +34,10 @@ public class VocabUtil {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(objToValidate);
         if (!constraintViolations.isEmpty()) {
-            ConstraintViolationException exc = new ConstraintViolationException();
-            exc.setViolations(constraintViolations);
+            Collection<String> messages = new ArrayList<>();
+            constraintViolations.stream().forEach(x -> messages.add(x.getMessage()));
+
+            ConstraintViolationException exc = new ConstraintViolationException(messages);
             throw exc;
         }
     }
