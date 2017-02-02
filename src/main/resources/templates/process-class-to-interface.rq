@@ -1,7 +1,7 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:process-class-to-interface(?class, ?comment) {
+template idsv:process-class-to-interface(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
     "/* " str(?comment) " */\n"
@@ -28,10 +28,10 @@ template idsv:process-class-to-interface(?class, ?comment) {
 
 }
 where{
-    ?class a owl:Class.
+    ?class a owl:Class;
+        rdfs:comment ?comment.
     OPTIONAL {
         ?class rdfs:subClassOf ?superClass.
     }
-    FILTER NOT EXISTS {?instance a ?class}
 }
 GROUP BY ?class

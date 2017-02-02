@@ -7,7 +7,7 @@ template idsv:process-class-to-class(?class) {
     "import de.fraunhofer.iais.eis.util.VocabUtil;\n\n"
     "/* " str(?comment) " */\n"
     "public class " concat(strafter(str(?class), "#"), "Impl")
-    " implements de.fraunhofer.iais.eis." strafter(str(?class), "#")
+    " implements " strafter(str(?class), "#")
 
     " {\n"
 
@@ -60,6 +60,4 @@ template idsv:process-class-to-class(?class) {
 where{
     ?class a owl:Class;
         rdfs:comment ?comment.
-
-    FILTER NOT EXISTS {?instance a ?class}
 }

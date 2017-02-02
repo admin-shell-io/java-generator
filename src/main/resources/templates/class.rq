@@ -3,13 +3,20 @@ prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template{
 
-	# Write process result into an own file
-	kg:write(concat("/tmp/",strafter(str(?class), "#"), ".java"),
-		st:call-template(idsv:process-class, ?class))
+	kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), "Impl.java"),
+		st:call-template(idsv:process-class-to-class, ?classWithNoInstances))
 
-	kg:write(concat("/tmp/",strafter(str(?class), "#"), "Impl.java"),
-		st:call-template(idsv:process-class-to-class, ?class))
+    kg:write(concat("/tmp/",strafter(str(?classWithInstances), "#"), ".java"),
+        st:call-template(idsv:process-class-to-enum, ?classWithInstances))
+
+    kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), ".java"),
+        st:call-template(idsv:process-class-to-interface, ?classWithNoInstances))
+
 }
 where  {
-    ?class a owl:Class.
+    ?classWithNoInstances a owl:Class.
+    ?classWithInstances a owl:Class.
+
+    FILTER EXISTS {?instance a ?classWithInstances}
+    FILTER NOT EXISTS {?instance a ?classWithNoInstances}
 }
