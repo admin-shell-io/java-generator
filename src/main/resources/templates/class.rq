@@ -6,11 +6,14 @@ template{
 	kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), "Impl.java"),
 		st:call-template(idsv:process-class-to-class, ?classWithNoInstances))
 
-    kg:write(concat("/tmp/",strafter(str(?classWithInstances), "#"), ".java"),
-        st:call-template(idsv:process-class-to-enum, ?classWithInstances))
+    kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), "Builder.java"),
+        st:call-template(idsv:process-class-to-builder, ?classWithNoInstances))
 
     kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), ".java"),
         st:call-template(idsv:process-class-to-interface, ?classWithNoInstances))
+
+    kg:write(concat("/tmp/",strafter(str(?classWithInstances), "#"), ".java"),
+        st:call-template(idsv:process-class-to-enum, ?classWithInstances))
 
 }
 where  {

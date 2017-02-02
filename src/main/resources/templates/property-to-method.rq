@@ -8,7 +8,7 @@ template idsv:property-to-method(?property, ?class, ?syntax) {
     # getter method
 
         # visibility modifier
-        if (str(?syntax) = 'class', 'public ', '')
+        if (str(?syntax) = 'class', 'final public ', '')
 
         # return type and annotation
         if (bound(?constraint),
@@ -26,7 +26,7 @@ template idsv:property-to-method(?property, ?class, ?syntax) {
     # setter method
 
         # visibility modifier
-        if (str(?syntax) = 'class', 'public ', '')
+        if (str(?syntax) = 'class', 'final public ', '')
 
         # method name
         "void set"
