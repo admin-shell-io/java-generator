@@ -18,7 +18,7 @@ template idsv:process-class-to-class(?class) {
     "\n"
 
     "\n\t// instance fields as derived from vocabulary\n"
-    st:call-template(idsv:properties-to-fields, ?class)
+    st:call-template(idsv:subclass-properties-to-fields, ?class)
 
     "\n"
     "\n\t// no manual construction"
@@ -52,10 +52,7 @@ template idsv:process-class-to-class(?class) {
 
     "\n\t// accessor method implementations as derived from vocabulary"
     "\n"
-    st:call-template(idsv:properties-to-methods, ?class, 'class')
-
-    # parent interface methods implementation
-    st:call-template(idsv:subclass-to-method, ?class)
+    st:call-template(idsv:subclass-properties-to-methods, ?class)
 
     "\n}\n"
 

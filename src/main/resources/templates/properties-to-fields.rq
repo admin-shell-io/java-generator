@@ -6,6 +6,6 @@ template idsv:properties-to-fields(?class) {
 	st:call-template(idsv:property-to-field, ?property, ?class)
 
 }
-where  {   
+where  {
   ?property rdfs:domain ?class.
 }
