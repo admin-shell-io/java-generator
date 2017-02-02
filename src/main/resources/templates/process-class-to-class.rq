@@ -54,11 +54,15 @@ template idsv:process-class-to-class(?class) {
     "\n"
     st:call-template(idsv:properties-to-methods, ?class, 'class')
 
+    # parent interface methods implementation
+    st:call-template(idsv:subclass-to-method, ?class)
+
     "\n}\n"
 
 }
 where{
     ?class a owl:Class;
         rdfs:comment ?comment.
+
     FILTER NOT EXISTS {?instance a ?class}
 }

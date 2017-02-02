@@ -8,7 +8,7 @@ template idsv:process-class-to-interface(?class, ?comment) {
     "public interface " strafter(str(?class), "#")
 
     if (bound(?superClass) && strstarts(str(?superClass), "http://industrialdataspace.org/"),
-        concat(" extends ", strafter(st:call-template(idsv:process-subclass, ?class), ", ")),
+        concat(" extends ", strafter(st:call-template(idsv:subclass-to-interface-extends, ?class), ", ")),
         "")
 
     " {\n"
