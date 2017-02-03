@@ -22,7 +22,6 @@ template idsv:process-class-to-builder(?class) {
 
     # method implementation
 
-    "\n"
     st:call-template(idsv:subclass-properties-to-methods, ?class, 'builder')
 
     # build method

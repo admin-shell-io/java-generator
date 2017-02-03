@@ -12,14 +12,14 @@ template{
     kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), ".java"),
         st:call-template(idsv:process-class-to-interface, ?classWithNoInstances))
 
-#    kg:write(concat("/tmp/",strafter(str(?classWithInstances), "#"), ".java"),
-#        st:call-template(idsv:process-class-to-enum, ?classWithInstances))
+    kg:write(concat("/tmp/",strafter(str(?classWithInstances), "#"), ".java"),
+        st:call-template(idsv:process-class-to-enum, ?classWithInstances))
 
 }
 where  {
     ?classWithNoInstances a owl:Class.
-#    ?classWithInstances a owl:Class.
+    ?classWithInstances a owl:Class.
 
-#    FILTER EXISTS {?instance a ?classWithInstances}
+    FILTER EXISTS {?instance a ?classWithInstances}
     FILTER NOT EXISTS {?instance a ?classWithNoInstances}
 }
