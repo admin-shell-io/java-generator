@@ -2,12 +2,34 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 
 template idsv:properties-to-methods(?class, ?syntax) {
 
-	# Iterates on selected properties
+	# Iterates on selected properties and writes getter and setter methods
+
+    # getter method
 
 	"\n\t"
+
+    # visibility modifier
+    if (str(?syntax) = 'bean', 'final public ', '')
+
+    # signature
 	st:call-template(idsv:property-to-getter-method, ?property, ?class, ?syntax)
+
+    # method body
+	if (str(?syntax) = 'bean', st:call-template(idsv:getter-method-body, ?property), ';')
+
+
+    # setter method
+
 	"\n\t"
+
+    # visibility modifier
+    if (str(?syntax) = 'bean', 'final public ', '')
+
 	st:call-template(idsv:property-to-setter-method, ?property, ?class, ?syntax)
+
+    # method body
+	if (str(?syntax) = 'bean', st:call-template(idsv:setter-method-body, ?property), ';')
+
     "\n\t"
 }
 where  {   

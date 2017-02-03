@@ -1,10 +1,7 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
 
-template idsv:property-to-getter-method(?property, ?class, ?syntax) {
-
-    # visibility modifier
-    if (str(?syntax) = 'bean', 'final public ', '')
+template idsv:property-to-getter-method(?property, ?class) {
 
     # return type and annotation
     if (bound(?constraint),
@@ -15,8 +12,6 @@ template idsv:property-to-getter-method(?property, ?class, ?syntax) {
 
     # method name
     "get" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2) "()"
-
-    if (str(?syntax) = 'bean', st:call-template(idsv:getter-method-body, ?property), ';')
 
 }
 where  {

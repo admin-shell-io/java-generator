@@ -1,10 +1,7 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
 
-template idsv:property-to-setter-method(?property, ?class, ?syntax) {
-
-    # visibility modifier
-    if (str(?syntax) = 'bean', 'final public ', '')
+template idsv:property-to-setter-method(?property, ?class) {
 
     # method name
     "void set" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
@@ -21,8 +18,6 @@ template idsv:property-to-setter-method(?property, ?class, ?syntax) {
         # parameter label
         str(?label)
     ")"
-
-    if (str(?syntax) = 'bean', st:call-template(idsv:setter-method-body, ?property), ';')
 
 }
 where  {
