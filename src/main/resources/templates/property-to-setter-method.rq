@@ -3,9 +3,6 @@ prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
 
 template idsv:property-to-setter-method(?property, ?class) {
 
-    # method name
-    "void set" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
-
     # method params
     "("
         # parameter type and annotation

@@ -1,0 +1,24 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idsv:setter-method-builder-body(?property, ?class) {
+
+    " {"
+
+    "\n\t\t"
+    lcase(substr(str(?classLabel), 1, 1)) substr(str(?classLabel), 2)
+    ".set"
+    ucase(substr(str(?propertyLabel), 1, 1)) substr(str(?propertyLabel), 2)
+    "("
+    str(?propertyLabel)
+    ");"
+
+    "\n\t\treturn this;"
+
+    "\n\t}"
+
+}
+where{
+    ?class rdfs:label ?classLabel.
+    ?property rdfs:label ?propertyLabel.
+}

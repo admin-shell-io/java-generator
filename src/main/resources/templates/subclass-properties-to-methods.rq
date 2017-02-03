@@ -3,7 +3,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idsv:subclass-properties-to-methods(?class, ?syntax) {
 
-    st:call-template(idsv:properties-to-methods, ?superClass, ?syntax)
+    if (str(?syntax) = 'bean', st:call-template(idsv:properties-to-bean-methods, ?superClass),
+    if (str(?syntax) = 'builder', st:call-template(idsv:properties-to-builder-methods, ?class, ?superClass),
+    if (str(?syntax) = 'interface', st:call-template(idsv:properties-to-interface-methods, ?superClass),
+    '')))
 
 }
 where {

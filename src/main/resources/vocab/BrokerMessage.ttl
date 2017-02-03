@@ -181,11 +181,6 @@ idsv:coveredEntity a owl:ObjectProperty;
     rdfs:range idsv:EntityCoveredByDataRequest;
     rdfs:comment "The IDS entity covered in the data request."@en.
 
-idsv:requestId rdfs:subPropertyOf dct:identifier ;
-    rdfs:label "requestId";
-    rdfs:domain idsv:BrokerRequestMessage ;
-    rdfs:comment "Unique identifier of the request message, MAY be part of the message's IRI."@en.
-
 idsv:payload a owl:DatatypeProperty;
     rdfs:label "payload";
     rdfs:domain idsv:BrokerMessage;

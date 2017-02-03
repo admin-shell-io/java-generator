@@ -23,7 +23,7 @@ template idsv:process-class-to-builder(?class) {
     # method implementation
 
     "\n"
-    #st:call-template(idsv:subclass-properties-to-methods, ?class, 'builder')
+    st:call-template(idsv:subclass-properties-to-methods, ?class, 'builder')
 
     # build method
 
@@ -37,7 +37,7 @@ template idsv:process-class-to-builder(?class) {
 
     # validation hook
     "\n"
-    "\n\tpublic void validationHook() throws ConstraintViolationException {"
+    "\n\tpublic void validationHook() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {"
     "\n\t\t// override me!"
     "\n\t}"
 

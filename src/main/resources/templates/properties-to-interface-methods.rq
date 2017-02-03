@@ -1,0 +1,24 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+
+template idsv:properties-to-interface-methods(?class) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    # getter method signature
+	"\n\t" st:call-template(idsv:property-to-getter-method, ?property, ?class) ";"
+
+    # setter method
+    "\n\t"
+
+    # return type and name
+    "void set" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+
+    # setter method signature
+	st:call-template(idsv:property-to-setter-method, ?property, ?class) ";"
+
+    "\n\t"
+}
+where  {   
+  ?property rdfs:domain ?class;
+    rdfs:label ?label.
+}

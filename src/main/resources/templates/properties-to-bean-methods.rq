@@ -1,0 +1,41 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+
+template idsv:properties-to-bean-methods(?class) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    # getter method
+
+	"\n\t"
+
+    # visibility modifier
+    "final public "
+
+    # signature
+	st:call-template(idsv:property-to-getter-method, ?property, ?class)
+
+    # method body
+	st:call-template(idsv:getter-method-body, ?property)
+
+
+    # setter method
+
+	"\n\t"
+
+    # visibility modifier
+    "final public "
+
+    # return type and name
+    "void set" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+
+	st:call-template(idsv:property-to-setter-method, ?property, ?class)
+
+    # method body
+	st:call-template(idsv:setter-method-bean-body, ?property)
+
+    "\n\t"
+}
+where  {   
+  ?property rdfs:domain ?class;
+    rdfs:label ?label.
+}
