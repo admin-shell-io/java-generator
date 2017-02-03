@@ -1,8 +1,8 @@
 package de.fraunhofer.iais.eis.invoke;
 
-import de.fraunhofer.iais.eis.handcrafted.Dataset;
+import de.fraunhofer.iais.eis.Dataset;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
-import de.fraunhofer.iais.eis.handcrafted.impl.DatasetBuilder;
+import de.fraunhofer.iais.eis.DatasetBuilder;
 
 /**
  * Created by christian on 19.01.17.
