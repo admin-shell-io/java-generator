@@ -1,9 +1,9 @@
 prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:subclass-properties-to-methods(?class) {
+template idsv:subclass-properties-to-methods(?class, ?syntax) {
 
-    st:call-template(idsv:properties-to-methods, ?superClass, 'class')
+    st:call-template(idsv:properties-to-methods, ?superClass, ?syntax)
 
 }
 where {

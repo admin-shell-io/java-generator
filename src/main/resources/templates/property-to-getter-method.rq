@@ -1,0 +1,32 @@
+prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
+
+template idsv:property-to-getter-method(?property, ?class, ?syntax) {
+
+    # visibility modifier
+    if (str(?syntax) = 'bean', 'final public ', '')
+
+    # return type and annotation
+    if (bound(?constraint),
+        st:call-template(idsv:propertyAnnotation, ?constraint, ?range),
+        st:call-template(idsv:range, ?range))
+
+    " "
+
+    # method name
+    "get" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2) "()"
+
+    if (str(?syntax) = 'bean', st:call-template(idsv:getter-method-body, ?property), ';')
+
+}
+where  {
+   ?property rdfs:label ?label;
+        rdfs:range ?range.
+
+    OPTIONAL {
+        ?class idsv:validation ?validation.
+        ?validation owl:onProperty ?property.
+        ?validation valid:constraint ?constraint.
+    }
+
+} 

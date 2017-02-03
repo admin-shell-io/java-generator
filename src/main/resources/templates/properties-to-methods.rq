@@ -2,9 +2,13 @@ prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
 
 template idsv:properties-to-methods(?class, ?syntax) {
 
-	# Iterates on selected properties 
-	st:call-template(idsv:property-to-method, ?property, ?class, ?syntax)
+	# Iterates on selected properties
 
+	"\n\t"
+	st:call-template(idsv:property-to-getter-method, ?property, ?class, ?syntax)
+	"\n\t"
+	st:call-template(idsv:property-to-setter-method, ?property, ?class, ?syntax)
+    "\n\t"
 }
 where  {   
   ?property rdfs:domain ?class.

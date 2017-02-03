@@ -3,7 +3,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idsv:subclass-properties-to-fields(?class) {
 
-    st:call-template(idsv:properties-to-fields, ?superClass, 'class')
+    st:call-template(idsv:properties-to-fields, ?superClass, 'bean')
 
 }
 where {
