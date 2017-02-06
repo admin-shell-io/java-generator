@@ -31,21 +31,17 @@ public class DatasetImpl implements Dataset {
 	final public @org.hibernate.validator.constraints.URL String getMediaType() {
 		return mediaType;
 	}
-	
 
 	final public @javax.validation.constraints.NotNull javax.xml.datatype.XMLGregorianCalendar getCreationDate() {
 		return creationDate;
 	}
-	
 
 	final public String getFormat() {
 		return format;
 	}
-	
 
 	final public String getVersion() {
 		return version;
 	}
-	
 
 }

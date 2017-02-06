@@ -46,7 +46,7 @@ public class DatasetBuilder {
 		return dataset;
 	}
 
-	public void creationHook(DatasetImpl dataset) throws de.fraunhofer.iais.eis.util.ConstraintViolationException {
+	public void creationHook(Dataset dataset) throws de.fraunhofer.iais.eis.util.ConstraintViolationException {
 		// override me!
 	}
 }

@@ -5,6 +5,9 @@ template idsv:process-class-to-interface(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
     "/* " str(?comment) " */\n"
+    "\n"
+    "@de.fhg.iais.jrdfb.annotation.RdfType(\"" str(?class) "\")"
+    "\n"
     "public interface " strafter(str(?class), "#")
 
     if (bound(?superClass) && strstarts(str(?superClass), "http://industrialdataspace.org/"),
@@ -15,6 +18,7 @@ template idsv:process-class-to-interface(?class) {
 
         "\n\t// standard methods\n"
 
+        "\n\t@de.fhg.iais.jrdfb.annotation.RdfId"
         "\n\t@javax.validation.constraints.NotNull java.net.URL getId();"
         "\n"
 
