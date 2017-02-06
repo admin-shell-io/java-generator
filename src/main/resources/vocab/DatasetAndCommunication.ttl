@@ -29,10 +29,6 @@ idsv:Dataset rdfs:subClassOf dcat:Dataset;
     idsv:validation [
         owl:onProperty idsv:creationDate;
         valid:constraint "@javax.validation.constraints.NotNull";
-    ];
-    idsv:validation [
-        owl:onProperty idsv:mediaType;
-        valid:constraint "@org.hibernate.validator.constraints.URL";
     ].
 
 idsv:TransferredDataset rdfs:subClassOf idsv:Dataset;
@@ -82,28 +78,28 @@ idsv:creationDate rdfs:subPropertyOf dct:dateSubmitted;
     rdfs:label "creationDate"@en;
     rdfs:domain idsv:Dataset;
     rdfs:range xsd:dateTime;
-    rdfs:comment "Date of creation of the InfrastructureComponent. SHOULD be asserted to resources of type InfrastructureComponent."@en.
+    rdfs:comment "Date of creation of the InfrastructureComponent."@en.
 
 idsv:format rdfs:subPropertyOf dct:format;
 	a owl:DatatypeProperty;
 	rdfs:label "format"@en;
 	rdfs:domain idsv:Dataset;
 	rdfs:range xsd:string;
-	rdfs:comment "The file format of the dataset. idsv:mediaType SHOULD be used if the type of the distribution is defined by IANA. SHOULD be asserted to resources of type Dataset."@en.
+	rdfs:comment "The file format of the dataset. idsv:mediaType SHOULD be used if the type of the distribution is defined by IANA."@en.
 
 idsv:mediaType rdfs:subPropertyOf dcat:mediaType;
 	a owl:DatatypeProperty;
 	rdfs:label "mediaType"@en;
 	rdfs:domain idsv:Dataset;
-	rdfs:range xsd:string;
-	rdfs:comment "The media type of the dataset, as defined by IANA. SHOULD be asserted to resources of type Dataset."@en.
+	rdfs:range xsd:anyURI;
+	rdfs:comment "The media type of the dataset, as defined by IANA."@en.
 
 idsv:version rdfs:subPropertyOf dct:hasVersion;
     a owl:DatatypeProperty;
     rdfs:label "version"@en;
     rdfs:domain idsv:Dataset;
     rdfs:range xsd:string;
-    rdfs:comment "Version identifier of the InfrastructureComponent. SHOULD be asserted to resources of type InfrastructureComponent."@en.
+    rdfs:comment "Version identifier of the InfrastructureComponent."@en.
 
 
 # Properties for describing a TransferredDataset

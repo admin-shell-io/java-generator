@@ -41,12 +41,12 @@ public class DatasetBuilder {
 	
 
 	public final Dataset build() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {
+		creationHook(dataset);
 		VocabUtil.validate(dataset);
-		validationHook();
 		return dataset;
 	}
 
-	public void validationHook() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {
+	public void creationHook(DatasetImpl dataset) throws de.fraunhofer.iais.eis.util.ConstraintViolationException {
 		// override me!
 	}
 }

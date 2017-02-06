@@ -7,7 +7,7 @@ template idsv:range(?range) {
     if (str(?range) = str(<xsd:string>), "java.lang.String",
     if (str(?range) = str(<xsd:integer>), "java.math.BigInteger",
     if (str(?range) = str(<xsd:int>), "int",
-    if (str(?range) = str(<xsd.long>), "long",
+    if (str(?range) = str(<xsd:long>), "long",
     if (str(?range) = str(<xsd:short>), "short",
     if (str(?range) = str(<xsd:float>), "float",
     if (str(?range) = str(<xsd:double>), "double",

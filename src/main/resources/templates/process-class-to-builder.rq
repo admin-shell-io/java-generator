@@ -39,14 +39,18 @@ template idsv:process-class-to-builder(?class) {
     # build method
 
      "\n\tpublic final " strafter(str(?class), "#") " build() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {"
+     "\n\t\tcreationHook("
+     lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+     ");"
      "\n\t\tVocabUtil.validate(" lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ");"
-     "\n\t\tvalidationHook();"
      "\n\t\treturn " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ";"
      "\n\t}"
 
-    # validation hook
+    # creation hook
     "\n"
-    "\n\tpublic void validationHook() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {"
+    "\n\tpublic void creationHook("
+    strafter(str(?class), '#')" " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+    ") throws de.fraunhofer.iais.eis.util.ConstraintViolationException {"
     "\n\t\t// override me!"
     "\n\t}"
 
