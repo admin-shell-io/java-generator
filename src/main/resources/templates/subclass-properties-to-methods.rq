@@ -1,11 +1,11 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:subclass-properties-to-methods(?class, ?syntax) {
+template ids:subclass-properties-to-methods(?class, ?syntax) {
 
-    if (str(?syntax) = 'bean', st:call-template(idsv:properties-to-bean-methods, ?superClass),
-    if (str(?syntax) = 'builder', st:call-template(idsv:properties-to-builder-methods, ?class, ?superClass),
-    if (str(?syntax) = 'interface', st:call-template(idsv:properties-to-interface-methods, ?superClass),
+    if (str(?syntax) = 'bean', st:call-template(ids:properties-to-bean-methods, ?superClass),
+    if (str(?syntax) = 'builder', st:call-template(ids:properties-to-builder-methods, ?class, ?superClass),
+    if (str(?syntax) = 'interface', st:call-template(ids:properties-to-interface-methods, ?superClass),
     '')))
 
 }

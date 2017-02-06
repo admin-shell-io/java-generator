@@ -1,7 +1,7 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:process-class-to-interface(?class) {
+template ids:process-class-to-interface(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
     "/* " str(?comment) " */\n"
@@ -11,7 +11,7 @@ template idsv:process-class-to-interface(?class) {
     "public interface " strafter(str(?class), "#")
 
     if (bound(?superClass) && strstarts(str(?superClass), "http://industrialdataspace.org/"),
-        concat(" extends ", strafter(st:call-template(idsv:subclass-to-interface-extends, ?class), ", ")),
+        concat(" extends ", strafter(st:call-template(ids:subclass-to-interface-extends, ?class), ", ")),
         "")
 
     " {\n"
@@ -25,7 +25,7 @@ template idsv:process-class-to-interface(?class) {
         "\n\t// accessor methods as derived from vocabulary"
         "\n"
 
-        st:call-template(idsv:properties-to-interface-methods, ?class)
+        st:call-template(ids:properties-to-interface-methods, ?class)
 
     "\n}\n"
 

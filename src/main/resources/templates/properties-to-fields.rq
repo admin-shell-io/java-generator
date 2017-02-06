@@ -1,9 +1,9 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 
-template idsv:properties-to-fields(?class) {
+template ids:properties-to-fields(?class) {
 
 	# Iterates on selected properties
-	st:call-template(idsv:property-to-field, ?property, ?class)
+	st:call-template(ids:property-to-field, ?property, ?class)
 
 }
 where  {

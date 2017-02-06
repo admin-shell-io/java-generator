@@ -42,4 +42,13 @@ public class VocabUtil {
         }
     }
 
+    public static void toRdf(Object obj) {
+        // todo: call serializer
+    }
+
+    public static Object fromRdf(String rdf) {
+        // todo: call deserializer
+        return null;
+    }
+
 }

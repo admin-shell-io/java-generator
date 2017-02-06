@@ -1,6 +1,6 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 
-template idsv:properties-to-builder-methods(?rootClass, ?class) {
+template ids:properties-to-builder-methods(?rootClass, ?class) {
 
 	# Iterates on selected properties and writes getter and setter methods
 
@@ -12,10 +12,10 @@ template idsv:properties-to-builder-methods(?rootClass, ?class) {
     # return type and name
     strafter(str(?rootClass), '#') "Builder " str(?label)
 
-	st:call-template(idsv:property-to-setter-method, ?property, ?class)
+	st:call-template(ids:property-to-setter-method, ?property, ?class)
 
     # method body
-	st:call-template(idsv:setter-method-builder-body, ?property, ?rootClass)
+	st:call-template(ids:setter-method-builder-body, ?property, ?rootClass)
 
     "\n\t"
 }

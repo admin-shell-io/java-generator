@@ -1,6 +1,6 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 
-template idsv:properties-to-bean-methods(?class) {
+template ids:properties-to-bean-methods(?class) {
 
 	# Iterates on selected properties and writes getter and setter methods
 
@@ -12,10 +12,10 @@ template idsv:properties-to-bean-methods(?class) {
     "final public "
 
     # signature
-	st:call-template(idsv:property-to-getter-method, ?property, ?class)
+	st:call-template(ids:property-to-getter-method, ?property, ?class)
 
     # method body
-	st:call-template(idsv:getter-method-body, ?property)
+	st:call-template(ids:getter-method-body, ?property)
 
 }
 where  {   

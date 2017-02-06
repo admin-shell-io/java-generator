@@ -1,13 +1,13 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:process-class-to-enum(?class) {
+template ids:process-class-to-enum(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
     "/* " str(?comment) " */\n"
     "public enum " strafter(str(?class), "#") " {\n"
 
-        st:call-template(idsv:process-individuals, ?class)
+        st:call-template(ids:process-individuals, ?class)
 
     "\n}\n"
 

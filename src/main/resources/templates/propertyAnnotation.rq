@@ -1,11 +1,11 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 
-template idsv:propertyAnnotation(?constraint, ?range) {
+template ids:propertyAnnotation(?constraint, ?range) {
 
     if (str(?constraint) = "@OneToMany", "java.util.Collection<", concat(str(?constraint), " "))
 
     # return type
-    st:call-template(idsv:range, ?range)
+    st:call-template(ids:range, ?range)
 
     if (str(?constraint) = "@OneToMany", ">", "")
 }

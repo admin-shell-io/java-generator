@@ -1,7 +1,7 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
-template idsv:range(?range) {
+template ids:range(?range) {
 
     if (str(?range) = str(<xsd:dateTime>), "javax.xml.datatype.XMLGregorianCalendar",
     if (str(?range) = str(<xsd:string>), "java.lang.String",

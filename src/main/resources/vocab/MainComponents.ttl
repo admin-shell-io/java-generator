@@ -1,6 +1,4 @@
-@prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> .
-@prefix idsv_top: <http://industrialdataspace.org/2016/10/idsv/topics#> .
-@prefix idsv_std: <http://industrialdataspace.org/2016/10/idsv/standards#> .
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -22,38 +20,38 @@
 # Classes describing central IDS and infrastructure-related components
 # --------------------------------------------------------------------
 
-idsv:InfrastructureComponent a owl:Class;
+ids:InfrastructureComponent a owl:Class;
     rdfs:label "InfrastructureComponent"@en ;
     rdfs:comment "The class of all infrastructure components of the IDS.".
 
-idsv:Connector a owl:Class;
-    rdfs:subClassOf idsv:InfrastructureComponent;
+ids:Connector a owl:Class;
+    rdfs:subClassOf ids:InfrastructureComponent;
     rdfs:label "Connector"@en ;
     rdfs:comment "Connector for hosting data services."@en.
 
-idsv:Broker a owl:Class;
-    rdfs:subClassOf idsv:InfrastructureComponent;
+ids:Broker a owl:Class;
+    rdfs:subClassOf ids:InfrastructureComponent;
     rdfs:label "Broker"@en ;
     rdfs:comment "Broker holding an index of published data endpoints."@en.
 
-idsv:DataEndpoint a owl:Class;
+ids:DataEndpoint a owl:Class;
     rdfs:label "DataEndpoint"@en ;
     rdfs:comment "Data Endpoint that provides a service interface."@en;
-    idsv:validation [
-        owl:onProperty idsv:providedBy;
+    ids:validation [
+        owl:onProperty ids:providedBy;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-idsv:Participant a owl:Class;
+ids:Participant a owl:Class;
     rdfs:subClassOf org:Organization;
 	rdfs:label "Participant"@en;
 	rdfs:comment "A person or company using the Industrial Data Space"@en;
-    idsv:validation [
-        owl:onProperty idsv:name;
+    ids:validation [
+        owl:onProperty ids:name;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-idsv:Site a owl:Class;
+ids:Site a owl:Class;
     rdfs:subclassOf org:Site;
     rdfs:label "Site"@en;
 	rdfs:comment "An office or other premise at which the organization is located"@en.
@@ -61,80 +59,80 @@ idsv:Site a owl:Class;
 # Properties for describing InfrastructureComponents
 # --------------------------------------------------
 
-idsv:title rdfs:subPropertyOf dct:title;
+ids:title rdfs:subPropertyOf dct:title;
 	a owl:DatatypeProperty;
 	rdfs:label "title"@en;
-	rdfs:domain idsv:InfrastructureComponent;
+	rdfs:domain ids:InfrastructureComponent;
 	rdfs:range rdfs:Literal;
 	rdfs:comment "Name of the BaseEntity. MUST be asserted to resources of type BaseEntity."@en.
 
-idsv:description rdfs:subPropertyOf dct:description;
+ids:description rdfs:subPropertyOf dct:description;
 	a owl:DatatypeProperty;
 	rdfs:label "description"@en;
-	rdfs:domain idsv:InfrastructureComponent;
+	rdfs:domain ids:InfrastructureComponent;
 	rdfs:range rdfs:Literal;
 	rdfs:comment "Freetext description of the BaseEntity. MAY be asserted to resources of type BaseEntity.".
 
-idsv:createdBy rdfs:subPropertyOf dct:creator;
+ids:createdBy rdfs:subPropertyOf dct:creator;
     a owl:ObjectProperty;
     rdfs:label "createdBy"@en;
-    rdfs:domain idsv:InfrastructureComponent;
-    rdfs:range idsv:Participant;
+    rdfs:domain ids:InfrastructureComponent;
+    rdfs:range ids:Participant;
     rdfs:comment "Participant primarily responsible for making the resource."@en.
 
-idsv:maintainedBy a owl:ObjectProperty;
+ids:maintainedBy a owl:ObjectProperty;
     a owl:ObjectProperty;
     rdfs:label "curator"@en;
-    rdfs:domain idsv:InfrastructureComponent;
-    rdfs:range idsv:Participant;
+    rdfs:domain ids:InfrastructureComponent;
+    rdfs:range ids:Participant;
     rdfs:comment "Entity responsible for curation of the InfrastructureComponent."@en.
 
 # Properties for describing a Participant
 # ---------------------------------------
 
-idsv:name rdfs:subPropertyOf foaf:name;
+ids:name rdfs:subPropertyOf foaf:name;
     a owl:ObjectProperty;
     rdfs:label "name"@en;
-    rdfs:domain idsv:Participant;
+    rdfs:domain ids:Participant;
     rdfs:range rdfs:Literal;
     rdfs:comment "Name of the company participating in the IDS."@en.
 
-idsv:primarySite rdfs:subPropertyOf org:hasPrimarySite;
+ids:primarySite rdfs:subPropertyOf org:hasPrimarySite;
     a owl:ObjectProperty;
     rdfs:label "primarySite"@en;
-    rdfs:domain idsv:Participant;
-    rdfs:range idsv:Site;
+    rdfs:domain ids:Participant;
+    rdfs:range ids:Site;
     rdfs:comment "Indicates a primary site for the Organization, this is the default means by which an Organization can be contacted and is not necessarily the formal headquarters."@en.
 
-idsv:email rdfs:subPropertyOf foaf:mbox;
+ids:email rdfs:subPropertyOf foaf:mbox;
     a owl:DatatypeProperty;
     rdfs:label "Email"@en;
-    rdfs:domain idsv:Participant;
+    rdfs:domain ids:Participant;
     rdfs:range xsd:string;
     rdfs:comment "Email address for contacting the participant on a general level."@en.
 
-idsv:homepage rdfs:subPropertyOf foaf:homepage;
+ids:homepage rdfs:subPropertyOf foaf:homepage;
     a owl:DatatypeProperty;
     rdfs:label "Homepage"@en;
-    rdfs:domain idsv:Participant;
+    rdfs:domain ids:Participant;
     rdfs:range xsd:anyURI;
     rdfs:comment "General official homepage of the participant."@en.
 
 # Properties for describing a DataEndpoint
 # ----------------------------------------
 
-idsv:providedBy a owl:ObjectProperty;
-	rdfs:domain idsv:DataEndpoint;
-	rdfs:range idsv:Connector;
+ids:providedBy a owl:ObjectProperty;
+	rdfs:domain ids:DataEndpoint;
+	rdfs:range ids:Connector;
 	rdfs:label "providedBy"@en;
 	rdfs:comment "The connector that publishes the endpoint."@en.
 
 # Properties for describing a Site
 # --------------------------------
 
-idsv:siteAddress rdfs:subPropertyOf org:siteAddress;
+ids:siteAddress rdfs:subPropertyOf org:siteAddress;
     a owl:ObjectProperty;
-	rdfs:domain idsv:Site;
+	rdfs:domain ids:Site;
 	rdfs:range xsd:string;
 	rdfs:label "siteAddress"@en;
 	rdfs:comment "Indicates an address for the site."@en.

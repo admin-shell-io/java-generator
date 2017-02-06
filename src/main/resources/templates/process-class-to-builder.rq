@@ -1,7 +1,7 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:process-class-to-builder(?class) {
+template ids:process-class-to-builder(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
     "import de.fraunhofer.iais.eis.util.VocabUtil;\n\n"
@@ -34,7 +34,7 @@ template idsv:process-class-to-builder(?class) {
 
     # method implementation
 
-    st:call-template(idsv:subclass-properties-to-methods, ?class, 'builder')
+    st:call-template(ids:subclass-properties-to-methods, ?class, 'builder')
 
     # build method
 

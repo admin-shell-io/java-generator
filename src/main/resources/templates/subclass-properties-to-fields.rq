@@ -1,9 +1,9 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:subclass-properties-to-fields(?class) {
+template ids:subclass-properties-to-fields(?class) {
 
-    st:call-template(idsv:properties-to-fields, ?superClass, 'bean')
+    st:call-template(ids:properties-to-fields, ?superClass, 'bean')
 
 }
 where {

@@ -1,7 +1,7 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:getter-method-body(?property) {
+template ids:getter-method-body(?property) {
 
     " {"
     "\n\t\treturn " strafter(str(?property), "#") ";"

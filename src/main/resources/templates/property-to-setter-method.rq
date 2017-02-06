@@ -1,14 +1,14 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
 
-template idsv:property-to-setter-method(?property, ?class) {
+template ids:property-to-setter-method(?property, ?class) {
 
     # method params
     "("
         # parameter type and annotation
         if (bound(?constraint),
-            st:call-template(idsv:propertyAnnotation, ?constraint, ?range),
-            st:call-template(idsv:range, ?range))
+            st:call-template(ids:propertyAnnotation, ?constraint, ?range),
+            st:call-template(ids:range, ?range))
 
         " "
 
@@ -21,7 +21,7 @@ where  {
    ?property rdfs:range ?range.
 
     OPTIONAL {
-        ?class idsv:validation ?validation.
+        ?class ids:validation ?validation.
         ?validation owl:onProperty ?property.
         ?validation valid:constraint ?constraint.
     }

@@ -1,7 +1,7 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:setter-method-bean-body(?property) {
+template ids:setter-method-bean-body(?property) {
 
     " {"
     "\n\t\tassertModifiable();"

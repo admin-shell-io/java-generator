@@ -1,19 +1,19 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template{
 
 	kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), "Impl.java"),
-		st:call-template(idsv:process-class-to-bean, ?classWithNoInstances))
+		st:call-template(ids:process-class-to-bean, ?classWithNoInstances))
 
     kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), "Builder.java"),
-        st:call-template(idsv:process-class-to-builder, ?classWithNoInstances))
+        st:call-template(ids:process-class-to-builder, ?classWithNoInstances))
 
     kg:write(concat("/tmp/",strafter(str(?classWithNoInstances), "#"), ".java"),
-        st:call-template(idsv:process-class-to-interface, ?classWithNoInstances))
+        st:call-template(ids:process-class-to-interface, ?classWithNoInstances))
 
     kg:write(concat("/tmp/",strafter(str(?classWithInstances), "#"), ".java"),
-        st:call-template(idsv:process-class-to-enum, ?classWithInstances))
+        st:call-template(ids:process-class-to-enum, ?classWithInstances))
 
 }
 where  {

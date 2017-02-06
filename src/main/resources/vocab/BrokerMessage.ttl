@@ -1,6 +1,4 @@
-@prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> .
-@prefix idsv_top: <http://industrialdataspace.org/2016/10/idsv/topics#> .
-@prefix idsv_std: <http://industrialdataspace.org/2016/10/idsv/standards#> .
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -22,179 +20,179 @@
 # Message Classes for interaction with a Broker
 # ---------------------------------------------
 
-idsv:BrokerMessage a owl:Class;
+ids:BrokerMessage a owl:Class;
     rdfs:label "BrokerMessage"@en ;
     rdfs:comment "The class of all messages to interact with a Broker.";
-    idsv:validation [
-        owl:onProperty idsv:payload;
+    ids:validation [
+        owl:onProperty ids:payload;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-idsv:BrokerDataMessage a owl:Class;
-    rdfs:subClassOf idsv:BrokerMessage;
+ids:BrokerDataMessage a owl:Class;
+    rdfs:subClassOf ids:BrokerMessage;
     rdfs:label "BrokerDataMessage"@en ;
     rdfs:comment "The class of all messages intended for data transfer to/from a Broker.".
 
-idsv:BrokerQueryMessage a owl:Class;
-    rdfs:subClassOf idsv:BrokerMessage;
+ids:BrokerQueryMessage a owl:Class;
+    rdfs:subClassOf ids:BrokerMessage;
     rdfs:label "BrokerQueryMessage"@en ;
     rdfs:comment "The class of all messages that query the broker for data.";
-    idsv:validation [
-        owl:onProperty idsv:queryScope;
+    ids:validation [
+        owl:onProperty ids:queryScope;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-idsv:BrokerRequestMessage a owl:Class;
-    rdfs:subClassOf idsv:BrokerMessage;
+ids:BrokerRequestMessage a owl:Class;
+    rdfs:subClassOf ids:BrokerMessage;
     rdfs:label "BrokerRequestMessage"@en ;
     rdfs:comment "The class of all messages that represent requests to a Broker.".
 
-idsv:BrokerResponseMessage a owl:Class;
-    rdfs:subClassOf idsv:BrokerMessage;
+ids:BrokerResponseMessage a owl:Class;
+    rdfs:subClassOf ids:BrokerMessage;
     rdfs:label "BrokerResponseMessage"@en ;
     rdfs:comment "The class of all messages that represent responses of a Broker.";
-    idsv:validation [
-        owl:onProperty idsv:correlationId;
+    ids:validation [
+        owl:onProperty ids:correlationId;
         valid:constraint "@javax.validation.constraints.NotNull";
     ];
-    idsv:validation [
-        owl:onProperty idsv:mediaType;
+    ids:validation [
+        owl:onProperty ids:mediaType;
         valid:constraint "@org.hibernate.validator.constraints.URL";
     ].
 
-idsv:BrokerDataRequest a owl:Class;
-    rdfs:subClassOf idsv:BrokerDataMessage;
-    rdfs:subClassOf idsv:BrokerRequestMessage;
+ids:BrokerDataRequest a owl:Class;
+    rdfs:subClassOf ids:BrokerDataMessage;
+    rdfs:subClassOf ids:BrokerRequestMessage;
     rdfs:label "BrokerDataRequest"@en ;
     rdfs:comment "The class of all messages that represent data requests to a Broker.";
-    idsv:validation [
-        owl:onProperty idsv:dataRequestAction;
+    ids:validation [
+        owl:onProperty ids:dataRequestAction;
         valid:constraint "@javax.validation.constraints.NotNull";
     ];
-    idsv:validation [
-        owl:onProperty idsv:coveredEntity;
+    ids:validation [
+        owl:onProperty ids:coveredEntity;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-idsv:BrokerDataResponse a owl:Class;
-    rdfs:subClassOf idsv:BrokerDataMessage;
-    rdfs:subClassOf idsv:BrokerResponseMessage;
+ids:BrokerDataResponse a owl:Class;
+    rdfs:subClassOf ids:BrokerDataMessage;
+    rdfs:subClassOf ids:BrokerResponseMessage;
     rdfs:label "BrokerDataResponse"@en ;
     rdfs:comment "The class of all messages that represent data responses of a Broker.".
 
-idsv:BrokerQueryRequest a owl:Class;
-    rdfs:subClassOf idsv:BrokerRequestMessage;
-    rdfs:subClassOf idsv:BrokerQueryMessage;
+ids:BrokerQueryRequest a owl:Class;
+    rdfs:subClassOf ids:BrokerRequestMessage;
+    rdfs:subClassOf ids:BrokerQueryMessage;
     rdfs:label "BrokerQueryRequest"@en ;
     rdfs:comment "The class of all messages that represent query requests to a Broker.";
-    idsv:validation [
-        owl:onProperty idsv:queryRequestAction;
+    ids:validation [
+        owl:onProperty ids:queryRequestAction;
         valid:constraint "@javax.validation.constraints.NotNull";
     ];
-    idsv:validation [
-        owl:onProperty idsv:queryScope;
+    ids:validation [
+        owl:onProperty ids:queryScope;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-idsv:BrokerQueryResponse a owl:Class;
-    rdfs:subClassOf idsv:BrokerQueryMessage;
-    rdfs:subClassOf idsv:BrokerResponseMessage;
+ids:BrokerQueryResponse a owl:Class;
+    rdfs:subClassOf ids:BrokerQueryMessage;
+    rdfs:subClassOf ids:BrokerResponseMessage;
     rdfs:label "BrokerQueryResponse"@en ;
     rdfs:comment "The class of all messages that represent a Broker's response to a query.".
 
 # Classes with a fixed set of instances
 # -------------------------------------
 
-idsv:BrokerDataRequestAction a owl:Class;
+ids:BrokerDataRequestAction a owl:Class;
     rdfs:label "BrokerDataRequestAction"@en ;
     rdfs:comment "The class of all actions that can be issued to a broker in a data request message.".
 
-idsv:BrokerDataRegisterAction a idsv:BrokerDataRequestAction;
+ids:BrokerDataRegisterAction a ids:BrokerDataRequestAction;
     rdfs:label "REGISTER"@en.
 
-idsv:BrokerDataUpdateAction a idsv:BrokerDataRequestAction;
+ids:BrokerDataUpdateAction a ids:BrokerDataRequestAction;
     rdfs:label "UPDATE"@en.
 
-idsv:BrokerDataPassivateAction a idsv:BrokerDataRequestAction;
+ids:BrokerDataPassivateAction a ids:BrokerDataRequestAction;
     rdfs:label "PASSIVATE"@en.
 
-idsv:BrokerDataActivateAction a idsv:BrokerDataRequestAction;
+ids:BrokerDataActivateAction a ids:BrokerDataRequestAction;
     rdfs:label "ACTIVATE"@en.
 
-idsv:BrokerDataRemoveAction a idsv:BrokerDataRequestAction;
+ids:BrokerDataRemoveAction a ids:BrokerDataRequestAction;
     rdfs:label "REMOVE"@en.
 
-idsv:BrokerQueryRequestAction a owl:Class;
+ids:BrokerQueryRequestAction a owl:Class;
     rdfs:label "BrokerQueryRequestAction"@en ;
     rdfs:comment "The class of all actions that can be issued to a broker in a query message.".
 
-idsv:BrokerQueryGetAction a idsv:BrokerQueryRequestAction;
+ids:BrokerQueryGetAction a ids:BrokerQueryRequestAction;
     rdfs:label "GET"@en.
 
-idsv:BrokerQueryListAction a idsv:BrokerQueryRequestAction;
+ids:BrokerQueryListAction a ids:BrokerQueryRequestAction;
     rdfs:label "LIST"@en.
 
-idsv:BrokerQueryMessageScope a owl:Class;
+ids:BrokerQueryMessageScope a owl:Class;
     rdfs:label "BrokerQueryMessageScope"@en ;
     rdfs:comment "The class of scopes that filter datasets by their states when queried.".
 
-idsv:BrokerQueryMessageScopeAll a idsv:BrokerQueryMessageScope;
+ids:BrokerQueryMessageScopeAll a ids:BrokerQueryMessageScope;
     rdfs:label "ALL"@en.
 
-idsv:BrokerQueryMessageScopeActive a idsv:BrokerQueryMessageScope;
+ids:BrokerQueryMessageScopeActive a ids:BrokerQueryMessageScope;
     rdfs:label "ACTIVE"@en.
 
-idsv:BrokerQueryMessageScopeAccess a idsv:BrokerQueryMessageScope;
+ids:BrokerQueryMessageScopeAccess a ids:BrokerQueryMessageScope;
     rdfs:label "ACCESS"@en.
 
-idsv:EntityCoveredByDataRequest a owl:Class;
+ids:EntityCoveredByDataRequest a owl:Class;
     rdfs:label "CoveredComponent"@en ;
     rdfs:comment "The class of IDS entities that are described in a BrokerDataRequest message.".
 
-idsv:CoveredParticipant a idsv:EntityCoveredByDataRequest;
+ids:CoveredParticipant a ids:EntityCoveredByDataRequest;
     rdfs:label "PARTICIPANT"@en.
 
-idsv:CoveredConnector a idsv:EntityCoveredByDataRequest;
+ids:CoveredConnector a ids:EntityCoveredByDataRequest;
     rdfs:label "CONNECTOR"@en.
 
-idsv:CoveredDataEndpoint a idsv:EntityCoveredByDataRequest;
+ids:CoveredDataEndpoint a ids:EntityCoveredByDataRequest;
     rdfs:label "DATA_ENDPOINT"@en.
 
 # Properties for describing BrokerMessages
 # ----------------------------------------
 
-idsv:dataRequestAction a owl:ObjectProperty;
+ids:dataRequestAction a owl:ObjectProperty;
     rdfs:label "dataRequestAction";
-    rdfs:domain idsv:BrokerDataRequest;
-    rdfs:range idsv:BrokerDataRequestAction;
+    rdfs:domain ids:BrokerDataRequest;
+    rdfs:range ids:BrokerDataRequestAction;
     rdfs:comment "The action that should be performed with the message's payload data at the Broker."@en.
 
-idsv:queryRequestAction a owl:ObjectProperty;
+ids:queryRequestAction a owl:ObjectProperty;
     rdfs:label "queryRequestAction";
-    rdfs:domain idsv:BrokerQueryRequest;
-    rdfs:range idsv:BrokerQueryRequestAction;
+    rdfs:domain ids:BrokerQueryRequest;
+    rdfs:range ids:BrokerQueryRequestAction;
     rdfs:comment "The action that should be performed by the query."@en.
 
-idsv:coveredEntity a owl:ObjectProperty;
+ids:coveredEntity a owl:ObjectProperty;
     rdfs:label "coveredEntity";
-    rdfs:domain idsv:BrokerDataRequest;
-    rdfs:range idsv:EntityCoveredByDataRequest;
+    rdfs:domain ids:BrokerDataRequest;
+    rdfs:range ids:EntityCoveredByDataRequest;
     rdfs:comment "The IDS entity covered in the data request."@en.
 
-idsv:payload a owl:DatatypeProperty;
+ids:payload a owl:DatatypeProperty;
     rdfs:label "payload";
-    rdfs:domain idsv:BrokerMessage;
+    rdfs:domain ids:BrokerMessage;
     rdfs:range xsd:string;
     rdfs:comment "The message's payload data."@en.
 
-idsv:correlationId a owl:DatatypeProperty;
+ids:correlationId a owl:DatatypeProperty;
     rdfs:label "correlationId";
-    rdfs:domain idsv:BrokerResponseMessage;
+    rdfs:domain ids:BrokerResponseMessage;
     rdfs:range xsd:anyURI;
     rdfs:comment "The unique ID of the source request which is referred to by a response message."@en.
 
-idsv:queryScope a owl:ObjectProperty;
+ids:queryScope a owl:ObjectProperty;
     rdfs:label "queryScope";
-    rdfs:domain idsv:BrokerQueryMessage;
-    rdfs:range idsv:BrokerQueryMessageScope;
+    rdfs:domain ids:BrokerQueryMessage;
+    rdfs:range ids:BrokerQueryMessageScope;
     rdfs:comment "The scope of a query defined in a query message."@en.

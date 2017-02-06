@@ -1,7 +1,7 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#>
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idsv:process-class-to-bean(?class) {
+template ids:process-class-to-bean(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
     "import de.fraunhofer.iais.eis.util.VocabUtil;\n\n"
@@ -17,7 +17,7 @@ template idsv:process-class-to-bean(?class) {
     "\n"
 
     "\n\t// instance fields as derived from vocabulary\n"
-    st:call-template(idsv:subclass-properties-to-fields, ?class)
+    st:call-template(ids:subclass-properties-to-fields, ?class)
 
     "\n"
     "\n\t// no manual construction"
@@ -33,7 +33,7 @@ template idsv:process-class-to-bean(?class) {
 
     "\n\t// accessor method implementations as derived from vocabulary"
     "\n"
-    st:call-template(idsv:subclass-properties-to-methods, ?class, 'bean')
+    st:call-template(ids:subclass-properties-to-methods, ?class, 'bean')
 
     "\n}\n"
 

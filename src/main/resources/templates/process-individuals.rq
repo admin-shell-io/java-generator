@@ -1,6 +1,6 @@
-prefix idsv: <http://industrialdataspace.org/2016/10/idsv/core#> 
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 
-template idsv:process-individuals(?class) {
+template ids:process-individuals(?class) {
 
     "\n\t" str(?label) ","
 
