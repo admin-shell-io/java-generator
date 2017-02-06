@@ -17,22 +17,6 @@ template idsv:properties-to-bean-methods(?class) {
     # method body
 	st:call-template(idsv:getter-method-body, ?property)
 
-
-    # setter method
-
-	"\n\t"
-
-    # visibility modifier
-    "final public "
-
-    # return type and name
-    "void set" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2)
-
-	st:call-template(idsv:property-to-setter-method, ?property, ?class)
-
-    # method body
-	st:call-template(idsv:setter-method-bean-body, ?property)
-
     "\n\t"
 }
 where  {   

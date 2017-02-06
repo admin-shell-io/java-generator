@@ -4,44 +4,41 @@ import de.fraunhofer.iais.eis.util.VocabUtil;
 
 public class DatasetBuilder {
 
-	private Dataset dataset;
+	private DatasetImpl dataset;
 
 	public DatasetBuilder() {
 		dataset = new DatasetImpl();
 	}
 
 	final public DatasetBuilder mediaType(@org.hibernate.validator.constraints.URL String mediaType) {
-		dataset.setMediaType(mediaType);
+		dataset.mediaType = mediaType;
 		return this;
 	}
 	
 
 	final public DatasetBuilder creationDate(@javax.validation.constraints.NotNull javax.xml.datatype.XMLGregorianCalendar creationDate) {
-		dataset.setCreationDate(creationDate);
+		dataset.creationDate = creationDate;
 		return this;
 	}
 	
 
 	final public DatasetBuilder format(String format) {
-		dataset.setFormat(format);
+		dataset.format = format;
 		return this;
 	}
 	
 
 	final public DatasetBuilder version(String version) {
-		dataset.setVersion(version);
+		dataset.version = version;
 		return this;
 	}
 	
 
-
 	public final Dataset build() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {
 		VocabUtil.validate(dataset);
 		validationHook();
-		dataset.setReadOnly();
 		return dataset;
 	}
-
 
 	public void validationHook() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {
 		// override me!

@@ -13,13 +13,12 @@ template idsv:property-to-setter-method(?property, ?class) {
         " "
 
         # parameter label
-        str(?label)
+        strafter(str(?property), "#")
     ")"
 
 }
 where  {
-   ?property rdfs:label ?label;
-        rdfs:range ?range.
+   ?property rdfs:range ?range.
 
     OPTIONAL {
         ?class idsv:validation ?validation.

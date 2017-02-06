@@ -7,11 +7,7 @@ template idsv:setter-method-builder-body(?property, ?class) {
 
     "\n\t\t"
     lcase(substr(str(?classLabel), 1, 1)) substr(str(?classLabel), 2)
-    ".set"
-    ucase(substr(str(?propertyLabel), 1, 1)) substr(str(?propertyLabel), 2)
-    "("
-    str(?propertyLabel)
-    ");"
+    "." strafter(str(?property), "#") " = " strafter(str(?property), "#") ";"
 
     "\n\t\treturn this;"
 
@@ -20,5 +16,4 @@ template idsv:setter-method-builder-body(?property, ?class) {
 }
 where{
     ?class rdfs:label ?classLabel.
-    ?property rdfs:label ?propertyLabel.
 }

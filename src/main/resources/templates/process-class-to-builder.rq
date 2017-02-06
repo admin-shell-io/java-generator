@@ -9,7 +9,7 @@ template idsv:process-class-to-builder(?class) {
 
     " {\n"
 
-    "\n\tprivate " strafter(str(?class), '#') " " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ";"
+    "\n\tprivate " strafter(str(?class), '#') "Impl " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ";"
 
     # constructor
 
@@ -26,13 +26,11 @@ template idsv:process-class-to-builder(?class) {
 
     # build method
 
-     "\n"
      "\n\tpublic final " strafter(str(?class), "#") " build() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {"
      "\n\t\tVocabUtil.validate(" lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ");"
      "\n\t\tvalidationHook();"
-     "\n\t\t" lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ".setReadOnly();"
      "\n\t\treturn " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ";"
-     "\n\t}\n"
+     "\n\t}"
 
     # validation hook
     "\n"

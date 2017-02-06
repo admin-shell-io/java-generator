@@ -13,8 +13,7 @@ template idsv:process-class-to-bean(?class) {
 
     # boilerplate methods
 
-    "\n\tprivate java.net.URL url;"
-    "\n\tprivate boolean readOnly;"
+    "\n\tjava.net.URL url;"
     "\n"
 
     "\n\t// instance fields as derived from vocabulary\n"
@@ -29,22 +28,6 @@ template idsv:process-class-to-bean(?class) {
     "\n\t@Override"
     "\n\tfinal public java.net.URL getId() {"
     "\n\t\treturn url;"
-    "\n\t}"
-    "\n"
-    "\n\t@Override"
-    "\n\tfinal public void setId(@javax.validation.constraints.NotNull java.net.URL url) {"
-    "\n\t\tassertModifiable();"
-    "\n\t\tthis.url = url;"
-    "\n\t}"
-    "\n"
-    "\n\tfinal public void setReadOnly() {"
-    "\n\t\treadOnly = true;"
-    "\n\t}"
-    "\n"
-    "\n\tprivate void assertModifiable() {"
-    "\n\t\tif (readOnly) {"
-    "\n\t\t\tthrow new RuntimeException(\"object has been built and cannot be modified anymore\");"
-    "\n\t\t}"
     "\n\t}"
     "\n"
 
