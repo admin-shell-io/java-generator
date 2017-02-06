@@ -17,6 +17,18 @@ template idsv:process-class-to-builder(?class) {
     "\n\tpublic " strafter(str(?class), "#") "Builder() {"
     "\n\t\t"
         lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) " = new " strafter(str(?class), "#") "Impl();"
+        "\n\t\t"
+        lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+        ".url = VocabUtil.createRandomUrl(\""
+        lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+        "\");"
+    "\n\t}"
+    "\n"
+    "\n\tpublic " strafter(str(?class), "#") "Builder(@javax.validation.constraints.NotNull java.net.URL url) {"
+    "\n\t\t"
+    "this();"
+    "\n\t\t"
+    lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ".url = url;"
     "\n\t}"
     "\n"
 

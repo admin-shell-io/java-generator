@@ -13,7 +13,7 @@ template idsv:process-class-to-bean(?class) {
 
     # boilerplate methods
 
-    "\n\tjava.net.URL url;"
+    "\n\t@javax.validation.constraints.NotNull java.net.URL url;"
     "\n"
 
     "\n\t// instance fields as derived from vocabulary\n"
@@ -21,9 +21,7 @@ template idsv:process-class-to-bean(?class) {
 
     "\n"
     "\n\t// no manual construction"
-    "\n\t" strafter(str(?class), "#") "Impl() {"
-    "\n\t\turl = VocabUtil.createRandomUrl(\"" lcase(strafter(str(?class), "#")) "\");"
-    "\n\t}"
+    "\n\t" strafter(str(?class), "#") "Impl() {}"
     "\n"
     "\n\t@Override"
     "\n\tfinal public java.net.URL getId() {"

@@ -5,7 +5,7 @@ import de.fraunhofer.iais.eis.util.VocabUtil;
 /* Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets. */
 public class DatasetImpl implements Dataset {
 
-	java.net.URL url;
+	@javax.validation.constraints.NotNull java.net.URL url;
 
 	// instance fields as derived from vocabulary
 
@@ -19,9 +19,7 @@ public class DatasetImpl implements Dataset {
 
 
 	// no manual construction
-	DatasetImpl() {
-		url = VocabUtil.createRandomUrl("dataset");
-	}
+	DatasetImpl() {}
 
 	@Override
 	final public java.net.URL getId() {

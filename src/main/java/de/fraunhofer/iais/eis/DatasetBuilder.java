@@ -8,6 +8,12 @@ public class DatasetBuilder {
 
 	public DatasetBuilder() {
 		dataset = new DatasetImpl();
+		dataset.url = VocabUtil.createRandomUrl("dataset");
+	}
+
+	public DatasetBuilder(@javax.validation.constraints.NotNull java.net.URL url) {
+		this();
+		dataset.url = url;
 	}
 
 	final public DatasetBuilder mediaType(@org.hibernate.validator.constraints.URL String mediaType) {
