@@ -42,6 +42,8 @@
     </dependencies>
 
     <build>
+        <finalName>ids-vocabulary-${version}</finalName>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -61,7 +63,7 @@
                 <executions>
                     <execution>
                         <id>generate-java-beans</id>
-                        <phase>prepare-package</phase>
+                        <phase>generate-resources</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
@@ -85,7 +87,7 @@
                 <executions>
                     <execution>
                         <id>copy-java-beans</id>
-                        <phase>package</phase>
+                        <phase>prepare-package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
