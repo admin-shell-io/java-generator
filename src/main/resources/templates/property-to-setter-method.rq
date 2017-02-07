@@ -1,5 +1,5 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
-prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#>
+prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
 template ids:property-to-setter-method(?property, ?class) {
 

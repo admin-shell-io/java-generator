@@ -36,6 +36,18 @@
             <version>3.1.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>fr.inria.wimmics</groupId>
+            <artifactId>kgtool</artifactId>
+            <version>3.2.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jws</artifactId>
+                    <groupId>edu.sussex.nlp</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
     </dependencies>
 
     <build>

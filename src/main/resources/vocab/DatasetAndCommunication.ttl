@@ -15,7 +15,7 @@
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
-@prefix valid: <http://industrialdataspace.org/2017/01/idsv/validation#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 
 # Classes describing datasets and datasets that are in the state of being transfered (aka Header)
 # -----------------------------------------------------------------------------------------------
