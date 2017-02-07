@@ -19,9 +19,10 @@ where  {
         rdfs:range ?range.
 
     OPTIONAL {
+        ?property rdfs:domain ?class.
         ?class ids:validation ?validation.
         ?validation owl:onProperty ?property.
         ?validation valid:constraint ?constraint.
     }
-
-} 
+}
+group by ?property

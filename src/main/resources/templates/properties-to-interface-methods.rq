@@ -5,8 +5,8 @@ template ids:properties-to-interface-methods(?class) {
 	# Iterates on selected properties and writes getter and setter methods
 
     # getter method signature
-    "\n\t"
-    "@de.fhg.iais.jrdfb.annotation.RdfProperty(\"" str(?property) "\")"
+    # "\n\t@de.fhg.iais.jrdfb.annotation.RdfProperty(\"" str(?property) "\")"
+
 	"\n\t" st:call-template(ids:property-to-getter-method, ?property, ?class) ";"
 
 }
