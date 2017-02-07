@@ -7,28 +7,44 @@ import fr.inria.edelweiss.kgraph.query.QueryProcess;
 import fr.inria.edelweiss.kgtool.load.Load;
 import fr.inria.edelweiss.kgtool.print.ResultFormat;
 import fr.inria.edelweiss.kgtool.print.TripleFormat;
+import org.apache.commons.io.IOUtils;
 
-/**
- * Created by christian on 06.02.17.
- */
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+
 public class Generator {
 
-    public static void main(String[] args) throws EngineException {
+    private Graph graph = Graph.create();
 
-        // input: (start)template
-        // output: ttl files
+    public static void main(String[] args) throws EngineException, URISyntaxException, IOException {
+        new Generator().generate();
+    }
 
-        Graph graph = Graph.create();
+    private void generate() throws URISyntaxException, IOException, EngineException {
+        File vocabDir = new File(this.getClass().getClassLoader().getResource("vocab").toURI());
+
+        loadVocabularyFiles(vocabDir.listFiles());
+        doQuery(getStartQuery());
+    }
+
+    private void loadVocabularyFiles(File[] files) {
         Load ld = Load.create(graph);
-        ld.load("/home/christian/projects/ids/rdf-codegen/src/main/resources/vocab/DatasetAndCommunication.ttl");
-        QueryProcess exec = QueryProcess.create(graph);
-        String query = "template{st:apply-templates-with('/home/christian/projects/ids/rdf-codegen/src/main/resources/templates')} where {}";
-        Mappings map = exec.query(query);
+        Arrays.stream(files).forEach(file -> ld.load(file.getAbsolutePath()));
+    }
 
-        ResultFormat f1 = ResultFormat.create(map);
-        System.out.println(f1);
-        TripleFormat f2 = TripleFormat.create(graph);
-        System.out.println(f2);
+    private String getStartQuery() throws IOException {
+        InputStream is = this.getClass().getClassLoader().getResourceAsStream("start.rq");
+        return IOUtils.toString(is, Charset.defaultCharset());
+    }
+
+    private void doQuery(String query) throws EngineException {
+        QueryProcess exec = QueryProcess.create(graph);
+        exec.query(query);
     }
 
 }
