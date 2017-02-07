@@ -59,8 +59,14 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.5.0</version>
                 <executions>
+                    <execution>
+                        <id>generate-java-beans</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
                 </executions>
-
                 <configuration>
                     <executable>java</executable>
                     <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
@@ -76,19 +82,15 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.2</version>
-
-                <!--
                 <executions>
                     <execution>
-                        <id>copy-resources</id>
-                        <phase>validate</phase>
+                        <id>copy-java-beans</id>
+                        <phase>package</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
                     </execution>
                 </executions>
-                -->
-
                 <configuration>
                     <outputDirectory>${basedir}/target/classes/de/fraunhofer/iais/eis</outputDirectory>
                     <resources>
@@ -103,6 +105,7 @@
 
             </plugin>
 
+            <!-- remove generated code from tmp directory -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.0.0</version>
