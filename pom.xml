@@ -10,51 +10,35 @@
 
     <dependencies>
         <dependency>
+            <groupId>de.fraunhofer.iais.eis</groupId>
+            <artifactId>sparql-template-executor</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
             <version>RELEASE</version>
         </dependency>
+
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
             <version>RELEASE</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.apache.jena/jena-core -->
-        <dependency>
-            <groupId>org.apache.jena</groupId>
-            <artifactId>jena-core</artifactId>
-            <version>3.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>fr.inria.wimmics</groupId>
-            <artifactId>kgtool</artifactId>
-            <version>3.2.0</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>jws</artifactId>
-                    <groupId>edu.sussex.nlp</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>2.5</version>
-        </dependency>
-
     </dependencies>
 
     <build>
@@ -68,6 +52,86 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <!-- execute the Java Beans generation based on the Vocabulary files and the SPARQL templates -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.5.0</version>
+                <executions>
+                </executions>
+
+                <configuration>
+                    <executable>java</executable>
+                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                    <arguments>
+                        <argument>${basedir}/src/main/resources/vocab</argument>
+                        <argument>${basedir}/src/main/resources/templates</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+
+            <!-- copy generated code to package directory -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+
+                <!--
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                -->
+
+                <configuration>
+                    <outputDirectory>${basedir}/target/classes/de/fraunhofer/iais/eis</outputDirectory>
+                    <resources>
+                        <resource>
+                            <directory>/tmp</directory>
+                            <includes>
+                                <include>*.java</include>
+                            </includes>
+                        </resource>
+                    </resources>
+                </configuration>
+
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>/tmp</directory>
+                            <includes>
+                                <include>*.java</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+            <!-- exclude templates in the final jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <excludes>
+                        <exclude>**/templates/**</exclude>
+                        <exclude>start.rq</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
