@@ -17,7 +17,6 @@ template ids:properties-to-builder-methods(?rootClass, ?class) {
     # method body
 	st:call-template(ids:setter-method-builder-body, ?property, ?rootClass)
 
-    "\n\t"
 }
 where  {   
   ?property rdfs:domain ?class;

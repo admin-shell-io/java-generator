@@ -94,7 +94,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <outputDirectory>${basedir}/target/classes/de/fraunhofer/iais/eis</outputDirectory>
+                    <outputDirectory>${basedir}/src/main/java/de/fraunhofer/iais/eis</outputDirectory>
                     <resources>
                         <resource>
                             <directory>/tmp</directory>
@@ -135,6 +135,20 @@
                         <exclude>start.rq</exclude>
                     </excludes>
                 </configuration>
+            </plugin>
+
+            <!-- attach source to jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>

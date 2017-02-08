@@ -3,8 +3,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template ids:process-class-to-builder(?class) {
 
-    "package de.fraunhofer.iais.eis;\n\n"
-    "import de.fraunhofer.iais.eis.util.VocabUtil;\n\n"
+    "package de.fraunhofer.iais.eis;\n"
+    "\nimport de.fraunhofer.iais.eis.util.VocabUtil;"
+    "\n"
+    "\n"
     "public class " concat(strafter(str(?class), "#"), "Builder")
 
     " {\n"
@@ -30,7 +32,6 @@ template ids:process-class-to-builder(?class) {
     "\n\t\t"
     lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ".url = url;"
     "\n\t}"
-    "\n"
 
     # method implementation
 

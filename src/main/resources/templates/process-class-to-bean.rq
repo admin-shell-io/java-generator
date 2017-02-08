@@ -3,8 +3,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template ids:process-class-to-bean(?class) {
 
-    "package de.fraunhofer.iais.eis;\n\n"
-    "import de.fraunhofer.iais.eis.util.VocabUtil;\n\n"
+    "package de.fraunhofer.iais.eis;\n"
+    "\nimport de.fraunhofer.iais.eis.util.VocabUtil;"
+    "\n"
+    "\n"
     "/* " str(?comment) " */\n"
     "public class " concat(strafter(str(?class), "#"), "Impl")
     " implements " strafter(str(?class), "#")
