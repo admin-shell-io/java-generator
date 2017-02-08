@@ -73,8 +73,8 @@
                     <executable>java</executable>
                     <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                     <arguments>
-                        <argument>${basedir}/src/main/resources/vocab</argument>
-                        <argument>${basedir}/src/main/resources/templates</argument>
+                        <argument>${basedir}/src/vocabulary/rdf</argument>
+                        <argument>${basedir}/src/vocabulary/templates</argument>
                     </arguments>
                 </configuration>
             </plugin>
@@ -99,7 +99,7 @@
                         <resource>
                             <directory>/tmp</directory>
                             <includes>
-                                <include>*.java</include>
+                                <include>**/*.java</include>
                             </includes>
                         </resource>
                     </resources>
