@@ -1,0 +1,24 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+
+template ids:properties-to-builder-methods(?rootClass, ?class) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+	"\n\t"
+
+    # visibility modifier
+    "final public "
+
+    # return type and name
+    strafter(str(?rootClass), '#') "Builder " str(?label)
+
+	st:call-template(ids:property-to-setter-method, ?property, ?class)
+
+    # method body
+	st:call-template(ids:setter-method-builder-body, ?property, ?rootClass)
+
+}
+where  {   
+  ?property rdfs:domain ?class;
+    rdfs:label ?label.
+}

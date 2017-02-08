@@ -1,0 +1,13 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:setter-method-bean-body(?property) {
+
+    " {"
+    "\n\t\tassertModifiable();"
+    "\n\t\tthis." strafter(str(?property), "#") " = " strafter(str(?property), "#") ";"
+    "\n\t}"
+
+}
+where{
+}

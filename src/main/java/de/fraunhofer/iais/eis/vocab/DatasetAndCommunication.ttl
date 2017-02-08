@@ -1,0 +1,155 @@
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix org: <http://www.w3.org/ns/org#> .
+@prefix gn: <http://www.geonames.org/ontology#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dqv: <http://www.w3.org/ns/dqv#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+
+# Classes describing datasets and datasets that are in the state of being transfered (aka Header)
+# -----------------------------------------------------------------------------------------------
+
+ids:Dataset rdfs:subClassOf dcat:Dataset;
+    a owl:Class;
+    rdfs:label "Dataset"@en;
+    rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
+    ids:validation [
+        owl:onProperty ids:creationDate;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
+
+ids:TransferredDataset rdfs:subClassOf ids:Dataset;
+	a owl:Class;
+	rdfs:label "TransferredDataset"@en;
+	rdfs:comment "The class of resources that describe a dataset transfered by an IDS communication in a protocol frame."@en;
+    ids:validation [
+        owl:onProperty ids:customProperty;
+        valid:constraint "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:sender;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:receiver;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
+
+ids:TransferProperty
+	a owl:Class;
+	rdfs:label "TransferProperty"@en;
+	rdfs:comment "General property for additional description of security aspects of a data transfer."@en;
+    ids:validation [
+        owl:onProperty ids:transferPropertyKey;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:transferPropertyValue;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
+
+ids:AuthToken
+	a owl:Class;
+	rdfs:label "AuthToken"@en;
+	rdfs:comment "Authorization Token."@en;
+    ids:validation [
+        owl:onProperty ids:tokenValue;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
+
+# Properties for describing a Dataset
+# -----------------------------------
+
+ids:creationDate rdfs:subPropertyOf dct:dateSubmitted;
+    a owl:DatatypeProperty;
+    rdfs:label "creationDate"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range xsd:dateTime;
+    rdfs:comment "Date of creation of the InfrastructureComponent."@en.
+
+ids:format rdfs:subPropertyOf dct:format;
+	a owl:DatatypeProperty;
+	rdfs:label "format"@en;
+	rdfs:domain ids:Dataset;
+	rdfs:range xsd:string;
+	rdfs:comment "The file format of the dataset. ids:mediaType SHOULD be used if the type of the distribution is defined by IANA."@en.
+
+ids:mediaType rdfs:subPropertyOf dcat:mediaType;
+	a owl:DatatypeProperty;
+	rdfs:label "mediaType"@en;
+	rdfs:domain ids:Dataset;
+	rdfs:range xsd:anyURI;
+	rdfs:comment "The media type of the dataset, as defined by IANA."@en.
+
+ids:version rdfs:subPropertyOf dct:hasVersion;
+    a owl:DatatypeProperty;
+    rdfs:label "version"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range xsd:string;
+    rdfs:comment "Version identifier of the InfrastructureComponent."@en.
+
+
+# Properties for describing a TransferredDataset
+# ----------------------------------------------
+
+ids:sender
+	a owl:ObjectProperty;
+	rdfs:label "sender"@en;
+	rdfs:domain ids:TransferredDataset;
+	rdfs:range ids:DataEndpoint;
+	rdfs:comment "The sender of the message."@en.
+
+ids:receiver
+	a owl:ObjectProperty;
+	rdfs:label "receiver"@en;
+	rdfs:domain ids:TransferredDataset;
+	rdfs:range ids:DataEndpoint;
+	rdfs:comment "The receiver of the message."@en.
+
+ids:authToken
+	a owl:ObjectProperty;
+	rdfs:label "authToken"@en;
+	rdfs:domain ids:TransferredDataset;
+	rdfs:range ids:AuthToken;
+	rdfs:comment "An authorization token like JSON Web Token."@en.
+
+ids:payloadDigest
+	a owl:DatatypeProperty;
+	rdfs:label "digest"@en;
+	rdfs:domain ids:TransferredDataset;
+	rdfs:range xsd:base64Binary;
+	rdfs:comment "The digest of the dataset being transfered."@en.
+
+ids:customProperty
+	a owl:ObjectProperty;
+	rdfs:label "customProperty"@en;
+	rdfs:domain ids:TransferredDataset;
+	rdfs:range ids:TransferProperty;
+	rdfs:comment "The digest of the dataset being transfered."@en.
+
+ids:tokenValue a owl:DatatypeProperty;
+	rdfs:label "tokenValue"@en;
+	rdfs:domain ids:AuthToken;
+	rdfs:range xsd:string;
+	rdfs:comment "An authorization token value like JSON Web Token."@en.
+
+ids:transferPropertyKey a owl:DatatypeProperty;
+	rdfs:label "transferPropertyKey"@en;
+	rdfs:domain ids:TransferProperty;
+	rdfs:range xsd:string.
+
+ids:transferPropertyValue a owl:DatatypeProperty;
+	rdfs:label "transferPropertyValue"@en;
+	rdfs:domain ids:TransferProperty;
+	rdfs:range xsd:string.
