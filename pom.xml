@@ -79,7 +79,7 @@
                 </configuration>
             </plugin>
 
-            <!-- copy generated code to package directory -->
+            <!-- copy generated code to package directory
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -104,8 +104,8 @@
                         </resource>
                     </resources>
                 </configuration>
-
             </plugin>
+            -->
 
             <!-- remove generated code from tmp directory -->
             <plugin>
