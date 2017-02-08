@@ -11,7 +11,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="ids-vocabulary-1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: de.fraunhofer.iais.eis:sparql-template-executor:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-core:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-iri:3.1.1" level="project" />
