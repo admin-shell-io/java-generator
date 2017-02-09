@@ -1,0 +1,37 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+
+# Classes
+# -------
+
+ids:DataEndpoint a owl:Class;
+    rdfs:label "DataEndpoint"@en ;
+    rdfs:comment "Data Endpoint that provides a service interface."@en;
+    ids:validation [
+        owl:onProperty ids:providedBy;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
+
+#ids:DataService
+
+#ids:UsagePolicy
+
+#ids:Pricing
+
+#ids:Operation
+
+#ids:Parameter
+
+#ids:ProtocolBinding
+
+# Properties for describing a DataEndpoint
+# ----------------------------------------
+
+ids:publishedBy a owl:ObjectProperty;
+    rdfs:domain ids:DataEndpoint;
+    rdfs:range ids:Connector;
+    rdfs:label "publishedBy"@en;
+    rdfs:comment "The connector that publishes the endpoint."@en.

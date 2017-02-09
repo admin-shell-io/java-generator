@@ -1,9 +1,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix org: <http://www.w3.org/ns/org#> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
@@ -13,34 +10,11 @@
 
 ids:InfrastructureComponent a owl:Class;
     rdfs:label "InfrastructureComponent"@en ;
-    rdfs:comment "The class of all infrastructure components of the IDS.".
-
-ids:Connector rdfs:subClassOf ids:InfrastructureComponent;
-    a owl:Class;
-    rdfs:label "Connector"@en ;
-    rdfs:comment "Connector for hosting data services."@en.
-
-ids:DataEndpoint a owl:Class;
-    rdfs:label "DataEndpoint"@en ;
-    rdfs:comment "Data Endpoint that provides a service interface."@en;
+    rdfs:comment "The class of all infrastructure components of the IDS.";
     ids:validation [
-        owl:onProperty ids:providedBy;
+        owl:onProperty ids:operatedBy;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
-
-ids:Participant a owl:Class;
-    rdfs:subClassOf org:Organization;
-	rdfs:label "Participant"@en;
-	rdfs:comment "A person or company using the Industrial Data Space"@en;
-    ids:validation [
-        owl:onProperty ids:name;
-        valid:constraint "@javax.validation.constraints.NotNull";
-    ].
-
-ids:Site a owl:Class;
-    rdfs:subclassOf org:Site;
-    rdfs:label "Site"@en;
-	rdfs:comment "An office or other premise at which the organization is located"@en.
 
 # Properties
 # ----------
@@ -68,57 +42,14 @@ ids:createdBy rdfs:subPropertyOf dct:creator;
 
 ids:maintainedBy a owl:ObjectProperty;
     a owl:ObjectProperty;
-    rdfs:label "curator"@en;
+    rdfs:label "maintainedBy"@en;
     rdfs:domain ids:InfrastructureComponent;
     rdfs:range ids:Participant;
-    rdfs:comment "Entity responsible for curation of the InfrastructureComponent."@en.
+    rdfs:comment "Participant responsible for maintaining the InfrastructureComponent."@en.
 
-# Properties for describing a Participant
-# ---------------------------------------
-
-ids:name rdfs:subPropertyOf foaf:name;
+ids:operatedBy a owl:ObjectProperty;
     a owl:ObjectProperty;
-    rdfs:label "name"@en;
-    rdfs:domain ids:Participant;
-    rdfs:range rdfs:Literal;
-    rdfs:comment "Name of the company participating in the IDS."@en.
-
-ids:primarySite rdfs:subPropertyOf org:hasPrimarySite;
-    a owl:ObjectProperty;
-    rdfs:label "primarySite"@en;
-    rdfs:domain ids:Participant;
-    rdfs:range ids:Site;
-    rdfs:comment "Indicates a primary site for the Organization, this is the default means by which an Organization can be contacted and is not necessarily the formal headquarters."@en.
-
-ids:email rdfs:subPropertyOf foaf:mbox;
-    a owl:DatatypeProperty;
-    rdfs:label "Email"@en;
-    rdfs:domain ids:Participant;
-    rdfs:range xsd:string;
-    rdfs:comment "Email address for contacting the participant on a general level."@en.
-
-ids:homepage rdfs:subPropertyOf foaf:homepage;
-    a owl:DatatypeProperty;
-    rdfs:label "Homepage"@en;
-    rdfs:domain ids:Participant;
-    rdfs:range xsd:anyURI;
-    rdfs:comment "General official homepage of the participant."@en.
-
-# Properties for describing a DataEndpoint
-# ----------------------------------------
-
-ids:providedBy a owl:ObjectProperty;
-	rdfs:domain ids:DataEndpoint;
-	rdfs:range ids:Connector;
-	rdfs:label "providedBy"@en;
-	rdfs:comment "The connector that publishes the endpoint."@en.
-
-# Properties for describing a Site
-# --------------------------------
-
-ids:siteAddress rdfs:subPropertyOf org:siteAddress;
-    a owl:ObjectProperty;
-	rdfs:domain ids:Site;
-	rdfs:range xsd:string;
-	rdfs:label "siteAddress"@en;
-	rdfs:comment "Indicates an address for the site."@en.
+    rdfs:label "operatedBy"@en;
+    rdfs:domain ids:InfrastructureComponent;
+    rdfs:range ids:Participant;
+    rdfs:comment "Participant responsible for operating the InfrastructureComponent."@en.

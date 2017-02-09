@@ -3,11 +3,11 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template ids:process-class-to-interface(?class) {
 
-    "package de.fraunhofer.iais.eis;\n"
+    "package de.fraunhofer.iais.eis;"
     "\n"
     "\n"
 
-    "/* " str(?comment) " */\n"
+    "/* " str(?comment) " */"
     #"\n@de.fhg.iais.jrdfb.annotation.RdfType(\"" str(?class) "\")"
     "\n"
     "public interface " strafter(str(?class), "#")

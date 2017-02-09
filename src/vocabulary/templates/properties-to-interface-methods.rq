@@ -5,6 +5,11 @@ template ids:properties-to-interface-methods(?class) {
 	# Iterates on selected properties and writes getter and setter methods
 
     # getter method signature
+
+    if (bound(?comment),
+        concat("\n\t/* ", str(?comment), " */"),
+        "")
+
     # "\n\t@de.fhg.iais.jrdfb.annotation.RdfProperty(\"" str(?property) "\")"
 
 	"\n\t" st:call-template(ids:property-to-getter-method, ?property, ?class) ";"
@@ -13,4 +18,8 @@ template ids:properties-to-interface-methods(?class) {
 where  {   
   ?property rdfs:domain ?class;
     rdfs:label ?label.
+
+  OPTIONAL {
+    ?property rdfs:comment ?comment.
+  }
 }

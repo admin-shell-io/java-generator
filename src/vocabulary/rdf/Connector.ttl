@@ -1,0 +1,24 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+
+# Classes
+# -------
+
+ids:Connector rdfs:subClassOf ids:InfrastructureComponent;
+    a owl:Class;
+    rdfs:label "Connector"@en ;
+    rdfs:comment "Connector for hosting data services."@en.
+
+# Properties
+# ----------
+
+ids:publishes a owl:ObjectProperty;
+    rdfs:domain ids:Connector;
+    rdfs:range ids:DataEndpoint;
+    rdfs:label "publishes"@en;
+    rdfs:comment "The DataEndpoints published by a Connector."@en.
+

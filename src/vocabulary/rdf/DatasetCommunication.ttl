@@ -9,10 +9,10 @@
 # Classes
 # -------
 
-ids:TransferredDataset rdfs:subClassOf ids:Dataset;
+ids:DataTransfer
 	a owl:Class;
-	rdfs:label "TransferredDataset"@en;
-	rdfs:comment "The class of resources that describe a dataset transfered by an IDS communication in a protocol frame."@en;
+	rdfs:label "DataTransfer"@en;
+	rdfs:comment "The class of resources that describe a data transfer on the IDS."@en;
     ids:validation [
         owl:onProperty ids:customProperty;
         valid:constraint "@OneToMany";
@@ -54,35 +54,35 @@ ids:AuthToken rdfs:subClassOf credential:SimpleCredential;
 ids:sender
 	a owl:ObjectProperty;
 	rdfs:label "sender"@en;
-	rdfs:domain ids:TransferredDataset;
+	rdfs:domain ids:DataTransfer;
 	rdfs:range ids:DataEndpoint;
 	rdfs:comment "The sender of the message."@en.
 
 ids:receiver
 	a owl:ObjectProperty;
 	rdfs:label "receiver"@en;
-	rdfs:domain ids:TransferredDataset;
+	rdfs:domain ids:DataTransfer;
 	rdfs:range ids:DataEndpoint;
 	rdfs:comment "The receiver of the message."@en.
 
 ids:authToken
 	a owl:ObjectProperty;
 	rdfs:label "authToken"@en;
-	rdfs:domain ids:TransferredDataset;
+	rdfs:domain ids:DataTransfer;
 	rdfs:range ids:AuthToken;
 	rdfs:comment "An authorization token like JSON Web Token."@en.
 
 ids:payloadDigest
 	a owl:DatatypeProperty;
 	rdfs:label "digest"@en;
-	rdfs:domain ids:TransferredDataset;
+	rdfs:domain ids:DataTransfer;
 	rdfs:range xsd:base64Binary;
 	rdfs:comment "The digest of the dataset being transfered."@en.
 
 ids:customProperty
 	a owl:ObjectProperty;
 	rdfs:label "customProperty"@en;
-	rdfs:domain ids:TransferredDataset;
+	rdfs:domain ids:DataTransfer;
 	rdfs:range ids:TransferProperty;
 	rdfs:comment "The digest of the dataset being transfered."@en.
 
