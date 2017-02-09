@@ -1,38 +1,24 @@
-@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 @prefix org: <http://www.w3.org/ns/org#> .
-@prefix gn: <http://www.geonames.org/ontology#> .
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dqv: <http://www.w3.org/ns/dqv#> .
-@prefix time: <http://www.w3.org/2006/time#> .
-@prefix locn: <http://www.w3.org/ns/locn#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 
-# Classes describing central IDS and infrastructure-related components
-# --------------------------------------------------------------------
+# Classes
+# -------
 
 ids:InfrastructureComponent a owl:Class;
     rdfs:label "InfrastructureComponent"@en ;
     rdfs:comment "The class of all infrastructure components of the IDS.".
 
-ids:Connector a owl:Class;
-    rdfs:subClassOf ids:InfrastructureComponent;
+ids:Connector rdfs:subClassOf ids:InfrastructureComponent;
+    a owl:Class;
     rdfs:label "Connector"@en ;
     rdfs:comment "Connector for hosting data services."@en.
-
-ids:Broker a owl:Class;
-    rdfs:subClassOf ids:InfrastructureComponent;
-    rdfs:label "Broker"@en ;
-    rdfs:comment "Broker holding an index of published data endpoints."@en.
 
 ids:DataEndpoint a owl:Class;
     rdfs:label "DataEndpoint"@en ;
@@ -56,8 +42,8 @@ ids:Site a owl:Class;
     rdfs:label "Site"@en;
 	rdfs:comment "An office or other premise at which the organization is located"@en.
 
-# Properties for describing InfrastructureComponents
-# --------------------------------------------------
+# Properties
+# ----------
 
 ids:title rdfs:subPropertyOf dct:title;
 	a owl:DatatypeProperty;

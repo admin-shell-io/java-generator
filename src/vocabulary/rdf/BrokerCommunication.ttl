@@ -1,40 +1,28 @@
-@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix prov: <http://www.w3.org/ns/prov#> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
-@prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
-@prefix org: <http://www.w3.org/ns/org#> .
-@prefix gn: <http://www.geonames.org/ontology#> .
-@prefix dcat: <http://www.w3.org/ns/dcat#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix dqv: <http://www.w3.org/ns/dqv#> .
-@prefix time: <http://www.w3.org/2006/time#> .
-@prefix locn: <http://www.w3.org/ns/locn#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 
-# Message Classes for interaction with a Broker
-# ---------------------------------------------
+# Classes
+# -------
 
 ids:BrokerMessage a owl:Class;
     rdfs:label "BrokerMessage"@en ;
     rdfs:comment "The class of all messages to interact with a Broker.";
     ids:validation [
-        owl:onProperty ids:payload;
+        owl:onProperty ids:messageContent;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-ids:BrokerDataMessage a owl:Class;
-    rdfs:subClassOf ids:BrokerMessage;
+ids:BrokerDataMessage rdfs:subClassOf ids:BrokerMessage;
+    a owl:Class;
     rdfs:label "BrokerDataMessage"@en ;
     rdfs:comment "The class of all messages intended for data transfer to/from a Broker.".
 
-ids:BrokerQueryMessage a owl:Class;
-    rdfs:subClassOf ids:BrokerMessage;
+ids:BrokerQueryMessage rdfs:subClassOf ids:BrokerMessage;
+    a owl:Class;
     rdfs:label "BrokerQueryMessage"@en ;
     rdfs:comment "The class of all messages that query the broker for data.";
     ids:validation [
@@ -42,13 +30,13 @@ ids:BrokerQueryMessage a owl:Class;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-ids:BrokerRequestMessage a owl:Class;
-    rdfs:subClassOf ids:BrokerMessage;
+ids:BrokerRequestMessage rdfs:subClassOf ids:BrokerMessage;
+    a owl:Class;
     rdfs:label "BrokerRequestMessage"@en ;
     rdfs:comment "The class of all messages that represent requests to a Broker.".
 
-ids:BrokerResponseMessage a owl:Class;
-    rdfs:subClassOf ids:BrokerMessage;
+ids:BrokerResponseMessage rdfs:subClassOf ids:BrokerMessage;
+    a owl:Class;
     rdfs:label "BrokerResponseMessage"@en ;
     rdfs:comment "The class of all messages that represent responses of a Broker.";
     ids:validation [
@@ -60,9 +48,8 @@ ids:BrokerResponseMessage a owl:Class;
         valid:constraint "@org.hibernate.validator.constraints.URL";
     ].
 
-ids:BrokerDataRequest a owl:Class;
-    rdfs:subClassOf ids:BrokerDataMessage;
-    rdfs:subClassOf ids:BrokerRequestMessage;
+ids:BrokerDataRequest rdfs:subClassOf ids:BrokerDataMessage, ids:BrokerRequestMessage;
+    a owl:Class;
     rdfs:label "BrokerDataRequest"@en ;
     rdfs:comment "The class of all messages that represent data requests to a Broker.";
     ids:validation [
@@ -74,15 +61,13 @@ ids:BrokerDataRequest a owl:Class;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-ids:BrokerDataResponse a owl:Class;
-    rdfs:subClassOf ids:BrokerDataMessage;
-    rdfs:subClassOf ids:BrokerResponseMessage;
+ids:BrokerDataResponse rdfs:subClassOf ids:BrokerDataMessage, ids:BrokerResponseMessage;
+    a owl:Class;
     rdfs:label "BrokerDataResponse"@en ;
     rdfs:comment "The class of all messages that represent data responses of a Broker.".
 
-ids:BrokerQueryRequest a owl:Class;
-    rdfs:subClassOf ids:BrokerRequestMessage;
-    rdfs:subClassOf ids:BrokerQueryMessage;
+ids:BrokerQueryRequest rdfs:subClassOf ids:BrokerRequestMessage, ids:BrokerQueryMessage;
+    a owl:Class;
     rdfs:label "BrokerQueryRequest"@en ;
     rdfs:comment "The class of all messages that represent query requests to a Broker.";
     ids:validation [
@@ -94,9 +79,8 @@ ids:BrokerQueryRequest a owl:Class;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-ids:BrokerQueryResponse a owl:Class;
-    rdfs:subClassOf ids:BrokerQueryMessage;
-    rdfs:subClassOf ids:BrokerResponseMessage;
+ids:BrokerQueryResponse rdfs:subClassOf ids:BrokerQueryMessage, ids:BrokerResponseMessage;
+    a owl:Class;
     rdfs:label "BrokerQueryResponse"@en ;
     rdfs:comment "The class of all messages that represent a Broker's response to a query.".
 
@@ -158,14 +142,14 @@ ids:CoveredConnector a ids:EntityCoveredByDataRequest;
 ids:CoveredDataEndpoint a ids:EntityCoveredByDataRequest;
     rdfs:label "DATA_ENDPOINT"@en.
 
-# Properties for describing BrokerMessages
-# ----------------------------------------
+# Properties
+# ----------
 
 ids:dataRequestAction a owl:ObjectProperty;
     rdfs:label "dataRequestAction";
     rdfs:domain ids:BrokerDataRequest;
     rdfs:range ids:BrokerDataRequestAction;
-    rdfs:comment "The action that should be performed with the message's payload data at the Broker."@en.
+    rdfs:comment "The action that should be performed with the message's content at the Broker."@en.
 
 ids:queryRequestAction a owl:ObjectProperty;
     rdfs:label "queryRequestAction";
@@ -179,11 +163,11 @@ ids:coveredEntity a owl:ObjectProperty;
     rdfs:range ids:EntityCoveredByDataRequest;
     rdfs:comment "The IDS entity covered in the data request."@en.
 
-ids:payload a owl:DatatypeProperty;
-    rdfs:label "payload";
+ids:messageContent a owl:DatatypeProperty;
+    rdfs:label "messageContent";
     rdfs:domain ids:BrokerMessage;
     rdfs:range xsd:string;
-    rdfs:comment "The message's payload data."@en.
+    rdfs:comment "The message's content, e.g., a query."@en.
 
 ids:correlationId a owl:DatatypeProperty;
     rdfs:label "correlationId";

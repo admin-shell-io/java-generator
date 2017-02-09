@@ -4,6 +4,7 @@ template ids:properties-to-builder-methods(?rootClass, ?class) {
 
 	# Iterates on selected properties and writes getter and setter methods
 
+    "\n"
 	"\n\t"
 
     # visibility modifier
