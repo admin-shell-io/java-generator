@@ -9,23 +9,35 @@
 
 ids:DataEndpoint a owl:Class;
     rdfs:label "DataEndpoint"@en ;
-    rdfs:comment "Data Endpoint that provides a service interface."@en;
+    rdfs:comment "Data Endpoint that may be invoked to retrieve (via service calls, subscription, etc) or push data."@en;
     ids:validation [
         owl:onProperty ids:providedBy;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-#ids:DataService
+ids:DataService a owl:Class;
+    rdfs:label "DataService"@en ;
+    rdfs:comment "A certain view or interaction ability on the data provided by a DataEndpoint."@en.
 
-#ids:UsagePolicy
+ids:Operation a owl:Class;
+    rdfs:label "Operation"@en ;
+    rdfs:comment "An operation to be performed on a DataService, like the retrieval of a filtered subset of the data."@en.
 
-#ids:Pricing
+ids:Parameter a owl:Class;
+    rdfs:label "Parameter"@en ;
+    rdfs:comment "Specifies how an Operation should be performed."@en.
 
-#ids:Operation
+ids:UsagePolicy a owl:Class;
+    rdfs:label "UsagePolicy"@en ;
+    rdfs:comment "Defines the terms and conditions to use a DataEndpoint."@en.
 
-#ids:Parameter
+ids:PricingModel a owl:Class;
+    rdfs:label "Pricing"@en ;
+    rdfs:comment "The pricing model for invoking a DataEndpoint."@en.
 
-#ids:ProtocolBinding
+ids:ProtocolBinding a owl:Class;
+    rdfs:label "ProtocolBinding"@en ;
+    rdfs:comment "Describes how a DataEndpoint can be invoked by using a certain protocol."@en.
 
 # Properties for describing a DataEndpoint
 # ----------------------------------------
@@ -35,3 +47,39 @@ ids:publishedBy a owl:ObjectProperty;
     rdfs:range ids:Connector;
     rdfs:label "publishedBy"@en;
     rdfs:comment "The connector that publishes the endpoint."@en.
+
+ids:offers a owl:ObjectProperty;
+    rdfs:domain ids:DataEndpoint;
+    rdfs:range ids:DataService;
+    rdfs:label "offers"@en;
+    rdfs:comment "A DataService that is offered by the DataEndpoint."@en.
+
+ids:operation a owl:ObjectProperty;
+    rdfs:domain ids:DataService;
+    rdfs:range ids:Operation;
+    rdfs:label "operation"@en;
+    rdfs:comment "An Operation that can be performed on a DataService."@en.
+
+ids:parameter a owl:ObjectProperty;
+    rdfs:domain ids:Operation;
+    rdfs:range ids:Parameter;
+    rdfs:label "parameter"@en;
+    rdfs:comment "Parameterizes an Operation."@en.
+
+ids:usagePolicy a owl:ObjectProperty;
+    rdfs:domain ids:DataEndpoint;
+    rdfs:range ids:UsagePolicy;
+    rdfs:label "usagePolicy"@en;
+    rdfs:comment "UsagePolicy for a DataEndpoint."@en.
+
+ids:pricingModel a owl:ObjectProperty;
+    rdfs:domain ids:DataEndpoint;
+    rdfs:range ids:PricingModel;
+    rdfs:label "pricingModel"@en;
+    rdfs:comment "The PricingModel that should be used when invoking the DataEndpoint."@en.
+
+ids:protocolBinding a owl:ObjectProperty;
+    rdfs:domain ids:DataEndpoint;
+    rdfs:range ids:ProtocolBinding;
+    rdfs:label "protocolBinding"@en;
+    rdfs:comment "ProtocolBinding to be used for creating access requests to a DataEndpoint using a specific protocol."@en.

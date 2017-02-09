@@ -21,6 +21,7 @@ public class Demo {
     }
 
     public Demo() throws ConstraintViolationException {
+        /*
         Connector sourceConnector = new ConnectorBuilder().build();
         Connector targetConnector = new ConnectorBuilder().build();
 
@@ -32,6 +33,7 @@ public class Demo {
             .receiver(receiver)
             .creationDate(new XMLGregorianCalendarImpl(new GregorianCalendar()))
             .build();
+            */
     }
 
 
