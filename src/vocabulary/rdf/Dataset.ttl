@@ -63,3 +63,10 @@ ids:technicalProvider
     rdfs:domain ids:Dataset;
     rdfs:range ids:DataEndpoint;
     rdfs:comment "DataEndpoint that provided access or generated this Dataset."@en.
+
+ids:conformsTo
+    a owl:DatatypeProperty;
+    rdfs:label "conformsTo"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "The standard the dataset conforms to."@en.
