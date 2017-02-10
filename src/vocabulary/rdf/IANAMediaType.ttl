@@ -1,0 +1,22 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix credential: <http://www.daml.org/services/owl-s/security/credential.owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+
+# Classes
+# -------
+
+ids:IANAMediaType a owl:Class;
+    rdfs:label "BrokerQueryMessageScope"@en ;
+    rdfs:comment "The class of scopes that filter datasets by their states when queried.".
+
+# Instances
+# ---------
+
+ids:mediatype_cdmi-object a ids:IANAMediaType;
+    rdfs:seeAlso <https://www.iana.org/assignments/media-types/application/cdmi-object>;
+    rdfs:label "application/cdmi-object";
+    dct:identifier "APPLICATION_CDMI_OBJECT".

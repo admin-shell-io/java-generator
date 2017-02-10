@@ -119,6 +119,14 @@
                             </includes>
                             <followSymlinks>false</followSymlinks>
                         </fileset>
+                        <fileset>
+                            <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
+                            <includes>
+                                <include>*.java</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+
                     </filesets>
                 </configuration>
             </plugin>

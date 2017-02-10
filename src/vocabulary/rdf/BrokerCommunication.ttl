@@ -1,6 +1,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
@@ -92,55 +93,55 @@ ids:BrokerDataRequestAction a owl:Class;
     rdfs:comment "The class of all actions that can be issued to a broker in a data request message.".
 
 ids:BrokerDataRegisterAction a ids:BrokerDataRequestAction;
-    rdfs:label "REGISTER"@en.
+    dct:identifier "REGISTER"@en.
 
 ids:BrokerDataUpdateAction a ids:BrokerDataRequestAction;
-    rdfs:label "UPDATE"@en.
+    dct:identifier "UPDATE"@en.
 
 ids:BrokerDataPassivateAction a ids:BrokerDataRequestAction;
-    rdfs:label "PASSIVATE"@en.
+    dct:identifier "PASSIVATE"@en.
 
 ids:BrokerDataActivateAction a ids:BrokerDataRequestAction;
-    rdfs:label "ACTIVATE"@en.
+    dct:identifier "ACTIVATE"@en.
 
 ids:BrokerDataRemoveAction a ids:BrokerDataRequestAction;
-    rdfs:label "REMOVE"@en.
+    dct:identifier "REMOVE"@en.
 
 ids:BrokerQueryRequestAction a owl:Class;
     rdfs:label "BrokerQueryRequestAction"@en ;
     rdfs:comment "The class of all actions that can be issued to a broker in a query message.".
 
 ids:BrokerQueryGetAction a ids:BrokerQueryRequestAction;
-    rdfs:label "GET"@en.
+    dct:identifier "GET"@en.
 
 ids:BrokerQueryListAction a ids:BrokerQueryRequestAction;
-    rdfs:label "LIST"@en.
+    dct:identifier "LIST"@en.
 
 ids:BrokerQueryMessageScope a owl:Class;
     rdfs:label "BrokerQueryMessageScope"@en ;
     rdfs:comment "The class of scopes that filter datasets by their states when queried.".
 
 ids:BrokerQueryMessageScopeAll a ids:BrokerQueryMessageScope;
-    rdfs:label "ALL"@en.
+    dct:identifier "ALL"@en.
 
 ids:BrokerQueryMessageScopeActive a ids:BrokerQueryMessageScope;
-    rdfs:label "ACTIVE"@en.
+    dct:identifier "ACTIVE"@en.
 
 ids:BrokerQueryMessageScopeAccess a ids:BrokerQueryMessageScope;
-    rdfs:label "ACCESS"@en.
+    dct:identifier "ACCESS"@en.
 
 ids:EntityCoveredByDataRequest a owl:Class;
     rdfs:label "CoveredComponent"@en ;
     rdfs:comment "The class of IDS entities that are described in a BrokerDataRequest message.".
 
 ids:CoveredParticipant a ids:EntityCoveredByDataRequest;
-    rdfs:label "PARTICIPANT"@en.
+    dct:identifier "PARTICIPANT"@en.
 
 ids:CoveredConnector a ids:EntityCoveredByDataRequest;
-    rdfs:label "CONNECTOR"@en.
+    dct:identifier "CONNECTOR"@en.
 
 ids:CoveredDataEndpoint a ids:EntityCoveredByDataRequest;
-    rdfs:label "DATA_ENDPOINT"@en.
+    dct:identifier "DATA_ENDPOINT"@en.
 
 # Properties
 # ----------
