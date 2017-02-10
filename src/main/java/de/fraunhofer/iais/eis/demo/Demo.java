@@ -1,10 +1,6 @@
-package de.fraunhofer.iais.eis.util.demo;
+package de.fraunhofer.iais.eis.demo;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
-import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
-
-import java.util.GregorianCalendar;
 
 /**
  * Created by christian on 08.02.17.
@@ -21,6 +17,8 @@ public class Demo {
     }
 
     public Demo() throws ConstraintViolationException {
+        //new DatasetBuilder().coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS);
+
         /*
         Connector sourceConnector = new ConnectorBuilder().build();
         Connector targetConnector = new ConnectorBuilder().build();

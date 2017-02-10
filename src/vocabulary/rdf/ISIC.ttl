@@ -9,16 +9,13 @@
 # Classes
 # -------
 
-ids:IANAMediaType a owl:Class;
+ids:ISICIndustry a owl:Class;
     rdfs:label "BrokerQueryMessageScope"@en ;
-    rdfs:comment "The class of media types (formerly known as MIME types) as defined by IANA.".
+    rdfs:comment "The class of economic activities as listed in the International Standard Industrial Classification (ISIC).".
 
 # Instances
 # ---------
 
-# todo: add all the entries from the .xml
-
-ids:mediatype_cdmi-object a ids:IANAMediaType;
-    rdfs:seeAlso <https://www.iana.org/assignments/media-types/application/cdmi-object>;
-    rdfs:comment "application/cdmi-object";
-    dct:identifier "APPLICATION_CDMI_OBJECT".
+ids:isic_0127 a ids:ISICIndustry;
+    rdfs:comment "Growing of beverage crops";
+    dct:identifier "GROWING_OF_BEVERAGE_CROPS".

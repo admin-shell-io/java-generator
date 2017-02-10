@@ -37,10 +37,10 @@ ids:format rdfs:subPropertyOf dct:format;
     rdfs:comment "The file format of the dataset. ids:mediaType SHOULD be used if the type of the distribution is defined by IANA."@en.
 
 ids:mediaType rdfs:subPropertyOf dcat:mediaType;
-    a owl:DatatypeProperty;
+    a owl:ObjectProperty;
     rdfs:label "mediaType"@en;
     rdfs:domain ids:Dataset;
-    rdfs:range xsd:anyURI;
+    rdfs:range ids:IANAMediaType;
     rdfs:comment "The media type of the dataset, as defined by IANA."@en.
 
 ids:version rdfs:subPropertyOf dct:hasVersion;
@@ -64,9 +64,15 @@ ids:technicalProvider
     rdfs:range ids:DataEndpoint;
     rdfs:comment "DataEndpoint that provided access or generated this Dataset."@en.
 
-ids:conformsTo
+ids:conformsToStandard
     a owl:DatatypeProperty;
     rdfs:label "conformsTo"@en;
     rdfs:domain ids:Dataset;
     rdfs:range xsd:anyURI;
-    rdfs:comment "The standard the dataset conforms to."@en.
+    rdfs:comment "The standard the Dataset conforms to."@en.
+
+ids:coversIndustry a owl:ObjectProperty;
+    rdfs:label "coversIndustry"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range ids:ISICIndustry;
+    rdfs:comment "Industry branch covered by the Dataset."@en.
