@@ -1,5 +1,9 @@
 package de.fraunhofer.iais.eis.demo;
 
+import de.fraunhofer.iais.eis.DataEndpointBuilder;
+import de.fraunhofer.iais.eis.DataService;
+import de.fraunhofer.iais.eis.DataServiceBuilder;
+import de.fraunhofer.iais.eis.OperationBuilder;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 
 /**
@@ -17,6 +21,12 @@ public class Demo {
     }
 
     public Demo() throws ConstraintViolationException {
+        //new OperationBuilder().input()
+
+        //DataService dataService = new DataServiceBuilder().build();
+
+        //new DataEndpointBuilder().offers(dataService).build();
+
         //new DatasetBuilder().coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS);
 
         /*

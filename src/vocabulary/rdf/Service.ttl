@@ -1,5 +1,6 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
@@ -21,15 +22,53 @@ ids:DataEndpoint a owl:Class;
 
 ids:DataService a owl:Class;
     rdfs:label "DataService"@en ;
-    rdfs:comment "A certain view or interaction ability on the data provided by a DataEndpoint."@en.
+    rdfs:comment "A certain view or interaction ability on the data provided by a DataEndpoint."@en;
+    ids:validation [
+        owl:onProperty ids:operation;
+        valid:constraint "@OneToMany";
+    ].
 
 ids:Operation a owl:Class;
     rdfs:label "Operation"@en ;
-    rdfs:comment "An operation to be performed on a DataService, like the retrieval of a filtered subset of the data."@en.
+    rdfs:comment "An operation to be performed on a DataService, like the retrieval of a filtered subset of the data."@en;
+    ids:validation [
+        owl:onProperty ids:opLabel;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:input;
+        valid:constraint "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:output;
+        valid:constraint "@OneToMany";
+    ].
 
 ids:Parameter a owl:Class;
     rdfs:label "Parameter"@en ;
-    rdfs:comment "Specifies how an Operation should be performed."@en.
+    rdfs:comment "Specifies how an Operation should be performed."@en;
+    ids:validation [
+        owl:onProperty ids:paramLabel;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:paramName;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:dataType;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ].
+
+ids:InputParameter rdfs:subClassOf ids:Parameter;
+    a owl:Class;
+    rdfs:label "InputParameter"@en ;
+    rdfs:comment "Input Parameter to control an Operation."@en.
+
+ids:OutputParameter rdfs:subClassOf ids:Parameter;
+    a owl:Class;
+    rdfs:label "OutputParameter"@en ;
+    rdfs:comment "Result of an Operation."@en.
 
 ids:UsagePolicy a owl:Class;
     rdfs:label "UsagePolicy"@en ;
@@ -58,18 +97,6 @@ ids:offers a owl:ObjectProperty;
     rdfs:label "offers"@en;
     rdfs:comment "A DataService that is offered by the DataEndpoint."@en.
 
-ids:operation a owl:ObjectProperty;
-    rdfs:domain ids:DataService;
-    rdfs:range ids:Operation;
-    rdfs:label "operation"@en;
-    rdfs:comment "An Operation that can be performed on a DataService."@en.
-
-ids:parameter a owl:ObjectProperty;
-    rdfs:domain ids:Operation;
-    rdfs:range ids:Parameter;
-    rdfs:label "parameter"@en;
-    rdfs:comment "Parameterizes an Operation."@en.
-
 ids:usagePolicy a owl:ObjectProperty;
     rdfs:domain ids:DataEndpoint;
     rdfs:range ids:UsagePolicy;
@@ -87,3 +114,92 @@ ids:protocolBinding a owl:ObjectProperty;
     rdfs:range ids:ProtocolBinding;
     rdfs:label "protocolBinding"@en;
     rdfs:comment "ProtocolBinding to be used for creating access requests to a DataEndpoint using a specific protocol."@en.
+
+# Properties for describing an Operation
+# --------------------------------------
+
+ids:operation a owl:ObjectProperty;
+    rdfs:domain ids:DataService;
+    rdfs:range ids:Operation;
+    rdfs:label "operation"@en;
+    rdfs:comment "An Operation that can be performed on a DataService."@en.
+
+ids:input a owl:ObjectProperty;
+    rdfs:domain ids:Operation;
+    rdfs:range ids:InputParameter;
+    rdfs:label "input"@en;
+    rdfs:comment "Parameterizes the input of an Operation."@en.
+
+ids:output a owl:ObjectProperty;
+    rdfs:domain ids:Operation;
+    rdfs:range ids:OutputParameter;
+    rdfs:label "output"@en;
+    rdfs:comment "Holds the result of an Operation."@en.
+
+ids:opLabel rdfs:subPropertyOf rdfs:label;
+    a owl:DatatypeProperty;
+    rdfs:domain ids:Operation;
+    rdfs:range rdfs:Literal;
+    rdfs:label "opLabel"@en;
+    rdfs:comment "Freetext label of the Operation as it should be shown in public indexes."@en.
+
+ids:opDescription rdfs:subPropertyOf dct:description;
+    a owl:DatatypeProperty;
+    rdfs:domain ids:Operation;
+    rdfs:range rdfs:Literal;
+    rdfs:label "opDescription"@en;
+    rdfs:comment "Freetext description of the Operation as it should be shown in public indexes."@en.
+
+ids:opFunctionality a owl:DatatypeProperty;
+   rdfs:domain ids:Operation;
+   rdfs:range xsd:anyURI;
+   rdfs:label "opFunctionality"@en;
+   rdfs:comment "Links to a description of the functionality the Operation provides, preferably expressed as Linked Data."@en.
+
+ids:opImplementation a owl:DatatypeProperty;
+  rdfs:domain ids:Operation;
+  rdfs:range xsd:anyURI;
+  rdfs:label "opFunctionality"@en;
+  rdfs:comment "Links to a description about how the operation is implemented. The description should provide information about, e.g., used algorithms, expected preconditions, or assumptions."@en.
+
+# Properties for describing a Parameter
+# -------------------------------------
+
+ids:paramLabel rdfs:subPropertyOf rdfs:label;
+    a owl:DatatypeProperty;
+    rdfs:domain ids:Parameter;
+    rdfs:range rdfs:Literal;
+    rdfs:label "paramLabel"@en;
+    rdfs:comment "Freetext label of the Parameter as it should be shown in public indexes."@en.
+
+ids:paramName rdfs:subPropertyOf dct:identifier;
+    a owl:DatatypeProperty;
+    rdfs:domain ids:Parameter;
+    rdfs:range xsd:string;
+    rdfs:label "paramName"@en;
+    rdfs:comment "Name of the Parameter as it must be used in service requests."@en.
+
+ids:paramDescription rdfs:subPropertyOf dct:description;
+    a owl:DatatypeProperty;
+    rdfs:domain ids:Parameter;
+    rdfs:range rdfs:Literal;
+    rdfs:label "paramDescription"@en;
+    rdfs:comment "Freetext description of the Parameter as it should be shown in public indexes."@en.
+
+ids:semanticType a owl:DatatypeProperty;
+    rdfs:domain ids:Parameter;
+    rdfs:range xsd:anyURI;
+    rdfs:label "semanticType"@en;
+    rdfs:comment "Links to a description of the Parameter's semantics, preferably expressed as Linked Data."@en.
+
+ids:dataType a owl:ObjectProperty;
+    rdfs:domain ids:Parameter;
+    rdfs:range ids:ParameterDataType;
+    rdfs:label "dataType"@en;
+    rdfs:comment "Indicates the datatype of the Parameter."@en.
+
+ids:paramMediaType a owl:ObjectProperty;
+    rdfs:domain ids:Parameter;
+    rdfs:range ids:IANAMediaType;
+    rdfs:label "paramMediaType"@en;
+    rdfs:comment "The media type of the Parameter, as defined by IANA."@en.
