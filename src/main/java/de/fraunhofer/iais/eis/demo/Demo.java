@@ -1,9 +1,6 @@
 package de.fraunhofer.iais.eis.demo;
 
-import de.fraunhofer.iais.eis.DataEndpointBuilder;
-import de.fraunhofer.iais.eis.DataService;
-import de.fraunhofer.iais.eis.DataServiceBuilder;
-import de.fraunhofer.iais.eis.OperationBuilder;
+import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 
 /**

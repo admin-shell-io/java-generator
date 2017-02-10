@@ -159,7 +159,7 @@ ids:opFunctionality a owl:DatatypeProperty;
 ids:opImplementation a owl:DatatypeProperty;
   rdfs:domain ids:Operation;
   rdfs:range xsd:anyURI;
-  rdfs:label "opFunctionality"@en;
+  rdfs:label "opImplementation"@en;
   rdfs:comment "Links to a description about how the operation is implemented. The description should provide information about, e.g., used algorithms, expected preconditions, or assumptions."@en.
 
 # Properties for describing a Parameter
