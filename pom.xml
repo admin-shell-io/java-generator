@@ -9,31 +9,35 @@
     <version>0.1-SNAPSHOT</version>
 
     <dependencies>
+        <!-- IAIS tools -->
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>sparql-template-executor</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>de.fhg.iais</groupId>
+            <artifactId>jrdfb</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
+        <!-- Bean validation -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
             <version>RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
             <version>RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
@@ -46,11 +50,17 @@
             <artifactId>slf4j-api</artifactId>
             <version>RELEASE</version>
         </dependency>
-
         <dependency>
             <groupId>xml-apis</groupId>
             <artifactId>xml-apis</artifactId>
             <version>1.4.01</version>
+        </dependency>
+
+        <!-- Reflection -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>RELEASE</version>
         </dependency>
 
     </dependencies>

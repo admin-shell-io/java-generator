@@ -1,9 +1,18 @@
 package de.fraunhofer.iais.eis.util;
 
+import com.google.common.reflect.ClassPath;
+import de.fhg.iais.jrdfb.JrdfbException;
+import de.fhg.iais.jrdfb.RdfSerializer;
+import de.fhg.iais.jrdfb.annotation.RdfId;
+import de.fraunhofer.iais.eis.IANAMediaType;
+import de.fraunhofer.iais.eis.Parameter;
+import de.fraunhofer.iais.eis.ParameterImpl;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -40,8 +49,32 @@ public class VocabUtil {
     }
 
     public static String toRdf(Object obj) {
-        System.out.println("rdf serialization not yet implemented");
-        // todo: call serializer
+        Collection<Class> serializationClasses = new ArrayList<>();
+        try {
+            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            ClassPath classPath = ClassPath.from(classLoader);
+            classPath.getTopLevelClasses("de.fraunhofer.iais.eis").stream().forEach(
+                    classInfo -> {
+                        try {
+                            serializationClasses.add(classLoader.loadClass(classInfo.getName()));
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+            );
+
+            RdfSerializer serializer = new RdfSerializer(serializationClasses.toArray(new Class[serializationClasses.size()]));
+            String rdf =  serializer.serialize(obj);
+            System.out.println(rdf);
+            return rdf;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JrdfbException e) {
+            e.printStackTrace();
+        }
+
+
         return null;
     }
 

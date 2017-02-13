@@ -8,7 +8,7 @@ template ids:process-class-to-interface(?class) {
     "\n"
 
     "/* " str(?comment) " */"
-    #"\n@de.fhg.iais.jrdfb.annotation.RdfType(\"" str(?class) "\")"
+    "\n@de.fhg.iais.jrdfb.annotation.RdfType(\"" str(?class) "\")"
     "\n"
     "public interface " strafter(str(?class), "#")
 
@@ -20,7 +20,7 @@ template ids:process-class-to-interface(?class) {
 
         "\n\t// standard methods\n"
 
-        #"\n\t@de.fhg.iais.jrdfb.annotation.RdfId"
+        "\n\t@de.fhg.iais.jrdfb.annotation.RdfId"
         "\n\t@javax.validation.constraints.NotNull java.net.URL getId();"
         "\n\tString toRdf();"
         "\n"

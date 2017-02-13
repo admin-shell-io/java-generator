@@ -5,6 +5,8 @@ template ids:process-class-to-enum(?class) {
 
     "package de.fraunhofer.iais.eis;\n\n"
     "/* " str(?comment) " */\n"
+    "\n@de.fhg.iais.jrdfb.annotation.RdfType(\"" str(?class) "\")"
+    "\n"
     "public enum " strafter(str(?class), "#") " {\n"
 
         st:call-template(ids:process-individuals, ?class)
