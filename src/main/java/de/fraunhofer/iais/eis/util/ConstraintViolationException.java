@@ -18,5 +18,12 @@ public class ConstraintViolationException extends Exception {
     public Collection<String> getMessages() {
         return messages;
     }
+
+    @Override
+    public String toString() {
+        return "ConstraintViolationException{" +
+                "messages=" + messages +
+                '}';
+    }
 }
 

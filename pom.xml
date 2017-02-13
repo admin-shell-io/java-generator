@@ -39,6 +39,20 @@
             <artifactId>javax.el</artifactId>
             <version>RELEASE</version>
         </dependency>
+
+        <!-- For Jena to work correctly -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>xml-apis</groupId>
+            <artifactId>xml-apis</artifactId>
+            <version>1.4.01</version>
+        </dependency>
+
     </dependencies>
 
     <build>

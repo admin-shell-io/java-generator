@@ -6,10 +6,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Created by christian on 31.01.17.
@@ -34,19 +31,22 @@ public class VocabUtil {
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(objToValidate);
         if (!constraintViolations.isEmpty()) {
-            Collection<String> messages = new ArrayList<>();
-            constraintViolations.stream().forEach(x -> messages.add(x.getMessage()));
+            Collection<String> messages = new HashSet<>();
+            constraintViolations.stream().forEach(x -> messages.add(x.getPropertyPath() + " " + x.getMessage()));
 
             ConstraintViolationException exc = new ConstraintViolationException(messages);
             throw exc;
         }
     }
 
-    public static void toRdf(Object obj) {
+    public static String toRdf(Object obj) {
+        System.out.println("rdf serialization not yet implemented");
         // todo: call serializer
+        return null;
     }
 
     public static Object fromRdf(String rdf) {
+        System.out.println("rdf deserialization not yet implemented");
         // todo: call deserializer
         return null;
     }

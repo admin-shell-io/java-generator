@@ -2,6 +2,11 @@ package de.fraunhofer.iais.eis.demo;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
+import org.apache.jena.graph.impl.LiteralLabel;
+import org.apache.jena.graph.impl.LiteralLabelFactory;
+import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.ResourceFactory;
+import org.apache.jena.rdf.model.impl.LiteralImpl;
 
 /**
  * Created by christian on 08.02.17.
@@ -18,6 +23,10 @@ public class Demo {
     }
 
     public Demo() throws ConstraintViolationException {
+        Literal label = ResourceFactory.createLangLiteral("somelabel", "en");
+        Parameter param = new ParameterBuilder().paramLabel(label).paramName("huhu").dataType(ParameterDataType.XSD_INT).build();
+        param.toRdf();
+
         //new OperationBuilder().input()
 
         //DataService dataService = new DataServiceBuilder().build();

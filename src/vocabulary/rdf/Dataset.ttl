@@ -76,3 +76,17 @@ ids:coversIndustry a owl:ObjectProperty;
     rdfs:domain ids:Dataset;
     rdfs:range ids:ISICIndustry;
     rdfs:comment "Industry branch covered by the Dataset."@en.
+
+ids:licenseDocument rdfs:subPropertyOf dct:license;
+    a owl:ObjectProperty;
+    rdfs:label "licenseDocument"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range ids:LicenseDocument;
+    rdfs:comment "License of the Dataset. Refers to common standard licenses used in the IDS."@en.
+
+ids:licenseReference rdfs:subPropertyOf dct:license;
+    a owl:ObjectProperty;
+    rdfs:label "licenseReference"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "References a license document that is publicly available on the Web."@en.

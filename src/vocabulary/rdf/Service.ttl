@@ -53,7 +53,7 @@ ids:Parameter a owl:Class;
     ];
     ids:validation [
         owl:onProperty ids:paramName;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@org.hibernate.validator.constraints.NotEmpty";
     ];
     ids:validation [
         owl:onProperty ids:dataType;
