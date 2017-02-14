@@ -34,10 +34,11 @@ public class Demo {
         //todo: this is invalid - valid dateendpoint object can be obtained elsewhere
         DataEndpoint permittedEndpoint = new DataEndpointBuilder().build();
 
-        Modify modifyAction = new ModifyBuilder().build();
+        Read modifyAction = new ReadBuilder().build();
 
+        // the permission to modify a certain endpoint
         Permission permission = new PermissionBuilder()
-                .target(permittedEndpoint)
+                .targetDataEndpoint(permittedEndpoint)
                 .action(Arrays.asList(modifyAction))
             .build();
 
