@@ -65,7 +65,6 @@ public class VocabUtil {
 
             RdfSerializer serializer = new RdfSerializer(serializationClasses.toArray(new Class[serializationClasses.size()]));
             String rdf =  serializer.serialize(obj);
-            System.out.println(rdf);
             return rdf;
 
         } catch (IOException e) {
@@ -73,7 +72,6 @@ public class VocabUtil {
         } catch (JrdfbException e) {
             e.printStackTrace();
         }
-
 
         return null;
     }

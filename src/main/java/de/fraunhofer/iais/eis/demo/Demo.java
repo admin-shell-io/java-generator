@@ -8,6 +8,9 @@ import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ResourceFactory;
 import org.apache.jena.rdf.model.impl.LiteralImpl;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by christian on 08.02.17.
  */
@@ -19,13 +22,22 @@ public class Demo {
         }
         catch (ConstraintViolationException e) {
             e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
         }
     }
 
-    public Demo() throws ConstraintViolationException {
+    public Demo() throws ConstraintViolationException, MalformedURLException {
         Literal label = ResourceFactory.createLangLiteral("somelabel", "en");
-        Parameter param = new ParameterBuilder().paramLabel(label).paramName("huhu").dataType(ParameterDataType.XSD_INT).build();
-        param.toRdf();
+        Parameter param = new ParameterBuilder()
+                .paramLabel(label)
+                .paramName("huhu")
+                .dataType(ParameterDataType.XSD_INT)
+                .semanticType(new URL("http://some.url.example.com"))
+                .paramMediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
+                .paramDescription(ResourceFactory.createLangLiteral("some description", "en"))
+                .build();
+        System.out.println(param.toRdf());
 
         //new OperationBuilder().input()
 

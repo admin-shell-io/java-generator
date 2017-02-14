@@ -3,6 +3,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix ids_mt: <http://industrialdataspace.org/2016/10/ids/core/mediatype#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 
 # Classes
@@ -17,7 +18,7 @@ ids:IANAMediaType a owl:Class;
 
 # todo: add all the entries from the .xml
 
-ids:mediatype_cdmi-object a ids:IANAMediaType;
+ids_mt:cdmi-object a ids:IANAMediaType;
     rdfs:seeAlso <https://www.iana.org/assignments/media-types/application/cdmi-object>;
     rdfs:comment "application/cdmi-object";
     dct:identifier "APPLICATION_CDMI_OBJECT".

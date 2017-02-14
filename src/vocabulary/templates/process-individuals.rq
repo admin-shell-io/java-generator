@@ -7,6 +7,7 @@ template ids:process-individuals(?class) {
         concat("\n\t/* ", str(?comment), " */"),
         '')
 
+    "\n\t@de.fhg.iais.jrdfb.annotation.RdfId(uriTemplate = \"" str(?individual) "\")"
     "\n\t" str(?identifier) ","
 
 }

@@ -4,6 +4,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix ids_isic: <http://industrialdataspace.org/2016/10/ids/core/isic#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 
 # Classes
@@ -16,6 +17,6 @@ ids:ISICIndustry a owl:Class;
 # Instances
 # ---------
 
-ids:isic_0127 a ids:ISICIndustry;
+ids_isic:isic_0127 a ids:ISICIndustry;
     rdfs:comment "Growing of beverage crops";
     dct:identifier "GROWING_OF_BEVERAGE_CROPS".
