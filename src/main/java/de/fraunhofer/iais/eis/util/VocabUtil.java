@@ -49,31 +49,37 @@ public class VocabUtil {
     }
 
     public static String toRdf(Object obj) {
-        Collection<Class> serializationClasses = new ArrayList<>();
+        Collection<Class> annotatedClasses = collectAnnotatedClasses();
+        RdfSerializer serializer = new RdfSerializer(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
+        String rdf = null;
         try {
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-            ClassPath classPath = ClassPath.from(classLoader);
-            classPath.getTopLevelClasses("de.fraunhofer.iais.eis").stream().forEach(
-                    classInfo -> {
-                        try {
-                            serializationClasses.add(classLoader.loadClass(classInfo.getName()));
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-            );
-
-            RdfSerializer serializer = new RdfSerializer(serializationClasses.toArray(new Class[serializationClasses.size()]));
-            String rdf =  serializer.serialize(obj);
+            rdf = serializer.serialize(obj);
             return rdf;
+        }
+        catch (JrdfbException e) {
+            throw new RdfSerializationException("Error serializing object", e);
+        }
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JrdfbException e) {
-            e.printStackTrace();
+    private static Collection<Class> collectAnnotatedClasses() {
+        Collection<Class> annotatedClasses = new ArrayList<>();
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+        try {
+            ClassPath classPath = ClassPath.from(classLoader);
+            Collection<ClassPath.ClassInfo> classInfos = classPath.getTopLevelClasses("de.fraunhofer.iais.eis");
+            for (ClassPath.ClassInfo classInfo : classInfos) {
+                annotatedClasses.add(classLoader.loadClass(classInfo.getName()));
+            }
+        }
+        catch (IOException e) {
+            throw new RdfSerializationException("Error getting classpath", e);
+        }
+        catch (ClassNotFoundException e) {
+            throw new RdfSerializationException("Error loading annotated class", e);
         }
 
-        return null;
+        return annotatedClasses;
     }
 
     public static Object fromRdf(String rdf) {
