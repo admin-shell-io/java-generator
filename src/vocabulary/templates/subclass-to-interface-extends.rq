@@ -8,4 +8,5 @@ template ids:subclass-to-interface-extends(?class) {
 }
 where {
     ?class rdfs:subClassOf ?superClass.
+    FILTER (strstarts(str(?superClass), str(<ids:>)))
 }

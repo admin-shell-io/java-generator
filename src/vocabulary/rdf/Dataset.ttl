@@ -14,7 +14,7 @@ ids:Dataset rdfs:subClassOf dcat:Dataset;
     a owl:Class;
     rdfs:label "Dataset"@en;
     rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
-    ids:technicalProvider [
+    ids:validation [
         owl:onProperty ids:sender;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].

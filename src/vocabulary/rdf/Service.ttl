@@ -70,10 +70,6 @@ ids:OutputParameter rdfs:subClassOf ids:Parameter;
     rdfs:label "OutputParameter"@en ;
     rdfs:comment "Result of an Operation."@en.
 
-ids:UsagePolicy a owl:Class;
-    rdfs:label "UsagePolicy"@en ;
-    rdfs:comment "Defines the terms and conditions to use a DataEndpoint."@en.
-
 ids:PricingModel a owl:Class;
     rdfs:label "Pricing"@en ;
     rdfs:comment "The pricing model for invoking a DataEndpoint."@en.
@@ -96,12 +92,6 @@ ids:offers a owl:ObjectProperty;
     rdfs:range ids:DataService;
     rdfs:label "offers"@en;
     rdfs:comment "A DataService that is offered by the DataEndpoint."@en.
-
-ids:usagePolicy a owl:ObjectProperty;
-    rdfs:domain ids:DataEndpoint;
-    rdfs:range ids:UsagePolicy;
-    rdfs:label "usagePolicy"@en;
-    rdfs:comment "UsagePolicy for a DataEndpoint."@en.
 
 ids:pricingModel a owl:ObjectProperty;
     rdfs:domain ids:DataEndpoint;

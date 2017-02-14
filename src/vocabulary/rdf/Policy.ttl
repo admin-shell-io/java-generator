@@ -1,0 +1,97 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+
+# Classes
+# -------
+
+ids:UsagePolicy rdfs:subClassOf odrl:Set;
+    a owl:Class;
+    rdfs:label "UsagePolicy"@en ;
+    rdfs:comment "Defines the terms and conditions to use a DataEndpoint."@en;
+    ids:validation [
+        owl:onProperty ids:permission;
+        valid:constraint "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:prohibition;
+        valid:constraint "@OneToMany";
+    ].
+
+ids:Rule rdfs:subClassOf odrl:Rule;
+    a owl:Class;
+    rdfs:label "Rule"@en;
+    rdfs:comment "Superclass of Permissions, Prohibitions and Duties."@en;
+    ids:validation [
+        owl:onProperty ids:target;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:action;
+        valid:constraint "@OneToMany";
+    ].
+
+ids:Permission rdfs:subClassOf ids:Rule;
+    rdfs:subClassOf odrl:Permission;
+    a owl:Class;
+    rdfs:label "Permission"@en;
+    rdfs:comment "The class of Permissions as defined in the ODRL ontology."@en.
+
+ids:Prohibition rdfs:subClassOf ids:Rule;
+    rdfs:subClassOf odrl:Prohibition;
+    a owl:Class;
+    rdfs:label "Prohibition"@en;
+    rdfs:comment "The class of Prohibitions as defined in the ODRL ontology."@en.
+
+ids:Action rdfs:subClassOf odrl:Action;
+    a owl:Class;
+    rdfs:label "Action"@en;
+    rdfs:comment "A thing one might be permitted to do or prohibited from doing to something."@en.
+
+ids:Modify rdfs:subClassOf ids:Action;
+    rdfs:subClassOf odrl:modify;
+    a owl:Class;
+    rdfs:label "Modify"@en;
+    rdfs:comment "The Assigner permits/prohibits the Assignees to update existing content of the Asset."@en.
+
+ids:Reproduce rdfs:subClassOf ids:Action;
+    rdfs:subClassOf odrl:reproduce;
+    a owl:Class;
+    rdfs:label "Reproduce"@en;
+    rdfs:comment "The act of making an exact reproduction of the asset."@en.
+
+# Properties
+# ----------
+
+ids:permission rdfs:subPropertyOf odrl:permission;
+    a owl:ObjectProperty;
+    rdfs:label "permission"@en;
+    rdfs:domain ids:UsagePolicy;
+    rdfs:range ids:Permission;
+    rdfs:comment "The Permissions granted by a UsagePolicy."@en.
+
+ids:prohibition rdfs:subPropertyOf odrl:prohibition;
+    a owl:ObjectProperty;
+    rdfs:label "prohibition"@en;
+    rdfs:domain ids:UsagePolicy;
+    rdfs:range ids:Prohibition;
+    rdfs:comment "The Prohibitions imposed by a UsagePolicy."@en.
+
+ids:target rdfs:subPropertyOf odrl:target;
+    a owl:ObjectProperty;
+    rdfs:label "target"@en;
+    rdfs:domain ids:Rule;
+    rdfs:range ids:DataEndpoint;
+    rdfs:comment "The DataEndpoints subjected by a Rule."@en.
+
+ids:action rdfs:subPropertyOf odrl:action;
+    a owl:ObjectProperty;
+    rdfs:label "action"@en;
+    rdfs:domain ids:Rule;
+    rdfs:range ids:Action;
+    rdfs:comment "The operation relating to the asset for which permission is being granted."@en.

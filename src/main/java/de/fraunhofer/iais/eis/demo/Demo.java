@@ -10,6 +10,7 @@ import org.apache.jena.rdf.model.impl.LiteralImpl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 
 /**
  * Created by christian on 08.02.17.
@@ -22,12 +23,31 @@ public class Demo {
         }
         catch (ConstraintViolationException e) {
             e.printStackTrace();
-        } catch (MalformedURLException e) {
+        }
+        catch (MalformedURLException e) {
             e.printStackTrace();
         }
     }
 
     public Demo() throws ConstraintViolationException, MalformedURLException {
+
+        //todo: this is invalid - valid dateendpoint object can be obtained elsewhere
+        DataEndpoint permittedEndpoint = new DataEndpointBuilder().build();
+
+        Modify modifyAction = new ModifyBuilder().build();
+
+        Permission permission = new PermissionBuilder()
+                .target(permittedEndpoint)
+                .action(Arrays.asList(modifyAction))
+            .build();
+
+        UsagePolicy policy = new UsagePolicyBuilder()
+                .permission(Arrays.asList(permission))
+            .build();
+
+        System.out.println(policy.toRdf());
+
+        /*
         Literal label = ResourceFactory.createLangLiteral("somelabel", "en");
         Parameter param = new ParameterBuilder()
                 .paramLabel(label)
@@ -38,14 +58,7 @@ public class Demo {
                 .paramDescription(ResourceFactory.createLangLiteral("some description", "en"))
                 .build();
         System.out.println(param.toRdf());
-
-        //new OperationBuilder().input()
-
-        //DataService dataService = new DataServiceBuilder().build();
-
-        //new DataEndpointBuilder().offers(dataService).build();
-
-        //new DatasetBuilder().coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS);
+        */
 
         /*
         Connector sourceConnector = new ConnectorBuilder().build();
