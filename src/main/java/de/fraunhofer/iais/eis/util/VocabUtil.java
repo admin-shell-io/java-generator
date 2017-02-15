@@ -68,7 +68,17 @@ public class VocabUtil {
         try {
             ClassPath classPath = ClassPath.from(classLoader);
             Collection<ClassPath.ClassInfo> classInfos = classPath.getTopLevelClasses("de.fraunhofer.iais.eis");
+
+            //todo: make one loop, this is to work around a serializer bug
             for (ClassPath.ClassInfo classInfo : classInfos) {
+                if (classInfo.getName().endsWith("Impl")) {
+                    annotatedClasses.add(classLoader.loadClass(classInfo.getName()));
+                }
+            }
+
+            for (ClassPath.ClassInfo classInfo : classInfos) {
+                if (classInfo.getName().endsWith("Impl"))
+                    continue;
                 annotatedClasses.add(classLoader.loadClass(classInfo.getName()));
             }
         }

@@ -11,6 +11,7 @@ import org.apache.jena.rdf.model.impl.LiteralImpl;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by christian on 08.02.17.
@@ -31,7 +32,7 @@ public class Demo {
 
     public Demo() throws ConstraintViolationException, MalformedURLException {
 
-        //todo: this is invalid - valid dateendpoint object can be obtained elsewhere
+        //todo: does not yet validate - data endpoint object can be obtained from backend system
         DataEndpoint permittedEndpoint = new DataEndpointBuilder().build();
 
         Read modifyAction = new ReadBuilder().build();
@@ -44,22 +45,24 @@ public class Demo {
 
         UsagePolicy policy = new UsagePolicyBuilder()
                 .permission(Arrays.asList(permission))
+                .prohibition(Collections.emptyList())
             .build();
 
         System.out.println(policy.toRdf());
 
-        /*
-        Literal label = ResourceFactory.createLangLiteral("somelabel", "en");
+        //-----
+        Literal germanLabel = ResourceFactory.createLangLiteral("Stahlgüte", "de");
+        Literal englishLabel = ResourceFactory.createLangLiteral("steel quality", "en");
+
         Parameter param = new ParameterBuilder()
-                .paramLabel(label)
-                .paramName("huhu")
-                .dataType(ParameterDataType.XSD_INT)
-                .semanticType(new URL("http://some.url.example.com"))
+                .paramLabel(Arrays.asList(germanLabel, englishLabel))
+                .paramName("qualityType")
+                .dataType(ParameterDataType.XSD_STRING)
+                .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
                 .paramMediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
-                .paramDescription(ResourceFactory.createLangLiteral("some description", "en"))
-                .build();
+                .paramDescription(ResourceFactory.createLangLiteral("steel quality quality according to european standard", "en"))
+            .build();
         System.out.println(param.toRdf());
-        */
 
         /*
         Connector sourceConnector = new ConnectorBuilder().build();
