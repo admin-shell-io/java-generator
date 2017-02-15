@@ -4,9 +4,12 @@ prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 template ids:property-to-field(?property, ?class) {
 
     "\n\t"
-    if (bound(?constraint),
-        st:call-template(ids:propertyAnnotation, ?constraint, ?range),
-        st:call-template(ids:range, ?range))
+
+    st:call-template(ids:propertyAnnotation, ?class, ?property, ?range)
+
+    " "
+
+    st:call-template(ids:range, ?class, ?property, ?range)
 
     " "
     strafter(str(?property), "#")
@@ -15,11 +18,4 @@ template ids:property-to-field(?property, ?class) {
 }
 where  {
    ?property rdfs:range ?range.
-
-    OPTIONAL {
-        ?property rdfs:domain ?class.
-        ?class ids:validation ?validation.
-        ?validation owl:onProperty ?property.
-        ?validation valid:constraint ?constraint.
-    }
 } 

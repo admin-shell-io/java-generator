@@ -1,13 +1,13 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
-template ids:propertyAnnotation(?constraint, ?range) {
+template ids:propertyAnnotation(?class, ?property, ?range) {
 
-    if (str(?constraint) = "@OneToMany", "java.util.Collection<", concat(str(?constraint), " "))
+    str(?constraint)
 
-    # return type
-    st:call-template(ids:range, ?range)
-
-    if (str(?constraint) = "@OneToMany", ">", "")
 }
 where {
+    ?class ids:validation ?validation.
+    ?validation owl:onProperty ?property.
+    ?validation valid:constraint ?constraint.
 }

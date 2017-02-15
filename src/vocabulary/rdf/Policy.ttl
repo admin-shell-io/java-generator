@@ -16,11 +16,11 @@ ids:UsagePolicy rdfs:subClassOf odrl:Set;
     rdfs:comment "Defines the terms and conditions to use a DataEndpoint."@en;
     ids:validation [
         owl:onProperty ids:permission;
-        valid:constraint "@OneToMany";
+        valid:relationType "@OneToMany";
     ];
     ids:validation [
         owl:onProperty ids:prohibition;
-        valid:constraint "@OneToMany";
+        valid:relationType "@OneToMany";
     ].
 
 ids:Rule rdfs:subClassOf odrl:Rule;
@@ -33,7 +33,7 @@ ids:Rule rdfs:subClassOf odrl:Rule;
     ];
     ids:validation [
         owl:onProperty ids:action;
-        valid:constraint "@OneToMany";
+        valid:relationType "@OneToMany";
     ].
 
 ids:Permission rdfs:subClassOf ids:Rule;

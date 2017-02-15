@@ -31,7 +31,7 @@ public class Demo {
     }
 
     public Demo() throws ConstraintViolationException, MalformedURLException {
-
+        /*
         //todo: does not yet validate - data endpoint object can be obtained from backend system
         DataEndpoint permittedEndpoint = new DataEndpointBuilder().build();
 
@@ -49,6 +49,7 @@ public class Demo {
             .build();
 
         System.out.println(policy.toRdf());
+        */
 
         //-----
         Literal germanLabel = ResourceFactory.createLangLiteral("Stahlgüte", "de");

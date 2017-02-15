@@ -15,7 +15,7 @@ ids:DataTransfer
 	rdfs:comment "The class of resources that describe a data transfer on the IDS."@en;
     ids:validation [
         owl:onProperty ids:customProperty;
-        valid:constraint "@OneToMany";
+        valid:relationType "@OneToMany";
     ];
     ids:validation [
         owl:onProperty ids:sender;

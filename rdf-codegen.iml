@@ -12,6 +12,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="ids-vocabulary-1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.22" level="project" />
     <orderEntry type="library" name="Maven: de.fraunhofer.iais.eis:sparql-template-executor:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-core:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-iri:3.1.1" level="project" />
@@ -75,7 +76,7 @@
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:1.3.1" level="project" />
     <orderEntry type="library" name="Maven: javax.el:javax.el-api:3.0.1-b04" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish.web:javax.el:2.2.6" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.22" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.23" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" name="Maven: com.google.guava:guava:21.0" level="project" />
   </component>
