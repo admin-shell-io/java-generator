@@ -49,7 +49,8 @@ ids:Parameter a owl:Class;
     rdfs:comment "Specifies how an Operation should be performed."@en;
     ids:validation [
         owl:onProperty ids:paramLabel;
-        valid:constraint "@OneToMany";
+        valid:constraint "@javax.validation.constraints.NotNull";
+#        valid:constraint "@OneToMany";
 #        valid:constraint "@org.hibernate.validator.constraints.NotEmpty";
     ];
     ids:validation [

@@ -31,7 +31,7 @@ public class Demo {
     }
 
     public Demo() throws ConstraintViolationException, MalformedURLException {
-
+        /*
         //todo: does not yet validate - data endpoint object can be obtained from backend system
         DataEndpoint permittedEndpoint = new DataEndpointBuilder().build();
 
@@ -49,13 +49,11 @@ public class Demo {
             .build();
 
         System.out.println(policy.toRdf());
-
+        */
         //-----
-        Literal germanLabel = ResourceFactory.createLangLiteral("Stahlgüte", "de");
-        Literal englishLabel = ResourceFactory.createLangLiteral("steel quality", "en");
 
         Parameter param = new ParameterBuilder()
-                .paramLabel(Arrays.asList(germanLabel, englishLabel))
+                .paramLabel(ResourceFactory.createLangLiteral("steel quality", "en"))
                 .paramName("qualityType")
                 .dataType(ParameterDataType.XSD_STRING)
                 .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
