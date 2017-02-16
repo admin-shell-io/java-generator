@@ -23,6 +23,9 @@ public class Demo {
     public static void main(String[] args) throws ConstraintViolationException, MalformedURLException {
         Demo demo = new Demo();
 
+        // create a dataset description (metadata)
+        demo.createDataset();
+
         // create a usage policy that can be attached to a data endpoint
         demo.createPolicy();
 
@@ -34,6 +37,21 @@ public class Demo {
 
         // create a data transfer between two connectors
         demo.createDataTransfer();
+    }
+
+    private void createDataset() throws ConstraintViolationException, MalformedURLException {
+        Participant datasetCreator = new ParticipantBuilder()
+                .name(ResourceFactory.createPlainLiteral("Historic data GmbH"))
+                .build();
+
+        new DatasetBuilder()
+                .datasetTitle(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en"))
+                .datasetDescription(ResourceFactory.createLangLiteral("Historic records, incomplete", "en"))
+                .contentCreator(datasetCreator)
+                .conformsTo(new URL("http://who.unitednations.org/datapublication/standards/prices"))
+                .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)
+                .licenseDocument(LicenseDocument.CC_BY_NC_ND_2_0)
+                .build();
     }
 
     private void createPolicy() throws ConstraintViolationException {
@@ -83,7 +101,7 @@ public class Demo {
         Participant dataOwner = new ParticipantBuilder()
                 .name(ResourceFactory.createPlainLiteral("Company A"))
                 .build();
-        Participant dataReceipient = new ParticipantBuilder()
+        Participant dataConsumer = new ParticipantBuilder()
                 .name(ResourceFactory.createPlainLiteral("Company B"))
                 .build();
 
@@ -91,7 +109,7 @@ public class Demo {
                 .operatedBy(dataOwner)
                 .build();
         Connector targetConnector = new ConnectorBuilder()
-                .operatedBy(dataReceipient)
+                .operatedBy(dataConsumer)
                 .build();
 
         DataEndpoint sender = new DataEndpointBuilder().publishedBy(sourceConnector).build();
