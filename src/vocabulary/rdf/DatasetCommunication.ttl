@@ -24,6 +24,10 @@ ids:DataTransfer
     ids:validation [
         owl:onProperty ids:receiver;
         valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:transferCreatedAt;
+        valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
 ids:TransferProperty
@@ -101,3 +105,10 @@ ids:transferPropertyValue a owl:DatatypeProperty;
 	rdfs:label "transferPropertyValue"@en;
 	rdfs:domain ids:TransferProperty;
 	rdfs:range xsd:string.
+
+ids:transferCreatedAt rdfs:subPropertyOf dct:dateSubmitted;
+    a owl:DatatypeProperty;
+    rdfs:label "transferCreatedAt"@en;
+    rdfs:domain ids:DataTransfer;
+    rdfs:range xsd:dateTime;
+    rdfs:comment "Date of creation of the DataTransfer."@en.
