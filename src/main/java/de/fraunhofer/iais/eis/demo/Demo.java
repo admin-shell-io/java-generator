@@ -22,9 +22,17 @@ public class Demo {
 
     public static void main(String[] args) throws ConstraintViolationException, MalformedURLException {
         Demo demo = new Demo();
+
+        // create a usage policy that can be attached to a data endpoint
         demo.createPolicy();
+
+        // create a parameter that controls a service operation
         demo.createParameter();
+
+        // create objects for communicating with the broker
         demo.createBrokerRequests();
+
+        // create a data transfer between two connectors
         demo.createDataTransfer();
     }
 
