@@ -3,11 +3,9 @@ package de.fraunhofer.iais.eis.demo;
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
-import org.apache.jena.graph.impl.LiteralLabel;
-import org.apache.jena.graph.impl.LiteralLabelFactory;
+import de.fraunhofer.iais.eis.util.VocabUtil;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ResourceFactory;
-import org.apache.jena.rdf.model.impl.LiteralImpl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,28 +21,37 @@ public class Demo {
     public static void main(String[] args) throws ConstraintViolationException, MalformedURLException {
         Demo demo = new Demo();
 
-        // create a data transfer between two connectors
-        demo.createDataTransfer();
-
-        // create objects for communicating with the broker
-        demo.createBrokerRequests();
-
-        // create a dataset description (metadata)
-        demo.createDataset();
-
-        // create a usage policy that can be attached to a data endpoint
-        demo.createPolicy();
-
-        // create a parameter that controls a service operation
-        demo.createParameter();
+        demo.objectCreation();
+        demo.objectSerialization();
+        demo.objectDeserialization();
     }
 
-    private void createDataTransfer() throws ConstraintViolationException, MalformedURLException {
+    private void objectCreation() throws MalformedURLException, ConstraintViolationException {
+        // create a data transfer between two connectors
+        createDataTransfer();
+
+        // create objects for communicating with the broker
+        createBrokerRequests();
+
+        // create a dataset description (metadata)
+        createDataset();
+
+        // create a usage policy that can be attached to a data endpoint
+        createPolicy();
+
+        // create a parameter that controls a service operation
+        createParameter();
+    }
+
+    private DataTransfer createDataTransfer() throws ConstraintViolationException, MalformedURLException {
+        // note here that sender and receiver are checked to be valid URLs by the build() method
+
         DataTransfer transfer = new DataTransferBuilder()
                 .sender("http://companyA.com/connector")
                 .receiver("http://companyB.com/connector")
                 .transferCreatedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
                 .build();
+        return transfer;
     }
 
     private void createBrokerRequests() throws ConstraintViolationException {
@@ -70,7 +77,7 @@ public class Demo {
                 .build();
     }
 
-    private void createPolicy() throws ConstraintViolationException {
+    private UsagePolicy createPolicy() throws ConstraintViolationException {
         Read modifyAction = new ReadBuilder().build();
 
         // the permission to modify a certain endpoint
@@ -82,11 +89,10 @@ public class Demo {
                 .permission(Arrays.asList(permission))
                 .prohibition(Collections.emptyList())
                 .build();
-
-        System.out.println(policy.toRdf());
+        return policy;
     }
 
-    private void createParameter() throws MalformedURLException, ConstraintViolationException {
+    private Parameter createParameter() throws MalformedURLException, ConstraintViolationException {
         Literal germanLabel = ResourceFactory.createLangLiteral("Stahlgüte", "de");
         Literal englishLabel = ResourceFactory.createLangLiteral("steel quality", "en");
 
@@ -98,7 +104,18 @@ public class Demo {
                 .paramMediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
                 .paramDescription(ResourceFactory.createLangLiteral("steel quality quality according to european standard", "en"))
                 .build();
-        System.out.println(param.toRdf());
+        return param;
+    }
+
+    private void objectSerialization() throws MalformedURLException, ConstraintViolationException {
+        DataTransfer transfer = createDataTransfer();
+        System.out.println(transfer.toRdf());
+    }
+
+    private void objectDeserialization() throws MalformedURLException, ConstraintViolationException {
+        DataTransfer transfer = createDataTransfer();
+        String rdf = transfer.toRdf();
+        DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
     }
 
 }

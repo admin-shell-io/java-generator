@@ -24,6 +24,7 @@ public class VocabUtil {
 
     private final static String PROTOCOL = "http";
     private final static String HOST = "industrialdataspace.org";
+    private static RdfSerializer serializer;
 
     public static URL createRandomUrl(String path) {
         try {
@@ -49,16 +50,20 @@ public class VocabUtil {
     }
 
     public static String toRdf(Object obj) {
-        Collection<Class> annotatedClasses = collectAnnotatedClasses();
-        RdfSerializer serializer = new RdfSerializer(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
-        String rdf = null;
         try {
-            rdf = serializer.serialize(obj);
-            return rdf;
+            return getRdfSeriaizer().serialize(obj);
         }
         catch (JrdfbException e) {
-            throw new RdfSerializationException("Error serializing object", e);
+            throw new RdfSerializationException("Error serializing objects", e);
         }
+    }
+
+    private static RdfSerializer getRdfSeriaizer() {
+        if (serializer == null) {
+            Collection<Class> annotatedClasses = collectAnnotatedClasses();
+            serializer = new RdfSerializer(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
+        }
+        return serializer;
     }
 
     private static Collection<Class> collectAnnotatedClasses() {
@@ -93,9 +98,12 @@ public class VocabUtil {
     }
 
     public static Object fromRdf(String rdf) {
-        System.out.println("rdf deserialization not yet implemented");
-        // todo: call deserializer
-        return null;
+        try {
+            return getRdfSeriaizer().deserialize(rdf);
+        }
+        catch (JrdfbException e) {
+            throw new RdfSerializationException("Error deserializing objects", e);
+        }
     }
 
 }
