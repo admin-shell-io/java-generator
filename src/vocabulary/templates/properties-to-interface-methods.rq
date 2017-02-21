@@ -12,7 +12,7 @@ template ids:properties-to-interface-methods(?class) {
 
     "\n\t@de.fhg.iais.jrdfb.annotation.RdfProperty(\"" str(?property) "\")"
 
-	"\n\t" st:call-template(ids:property-to-getter-method, ?property, ?class) ";"
+	st:call-template(ids:property-to-getter-method, ?property, ?class) ";"
 
 }
 where  {   

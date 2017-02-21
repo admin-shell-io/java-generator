@@ -1,12 +1,14 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
-prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
 template ids:property-to-getter-method(?property, ?class) {
 
-    # return type and annotation
-    if (bound(?constraint),
-        st:call-template(ids:propertyAnnotation, ?constraint, ?range),
-        st:call-template(ids:range, ?range))
+    "\n\t"
+
+    st:call-template(ids:propertyAnnotation, ?class, ?property, ?range)
+
+    "\n\t"
+
+    st:call-template(ids:range, ?class, ?property, ?range)
 
     " "
 
@@ -17,12 +19,4 @@ template ids:property-to-getter-method(?property, ?class) {
 where  {
    ?property rdfs:label ?label;
         rdfs:range ?range.
-
-    OPTIONAL {
-        ?property rdfs:domain ?class.
-        ?class ids:validation ?validation.
-        ?validation owl:onProperty ?property.
-        ?validation valid:constraint ?constraint.
-    }
 }
-group by ?property

@@ -6,9 +6,11 @@ template ids:property-to-setter-method(?property, ?class) {
     # method params
     "("
         # parameter type and annotation
-        if (bound(?constraint),
-            st:call-template(ids:propertyAnnotation, ?constraint, ?range),
-            st:call-template(ids:range, ?range))
+        st:call-template(ids:propertyAnnotation, ?class, ?property, ?range)
+
+        " "
+
+        st:call-template(ids:range, ?class, ?property, ?range)
 
         " "
 
@@ -19,12 +21,4 @@ template ids:property-to-setter-method(?property, ?class) {
 }
 where  {
    ?property rdfs:range ?range.
-
-    OPTIONAL {
-        ?property rdfs:domain ?class.
-        ?class ids:validation ?validation.
-        ?validation owl:onProperty ?property.
-        ?validation valid:constraint ?constraint.
-    }
-
-} 
+}

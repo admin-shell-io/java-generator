@@ -15,12 +15,30 @@ ids:Dataset rdfs:subClassOf dcat:Dataset;
     rdfs:label "Dataset"@en;
     rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
     ids:validation [
-        owl:onProperty ids:sender;
+        owl:onProperty ids:datasetTitle;
+        valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:contentCreator;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
 # Properties
 # ----------
+
+ids:datasetTitle rdfs:subPropertyOf dct:title;
+	a owl:DatatypeProperty;
+	rdfs:label "datasetTitle"@en;
+	rdfs:domain ids:Dataset;
+	rdfs:range rdfs:Literal;
+	rdfs:comment "Title of the Dataset."@en.
+
+ids:datasetDescription rdfs:subPropertyOf dct:description;
+	a owl:DatatypeProperty;
+	rdfs:label "datasetDescription"@en;
+	rdfs:domain ids:Dataset;
+	rdfs:range rdfs:Literal;
+	rdfs:comment "Freetext description of the Dataset.".
 
 ids:creationDate rdfs:subPropertyOf dct:dateSubmitted;
     a owl:DatatypeProperty;
@@ -52,7 +70,7 @@ ids:version rdfs:subPropertyOf dct:hasVersion;
 
 ids:contentCreator
     a owl:ObjectProperty;
-    rdfs:label "contentProvider"@en;
+    rdfs:label "contentCreator"@en;
     rdfs:domain ids:Dataset;
     rdfs:range ids:Participant;
     rdfs:comment "Participant responsible for creating the content of the Dataset."@en.

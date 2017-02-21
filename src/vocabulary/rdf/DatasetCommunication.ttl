@@ -15,7 +15,7 @@ ids:DataTransfer
 	rdfs:comment "The class of resources that describe a data transfer on the IDS."@en;
     ids:validation [
         owl:onProperty ids:customProperty;
-        valid:constraint "@OneToMany";
+        valid:relationType "@OneToMany";
     ];
     ids:validation [
         owl:onProperty ids:sender;
@@ -24,18 +24,22 @@ ids:DataTransfer
     ids:validation [
         owl:onProperty ids:receiver;
         valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:transferCreatedAt;
+        valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
-ids:TransferProperty
+ids:TransferAttribute
 	a owl:Class;
-	rdfs:label "TransferProperty"@en;
-	rdfs:comment "General property for additional description of security aspects of a data transfer."@en;
+	rdfs:label "TransferAttribute"@en;
+	rdfs:comment "General attribute for additional description of security aspects of a data transfer."@en;
     ids:validation [
-        owl:onProperty ids:transferPropertyKey;
+        owl:onProperty ids:transferAttributeKey;
         valid:constraint "@javax.validation.constraints.NotNull";
     ];
     ids:validation [
-        owl:onProperty ids:transferPropertyValue;
+        owl:onProperty ids:transferAttributeValue;
         valid:constraint "@javax.validation.constraints.NotNull";
     ].
 
@@ -52,17 +56,17 @@ ids:AuthToken rdfs:subClassOf credential:SimpleCredential;
 # ----------
 
 ids:sender
-	a owl:ObjectProperty;
+	a owl:DatatypeProperty;
 	rdfs:label "sender"@en;
 	rdfs:domain ids:DataTransfer;
-	rdfs:range ids:DataEndpoint;
+	rdfs:range xsd:anyURI;
 	rdfs:comment "The sender of the message."@en.
 
 ids:receiver
-	a owl:ObjectProperty;
+	a owl:DatatypeProperty;
 	rdfs:label "receiver"@en;
 	rdfs:domain ids:DataTransfer;
-	rdfs:range ids:DataEndpoint;
+	rdfs:range xsd:anyURI;
 	rdfs:comment "The receiver of the message."@en.
 
 ids:authToken
@@ -79,12 +83,12 @@ ids:payloadDigest
 	rdfs:range xsd:base64Binary;
 	rdfs:comment "The digest of the dataset being transfered."@en.
 
-ids:customProperty
+ids:customAttribute
 	a owl:ObjectProperty;
-	rdfs:label "customProperty"@en;
+	rdfs:label "customAttribute"@en;
 	rdfs:domain ids:DataTransfer;
-	rdfs:range ids:TransferProperty;
-	rdfs:comment "The digest of the dataset being transfered."@en.
+	rdfs:range ids:TransferAttribute;
+	rdfs:comment "Additional attributes that can be specified for a DataTransfer."@en.
 
 ids:tokenValue a owl:DatatypeProperty;
 	rdfs:label "tokenValue"@en;
@@ -92,12 +96,19 @@ ids:tokenValue a owl:DatatypeProperty;
 	rdfs:range xsd:string;
 	rdfs:comment "An authorization token value like JSON Web Token."@en.
 
-ids:transferPropertyKey a owl:DatatypeProperty;
-	rdfs:label "transferPropertyKey"@en;
+ids:transferAttributeKey a owl:DatatypeProperty;
+	rdfs:label "transferAttributeKey"@en;
 	rdfs:domain ids:TransferProperty;
 	rdfs:range xsd:string.
 
-ids:transferPropertyValue a owl:DatatypeProperty;
-	rdfs:label "transferPropertyValue"@en;
+ids:transferAttributeValue a owl:DatatypeProperty;
+	rdfs:label "transferAttributeValue"@en;
 	rdfs:domain ids:TransferProperty;
 	rdfs:range xsd:string.
+
+ids:transferCreatedAt rdfs:subPropertyOf dct:dateSubmitted;
+    a owl:DatatypeProperty;
+    rdfs:label "transferCreatedAt"@en;
+    rdfs:domain ids:DataTransfer;
+    rdfs:range xsd:dateTime;
+    rdfs:comment "Date of creation of the DataTransfer."@en.
