@@ -1,6 +1,5 @@
 package de.fraunhofer.iais.eis.util;
 
-import javax.validation.ConstraintViolation;
 import java.util.Collection;
 import java.util.Set;
 
