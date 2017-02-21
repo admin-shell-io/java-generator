@@ -23,6 +23,12 @@ public class Demo {
     public static void main(String[] args) throws ConstraintViolationException, MalformedURLException {
         Demo demo = new Demo();
 
+        // create a data transfer between two connectors
+        demo.createDataTransfer();
+
+        // create objects for communicating with the broker
+        demo.createBrokerRequests();
+
         // create a dataset description (metadata)
         demo.createDataset();
 
@@ -31,12 +37,22 @@ public class Demo {
 
         // create a parameter that controls a service operation
         demo.createParameter();
+    }
 
-        // create objects for communicating with the broker
-        demo.createBrokerRequests();
+    private void createDataTransfer() throws ConstraintViolationException, MalformedURLException {
+        DataTransfer transfer = new DataTransferBuilder()
+                .sender("http://companyA.com/connector")
+                .receiver("http://companyB.com/connector")
+                .transferCreatedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
+                .build();
+    }
 
-        // create a data transfer between two connectors
-        demo.createDataTransfer();
+    private void createBrokerRequests() throws ConstraintViolationException {
+        new BrokerQueryRequestBuilder()
+                .queryRequestAction(BrokerQueryRequestAction.GET)
+                .queryScope(BrokerQueryMessageScope.ACTIVE)
+                .messageContent("test")
+                .build();
     }
 
     private void createDataset() throws ConstraintViolationException, MalformedURLException {
@@ -55,14 +71,10 @@ public class Demo {
     }
 
     private void createPolicy() throws ConstraintViolationException {
-        //todo: does not yet validate - data endpoint object can be obtained from backend system
-        DataEndpoint permittedEndpoint = new DataEndpointBuilder().build();
-
         Read modifyAction = new ReadBuilder().build();
 
         // the permission to modify a certain endpoint
         Permission permission = new PermissionBuilder()
-                .targetDataEndpoint(permittedEndpoint)
                 .action(Arrays.asList(modifyAction))
                 .build();
 
@@ -89,36 +101,4 @@ public class Demo {
         System.out.println(param.toRdf());
     }
 
-    private void createBrokerRequests() throws ConstraintViolationException {
-        new BrokerQueryRequestBuilder()
-                .queryRequestAction(BrokerQueryRequestAction.GET)
-                .queryScope(BrokerQueryMessageScope.ACTIVE)
-                .messageContent("test")
-                .build();
-    }
-
-    private void createDataTransfer() throws ConstraintViolationException {
-        Participant dataOwner = new ParticipantBuilder()
-                .name(ResourceFactory.createPlainLiteral("Company A"))
-                .build();
-        Participant dataConsumer = new ParticipantBuilder()
-                .name(ResourceFactory.createPlainLiteral("Company B"))
-                .build();
-
-        Connector sourceConnector = new ConnectorBuilder()
-                .operatedBy(dataOwner)
-                .build();
-        Connector targetConnector = new ConnectorBuilder()
-                .operatedBy(dataConsumer)
-                .build();
-
-        DataEndpoint sender = new DataEndpointBuilder().publishedBy(sourceConnector).build();
-        DataEndpoint receiver = new DataEndpointBuilder().publishedBy(targetConnector).build();
-
-        DataTransfer transfer = new DataTransferBuilder()
-                .sender(sender)
-                .receiver(receiver)
-                .transferCreatedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
-                .build();
-    }
 }

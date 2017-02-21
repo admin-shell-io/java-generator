@@ -13,7 +13,7 @@
 ids:UsagePolicy rdfs:subClassOf odrl:Set;
     a owl:Class;
     rdfs:label "UsagePolicy"@en ;
-    rdfs:comment "Defines the terms and conditions to use a DataEndpoint."@en;
+    rdfs:comment "Defines terms and conditions for dealing with IDS components."@en;
     ids:validation [
         owl:onProperty ids:permission;
         valid:relationType "@OneToMany";
@@ -81,13 +81,6 @@ ids:prohibition rdfs:subPropertyOf odrl:prohibition;
     rdfs:domain ids:UsagePolicy;
     rdfs:range ids:Prohibition;
     rdfs:comment "The Prohibitions imposed by a UsagePolicy."@en.
-
-ids:targetDataEndpoint rdfs:subPropertyOf odrl:target;
-    a owl:ObjectProperty;
-    rdfs:label "targetDataEndpoint"@en;
-    rdfs:domain ids:Rule;
-    rdfs:range ids:DataEndpoint;
-    rdfs:comment "The DataEndpoints subjected by a Rule."@en.
 
 ids:action rdfs:subPropertyOf odrl:action;
     a owl:ObjectProperty;

@@ -43,10 +43,6 @@ ids:BrokerResponseMessage rdfs:subClassOf ids:BrokerMessage;
     ids:validation [
         owl:onProperty ids:correlationId;
         valid:constraint "@javax.validation.constraints.NotNull";
-    ];
-    ids:validation [
-        owl:onProperty ids:mediaType;
-        valid:constraint "@org.hibernate.validator.constraints.URL";
     ].
 
 ids:BrokerDataRequest rdfs:subClassOf ids:BrokerDataMessage, ids:BrokerRequestMessage;

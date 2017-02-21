@@ -26,7 +26,6 @@ ids:Dataset rdfs:subClassOf dcat:Dataset;
 # Properties
 # ----------
 
-
 ids:datasetTitle rdfs:subPropertyOf dct:title;
 	a owl:DatatypeProperty;
 	rdfs:label "datasetTitle"@en;
