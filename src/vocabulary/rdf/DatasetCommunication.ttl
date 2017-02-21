@@ -20,12 +20,10 @@ ids:DataTransfer
     ids:validation [
         owl:onProperty ids:sender;
         valid:constraint "@javax.validation.constraints.NotNull";
-        valid:constraint "@org.hibernate.validator.constraints.URL";
     ];
     ids:validation [
         owl:onProperty ids:receiver;
         valid:constraint "@javax.validation.constraints.NotNull";
-        valid:constraint "@org.hibernate.validator.constraints.URL";
     ];
     ids:validation [
         owl:onProperty ids:transferCreatedAt;
@@ -61,14 +59,14 @@ ids:sender
 	a owl:DatatypeProperty;
 	rdfs:label "sender"@en;
 	rdfs:domain ids:DataTransfer;
-	rdfs:range xsd:string;
+	rdfs:range xsd:anyURI;
 	rdfs:comment "The sender of the message."@en.
 
 ids:receiver
 	a owl:DatatypeProperty;
 	rdfs:label "receiver"@en;
 	rdfs:domain ids:DataTransfer;
-	rdfs:range xsd:string;
+	rdfs:range xsd:anyURI;
 	rdfs:comment "The receiver of the message."@en.
 
 ids:authToken

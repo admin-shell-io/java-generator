@@ -18,10 +18,6 @@ ids:DataEndpoint a owl:Class;
     ids:validation [
         owl:onProperty ids:offers;
         valid:constraint "@javax.validation.constraints.NotNull";
-    ];
-    ids:validation [
-        owl:onProperty ids:usagePolicy;
-        valid:constraint "@org.hibernate.validator.constraints.URL";
     ].
 
 ids:DataService a owl:Class;
@@ -112,7 +108,7 @@ ids:protocolBinding a owl:ObjectProperty;
 
 ids:usagePolicy a owl:DatatypeProperty;
     rdfs:domain ids:DataEndpoint;
-    rdfs:range xsd:string;
+    rdfs:range xsd:anyURI;
     rdfs:label "usagePolicy"@en;
     rdfs:comment "Policy for using the DataEndpoint."@en.
 

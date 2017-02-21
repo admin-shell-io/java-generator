@@ -47,8 +47,8 @@ public class Demo {
         // note here that sender and receiver are checked to be valid URLs by the build() method
 
         DataTransfer transfer = new DataTransferBuilder()
-                .sender("http://companyA.com/connector")
-                .receiver("http://companyB.com/connector")
+                .sender(new URL("http://companyA.com/connector"))
+                .receiver(new URL("http://companyB.com/connector"))
                 .transferCreatedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
                 .build();
         return transfer;
