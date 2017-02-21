@@ -22,7 +22,7 @@ public class Demo {
         Demo demo = new Demo();
 
         demo.objectCreation();
-        demo.objectSerialization();
+        //demo.objectSerialization();
         demo.objectDeserialization();
     }
 
