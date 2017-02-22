@@ -1,12 +1,14 @@
 package de.fraunhofer.iais.eis.demo;
 
-import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.VocabUtil;
 import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ResourceFactory;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -18,7 +20,7 @@ import java.util.GregorianCalendar;
  */
 public class Demo {
 
-    public static void main(String[] args) throws ConstraintViolationException, MalformedURLException {
+    public static void main(String[] args) throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
         Demo demo = new Demo();
 
         demo.objectCreation();
@@ -26,7 +28,7 @@ public class Demo {
         demo.objectDeserialization();
     }
 
-    private void objectCreation() throws MalformedURLException, ConstraintViolationException {
+    private void objectCreation() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
         // create a data transfer between two connectors
         createDataTransfer();
 
@@ -43,13 +45,15 @@ public class Demo {
         createParameter();
     }
 
-    private DataTransfer createDataTransfer() throws ConstraintViolationException, MalformedURLException {
+    private DataTransfer createDataTransfer() throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
         // note here that sender and receiver are checked to be valid URLs by the build() method
+
+        XMLGregorianCalendar now = DatatypeFactory.newInstance().newXMLGregorianCalendar();
 
         DataTransfer transfer = new DataTransferBuilder()
                 .sender(new URL("http://companyA.com/connector"))
                 .receiver(new URL("http://companyB.com/connector"))
-                .transferCreatedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
+                .transferCreatedAt(now)
                 .build();
         return transfer;
     }
@@ -107,12 +111,12 @@ public class Demo {
         return param;
     }
 
-    private void objectSerialization() throws MalformedURLException, ConstraintViolationException {
+    private void objectSerialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
         DataTransfer transfer = createDataTransfer();
         System.out.println(transfer.toRdf());
     }
 
-    private void objectDeserialization() throws MalformedURLException, ConstraintViolationException {
+    private void objectDeserialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
         DataTransfer transfer = createDataTransfer();
         String rdf = transfer.toRdf();
         DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);

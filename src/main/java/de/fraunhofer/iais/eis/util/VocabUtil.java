@@ -3,10 +3,6 @@ package de.fraunhofer.iais.eis.util;
 import com.google.common.reflect.ClassPath;
 import de.fhg.iais.jrdfb.JrdfbException;
 import de.fhg.iais.jrdfb.RdfSerializer;
-import de.fhg.iais.jrdfb.annotation.RdfId;
-import de.fraunhofer.iais.eis.IANAMediaType;
-import de.fraunhofer.iais.eis.Parameter;
-import de.fraunhofer.iais.eis.ParameterImpl;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

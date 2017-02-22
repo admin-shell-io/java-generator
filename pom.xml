@@ -31,12 +31,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>RELEASE</version>
+            <version>5.2.4.Final</version>
         </dependency>
         <dependency>
             <groupId>javax.el</groupId>
@@ -71,7 +66,15 @@
     </dependencies>
 
     <build>
-        <finalName>ids-vocabulary-${version}</finalName>
+        <finalName>ids-vocabulary-${project.version}</finalName>
+        <resources>
+            <resource>
+                <directory>src/vocabulary/rdf</directory>
+                <includes>
+                    <include>*.ttl</include>
+                </includes>
+            </resource>
+        </resources>
 
         <plugins>
             <plugin>
@@ -160,23 +163,11 @@
                 </configuration>
             </plugin>
 
-            <!-- exclude templates in the final jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/templates/**</exclude>
-                        <exclude>start.rq</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-
             <!-- attach source to jar -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
