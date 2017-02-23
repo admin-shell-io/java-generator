@@ -67,14 +67,6 @@
 
     <build>
         <finalName>ids-vocabulary-${project.version}</finalName>
-        <resources>
-            <resource>
-                <directory>src/vocabulary/rdf</directory>
-                <includes>
-                    <include>*.ttl</include>
-                </includes>
-            </resource>
-        </resources>
 
         <plugins>
             <plugin>

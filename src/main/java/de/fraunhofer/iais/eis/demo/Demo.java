@@ -1,5 +1,6 @@
 package de.fraunhofer.iais.eis.demo;
 
+import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.VocabUtil;
@@ -23,7 +24,7 @@ public class Demo {
     public static void main(String[] args) throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
         Demo demo = new Demo();
 
-        demo.objectCreation();
+        //demo.objectCreation();
         //demo.objectSerialization();
         demo.objectDeserialization();
     }
@@ -48,18 +49,16 @@ public class Demo {
     private DataTransfer createDataTransfer() throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
         // note here that sender and receiver are checked to be valid URLs by the build() method
 
-        XMLGregorianCalendar now = DatatypeFactory.newInstance().newXMLGregorianCalendar();
-
         DataTransfer transfer = new DataTransferBuilder()
                 .sender(new URL("http://companyA.com/connector"))
                 .receiver(new URL("http://companyB.com/connector"))
-                .transferCreatedAt(now)
+                .transferCreatedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
                 .build();
         return transfer;
     }
 
     private void createBrokerRequests() throws ConstraintViolationException {
-        new BrokerQueryRequestBuilder()
+        BrokerQueryRequest request = new BrokerQueryRequestBuilder()
                 .queryRequestAction(BrokerQueryRequestAction.GET)
                 .queryScope(BrokerQueryMessageScope.ACTIVE)
                 .messageContent("test")
@@ -99,15 +98,20 @@ public class Demo {
     private Parameter createParameter() throws MalformedURLException, ConstraintViolationException {
         Literal germanLabel = ResourceFactory.createLangLiteral("Stahlgüte", "de");
         Literal englishLabel = ResourceFactory.createLangLiteral("steel quality", "en");
+        Literal description = ResourceFactory.createLangLiteral("parameter description", "en");
 
         Parameter param = new ParameterBuilder()
                 .paramLabel(Arrays.asList(germanLabel, englishLabel))
                 .paramName("qualityType")
+                .paramDescription(germanLabel)
                 .dataType(ParameterDataType.XSD_STRING)
                 .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
                 .paramMediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
                 .paramDescription(ResourceFactory.createLangLiteral("steel quality quality according to european standard", "en"))
                 .build();
+
+        System.out.println(param.toRdf());
+
         return param;
     }
 
@@ -119,6 +123,7 @@ public class Demo {
     private void objectDeserialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
         DataTransfer transfer = createDataTransfer();
         String rdf = transfer.toRdf();
+        System.out.println(rdf);
         DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
     }
 

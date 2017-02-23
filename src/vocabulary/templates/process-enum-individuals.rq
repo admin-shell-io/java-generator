@@ -1,13 +1,13 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix dct: <http://purl.org/dc/terms/>
 
-template ids:process-individuals(?class) {
+template ids:process-enum-individuals(?class) {
 
     if (bound(?comment),
         concat("\n\t/* ", str(?comment), " */"),
         '')
 
-    "\n\t@de.fhg.iais.jrdfb.annotation.RdfId(uriTemplate = \"" str(?individual) "\")"
+    "\n\t@de.fhg.iais.jrdfb.annotation.RdfUri(\"" str(?individual) "\")"
     "\n\t" str(?identifier) ","
 
 }
