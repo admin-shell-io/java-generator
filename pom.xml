@@ -17,7 +17,7 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>de.fhg.iais</groupId>
+            <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>jrdfb</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -180,5 +180,13 @@
             <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
         </repository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>isst-repo</id>
+            <name>Maven repository at ISST</name>
+            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
+        </repository>
+    </repositories>
 
 </project>

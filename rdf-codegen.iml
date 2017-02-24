@@ -54,7 +54,7 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient-cache:4.2.5" level="project" />
     <orderEntry type="library" name="Maven: edu.stanford.nlp:stanford-parser:3.5.2" level="project" />
     <orderEntry type="library" name="Maven: com.googlecode.efficient-java-matrix-library:ejml:0.23" level="project" />
-    <orderEntry type="library" name="Maven: de.fhg.iais:jrdfb:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: de.fraunhofer.iais.eis:jrdfb:1.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-tdb:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-arq:3.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.thrift:libthrift:0.9.3" level="project" />
