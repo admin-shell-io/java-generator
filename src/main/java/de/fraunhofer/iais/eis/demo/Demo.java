@@ -24,8 +24,8 @@ public class Demo {
     public static void main(String[] args) throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
         Demo demo = new Demo();
 
-        //demo.objectCreation();
-        //demo.objectSerialization();
+        demo.objectCreation();
+        demo.objectSerialization();
         demo.objectDeserialization();
     }
 
@@ -103,7 +103,7 @@ public class Demo {
         Parameter param = new ParameterBuilder()
                 .paramLabel(Arrays.asList(germanLabel, englishLabel))
                 .paramName("qualityType")
-                .paramDescription(germanLabel)
+                .paramDescription(description)
                 .dataType(ParameterDataType.XSD_STRING)
                 .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
                 .paramMediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
@@ -124,7 +124,9 @@ public class Demo {
         DataTransfer transfer = createDataTransfer();
         String rdf = transfer.toRdf();
         System.out.println(rdf);
-        DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
+
+        // does not work so far, fix in progress
+        //DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
     }
 
 }

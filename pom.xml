@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.fraunhofer.iais.eis</groupId>
-    <artifactId>rdf-codegen</artifactId>
+    <artifactId>ids-vocabulary</artifactId>
     <version>0.1-SNAPSHOT</version>
 
     <dependencies>
@@ -66,8 +66,6 @@
     </dependencies>
 
     <build>
-        <finalName>ids-vocabulary-${project.version}</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
