@@ -173,4 +173,12 @@
         </plugins>
     </build>
 
+    <distributionManagement>
+        <repository>
+            <id>isst-repo</id>
+            <name>Maven repository at ISST</name>
+            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
+        </repository>
+    </distributionManagement>
+
 </project>
