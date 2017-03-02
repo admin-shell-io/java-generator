@@ -84,7 +84,7 @@ ids:ProtocolBinding a owl:Class;
 
 ids:publishedBy a owl:ObjectProperty;
     rdfs:domain ids:DataEndpoint;
-    rdfs:range ids:Connector;
+    rdfs:range xsd:anyURI;
     rdfs:label "publishedBy"@en;
     rdfs:comment "The connector that publishes the endpoint."@en.
 

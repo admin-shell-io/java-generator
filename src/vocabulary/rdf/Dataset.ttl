@@ -72,15 +72,8 @@ ids:contentCreator
     a owl:ObjectProperty;
     rdfs:label "contentCreator"@en;
     rdfs:domain ids:Dataset;
-    rdfs:range ids:Participant;
+    rdfs:range xsd:anyURI;
     rdfs:comment "Participant responsible for creating the content of the Dataset."@en.
-
-ids:technicalProvider
-    a owl:ObjectProperty;
-    rdfs:label "technicalProvider"@en;
-    rdfs:domain ids:Dataset;
-    rdfs:range ids:DataEndpoint;
-    rdfs:comment "DataEndpoint that provided access or generated this Dataset."@en.
 
 ids:conformsToStandard
     a owl:DatatypeProperty;
@@ -88,12 +81,6 @@ ids:conformsToStandard
     rdfs:domain ids:Dataset;
     rdfs:range xsd:anyURI;
     rdfs:comment "The standard the Dataset conforms to."@en.
-
-ids:coversIndustry a owl:ObjectProperty;
-    rdfs:label "coversIndustry"@en;
-    rdfs:domain ids:Dataset;
-    rdfs:range ids:ISICIndustry;
-    rdfs:comment "Industry branch covered by the Dataset."@en.
 
 ids:licenseDocument rdfs:subPropertyOf dct:license;
     a owl:ObjectProperty;
@@ -108,3 +95,22 @@ ids:licenseReference rdfs:subPropertyOf dct:license;
     rdfs:domain ids:Dataset;
     rdfs:range xsd:anyURI;
     rdfs:comment "References a license document that is publicly available on the Web."@en.
+
+ids:coversIndustry a owl:ObjectProperty;
+    rdfs:label "coversIndustry"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range ids:ISICIndustry;
+    rdfs:comment "Industry branch covered by the Dataset."@en.
+
+ids:coversTemporal rdfs:subPropertyOf dct:temporal;
+    a owl:ObjectProperty;
+    rdfs:label "coversTemporal"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range ids:TemporalEntity;
+    rdfs:comment "Temporal period or instance covered by the dataset."@en.
+
+#ids:coversSpatialLocation rdfs:subPropertyOf dct:spatial;
+#ids:coversLanguage rdfs:subPropertyOf dct:language
+#ids:coversTheme rdfs:subPropertyOf dcat:theme
+#ids:totalSizeInBytesUncompressed a owl:DatatypeProperty;
+#ids:structure
