@@ -16,11 +16,24 @@ ids:Dataset rdfs:subClassOf dcat:Dataset;
     rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
     ids:validation [
         owl:onProperty ids:datasetTitle;
+        valid:relationType "@OneToMany";
         valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:datasetDescription;
+        valid:relationType "@OneToMany";
     ];
     ids:validation [
         owl:onProperty ids:contentCreator;
         valid:constraint "@javax.validation.constraints.NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:coversTemporal;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:coversSpatial;
+        valid:relationType "@OneToMany";
     ].
 
 # Properties
@@ -103,13 +116,17 @@ ids:coversIndustry a owl:ObjectProperty;
     rdfs:comment "Industry branch covered by the Dataset."@en.
 
 ids:coversTemporal rdfs:subPropertyOf dct:temporal;
-    a owl:ObjectProperty;
     rdfs:label "coversTemporal"@en;
     rdfs:domain ids:Dataset;
     rdfs:range ids:TemporalEntity;
     rdfs:comment "Temporal period or instance covered by the dataset."@en.
 
-#ids:coversSpatialLocation rdfs:subPropertyOf dct:spatial;
+ids:coversSpatial rdfs:subPropertyOf dct:spatial;
+    rdfs:label "coversSpatial"@en;
+    rdfs:domain ids:Dataset;
+    rdfs:range ids:SpatialEntity;
+    rdfs:comment "Spatial location covered by the dataset."@en.
+
 #ids:coversLanguage rdfs:subPropertyOf dct:language
 #ids:coversTheme rdfs:subPropertyOf dcat:theme
 #ids:totalSizeInBytesUncompressed a owl:DatatypeProperty;
