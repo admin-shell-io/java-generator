@@ -65,7 +65,7 @@ public class Demo {
                 .build();
     }
 
-    private void createDataset() throws ConstraintViolationException, MalformedURLException {
+    private Dataset createDataset() throws ConstraintViolationException, MalformedURLException {
         GeoPoint zooOfFrankfurt = new GeoPointBuilder().latitude(50.1156f).longitude(8.70314f).build();
 
         Instant beginning = new InstantBuilder().inXSDDateTime(new XMLGregorianCalendarImpl(new GregorianCalendar())).build();
@@ -76,7 +76,7 @@ public class Demo {
                 .end(end)
                 .build();
 
-        new DatasetBuilder()
+        return new DatasetBuilder()
                 .datasetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
                 .datasetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .contentCreator(new URL("http://example.org/company/"))
@@ -118,20 +118,17 @@ public class Demo {
                 .paramDescription(ResourceFactory.createLangLiteral("steel quality quality according to european standard", "en"))
                 .build();
 
-        System.out.println(param.toRdf());
-
         return param;
     }
 
     private void objectSerialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
-        DataTransfer transfer = createDataTransfer();
-        System.out.println(transfer.toRdf());
+        //System.out.println(createDataTransfer().toRdf());
+        System.out.println(createParameter().toRdf());
     }
 
     private void objectDeserialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
         DataTransfer transfer = createDataTransfer();
         String rdf = transfer.toRdf();
-        System.out.println(rdf);
 
         // does not work so far, fix in progress
         //DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);

@@ -1,8 +1,8 @@
 package de.fraunhofer.iais.eis.util;
 
 import com.google.common.reflect.ClassPath;
-import de.fhg.iais.jrdfb.JrdfbException;
-import de.fhg.iais.jrdfb.RdfSerializer;
+import de.fraunhofer.iais.eis.jrdfb.JrdfbException;
+import de.fraunhofer.iais.eis.jrdfb.serializer.RdfSerializer;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

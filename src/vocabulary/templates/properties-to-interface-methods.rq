@@ -10,7 +10,7 @@ template ids:properties-to-interface-methods(?class) {
         concat("\n\t/* ", str(?comment), " */"),
         "")
 
-    "\n\t@de.fhg.iais.jrdfb.annotation.RdfProperty(\"" str(?property) "\")"
+    "\n\t@RdfProperty(\"" str(?property) "\")"
 
 	st:call-template(ids:property-to-getter-method, ?property, ?class) ";"
 
