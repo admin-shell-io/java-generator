@@ -2,19 +2,22 @@ package de.fraunhofer.iais.eis.demo;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.*;
+import de.fraunhofer.iais.eis.jrdfb.JrdfbException;
+import de.fraunhofer.iais.eis.jrdfb.serializer.RdfSerializer;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.VocabUtil;
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.ResourceFactory;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.GregorianCalendar;
+import java.util.*;
 
 /**
  * Created by christian on 08.02.17.
@@ -76,7 +79,7 @@ public class Demo {
                 .end(end)
                 .build();
 
-        return new DatasetBuilder()
+        Dataset dataset = new DatasetBuilder()
                 .datasetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
                 .datasetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .contentCreator(new URL("http://example.org/company/"))
@@ -86,6 +89,8 @@ public class Demo {
                 .coversTemporal(Arrays.asList(interval))
                 .coversSpatial(Arrays.asList(zooOfFrankfurt))
                 .build();
+
+        return dataset;
     }
 
     private UsagePolicy createPolicy() throws ConstraintViolationException {
@@ -122,7 +127,7 @@ public class Demo {
     }
 
     private void objectSerialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
-        //System.out.println(createDataTransfer().toRdf());
+        System.out.println(createDataTransfer().toRdf());
         System.out.println(createParameter().toRdf());
     }
 
@@ -131,7 +136,7 @@ public class Demo {
         String rdf = transfer.toRdf();
 
         // does not work so far, fix in progress
-        //DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
+        DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
     }
 
 }
