@@ -47,14 +47,14 @@ public class VocabUtil {
 
     public static String toRdf(Object obj) {
         try {
-            return getRdfSeriaizer().serialize(obj);
+            return getRdfSerializer().serialize(obj);
         }
         catch (JrdfbException e) {
             throw new RdfSerializationException("Error serializing objects", e);
         }
     }
 
-    private static RdfSerializer getRdfSeriaizer() {
+    private static RdfSerializer getRdfSerializer() {
         if (serializer == null) {
             Collection<Class> annotatedClasses = collectAnnotatedClasses();
             serializer = new RdfSerializer(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
@@ -89,7 +89,7 @@ public class VocabUtil {
 
     public static Object fromRdf(String rdf) {
         try {
-            return getRdfSeriaizer().deserialize(rdf);
+            return getRdfSerializer().deserialize(rdf);
         }
         catch (JrdfbException e) {
             throw new RdfSerializationException("Error deserializing objects", e);

@@ -7,6 +7,7 @@ template st:start {
         st:call-template(ids:class-abox, ?class),
         st:call-template(ids:class-tbox, ?class))
 
+    st:call-template(ids:uml, ?class)
 }
 where  {
     ?class a owl:Class.

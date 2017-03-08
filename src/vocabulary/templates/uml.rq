@@ -1,0 +1,11 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+
+template ids:uml(?class) {
+
+    kg:write("/tmp/classes.dot",
+        st:call-template(ids:process-class-to-uml, ?class))
+
+}
+where  {
+}
+

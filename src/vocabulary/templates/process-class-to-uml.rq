@@ -1,0 +1,16 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:process-class-to-uml(?class) {
+
+    str(?class)
+    "\n"
+#    str(?label) "[\n"
+#        "label = {" str(?label) "|"
+    "]\n"
+
+}
+where {
+#    ?class a owl:Class;
+#        rdfs:label ?label.
+}
