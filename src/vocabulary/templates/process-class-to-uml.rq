@@ -3,14 +3,26 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template ids:process-class-to-uml(?class) {
 
-    str(?class)
-    "\n"
-#    str(?label) "[\n"
-#        "label = {" str(?label) "|"
-    "]\n"
+    "digraph G {\n"
+
+    "\tfontname = \"Bitstream Vera Sans\"\n"
+    "\tfontsize = 8\n"
+
+    "\tnode [\n"
+    "\tfontname = \"Bitstream Vera Sans\"\n"
+    "\tfontsize = 8\n"
+    "\tshape = \"record\"\n"
+    "\t]\n"
+
+    "\t" str(?label) " [\n"
+    "\t\tlabel = \"{" str(?label) " | attributes | methods}\"\n"
+    "\t]\n"
+
+    "}\n"
 
 }
 where {
-#    ?class a owl:Class;
-#        rdfs:label ?label.
+    ?class rdfs:label ?label.
+
 }
+
