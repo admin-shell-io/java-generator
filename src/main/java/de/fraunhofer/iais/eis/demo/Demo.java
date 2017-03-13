@@ -68,7 +68,7 @@ public class Demo {
                 .build();
     }
 
-    private Dataset createDataset() throws ConstraintViolationException, MalformedURLException {
+    private DataAsset createDataset() throws ConstraintViolationException, MalformedURLException {
         GeoPoint zooOfFrankfurt = new GeoPointBuilder().latitude(50.1156f).longitude(8.70314f).build();
 
         Instant beginning = new InstantBuilder().inXSDDateTime(new XMLGregorianCalendarImpl(new GregorianCalendar())).build();
@@ -79,9 +79,9 @@ public class Demo {
                 .end(end)
                 .build();
 
-        Dataset dataset = new DatasetBuilder()
-                .datasetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
-                .datasetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
+        DataAsset dataset = new DataAssetBuilder()
+                .dataAssetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
+                .dataAssetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .contentCreator(new URL("http://example.org/company/"))
                 .conformsTo(new URL("http://who.unitednations.org/datapublication/standards/prices"))
                 .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)

@@ -10,17 +10,17 @@
 # Classes
 # -------
 
-ids:Dataset rdfs:subClassOf dcat:Dataset;
+ids:DataAsset rdfs:subClassOf dcat:Dataset;
     a owl:Class;
-    rdfs:label "Dataset"@en;
-    rdfs:comment "Dataset on the Industrial Dataspace. May be a data offering, a subset of a dataset that is in the state of being transfered or an aggregation of multiple other datasets."@en;
+    rdfs:label "DataAsset"@en;
+    rdfs:comment "DataAsset on the Industrial Dataspace. May be a data offering, data that is in the state of being transfered or an aggregation of multiple other dataassets."@en;
     ids:validation [
-        owl:onProperty ids:datasetTitle;
+        owl:onProperty ids:dataAssetTitle;
         valid:relationType "@OneToMany";
         valid:constraint "@javax.validation.constraints.NotNull";
     ];
     ids:validation [
-        owl:onProperty ids:datasetDescription;
+        owl:onProperty ids:dataAssetDescription;
         valid:relationType "@OneToMany";
     ];
     ids:validation [
@@ -39,93 +39,93 @@ ids:Dataset rdfs:subClassOf dcat:Dataset;
 # Properties
 # ----------
 
-ids:datasetTitle rdfs:subPropertyOf dct:title;
+ids:dataAssetTitle rdfs:subPropertyOf dct:title;
 	a owl:DatatypeProperty;
-	rdfs:label "datasetTitle"@en;
-	rdfs:domain ids:Dataset;
+	rdfs:label "dataAssetTitle"@en;
+	rdfs:domain ids:DataAsset;
 	rdfs:range rdfs:Literal;
-	rdfs:comment "Title of the Dataset."@en.
+	rdfs:comment "Title of the DataAsset."@en.
 
-ids:datasetDescription rdfs:subPropertyOf dct:description;
+ids:dataAssetDescription rdfs:subPropertyOf dct:description;
 	a owl:DatatypeProperty;
-	rdfs:label "datasetDescription"@en;
-	rdfs:domain ids:Dataset;
+	rdfs:label "dataAssetDescription"@en;
+	rdfs:domain ids:DataAsset;
 	rdfs:range rdfs:Literal;
-	rdfs:comment "Freetext description of the Dataset.".
+	rdfs:comment "Freetext description of the DataAsset.".
 
 ids:creationDate rdfs:subPropertyOf dct:dateSubmitted;
     a owl:DatatypeProperty;
     rdfs:label "creationDate"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range xsd:dateTime;
     rdfs:comment "Date of creation of the InfrastructureComponent."@en.
 
 ids:format rdfs:subPropertyOf dct:format;
     a owl:DatatypeProperty;
     rdfs:label "format"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range xsd:string;
-    rdfs:comment "The file format of the dataset. ids:mediaType SHOULD be used if the type of the distribution is defined by IANA."@en.
+    rdfs:comment "The file format of the DataAsset. ids:mediaType SHOULD be used if the type of the distribution is defined by IANA."@en.
 
 ids:mediaType rdfs:subPropertyOf dcat:mediaType;
     a owl:ObjectProperty;
     rdfs:label "mediaType"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range ids:IANAMediaType;
-    rdfs:comment "The media type of the dataset, as defined by IANA."@en.
+    rdfs:comment "The media type of the DataAsset, as defined by IANA."@en.
 
 ids:version rdfs:subPropertyOf dct:hasVersion;
     a owl:DatatypeProperty;
     rdfs:label "version"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range xsd:string;
     rdfs:comment "Version identifier of the InfrastructureComponent."@en.
 
 ids:contentCreator
     a owl:ObjectProperty;
     rdfs:label "contentCreator"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range xsd:anyURI;
-    rdfs:comment "Participant responsible for creating the content of the Dataset."@en.
+    rdfs:comment "Participant responsible for creating the content of the DataAsset."@en.
 
 ids:conformsToStandard
     a owl:DatatypeProperty;
     rdfs:label "conformsTo"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range xsd:anyURI;
-    rdfs:comment "The standard the Dataset conforms to."@en.
+    rdfs:comment "The standard the DataAsset conforms to."@en.
 
 ids:licenseDocument rdfs:subPropertyOf dct:license;
     a owl:ObjectProperty;
     rdfs:label "licenseDocument"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range ids:LicenseDocument;
-    rdfs:comment "License of the Dataset. Refers to common standard licenses used in the IDS."@en.
+    rdfs:comment "License of the DataAsset. Refers to common standard licenses used in the IDS."@en.
 
 ids:licenseReference rdfs:subPropertyOf dct:license;
     a owl:ObjectProperty;
     rdfs:label "licenseReference"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range xsd:anyURI;
     rdfs:comment "References a license document that is publicly available on the Web."@en.
 
 ids:coversIndustry a owl:ObjectProperty;
     rdfs:label "coversIndustry"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range ids:ISICIndustry;
-    rdfs:comment "Industry branch covered by the Dataset."@en.
+    rdfs:comment "Industry branch covered by the DataAsset."@en.
 
 ids:coversTemporal rdfs:subPropertyOf dct:temporal;
     rdfs:label "coversTemporal"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range ids:TemporalEntity;
-    rdfs:comment "Temporal period or instance covered by the dataset."@en.
+    rdfs:comment "Temporal period or instance covered by the DataAsset."@en.
 
 ids:coversSpatial rdfs:subPropertyOf dct:spatial;
     rdfs:label "coversSpatial"@en;
-    rdfs:domain ids:Dataset;
+    rdfs:domain ids:DataAsset;
     rdfs:range ids:SpatialEntity;
-    rdfs:comment "Spatial location covered by the dataset."@en.
+    rdfs:comment "Spatial location covered by the DataAsset."@en.
 
 #ids:coversLanguage rdfs:subPropertyOf dct:language
 #ids:coversTheme rdfs:subPropertyOf dcat:theme

@@ -81,7 +81,7 @@ ids:payloadDigest
 	rdfs:label "digest"@en;
 	rdfs:domain ids:DataTransfer;
 	rdfs:range xsd:base64Binary;
-	rdfs:comment "The digest of the dataset being transfered."@en.
+	rdfs:comment "The digest of the DataAsset being transfered."@en.
 
 ids:customAttribute
 	a owl:ObjectProperty;

@@ -13,7 +13,7 @@
 ids:LicenseDocument rdfs:subClassOf dct:LicenseDocument;
     a owl:Class;
     rdfs:label "LicenseDocument"@en ;
-    rdfs:comment "The class of license documents to be attached to Datasets.".
+    rdfs:comment "The class of license documents to be attached to DataAssets.".
 
 # Instances
 # ---------
