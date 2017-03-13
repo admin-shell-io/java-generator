@@ -3,6 +3,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
@@ -33,6 +34,18 @@ ids:DataAsset rdfs:subClassOf dcat:Dataset;
     ];
     ids:validation [
         owl:onProperty ids:coversSpatial;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:coversCategory;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:coversLanguage;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:keyword;
         valid:relationType "@OneToMany";
     ].
 
@@ -127,7 +140,38 @@ ids:coversSpatial rdfs:subPropertyOf dct:spatial;
     rdfs:range ids:SpatialEntity;
     rdfs:comment "Spatial location covered by the DataAsset."@en.
 
-#ids:coversLanguage rdfs:subPropertyOf dct:language
-#ids:coversTheme rdfs:subPropertyOf dcat:theme
-#ids:totalSizeInBytesUncompressed a owl:DatatypeProperty;
-#ids:structure
+ids:conformsToStructure a owl:ObjectProperty;
+    rdfs:label "conformsToStructure"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "Links to a document that contains additional information like class and type descriptions or integrity constraints describing the DataAssets structure."@en.
+
+ids:transformationRule a owl:ObjectProperty;
+    rdfs:label "transformationRule"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "Links to a document that contains rules or algorithms to transform the DataAsset into another representation while retaining the information content."@en.
+
+ids:coversCategory rdfs:subPropertyOf dcat:theme;
+    rdfs:label "coversCategory"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "Links to a taxonomy categorizing content-related coverage of the DataAsset."@en.
+
+ids:keyword rdfs:subPropertyOf dcat:theme;
+    rdfs:label "keyword"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "Links to an item in a flat list of controlled keywords that describe content-related coverage of the DataAsset."@en.
+
+ids:volume a owl:DatatypeProperty;
+    rdfs:label "volume"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:long;
+    rdfs:comment "The total uncompressed size of the dataset in MB."@en.
+
+ids:coversLanguage rdfs:subPropertyOf dct:language;
+    rdfs:label "coversLanguage"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range ids:Language;
+    rdfs:comment "States the language that is used in the DataAsset."@en.
