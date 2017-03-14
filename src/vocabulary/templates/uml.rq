@@ -1,0 +1,24 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:uml {
+
+    "digraph G {\n\n"
+
+    "\tfontname = \"Bitstream Vera Sans\"\n"
+    "\tfontsize = 8\n"
+
+    "\tnode [\n"
+    "\t\tfontname = \"Bitstream Vera Sans\"\n"
+    "\t\tfontsize = 8\n"
+    "\t\tshape = \"record\"\n"
+    "\t]\n"
+
+    st:call-template(ids:process-class-to-uml)
+
+    "}\n"
+
+}
+where {
+}
+
