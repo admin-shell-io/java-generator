@@ -9,8 +9,6 @@ template ids:process-relations-to-uml {
     "\t\theadlabel = \"" st:call-template(ids:uml-headlabel, ?domain, ?property) "\""
     "\n\t]"
 
-
-
 }
 where {
     ?property rdfs:domain ?domain;

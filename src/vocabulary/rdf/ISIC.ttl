@@ -11,7 +11,7 @@
 # -------
 
 ids:ISICIndustry a owl:Class;
-    rdfs:label "BrokerQueryMessageScope"@en ;
+    rdfs:label "ISICIndustry"@en ;
     rdfs:comment "The class of economic activities as listed in the International Standard Industrial Classification (ISIC).".
 
 # Instances

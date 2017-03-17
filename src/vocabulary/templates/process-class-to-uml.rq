@@ -5,16 +5,27 @@ template ids:process-class-to-uml {
 
     "\n"
     "\t" str(?label) " [\n"
-    "\t\tlabel = \"{" str(?label) " | "
+    "\t\tlabel = \"{"
 
-    st:call-template(ids:properties-to-uml, ?class)
+    if (bound(?instance), "&lt;&lt;enumeration&gt;&gt;\\l ", "")
 
-    " | + get&#123;ATTRIBUTE&#125;() : &#123;ATTR_RET_TYPE&#125;}\"\n"
-    "\t]\n"
+    str(?label)
+
+    " | "
+
+    if (bound(?instance),
+        st:call-template(ids:enum-values-to-uml, ?class),
+        st:call-template(ids:properties-to-uml, ?class))
+
+    "}\"\n\t]\n"
 
 }
 where {
     ?class a owl:Class;
         rdfs:label ?label.
+
+    OPTIONAL {
+        ?instance a ?class
+    }
 }
 
