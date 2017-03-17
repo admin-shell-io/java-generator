@@ -7,12 +7,15 @@ template ids:process-relations-to-uml {
     "\t" str(?classA) " -> " str(?classB) " [\n\t\tarrowhead=vee\n"
 
     "\t\theadlabel = \"" st:call-template(ids:uml-headlabel, ?domain, ?property) "\""
+    "\t\txlabel= \"" str(?propLabel) "\""
+
     "\n\t]"
 
 }
 where {
     ?property rdfs:domain ?domain;
-        rdfs:range ?range.
+        rdfs:range ?range;
+        rdfs:label ?propLabel.
 
     ?domain rdfs:label ?classA.
     ?range rdfs:label ?classB.
