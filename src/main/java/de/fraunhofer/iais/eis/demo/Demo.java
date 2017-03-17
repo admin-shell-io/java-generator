@@ -28,7 +28,7 @@ public class Demo {
         Demo demo = new Demo();
 
         demo.objectCreation();
-        demo.objectSerialization();
+        //demo.objectSerialization();
         demo.objectDeserialization();
     }
 
@@ -132,11 +132,17 @@ public class Demo {
     }
 
     private void objectDeserialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
+        /*
         DataTransfer transfer = createDataTransfer();
         String rdf = transfer.toRdf();
-
-        // does not work so far, fix in progress
         DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
+        */
+
+        String rdf2 = createDataset().toRdf();
+        System.out.println(rdf2);
+        Object obj2 = VocabUtil.fromRdf(rdf2);
+
+        System.out.println("xx");
     }
 
 }

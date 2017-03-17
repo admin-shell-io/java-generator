@@ -52,6 +52,8 @@ ids:Geometry rdfs:subClassOf locn:Geometry;
 
 ids:BoundingPolygon rdfs:subClassOf ids:Geometry;
     a owl:Class;
+    rdfs:label "BoundingPolygon"@en;
+    rdfs:comment "Defines an area of interest as a set of connected points."@en;
     ids:validation [
         owl:onProperty ids:geoPoint;
         valid:relationType "@OneToMany";

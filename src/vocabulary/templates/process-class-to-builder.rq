@@ -4,7 +4,9 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 template ids:process-class-to-builder(?class) {
 
     "package de.fraunhofer.iais.eis;\n"
-    "\nimport de.fraunhofer.iais.eis.util.VocabUtil;"
+
+    st:call-template(ids:basic-imports)
+
     "\n"
     "\n"
     "public class " concat(strafter(str(?class), "#"), "Builder")
@@ -39,7 +41,7 @@ template ids:process-class-to-builder(?class) {
 
     # build method
 
-     "\n\tpublic final " strafter(str(?class), "#") " build() throws de.fraunhofer.iais.eis.util.ConstraintViolationException {"
+     "\n\tpublic final " strafter(str(?class), "#") " build() throws ConstraintViolationException {"
      "\n\t\tcreationHook("
      lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
      ");"
@@ -51,7 +53,7 @@ template ids:process-class-to-builder(?class) {
     "\n"
     "\n\tpublic void creationHook("
     strafter(str(?class), '#')" " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
-    ") throws de.fraunhofer.iais.eis.util.ConstraintViolationException {"
+    ") throws ConstraintViolationException {"
     "\n\t\t// override me!"
     "\n\t}"
 
