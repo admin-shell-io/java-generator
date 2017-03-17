@@ -2,9 +2,7 @@ prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
-template ids:range(?class, ?property, ?range) {
-
-    if (bound(?relationType) && str(?relationType) = "@OneToMany", "java.util.Collection<", "")
+template ids:range-to-basic-type(?range) {
 
     if (str(?range) = str(<xsd:dateTime>), "javax.xml.datatype.XMLGregorianCalendar",
     if (str(?range) = str(<xsd:string>), "java.lang.String",
@@ -23,17 +21,8 @@ template ids:range(?class, ?property, ?range) {
     if (str(?range) = str(<rdfs:Literal>), "org.apache.jena.rdf.model.Literal",
 
     if (strstarts(str(?range), str(<ids:>)), concat("de.fraunhofer.iais.eis.", strafter(?range, "#")),
-    "!!unknownType!!"))))))))))))))))
-
-    if (bound(?relationType) && str(?relationType) = "@OneToMany", ">", "")
+        "!!unknownType!!"))))))))))))))))
 
 }
 where {
-    ?property rdfs:domain ?class
-
-    OPTIONAL {
-        ?class ids:validation ?validation.
-        ?validation owl:onProperty ?property.
-        ?validation valid:relationType ?relationType.
-    }
 }

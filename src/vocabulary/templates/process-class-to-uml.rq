@@ -5,7 +5,11 @@ template ids:process-class-to-uml {
 
     "\n"
     "\t" str(?label) " [\n"
-    "\t\tlabel = \"{" str(?label) " | attributes | methods}\"\n"
+    "\t\tlabel = \"{" str(?label) " | "
+
+    st:call-template(ids:properties-to-uml, ?class)
+
+    " | }\"\n"
     "\t]\n"
 
 }

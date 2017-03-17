@@ -9,7 +9,7 @@ template ids:property-to-field(?property, ?class) {
 
     " "
 
-    st:call-template(ids:range, ?class, ?property, ?range)
+    st:call-template(ids:range-to-java-type, ?class, ?property, ?range)
 
     " "
     strafter(str(?property), "#")

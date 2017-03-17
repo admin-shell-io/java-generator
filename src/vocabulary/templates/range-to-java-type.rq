@@ -1,0 +1,22 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
+
+template ids:range-to-java-type(?class, ?property, ?range) {
+
+    if (bound(?relationType) && str(?relationType) = "@OneToMany", "java.util.Collection<", "")
+
+    st:call-template(ids:range-to-basic-type, ?range)
+
+    if (bound(?relationType) && str(?relationType) = "@OneToMany", ">", "")
+
+}
+where {
+    ?property rdfs:domain ?class
+
+    OPTIONAL {
+        ?class ids:validation ?validation.
+        ?validation owl:onProperty ?property.
+        ?validation valid:relationType ?relationType.
+    }
+}
