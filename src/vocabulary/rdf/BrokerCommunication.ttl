@@ -14,7 +14,7 @@ ids:BrokerMessage a owl:Class;
     rdfs:comment "The class of all messages to interact with a Broker.";
     ids:validation [
         owl:onProperty ids:messageContent;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:BrokerDataMessage rdfs:subClassOf ids:BrokerMessage;
@@ -28,7 +28,7 @@ ids:BrokerQueryMessage rdfs:subClassOf ids:BrokerMessage;
     rdfs:comment "The class of all messages that query the broker for data.";
     ids:validation [
         owl:onProperty ids:queryScope;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:BrokerRequestMessage rdfs:subClassOf ids:BrokerMessage;
@@ -42,7 +42,7 @@ ids:BrokerResponseMessage rdfs:subClassOf ids:BrokerMessage;
     rdfs:comment "The class of all messages that represent responses of a Broker.";
     ids:validation [
         owl:onProperty ids:correlationId;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:BrokerDataRequest rdfs:subClassOf ids:BrokerDataMessage, ids:BrokerRequestMessage;
@@ -51,11 +51,11 @@ ids:BrokerDataRequest rdfs:subClassOf ids:BrokerDataMessage, ids:BrokerRequestMe
     rdfs:comment "The class of all messages that represent data requests to a Broker.";
     ids:validation [
         owl:onProperty ids:dataRequestAction;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:coveredEntity;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:BrokerDataResponse rdfs:subClassOf ids:BrokerDataMessage, ids:BrokerResponseMessage;
@@ -69,11 +69,11 @@ ids:BrokerQueryRequest rdfs:subClassOf ids:BrokerRequestMessage, ids:BrokerQuery
     rdfs:comment "The class of all messages that represent query requests to a Broker.";
     ids:validation [
         owl:onProperty ids:queryRequestAction;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:queryScope;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:BrokerQueryResponse rdfs:subClassOf ids:BrokerQueryMessage, ids:BrokerResponseMessage;

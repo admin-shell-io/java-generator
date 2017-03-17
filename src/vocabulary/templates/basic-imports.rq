@@ -13,6 +13,8 @@ template ids:basic-imports {
     "\nimport java.net.URL;"
     "\nimport java.util.Collection;"
     "\nimport org.apache.jena.rdf.model.Literal;"
+    "\nimport org.hibernate.validator.constraints.*;"
+    "\nimport javax.validation.constraints.*;"
 
 }
 where {

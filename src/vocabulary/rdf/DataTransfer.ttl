@@ -19,15 +19,15 @@ ids:DataTransfer
     ];
     ids:validation [
         owl:onProperty ids:sender;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:receiver;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:transferCreatedAt;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:TransferAttribute
@@ -36,11 +36,11 @@ ids:TransferAttribute
 	rdfs:comment "General attribute for additional description of security aspects of a data transfer."@en;
     ids:validation [
         owl:onProperty ids:transferAttributeKey;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:transferAttributeValue;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:AuthToken rdfs:subClassOf credential:SimpleCredential;
@@ -49,7 +49,7 @@ ids:AuthToken rdfs:subClassOf credential:SimpleCredential;
 	rdfs:comment "Authorization Token."@en;
     ids:validation [
         owl:onProperty ids:tokenValue;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 # Properties

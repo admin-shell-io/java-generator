@@ -13,7 +13,7 @@ ids:InfrastructureComponent a owl:Class;
     rdfs:comment "The class of all infrastructure components of the IDS.";
     ids:validation [
         owl:onProperty ids:operatedBy;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 # Properties

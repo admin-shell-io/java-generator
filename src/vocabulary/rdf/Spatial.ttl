@@ -29,11 +29,11 @@ ids:GeoPoint rdfs:subClassOf ids:Location;
     rdfs:comment "A location identified by geo coordinates."@en;
     ids:validation [
         owl:onProperty ids:latitude;
-        valid:relationType "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:longitude;
-        valid:relationType "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:GeoFeature rdfs:subClassOf ids:Location;
@@ -42,7 +42,7 @@ ids:GeoFeature rdfs:subClassOf ids:Location;
     rdfs:comment "A location identified by a geonames identifier."@en;
     ids:validation [
         owl:onProperty ids:geoFeatureId;
-        valid:relationType "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:Geometry rdfs:subClassOf locn:Geometry;
@@ -57,7 +57,7 @@ ids:BoundingPolygon rdfs:subClassOf ids:Geometry;
     ids:validation [
         owl:onProperty ids:geoPoint;
         valid:relationType "@OneToMany";
-        valid:constraint "@org.hibernate.validator.constraints.NotEmpty";
+        valid:constraint "@NotEmpty";
     ].
 
 # Properties for describing spatial entitites

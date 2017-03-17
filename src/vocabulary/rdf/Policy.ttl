@@ -29,7 +29,7 @@ ids:Rule rdfs:subClassOf odrl:Rule;
     rdfs:comment "Superclass of Permissions, Prohibitions and Duties."@en;
     ids:validation [
         owl:onProperty ids:target;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:action;

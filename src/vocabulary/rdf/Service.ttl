@@ -13,11 +13,11 @@ ids:DataEndpoint a owl:Class;
     rdfs:comment "Data Endpoint that may be invoked to retrieve (via service calls, subscription, etc) or push data."@en;
     ids:validation [
         owl:onProperty ids:publishedBy;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:offers;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:DataService a owl:Class;
@@ -33,7 +33,7 @@ ids:Operation a owl:Class;
     rdfs:comment "An operation to be performed on a DataService, like the retrieval of a filtered subset of the data."@en;
     ids:validation [
         owl:onProperty ids:opLabel;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:input;
@@ -50,15 +50,15 @@ ids:Parameter a owl:Class;
     ids:validation [
         owl:onProperty ids:paramLabel;
         valid:relationType "@OneToMany";
-        valid:constraint "@org.hibernate.validator.constraints.NotEmpty";
+        valid:constraint "@NotEmpty";
     ];
     ids:validation [
         owl:onProperty ids:paramName;
-        valid:constraint "@org.hibernate.validator.constraints.NotEmpty";
+        valid:constraint "@NotEmpty";
     ];
     ids:validation [
         owl:onProperty ids:dataType;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:InputParameter rdfs:subClassOf ids:Parameter;
