@@ -5,7 +5,9 @@ template ids:process-class-to-interface(?class) {
 
     "package de.fraunhofer.iais.eis;"
     "\n"
-    "import de.fraunhofer.iais.eis.jrdfb.annotation.*;"
+
+    st:call-template(ids:basic-imports)
+
     "\n\n"
 
     "/* " str(?comment) " */"

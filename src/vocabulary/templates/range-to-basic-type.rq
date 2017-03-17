@@ -4,9 +4,9 @@ prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
 template ids:range-to-basic-type(?range) {
 
-    if (str(?range) = str(<xsd:dateTime>), "javax.xml.datatype.XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:string>), "java.lang.String",
-    if (str(?range) = str(<xsd:integer>), "java.math.BigInteger",
+    if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
+    if (str(?range) = str(<xsd:string>), "String",
+    if (str(?range) = str(<xsd:integer>), "BigInteger",
     if (str(?range) = str(<xsd:int>), "int",
     if (str(?range) = str(<xsd:long>), "long",
     if (str(?range) = str(<xsd:short>), "short",
@@ -15,12 +15,12 @@ template ids:range-to-basic-type(?range) {
     if (str(?range) = str(<xsd:boolean>), "boolean",
     if (str(?range) = str(<xsd:byte>), "byte",
     if (str(?range) = str(<xsd:base64Binary>), "byte[]",
-    if (str(?range) = str(<xsd:time>), "javax.xml.datatype.XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:date>), "javax.xml.datatype.XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:anyURI>), "java.net.URL",
-    if (str(?range) = str(<rdfs:Literal>), "org.apache.jena.rdf.model.Literal",
+    if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
+    if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
+    if (str(?range) = str(<xsd:anyURI>), "URL",
+    if (str(?range) = str(<rdfs:Literal>), "Literal",
 
-    if (strstarts(str(?range), str(<ids:>)), concat("de.fraunhofer.iais.eis.", strafter(?range, "#")),
+    if (strstarts(str(?range), str(<ids:>)), strafter(?range, "#"),
         "!!unknownType!!"))))))))))))))))
 
 }
