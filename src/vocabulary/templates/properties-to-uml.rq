@@ -5,7 +5,7 @@ template ids:properties-to-uml(?class) {
 
     "~ " str(?label) " : "
 
-    st:call-template(ids:range-to-basic-type, ?range)
+    st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "&lt;", "&gt;")
 
     "\\l"
 
@@ -14,5 +14,7 @@ where {
     ?property rdfs:domain ?class;
         rdfs:range ?range;
         rdfs:label ?label.
+
+    filter (!(strstarts(str(?range), str(<ids:>))))
 }
 

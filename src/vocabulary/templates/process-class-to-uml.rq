@@ -9,7 +9,7 @@ template ids:process-class-to-uml {
 
     st:call-template(ids:properties-to-uml, ?class)
 
-    " | }\"\n"
+    " | + get&#123;ATTRIBUTE&#125;() : &#123;ATTR_RET_TYPE&#125;}\"\n"
     "\t]\n"
 
 }

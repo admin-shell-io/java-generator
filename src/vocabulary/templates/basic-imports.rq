@@ -11,6 +11,7 @@ template ids:basic-imports {
     "\nimport java.lang.String;"
     "\nimport java.math.BigInteger;"
     "\nimport java.net.URL;"
+    "\nimport java.util.Collection;"
     "\nimport org.apache.jena.rdf.model.Literal;"
 
 }

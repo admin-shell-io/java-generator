@@ -17,7 +17,7 @@ ids:Dataset rdfs:subClassOf dcat:Dataset;
     ids:validation [
         owl:onProperty ids:datasetTitle;
         valid:relationType "@OneToMany";
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@org.hibernate.validator.constraints.NotEmpty";
     ];
     ids:validation [
         owl:onProperty ids:datasetDescription;

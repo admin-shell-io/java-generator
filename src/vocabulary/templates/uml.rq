@@ -5,6 +5,8 @@ template ids:uml {
 
     "digraph G {\n\n"
 
+    "\tgraph[splines=ortho];"
+
     "\tfontname = \"Bitstream Vera Sans\"\n"
     "\tfontsize = 8\n"
 
@@ -13,8 +15,15 @@ template ids:uml {
     "\t\tfontsize = 8\n"
     "\t\tshape = \"record\"\n"
     "\t]\n"
+    "\n"
+    "\tedge [\n"
+    "\t\tfontname = \"Bitstream Vera Sans\"\n"
+    "\t\tfontsize = 8\n"
+    "\t]\n"
+    "\n"
 
     st:call-template(ids:process-class-to-uml)
+    st:call-template(ids:process-relations-to-uml)
 
     "}\n"
 

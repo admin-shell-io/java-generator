@@ -8,7 +8,7 @@ template ids:property-to-getter-method(?property, ?class) {
 
     "\n\t"
 
-    st:call-template(ids:range-to-java-type, ?class, ?property, ?range)
+    st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<", ">")
 
     " "
 

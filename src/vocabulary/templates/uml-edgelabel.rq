@@ -1,0 +1,15 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
+
+template ids:uml-headlabel(?class, ?property) {
+
+    if (str(?relationType) = "@OneToMany", "  *  ", "")
+
+}
+where {
+    ?class ids:validation ?validation.
+    ?validation owl:onProperty ?property.
+    ?validation valid:relationType ?relationType.
+}
+

@@ -2,13 +2,13 @@ prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
-template ids:range-to-java-type(?class, ?property, ?range) {
+template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
 
-    if (bound(?relationType) && str(?relationType) = "@OneToMany", "java.util.Collection<", "")
+    if (bound(?relationType) && str(?relationType) = "@OneToMany", concat("Collection", str(?bracketOpen)), "")
 
     st:call-template(ids:range-to-basic-type, ?range)
 
-    if (bound(?relationType) && str(?relationType) = "@OneToMany", ">", "")
+    if (bound(?relationType) && str(?relationType) = "@OneToMany", str(?bracketClose), "")
 
 }
 where {

@@ -1,1 +1,6 @@
-template{st:apply-templates-with("/home/christian/projects/ids/rdf-codegen/src/vocabulary/templates")} where {}
+template{
+
+    st:apply-templates-with("/home/christian/projects/ids/rdf-codegen/src/vocabulary/templates")
+
+}
+where {}
