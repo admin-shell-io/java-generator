@@ -35,18 +35,21 @@ ids:Interval rdfs:subClassOf ids:TemporalEntity;
 # -------------------------------------------
 
 ids:inXSDDateTime rdfs:subPropertyOf time:inXSDDateTime;
+    a owl:DatatypeProperty;
     rdfs:domain ids:Instant;
     rdfs:range xsd:dateTime;
     rdfs:label "inXSDDateTime"@en;
     rdfs:comment "Position of an Instant."@en.
 
 ids:beginning rdfs:subPropertyOf time:hasBeginning;
+    a owl:ObjectProperty;
     rdfs:domain ids:Interval;
     rdfs:range ids:Instant;
     rdfs:label "beginning"@en;
     rdfs:comment "Beginning of an Interval."@en.
 
 ids:end rdfs:subPropertyOf time:hasEnd;
+    a owl:ObjectProperty;
     rdfs:domain ids:Interval;
     rdfs:range ids:Instant;
     rdfs:label "end"@en;

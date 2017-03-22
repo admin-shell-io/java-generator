@@ -5,7 +5,9 @@ template ids:uml {
 
     "digraph G {\n\n"
 
-    "\tgraph[splines=ortho];\n"
+    "\tgraph[splines=ortho\n"
+    "\t\trankdir = BT\n"
+    "\t];\n"
 
     "\tfontname = \"Bitstream Vera Sans\"\n"
     "\tfontsize = 8\n"

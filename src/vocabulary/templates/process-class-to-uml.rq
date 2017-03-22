@@ -7,11 +7,12 @@ template ids:process-class-to-uml {
     "\t" str(?label) " [\n"
     "\t\tlabel = \"{"
 
-    if (bound(?instance), "&lt;&lt;enumeration&gt;&gt;\\l ", "")
+    if (bound(?instance), "&lt;&lt;enumeration&gt;&gt;\\n ", "")
 
     str(?label)
 
     " | "
+#    "~ url : URL\\l"
 
     if (bound(?instance),
         st:call-template(ids:enum-values-to-uml, ?class),
