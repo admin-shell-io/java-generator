@@ -8,7 +8,8 @@
 # Classes
 # -------
 
-ids:DataEndpoint a owl:Class;
+ids:DataEndpoint rdfs:subClassOf ids:EntityWithLifecycle;
+    a owl:Class;
     rdfs:label "DataEndpoint"@en ;
     rdfs:comment "Data Endpoint that may be invoked to retrieve (via service calls, subscription, etc) or push data."@en;
     ids:validation [

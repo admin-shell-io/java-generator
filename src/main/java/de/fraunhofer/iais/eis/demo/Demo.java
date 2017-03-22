@@ -82,7 +82,7 @@ public class Demo {
         DataAsset dataset = new DataAssetBuilder()
                 .dataAssetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
                 .dataAssetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
-                .contentCreator(new URL("http://example.org/company/"))
+                .origin(new URL("http://example.org/company/"))
                 .conformsTo(new URL("http://who.unitednations.org/datapublication/standards/prices"))
                 .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)
                 .licenseDocument(LicenseDocument.CC_BY_NC_ND_2_0)

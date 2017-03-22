@@ -11,7 +11,8 @@
 # Classes
 # -------
 
-ids:DataAsset rdfs:subClassOf dcat:Dataset;
+ids:DataAsset rdfs:subClassOf ids:EntityWithLifecycle;
+    rdfs:subClassOf dcat:Dataset;
     a owl:Class;
     rdfs:label "DataAsset"@en;
     rdfs:comment "DataAsset on the Industrial Dataspace. May be a data offering, data that is in the state of being transfered or an aggregation of multiple other dataassets."@en;
@@ -23,10 +24,6 @@ ids:DataAsset rdfs:subClassOf dcat:Dataset;
     ids:validation [
         owl:onProperty ids:dataAssetDescription;
         valid:relationType "@OneToMany";
-    ];
-    ids:validation [
-        owl:onProperty ids:contentCreator;
-        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:coversTemporal;
@@ -66,13 +63,6 @@ ids:dataAssetDescription rdfs:subPropertyOf dct:description;
 	rdfs:range rdfs:Literal;
 	rdfs:comment "Freetext description of the DataAsset.".
 
-ids:creationDate rdfs:subPropertyOf dct:dateSubmitted;
-    a owl:DatatypeProperty;
-    rdfs:label "creationDate"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range xsd:dateTime;
-    rdfs:comment "Date of creation of the InfrastructureComponent."@en.
-
 ids:format rdfs:subPropertyOf dct:format;
     a owl:DatatypeProperty;
     rdfs:label "format"@en;
@@ -93,13 +83,6 @@ ids:version rdfs:subPropertyOf dct:hasVersion;
     rdfs:domain ids:DataAsset;
     rdfs:range xsd:string;
     rdfs:comment "Version identifier of the InfrastructureComponent."@en.
-
-ids:contentCreator
-    a owl:ObjectProperty;
-    rdfs:label "contentCreator"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range xsd:anyURI;
-    rdfs:comment "Participant responsible for creating the content of the DataAsset."@en.
 
 ids:conformsToStandard
     a owl:DatatypeProperty;
@@ -175,3 +158,9 @@ ids:coversLanguage rdfs:subPropertyOf dct:language;
     rdfs:domain ids:DataAsset;
     rdfs:range ids:Language;
     rdfs:comment "States the language that is used in the DataAsset."@en.
+
+ids:origin a owl:DatatypeProperty;
+    rdfs:label "origin"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "Links to the original creator or entity from which the DataAsset has been derived."@en.

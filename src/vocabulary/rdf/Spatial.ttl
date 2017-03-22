@@ -46,6 +46,7 @@ ids:GeoFeature rdfs:subClassOf ids:Location;
     ].
 
 ids:Geometry rdfs:subClassOf locn:Geometry;
+    rdfs:subClassOf ids:Location;
     a owl:Class;
     rdfs:label "Geometry"@en ;
     rdfs:comment "Geometrical shape indicating a spatial area of interest."@en.
