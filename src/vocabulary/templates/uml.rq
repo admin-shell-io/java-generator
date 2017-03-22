@@ -23,7 +23,8 @@ template ids:uml {
     "\n"
 
     st:call-template(ids:process-class-to-uml)
-    st:call-template(ids:process-relations-to-uml)
+    st:call-template(ids:property-relations-to-uml)
+    st:call-template(ids:subclass-relations-to-uml)
 
     "}\n"
 
