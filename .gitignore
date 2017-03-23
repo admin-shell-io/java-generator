@@ -1,3 +1,4 @@
 .idea/
 target/
 src/main/java/de/fraunhofer/iais/eis/*.java
+classes.png

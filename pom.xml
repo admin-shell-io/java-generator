@@ -143,6 +143,7 @@
                             <directory>/tmp</directory>
                             <includes>
                                 <include>**/*.java</include>
+                                <include>**/*.png</include>
                             </includes>
                         </resource>
                     </resources>
@@ -150,7 +151,7 @@
 
             </plugin>
 
-            <!-- remove generated code from tmp directory -->
+            <!-- remove generated code from tmp and package directory -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.0.0</version>
@@ -160,6 +161,7 @@
                             <directory>/tmp</directory>
                             <includes>
                                 <include>*.java</include>
+                                <include>*.png</include>
                             </includes>
                             <followSymlinks>false</followSymlinks>
                         </fileset>
@@ -167,10 +169,10 @@
                             <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
                             <includes>
                                 <include>*.java</include>
+                                <include>*.png</include>
                             </includes>
                             <followSymlinks>false</followSymlinks>
                         </fileset>
-
                     </filesets>
                 </configuration>
             </plugin>
