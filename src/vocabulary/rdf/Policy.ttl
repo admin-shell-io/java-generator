@@ -81,7 +81,7 @@ ids:Write rdfs:subClassOf ids:Action;
     rdfs:label "Write"@en;
     rdfs:comment "The act of writing to the asset."@en.
 
-ids:Price dfs:subClassOf gr:PriceSpecification;
+ids:Price rdfs:subClassOf gr:PriceSpecification;
     a owl:Class;
     rdfs:label "Price"@en;
     rdfs:comment "Monetary price for a good."@en;
@@ -133,10 +133,10 @@ ids:price a owl:ObjectProperty;
     rdfs:comment "Specifies the price for of a PaymentDuty."@en.
 
 ids:currency rdfs:subPropertyOf gr:hasCurrency;
-    a owl:DatatypeProperty;
+    a owl:ObjectProperty;
     rdfs:label "currency"@en;
     rdfs:domain ids:Price;
-    rdfs:range xsd:string;
+    rdfs:range ids:Currency;
     rdfs:comment "The currency in which the Price is specified."@en.
 
 ids:currencyValue rdfs:subPropertyOf gr:hasCurrencyValue;

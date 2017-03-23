@@ -1,0 +1,25 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix ids_curr: <http://industrialdataspace.org/2016/10/ids/core/currency#> .
+
+# Classes
+# -------
+
+ids:Currency a owl:Class;
+    rdfs:label "Currency"@en ;
+    rdfs:comment "The class of currencies.".
+
+# Instances
+# ---------
+
+ids_curr:euro a ids:Currency;
+    rdfs:comment "Euro";
+    dct:identifier "EUR".
+
+ids_curr:usd a ids:Currency;
+    rdfs:comment "US Dollar";
+    dct:identifier "USD".
+
