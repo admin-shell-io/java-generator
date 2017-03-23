@@ -2,19 +2,13 @@ package de.fraunhofer.iais.eis.demo;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.*;
-import de.fraunhofer.iais.eis.jrdfb.JrdfbException;
-import de.fraunhofer.iais.eis.jrdfb.serializer.RdfSerializer;
+import de.fraunhofer.iais.eis.Currency;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.VocabUtil;
 import org.apache.jena.rdf.model.Literal;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.ResourceFactory;
 
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
-import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -39,14 +33,8 @@ public class Demo {
         // create objects for communicating with the broker
         createBrokerRequests();
 
-        // create a dataset description (metadata)
-        createDataset();
-
-        // create a usage policy that can be attached to a data endpoint
-        createPolicy();
-
-        // create a parameter that controls a service operation
-        createParameter();
+        // create a data endpoint description
+        createDataEndpoint();
     }
 
     private DataTransfer createDataTransfer() throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
@@ -68,8 +56,8 @@ public class Demo {
                 .build();
     }
 
-    private DataAsset createDataset() throws ConstraintViolationException, MalformedURLException {
-        GeoPoint zooOfFrankfurt = new GeoPointBuilder().latitude(50.1156f).longitude(8.70314f).build();
+    private DataEndpoint createDataEndpoint() throws ConstraintViolationException, MalformedURLException {
+        GeoPoint frankfurt = new GeoPointBuilder().latitude(50.1156f).longitude(8.70314f).build();
 
         Instant beginning = new InstantBuilder().inXSDDateTime(new XMLGregorianCalendarImpl(new GregorianCalendar())).build();
         Instant end = new InstantBuilder().inXSDDateTime(new XMLGregorianCalendarImpl(new GregorianCalendar())).build();
@@ -83,52 +71,60 @@ public class Demo {
                 .dataAssetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
                 .dataAssetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .origin(new URL("http://example.org/company/"))
-                .conformsTo(new URL("http://who.unitednations.org/datapublication/standards/prices"))
-                .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)
                 .licenseDocument(LicenseDocument.CC_BY_NC_ND_2_0)
                 .coversTemporal(Arrays.asList(interval))
-                .coversSpatial(Arrays.asList(zooOfFrankfurt))
+                .coversSpatial(Arrays.asList(frankfurt))
                 .build();
 
-        return dataset;
+        ServiceContract serviceContract = new ServiceContractBuilder().usagePolicy(createPolicy()).build();
+
+        Representation representation = new RepresentationBuilder()
+                .conformsToStandard(new URL("http://example.org/GS1"))
+                .mediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
+                .build();
+
+        OutputParameter outputParameter = new OutputParameterBuilder()
+            .paramLabel(Arrays.asList(ResourceFactory.createLangLiteral("whole dataset dump", "en")))
+            .paramName("dataset")
+            .paramDescription(ResourceFactory.createLangLiteral("default output parameter", "en"))
+
+            .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
+            .representation(representation)
+            .content(dataset)
+            .build();
+
+        Operation operation = new OperationBuilder().output(Arrays.asList(outputParameter)).build();
+
+        DataService dataService = new DataServiceBuilder()
+            .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)
+            .operation(Arrays.asList(operation))
+            .usageCondition(Arrays.asList(serviceContract))
+            .build();
+
+        DataEndpoint dataEndpoint = new DataEndpointBuilder().offers(dataService).build();
+        return dataEndpoint;
     }
 
     private UsagePolicy createPolicy() throws ConstraintViolationException {
-        Read modifyAction = new ReadBuilder().build();
+        // the permission to read after paying a certain amount of money
 
-        // the permission to modify a certain endpoint
-        Permission permission = new PermissionBuilder()
-                .action(Arrays.asList(modifyAction))
+        Price price = new PriceBuilder().currency(Currency.EUR).currencyValue(10.5f).build();
+
+        Duty duty = new PaymentDutyBuilder()
+                .action(Arrays.asList(new ReadBuilder().build()))
+                .paymentModality(new PayPerUseBuilder().build())
+                .price(price)
                 .build();
 
         UsagePolicy policy = new UsagePolicyBuilder()
-                .permission(Arrays.asList(permission))
-                .prohibition(Collections.emptyList())
+                .duty(Arrays.asList(duty))
                 .build();
+
         return policy;
-    }
-
-    private Parameter createParameter() throws MalformedURLException, ConstraintViolationException {
-        Literal germanLabel = ResourceFactory.createLangLiteral("Stahlgüte", "de");
-        Literal englishLabel = ResourceFactory.createLangLiteral("steel quality", "en");
-        Literal description = ResourceFactory.createLangLiteral("parameter description", "en");
-
-        Parameter param = new ParameterBuilder()
-                .paramLabel(Arrays.asList(germanLabel, englishLabel))
-                .paramName("qualityType")
-                .paramDescription(description)
-                .dataType(ParameterDataType.XSD_STRING)
-                .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
-                .paramMediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
-                .paramDescription(ResourceFactory.createLangLiteral("steel quality quality according to european standard", "en"))
-                .build();
-
-        return param;
     }
 
     private void objectSerialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
         System.out.println(createDataTransfer().toRdf());
-        System.out.println(createParameter().toRdf());
     }
 
     private void objectDeserialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
@@ -138,7 +134,7 @@ public class Demo {
         DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
         */
 
-        String rdf2 = createDataset().toRdf();
+        String rdf2 = createDataEndpoint().toRdf();
         System.out.println(rdf2);
         Object obj2 = VocabUtil.fromRdf(rdf2);
 
