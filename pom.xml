@@ -77,28 +77,49 @@
                 </configuration>
             </plugin>
 
-            <!-- execute the Java Beans generation based on the Vocabulary files and the SPARQL templates -->
+            <!-- execute the java beans and diagram generation based on the Vocabulary files and the SPARQL templates -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.5.0</version>
                 <executions>
                     <execution>
-                        <id>generate-java-beans</id>
+                        <id>generate-java-and-diagram</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
+                        <configuration>
+                            <executableDependency>
+                                <groupId>de.fraunhofer.iais.eis</groupId>
+                                <artifactId>sparql-template-executor</artifactId>
+                            </executableDependency>
+                            <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                            <arguments>
+                                <argument>${basedir}/src/vocabulary/rdf</argument>
+                                <argument>${basedir}/src/vocabulary/templates</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>render-diagram</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>dot</executable>
+                            <workingDirectory>/tmp</workingDirectory>
+                            <arguments>
+                                <argument>-T</argument>
+                                <argument>png</argument>
+                                <argument>-o</argument>
+                                <argument>classes.png</argument>
+                                <argument>classes.dot</argument>
+                            </arguments>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <executable>java</executable>
-                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
-                    <arguments>
-                        <argument>${basedir}/src/vocabulary/rdf</argument>
-                        <argument>${basedir}/src/vocabulary/templates</argument>
-                    </arguments>
-                </configuration>
             </plugin>
 
             <!-- copy generated code to package src directory -->
@@ -126,6 +147,7 @@
                         </resource>
                     </resources>
                 </configuration>
+
             </plugin>
 
             <!-- remove generated code from tmp directory -->
