@@ -64,6 +64,29 @@ ids:PaymentDuty rdfs:subClassOf ids:Duty;
     rdfs:label "PaymentDuty"@en;
     rdfs:comment "The duty to pay a certain amount of money."@en.
 
+ids:PaymentModality rdfs:subClassOf ids:Duty;
+    a owl:Class;
+    rdfs:label "PaymentModality"@en;
+    rdfs:comment "Specifies when to pay the specified amount."@en.
+
+ids:PayPerUse rdfs:subClassOf ids:PaymentModality;
+    a owl:Class;
+    rdfs:label "PayPerUse"@en;
+    rdfs:comment "Price must be paid on each service call."@en.
+
+ids:PayPerVolume rdfs:subClassOf ids:PaymentModality;
+    a owl:Class;
+    rdfs:label "PayPerVolume"@en;
+    rdfs:comment "Price must be paid for a specified volume of transferred data."@en;
+    ids:validation [
+        owl:onProperty ids:transferredVolumeUnit;
+        valid:constraint "@NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:transferredVolume;
+        valid:constraint "@NotNull";
+    ].
+
 ids:Action rdfs:subClassOf odrl:Action;
     a owl:Class;
     rdfs:label "Action"@en;
@@ -118,13 +141,19 @@ ids:duty rdfs:subPropertyOf odrl:duty;
     rdfs:range ids:Duty;
     rdfs:comment "The Duties imposed by a UsagePolicy."@en.
 
-
 ids:action rdfs:subPropertyOf odrl:action;
     a owl:ObjectProperty;
     rdfs:label "action"@en;
     rdfs:domain ids:Rule;
     rdfs:range ids:Action;
     rdfs:comment "The operation relating to the asset for which permission is being granted."@en.
+
+ids:ruleDescription rdfs:subPropertyOf dct:description;
+    a owl:DatatypeProperty;
+    rdfs:label "ruleDescription"@en;
+    rdfs:domain ids:Rule;
+    rdfs:range rdfs:Literal;
+    rdfs:comment "Freetext description of the Rule.".
 
 ids:price a owl:ObjectProperty;
     rdfs:label "price"@en;
@@ -146,7 +175,20 @@ ids:currencyValue rdfs:subPropertyOf gr:hasCurrencyValue;
     rdfs:range xsd:float;
     rdfs:comment "The currency in which the Price is specified."@en.
 
-#pricing
-#payPerUse
-#payPerAmount
-#payPerSubscription
+ids:paymentModality a owl:ObjectProperty;
+    rdfs:label "paymentModality"@en;
+    rdfs:domain ids:PaymentDuty;
+    rdfs:range ids:PaymentModality;
+    rdfs:comment "The modality when to pay the Price."@en.
+
+ids:transferredVolumeUnit a owl:DatatypeProperty;
+    rdfs:label "transferredVolumeUnit"@en;
+    rdfs:domain ids:PayPerVolume;
+    rdfs:range xsd:string;
+    rdfs:comment "The unit of a data transfer volume."@en.
+
+ids:transferredVolume a owl:DatatypeProperty;
+    rdfs:label "transferredVolume"@en;
+    rdfs:domain ids:PayPerVolume;
+    rdfs:range xsd:float;
+    rdfs:comment "The volume of a data transfer."@en.
