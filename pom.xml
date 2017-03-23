@@ -66,6 +66,22 @@
     </dependencies>
 
     <build>
+
+        <resources>
+            <resource>
+                <directory>src/vocabulary</directory>
+                <includes>
+                    <include>diagram/classes.png</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/vocabulary</directory>
+                <includes>
+                    <include>rdf/*.ttl</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
