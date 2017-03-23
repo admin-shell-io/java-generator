@@ -137,12 +137,19 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <outputDirectory>${basedir}/src/main/java/de/fraunhofer/iais/eis</outputDirectory>
+                    <outputDirectory>${basedir}</outputDirectory>
                     <resources>
                         <resource>
+                            <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
                             <directory>/tmp</directory>
                             <includes>
                                 <include>**/*.java</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <targetPath>${basedir}/src/vocabulary/diagram</targetPath>
+                            <directory>/tmp</directory>
+                            <includes>
                                 <include>**/*.png</include>
                             </includes>
                         </resource>
@@ -169,6 +176,12 @@
                             <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
                             <includes>
                                 <include>*.java</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                        <fileset>
+                            <directory>${basedir}/src/vocabulary/diagram</directory>
+                            <includes>
                                 <include>*.png</include>
                             </includes>
                             <followSymlinks>false</followSymlinks>
