@@ -76,6 +76,10 @@ ids:ProtocolBinding a owl:Class;
     rdfs:label "ProtocolBinding"@en ;
     rdfs:comment "Describes how a DataEndpoint can be invoked by using a certain protocol."@en.
 
+ids:Representation a owl:Class;
+    rdfs:label "Representation"@en ;
+    rdfs:comment "Describes how a Parameter's value is represented."@en.
+
 # Properties for describing a DataEndpoint
 # ----------------------------------------
 
@@ -183,8 +187,62 @@ ids:dataType a owl:ObjectProperty;
     rdfs:label "dataType"@en;
     rdfs:comment "Indicates the datatype of the Parameter."@en.
 
-ids:paramMediaType a owl:ObjectProperty;
+# Properties for describing a Representation
+# ------------------------------------------
+
+ids:representation a owl:ObjectProperty;
     rdfs:domain ids:Parameter;
-    rdfs:range ids:IANAMediaType;
-    rdfs:label "paramMediaType"@en;
-    rdfs:comment "The media type of the Parameter, as defined by IANA."@en.
+    rdfs:range ids:Representation;
+    rdfs:label "representation"@en;
+    rdfs:comment "The Representation of the Parameter's value."@en.
+
+
+    ids:format rdfs:subPropertyOf dct:format;
+        a owl:DatatypeProperty;
+        rdfs:label "format"@en;
+        rdfs:domain ids:DataAsset;
+        rdfs:range xsd:string;
+        rdfs:comment "The file format of the DataAsset. ids:mediaType SHOULD be used if the type of the distribution is defined by IANA."@en.
+
+    ids:mediaType rdfs:subPropertyOf dcat:mediaType;
+        a owl:ObjectProperty;
+        rdfs:label "mediaType"@en;
+        rdfs:domain ids:DataAsset;
+        rdfs:range ids:IANAMediaType;
+        rdfs:comment "The media type of the DataAsset, as defined by IANA."@en.
+
+ids:conformsToStandard
+    a owl:DatatypeProperty;
+    rdfs:label "conformsTo"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "The standard the DataAsset conforms to."@en.
+
+ids:conformsToStructure a owl:ObjectProperty;
+    rdfs:label "conformsToStructure"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "Links to a document that contains additional information like class and type descriptions or integrity constraints describing the DataAssets structure."@en.
+
+ids:transformationRule a owl:ObjectProperty;
+    rdfs:label "transformationRule"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:anyURI;
+    rdfs:comment "Links to a document that contains rules or algorithms to transform the DataAsset into another representation while retaining the information content."@en.
+
+ids:volume a owl:DatatypeProperty;
+    rdfs:label "volume"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range xsd:long;
+    rdfs:comment "The total uncompressed size of the dataset in MB."@en.
+
+
+
+
+
+
+ids:coversIndustry a owl:ObjectProperty;
+    rdfs:label "coversIndustry"@en;
+    rdfs:domain ids:DataAsset;
+    rdfs:range ids:ISICIndustry;
+    rdfs:comment "Industry branch covered by the DataAsset."@en.

@@ -63,33 +63,12 @@ ids:dataAssetDescription rdfs:subPropertyOf dct:description;
 	rdfs:range rdfs:Literal;
 	rdfs:comment "Freetext description of the DataAsset.".
 
-ids:format rdfs:subPropertyOf dct:format;
-    a owl:DatatypeProperty;
-    rdfs:label "format"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range xsd:string;
-    rdfs:comment "The file format of the DataAsset. ids:mediaType SHOULD be used if the type of the distribution is defined by IANA."@en.
-
-ids:mediaType rdfs:subPropertyOf dcat:mediaType;
-    a owl:ObjectProperty;
-    rdfs:label "mediaType"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range ids:IANAMediaType;
-    rdfs:comment "The media type of the DataAsset, as defined by IANA."@en.
-
 ids:version rdfs:subPropertyOf dct:hasVersion;
     a owl:DatatypeProperty;
     rdfs:label "version"@en;
     rdfs:domain ids:DataAsset;
     rdfs:range xsd:string;
     rdfs:comment "Version identifier of the InfrastructureComponent."@en.
-
-ids:conformsToStandard
-    a owl:DatatypeProperty;
-    rdfs:label "conformsTo"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range xsd:anyURI;
-    rdfs:comment "The standard the DataAsset conforms to."@en.
 
 ids:licenseDocument rdfs:subPropertyOf dct:license;
     a owl:ObjectProperty;
@@ -105,12 +84,6 @@ ids:licenseReference rdfs:subPropertyOf dct:license;
     rdfs:range xsd:anyURI;
     rdfs:comment "References a license document that is publicly available on the Web."@en.
 
-ids:coversIndustry a owl:ObjectProperty;
-    rdfs:label "coversIndustry"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range ids:ISICIndustry;
-    rdfs:comment "Industry branch covered by the DataAsset."@en.
-
 ids:coversTemporal rdfs:subPropertyOf dct:temporal;
     rdfs:label "coversTemporal"@en;
     rdfs:domain ids:DataAsset;
@@ -123,18 +96,6 @@ ids:coversSpatial rdfs:subPropertyOf dct:spatial;
     rdfs:range ids:SpatialEntity;
     rdfs:comment "Spatial location covered by the DataAsset."@en.
 
-ids:conformsToStructure a owl:ObjectProperty;
-    rdfs:label "conformsToStructure"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range xsd:anyURI;
-    rdfs:comment "Links to a document that contains additional information like class and type descriptions or integrity constraints describing the DataAssets structure."@en.
-
-ids:transformationRule a owl:ObjectProperty;
-    rdfs:label "transformationRule"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range xsd:anyURI;
-    rdfs:comment "Links to a document that contains rules or algorithms to transform the DataAsset into another representation while retaining the information content."@en.
-
 ids:coversCategory rdfs:subPropertyOf dcat:theme;
     rdfs:label "coversCategory"@en;
     rdfs:domain ids:DataAsset;
@@ -146,12 +107,6 @@ ids:keyword rdfs:subPropertyOf dcat:theme;
     rdfs:domain ids:DataAsset;
     rdfs:range xsd:anyURI;
     rdfs:comment "Links to an item in a flat list of controlled keywords that describe content-related coverage of the DataAsset."@en.
-
-ids:volume a owl:DatatypeProperty;
-    rdfs:label "volume"@en;
-    rdfs:domain ids:DataAsset;
-    rdfs:range xsd:long;
-    rdfs:comment "The total uncompressed size of the dataset in MB."@en.
 
 ids:coversLanguage rdfs:subPropertyOf dct:language;
     rdfs:label "coversLanguage"@en;
