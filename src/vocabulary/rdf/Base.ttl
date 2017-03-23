@@ -32,20 +32,6 @@ ids:InfrastructureComponent rdfs:subClassOf ids:EntityWithLifecycle;
 # Properties of InfrastructureComponent
 # -------------------------------------
 
-ids:title rdfs:subPropertyOf dct:title;
-	a owl:DatatypeProperty;
-	rdfs:label "title"@en;
-	rdfs:domain ids:InfrastructureComponent;
-	rdfs:range rdfs:Literal;
-	rdfs:comment "Name of the BaseEntity. MUST be asserted to resources of type BaseEntity."@en.
-
-ids:description rdfs:subPropertyOf dct:description;
-	a owl:DatatypeProperty;
-	rdfs:label "description"@en;
-	rdfs:domain ids:InfrastructureComponent;
-	rdfs:range rdfs:Literal;
-	rdfs:comment "Freetext description of the BaseEntity. MAY be asserted to resources of type BaseEntity.".
-
 ids:maintainer a owl:ObjectProperty;
     a owl:ObjectProperty;
     rdfs:label "maintainer"@en;
@@ -62,6 +48,20 @@ ids:operator a owl:ObjectProperty;
 
 # Properties of EntityWithLifecycle
 # -------------------------------------
+
+ids:title rdfs:subPropertyOf dct:title;
+	a owl:DatatypeProperty;
+	rdfs:label "title"@en;
+	rdfs:domain ids:EntityWithLifecycle;
+	rdfs:range rdfs:Literal;
+	rdfs:comment "Name of the BaseEntity. MUST be asserted to resources of type BaseEntity."@en.
+
+ids:description rdfs:subPropertyOf dct:description;
+	a owl:DatatypeProperty;
+	rdfs:label "description"@en;
+	rdfs:domain ids:EntityWithLifecycle;
+	rdfs:range rdfs:Literal;
+	rdfs:comment "Freetext description of the BaseEntity. MAY be asserted to resources of type BaseEntity.".
 
 ids:generationActivity rdfs:subPropertyOf prov:wasGeneratedBy;
     a owl:ObjectProperty;

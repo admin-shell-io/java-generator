@@ -1,0 +1,58 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+
+# Classes
+# -------
+
+ids:ServiceContract a owl:Class;
+    rdfs:label "ServiceContract"@en ;
+    rdfs:comment "Describes under what conditions a DataService Endpoint may be used by Participants."@en.
+
+ids:GenericServiceContract rdfs:subClassOf ids:ServiceContract;
+    a owl:Class;
+    rdfs:label "GenericServiceContract"@en ;
+    rdfs:comment "A ServiceContract with unknown Participants."@en.
+
+ids:ExclusiveServiceContract rdfs:subClassOf ids:ServiceContract;
+    a owl:Class;
+    rdfs:label "ExclusiveServiceContract"@en ;
+    rdfs:comment "A ServiceContract that may include or exclude specific Participants."@en;
+    ids:validation [
+        owl:onProperty ids:includedPartners;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:excludedPartners;
+        valid:relationType "@OneToMany";
+    ].
+
+# Properties
+# ----------
+
+ids:contractDuration a owl:ObjectProperty;
+    rdfs:domain ids:ServiceContract;
+    rdfs:range ids:TemporalEntity;
+    rdfs:label "contractDuration"@en;
+    rdfs:comment "The duration for which the ServiceContract is valid."@en.
+
+ids:usagePolicy a owl:ObjectProperty;
+    rdfs:domain ids:ServiceContract;
+    rdfs:range ids:UsagePolicy;
+    rdfs:label "usagePolicy"@en;
+    rdfs:comment "Policy describing rights and duties that are granted or must be fulfilled within the ServiceContract."@en.
+
+ids:includedPartners a owl:ObjectProperty;
+    rdfs:domain ids:ExclusiveServiceContract;
+    rdfs:range ids:Participant;
+    rdfs:label "includedPartners"@en;
+    rdfs:comment "Partners involved in the ServiceContract."@en.
+
+ids:excludedPartners a owl:ObjectProperty;
+    rdfs:domain ids:ExclusiveServiceContract;
+    rdfs:range ids:Participant;
+    rdfs:label "excludedPartners"@en;
+    rdfs:comment "Partners excluded from the ServiceContract."@en.
