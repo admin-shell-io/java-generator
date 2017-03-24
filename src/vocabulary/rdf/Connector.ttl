@@ -25,6 +25,3 @@ ids:provides a owl:ObjectProperty;
     rdfs:range ids:DataEndpoint;
     rdfs:label "provides"@en;
     rdfs:comment "The DataEndpoints provided by a Connector."@en.
-
-
-
