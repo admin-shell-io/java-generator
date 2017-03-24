@@ -2,6 +2,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix credential: <http://www.daml.org/services/owl-s/security/credential.owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
@@ -19,15 +20,15 @@ ids:DataTransfer
     ];
     ids:validation [
         owl:onProperty ids:sender;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:receiver;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:transferCreatedAt;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:TransferAttribute
@@ -36,11 +37,11 @@ ids:TransferAttribute
 	rdfs:comment "General attribute for additional description of security aspects of a data transfer."@en;
     ids:validation [
         owl:onProperty ids:transferAttributeKey;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:transferAttributeValue;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 ids:AuthToken rdfs:subClassOf credential:SimpleCredential;
@@ -49,7 +50,7 @@ ids:AuthToken rdfs:subClassOf credential:SimpleCredential;
 	rdfs:comment "Authorization Token."@en;
     ids:validation [
         owl:onProperty ids:tokenValue;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ].
 
 # Properties
@@ -81,7 +82,7 @@ ids:payloadDigest
 	rdfs:label "digest"@en;
 	rdfs:domain ids:DataTransfer;
 	rdfs:range xsd:base64Binary;
-	rdfs:comment "The digest of the dataset being transfered."@en.
+	rdfs:comment "The digest of the DataAsset being transfered."@en.
 
 ids:customAttribute
 	a owl:ObjectProperty;

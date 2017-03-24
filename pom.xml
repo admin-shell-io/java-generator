@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.fraunhofer.iais.eis</groupId>
-    <artifactId>rdf-codegen</artifactId>
+    <artifactId>ids-vocabulary</artifactId>
     <version>0.1-SNAPSHOT</version>
 
     <dependencies>
@@ -13,11 +13,11 @@
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>sparql-template-executor</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>de.fhg.iais</groupId>
+            <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>jrdfb</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -31,7 +31,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>RELEASE</version>
+            <version>5.2.4.Final</version>
         </dependency>
         <dependency>
             <groupId>javax.el</groupId>
@@ -66,7 +66,21 @@
     </dependencies>
 
     <build>
-        <finalName>ids-vocabulary-${version}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/vocabulary</directory>
+                <includes>
+                    <include>diagram/classes.png</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/vocabulary</directory>
+                <includes>
+                    <include>rdf/*.ttl</include>
+                </includes>
+            </resource>
+        </resources>
 
         <plugins>
             <plugin>
@@ -79,28 +93,50 @@
                 </configuration>
             </plugin>
 
-            <!-- execute the Java Beans generation based on the Vocabulary files and the SPARQL templates -->
+            <!-- execute the java beans and diagram generation based on the Vocabulary files and the SPARQL templates -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.5.0</version>
                 <executions>
                     <execution>
-                        <id>generate-java-beans</id>
+                        <id>generate-java-and-diagram</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
+                        <configuration>
+                            <executableDependency>
+                                <groupId>de.fraunhofer.iais.eis</groupId>
+                                <artifactId>sparql-template-executor</artifactId>
+                            </executableDependency>
+                            <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                            <arguments>
+                                <argument>${basedir}/src/vocabulary/rdf</argument>
+                                <argument>${basedir}/src/vocabulary/templates/diagram</argument>
+                                <argument>${basedir}/src/vocabulary/templates/java</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>render-diagram</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>dot</executable>
+                            <workingDirectory>/tmp</workingDirectory>
+                            <arguments>
+                                <argument>-T</argument>
+                                <argument>png</argument>
+                                <argument>-o</argument>
+                                <argument>classes.png</argument>
+                                <argument>classes.dot</argument>
+                            </arguments>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <executable>java</executable>
-                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
-                    <arguments>
-                        <argument>${basedir}/src/vocabulary/rdf</argument>
-                        <argument>${basedir}/src/vocabulary/templates</argument>
-                    </arguments>
-                </configuration>
             </plugin>
 
             <!-- copy generated code to package src directory -->
@@ -118,19 +154,28 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <outputDirectory>${basedir}/src/main/java/de/fraunhofer/iais/eis</outputDirectory>
+                    <outputDirectory>${basedir}</outputDirectory>
                     <resources>
                         <resource>
+                            <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
                             <directory>/tmp</directory>
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
                         </resource>
+                        <resource>
+                            <targetPath>${basedir}/src/vocabulary/diagram</targetPath>
+                            <directory>/tmp</directory>
+                            <includes>
+                                <include>**/*.png</include>
+                            </includes>
+                        </resource>
                     </resources>
                 </configuration>
+
             </plugin>
 
-            <!-- remove generated code from tmp directory -->
+            <!-- remove generated code from tmp and package directory -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.0.0</version>
@@ -140,6 +185,7 @@
                             <directory>/tmp</directory>
                             <includes>
                                 <include>*.java</include>
+                                <include>*.png</include>
                             </includes>
                             <followSymlinks>false</followSymlinks>
                         </fileset>
@@ -150,21 +196,14 @@
                             </includes>
                             <followSymlinks>false</followSymlinks>
                         </fileset>
-
+                        <fileset>
+                            <directory>${basedir}/src/vocabulary/diagram</directory>
+                            <includes>
+                                <include>*.png</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
                     </filesets>
-                </configuration>
-            </plugin>
-
-            <!-- exclude templates in the final jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <configuration>
-                    <excludes>
-                        <exclude>**/templates/**</exclude>
-                        <exclude>start.rq</exclude>
-                    </excludes>
                 </configuration>
             </plugin>
 
@@ -172,6 +211,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -184,5 +224,21 @@
 
         </plugins>
     </build>
+
+    <distributionManagement>
+        <repository>
+            <id>isst-repo</id>
+            <name>Maven repository at ISST</name>
+            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
+        </repository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>isst-repo</id>
+            <name>Maven repository at ISST</name>
+            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
+        </repository>
+    </repositories>
 
 </project>

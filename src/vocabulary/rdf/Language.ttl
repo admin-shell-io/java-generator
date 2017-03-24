@@ -1,0 +1,20 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix ids_lang: <http://industrialdataspace.org/2016/10/ids/core/isic#> .
+
+# Classes
+# -------
+
+ids:Language a owl:Class;
+    rdfs:label "Language"@en ;
+    rdfs:comment "The class of languages potentially being used by DataAssets within the Industrial Data Space.".
+
+# Instances
+# ---------
+
+ids_lang:old_church_slavonic a ids:Language;
+    rdfs:comment "Old Church Slavonic";
+    dct:identifier "OLD_CHURCH_SLAVONIC".

@@ -1,3 +1,7 @@
 .idea/
 target/
+diagram/
+rdf/
 src/main/java/de/fraunhofer/iais/eis/*.java
+classes.png
+*.iml

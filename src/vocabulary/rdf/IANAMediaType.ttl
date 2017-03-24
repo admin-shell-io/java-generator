@@ -10,7 +10,7 @@
 # -------
 
 ids:IANAMediaType a owl:Class;
-    rdfs:label "BrokerQueryMessageScope"@en ;
+    rdfs:label "IANAMediaType"@en ;
     rdfs:comment "The class of media types (formerly known as MIME types) as defined by IANA.".
 
 # Instances

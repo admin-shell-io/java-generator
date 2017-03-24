@@ -1,12 +1,8 @@
 package de.fraunhofer.iais.eis.util;
 
 import com.google.common.reflect.ClassPath;
-import de.fhg.iais.jrdfb.JrdfbException;
-import de.fhg.iais.jrdfb.RdfSerializer;
-import de.fhg.iais.jrdfb.annotation.RdfId;
-import de.fraunhofer.iais.eis.IANAMediaType;
-import de.fraunhofer.iais.eis.Parameter;
-import de.fraunhofer.iais.eis.ParameterImpl;
+import de.fraunhofer.iais.eis.jrdfb.JrdfbException;
+import de.fraunhofer.iais.eis.jrdfb.serializer.RdfSerializer;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -51,14 +47,14 @@ public class VocabUtil {
 
     public static String toRdf(Object obj) {
         try {
-            return getRdfSeriaizer().serialize(obj);
+            return getRdfSerializer().serialize(obj);
         }
         catch (JrdfbException e) {
             throw new RdfSerializationException("Error serializing objects", e);
         }
     }
 
-    private static RdfSerializer getRdfSeriaizer() {
+    private static RdfSerializer getRdfSerializer() {
         if (serializer == null) {
             Collection<Class> annotatedClasses = collectAnnotatedClasses();
             serializer = new RdfSerializer(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
@@ -74,17 +70,11 @@ public class VocabUtil {
             ClassPath classPath = ClassPath.from(classLoader);
             Collection<ClassPath.ClassInfo> classInfos = classPath.getTopLevelClasses("de.fraunhofer.iais.eis");
 
-            //todo: make one loop, this is to work around a serializer bug
             for (ClassPath.ClassInfo classInfo : classInfos) {
-                if (classInfo.getName().endsWith("Impl")) {
-                    annotatedClasses.add(classLoader.loadClass(classInfo.getName()));
+                Class clazz = classLoader.loadClass(classInfo.getName());
+                if (clazz.isInterface()) {
+                    annotatedClasses.add(clazz);
                 }
-            }
-
-            for (ClassPath.ClassInfo classInfo : classInfos) {
-                if (classInfo.getName().endsWith("Impl"))
-                    continue;
-                annotatedClasses.add(classLoader.loadClass(classInfo.getName()));
             }
         }
         catch (IOException e) {
@@ -99,7 +89,7 @@ public class VocabUtil {
 
     public static Object fromRdf(String rdf) {
         try {
-            return getRdfSeriaizer().deserialize(rdf);
+            return getRdfSerializer().deserialize(rdf);
         }
         catch (JrdfbException e) {
             throw new RdfSerializationException("Error deserializing objects", e);

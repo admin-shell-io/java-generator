@@ -3,6 +3,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
@@ -21,6 +22,10 @@ ids:UsagePolicy rdfs:subClassOf odrl:Set;
     ids:validation [
         owl:onProperty ids:prohibition;
         valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:duty;
+        valid:relationType "@OneToMany";
     ].
 
 ids:Rule rdfs:subClassOf odrl:Rule;
@@ -29,7 +34,7 @@ ids:Rule rdfs:subClassOf odrl:Rule;
     rdfs:comment "Superclass of Permissions, Prohibitions and Duties."@en;
     ids:validation [
         owl:onProperty ids:target;
-        valid:constraint "@javax.validation.constraints.NotNull";
+        valid:constraint "@NotNull";
     ];
     ids:validation [
         owl:onProperty ids:action;
@@ -48,6 +53,40 @@ ids:Prohibition rdfs:subClassOf ids:Rule;
     rdfs:label "Prohibition"@en;
     rdfs:comment "The class of Prohibitions as defined in the ODRL ontology."@en.
 
+ids:Duty rdfs:subClassOf ids:Rule;
+    rdfs:subClassOf odrl:Duty;
+    a owl:Class;
+    rdfs:label "Duty"@en;
+    rdfs:comment "The class of Duties as defined in the ODRL ontology."@en.
+
+ids:PaymentDuty rdfs:subClassOf ids:Duty;
+    a owl:Class;
+    rdfs:label "PaymentDuty"@en;
+    rdfs:comment "The duty to pay a certain amount of money."@en.
+
+ids:PaymentModality rdfs:subClassOf ids:Duty;
+    a owl:Class;
+    rdfs:label "PaymentModality"@en;
+    rdfs:comment "Specifies when to pay the specified amount."@en.
+
+ids:PayPerUse rdfs:subClassOf ids:PaymentModality;
+    a owl:Class;
+    rdfs:label "PayPerUse"@en;
+    rdfs:comment "Price must be paid on each service call."@en.
+
+ids:PayPerVolume rdfs:subClassOf ids:PaymentModality;
+    a owl:Class;
+    rdfs:label "PayPerVolume"@en;
+    rdfs:comment "Price must be paid for a specified volume of transferred data."@en;
+    ids:validation [
+        owl:onProperty ids:transferredVolumeUnit;
+        valid:constraint "@NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:transferredVolume;
+        valid:constraint "@NotNull";
+    ].
+
 ids:Action rdfs:subClassOf odrl:Action;
     a owl:Class;
     rdfs:label "Action"@en;
@@ -64,6 +103,19 @@ ids:Write rdfs:subClassOf ids:Action;
     a owl:Class;
     rdfs:label "Write"@en;
     rdfs:comment "The act of writing to the asset."@en.
+
+ids:Price rdfs:subClassOf gr:PriceSpecification;
+    a owl:Class;
+    rdfs:label "Price"@en;
+    rdfs:comment "Monetary price for a good."@en;
+    ids:validation [
+        owl:onProperty ids:currency;
+        valid:constraint "@NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:currencyValue;
+        valid:constraint "@NotNull";
+    ].
 
 # Properties
 # ----------
@@ -82,9 +134,61 @@ ids:prohibition rdfs:subPropertyOf odrl:prohibition;
     rdfs:range ids:Prohibition;
     rdfs:comment "The Prohibitions imposed by a UsagePolicy."@en.
 
+ids:duty rdfs:subPropertyOf odrl:duty;
+    a owl:ObjectProperty;
+    rdfs:label "duty"@en;
+    rdfs:domain ids:UsagePolicy;
+    rdfs:range ids:Duty;
+    rdfs:comment "The Duties imposed by a UsagePolicy."@en.
+
 ids:action rdfs:subPropertyOf odrl:action;
     a owl:ObjectProperty;
     rdfs:label "action"@en;
     rdfs:domain ids:Rule;
     rdfs:range ids:Action;
     rdfs:comment "The operation relating to the asset for which permission is being granted."@en.
+
+ids:ruleDescription rdfs:subPropertyOf dct:description;
+    a owl:DatatypeProperty;
+    rdfs:label "ruleDescription"@en;
+    rdfs:domain ids:Rule;
+    rdfs:range rdfs:Literal;
+    rdfs:comment "Freetext description of the Rule.".
+
+ids:price a owl:ObjectProperty;
+    rdfs:label "price"@en;
+    rdfs:domain ids:PaymentDuty;
+    rdfs:range ids:Price;
+    rdfs:comment "Specifies the price for of a PaymentDuty."@en.
+
+ids:currency rdfs:subPropertyOf gr:hasCurrency;
+    a owl:ObjectProperty;
+    rdfs:label "currency"@en;
+    rdfs:domain ids:Price;
+    rdfs:range ids:Currency;
+    rdfs:comment "The currency in which the Price is specified."@en.
+
+ids:currencyValue rdfs:subPropertyOf gr:hasCurrencyValue;
+    a owl:DatatypeProperty;
+    rdfs:label "currencyValue"@en;
+    rdfs:domain ids:Price;
+    rdfs:range xsd:float;
+    rdfs:comment "The currency in which the Price is specified."@en.
+
+ids:paymentModality a owl:ObjectProperty;
+    rdfs:label "paymentModality"@en;
+    rdfs:domain ids:PaymentDuty;
+    rdfs:range ids:PaymentModality;
+    rdfs:comment "The modality when to pay the Price."@en.
+
+ids:transferredVolumeUnit a owl:DatatypeProperty;
+    rdfs:label "transferredVolumeUnit"@en;
+    rdfs:domain ids:PayPerVolume;
+    rdfs:range xsd:string;
+    rdfs:comment "The unit of a data transfer volume."@en.
+
+ids:transferredVolume a owl:DatatypeProperty;
+    rdfs:label "transferredVolume"@en;
+    rdfs:domain ids:PayPerVolume;
+    rdfs:range xsd:float;
+    rdfs:comment "The volume of a data transfer."@en.

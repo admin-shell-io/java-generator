@@ -1,0 +1,20 @@
+prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:subclass-relations-to-uml {
+
+    "\n"
+    "\t" str(?classAlabel) " -> " str(?classBlabel) " [\n\t\tarrowhead=empty]\n\n"
+
+}
+where {
+    ?classA rdfs:subClassOf ?classB.
+
+    ?classA rdfs:label ?classAlabel.
+    ?classB rdfs:label ?classBlabel.
+
+
+    FILTER (strstarts(str(?classA), str(<ids:>)) && strstarts(str(?classB), str(<ids:>)))
+
+}
+
