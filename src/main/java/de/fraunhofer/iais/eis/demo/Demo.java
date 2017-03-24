@@ -85,23 +85,9 @@ public class Demo {
     private DataEndpoint createDataEndpoint() throws ConstraintViolationException, MalformedURLException {
         ServiceContract serviceContract = new ServiceContractBuilder().usagePolicy(createPolicy()).build();
 
-        Representation representation = new RepresentationBuilder()
-                .conformsToStandard(new URL("http://example.org/GS1"))
-                .mediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
-                .build();
-
-        OutputParameter outputParameter = new OutputParameterBuilder()
-            .paramLabel(Arrays.asList(ResourceFactory.createLangLiteral("whole dataset dump", "en")))
-            .paramName("dataset")
-            .paramDescription(ResourceFactory.createLangLiteral("default output parameter", "en"))
-
-            .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
-            .representation(representation)
-            .build();
-
         Operation operation = new OperationBuilder()
             .opLabel(ResourceFactory.createLangLiteral("retrieve dump operation", "en"))
-            .output(Arrays.asList(outputParameter)).build();
+            .output(Arrays.asList(createOutputParameter())).build();
 
         DataService dataService = new DataServiceBuilder()
             .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)
@@ -111,6 +97,26 @@ public class Demo {
 
         DataEndpoint dataEndpoint = new DataEndpointBuilder().offers(dataService).build();
         return dataEndpoint;
+    }
+
+    private OutputParameter createOutputParameter() throws ConstraintViolationException, MalformedURLException {
+
+        Representation representation = new RepresentationBuilder()
+                .conformsToStandard(new URL("http://example.org/GS1"))
+                //.dataType(ParameterDataType.XSD_INT)
+                .mediaType(IANAMediaType.APPLICATION_CDMI_OBJECT)
+                .build();
+
+        OutputParameter outputParameter = new OutputParameterBuilder()
+                .paramLabel(Arrays.asList(ResourceFactory.createLangLiteral("whole dataset dump", "en")))
+                .paramName("dataset")
+                .paramDescription(ResourceFactory.createLangLiteral("default output parameter", "en"))
+
+                .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
+                .representation(representation)
+                .build();
+
+        return outputParameter;
     }
 
     private UsagePolicy createPolicy() throws ConstraintViolationException {
@@ -142,9 +148,16 @@ public class Demo {
         DataTransfer obj = (DataTransfer) VocabUtil.fromRdf(rdf);
         */
 
-        String rdf2 = createDataEndpoint().toRdf();
-        System.out.println(rdf2);
-        Object obj2 = VocabUtil.fromRdf(rdf2);
+        /*
+        String rdf = createDataEndpoint().toRdf();
+        System.out.println(rdf);
+        Object obj = VocabUtil.fromRdf(rdf);
+        */
+
+        String rdf = createOutputParameter().toRdf();
+        System.out.println(rdf);
+        Object obj = VocabUtil.fromRdf(rdf);
+
 
         System.out.println("xx");
     }
