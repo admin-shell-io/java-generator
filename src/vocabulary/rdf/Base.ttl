@@ -50,19 +50,19 @@ ids:operator a owl:ObjectProperty;
 # Properties of EntityWithLifecycle
 # -------------------------------------
 
-ids:title rdfs:subPropertyOf dct:title;
+ids:entityName rdfs:subPropertyOf dct:title;
 	a owl:DatatypeProperty;
-	rdfs:label "title"@en;
+	rdfs:label "entityName"@en;
 	rdfs:domain ids:EntityWithLifecycle;
 	rdfs:range rdfs:Literal;
-	rdfs:comment "Name of the BaseEntity. MUST be asserted to resources of type BaseEntity."@en.
+	rdfs:comment "Name of the EntityWithLifecycle."@en.
 
 ids:description rdfs:subPropertyOf dct:description;
 	a owl:DatatypeProperty;
 	rdfs:label "description"@en;
 	rdfs:domain ids:EntityWithLifecycle;
 	rdfs:range rdfs:Literal;
-	rdfs:comment "Freetext description of the BaseEntity. MAY be asserted to resources of type BaseEntity.".
+	rdfs:comment "Freetext description of the EntityWithLifecycle.".
 
 ids:generationActivity rdfs:subPropertyOf prov:wasGeneratedBy;
     a owl:ObjectProperty;

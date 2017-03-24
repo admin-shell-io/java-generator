@@ -27,9 +27,9 @@ ids:Site a owl:Class;
 # Properties for describing a Participant
 # ---------------------------------------
 
-ids:name rdfs:subPropertyOf foaf:name;
+ids:participantName rdfs:subPropertyOf foaf:name;
     a owl:ObjectProperty;
-    rdfs:label "name"@en;
+    rdfs:label "participantName"@en;
     rdfs:domain ids:Participant;
     rdfs:range rdfs:Literal;
     rdfs:comment "Name of the company participating in the IDS."@en.
