@@ -17,7 +17,7 @@ ids:DataAsset rdfs:subClassOf ids:EntityWithLifecycle;
     rdfs:label "DataAsset"@en;
     rdfs:comment "DataAsset on the Industrial Dataspace. May be a data offering, data that is in the state of being transfered or an aggregation of multiple other dataassets."@en;
     ids:validation [
-        owl:onProperty ids:dataAssetTitle;
+        owl:onProperty ids:dataAssetName;
         valid:relationType "@OneToMany";
         valid:constraint "@NotNull";
     ];
@@ -49,12 +49,12 @@ ids:DataAsset rdfs:subClassOf ids:EntityWithLifecycle;
 # Properties
 # ----------
 
-ids:dataAssetTitle rdfs:subPropertyOf dct:title;
+ids:dataAssetName rdfs:subPropertyOf dct:title;
 	a owl:DatatypeProperty;
-	rdfs:label "dataAssetTitle"@en;
+	rdfs:label "dataAssetName"@en;
 	rdfs:domain ids:DataAsset;
 	rdfs:range rdfs:Literal;
-	rdfs:comment "Title of the DataAsset."@en.
+	rdfs:comment "Name of the DataAsset."@en.
 
 ids:dataAssetDescription rdfs:subPropertyOf dct:description;
 	a owl:DatatypeProperty;

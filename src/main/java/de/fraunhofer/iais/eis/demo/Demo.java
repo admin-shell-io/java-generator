@@ -71,7 +71,7 @@ public class Demo {
                 .build();
 
         DataAsset dataAsset = new DataAssetBuilder()
-                .dataAssetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
+                .dataAssetName(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
                 .dataAssetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .origin(new URL("http://example.org/company/"))
                 .licenseDocument(LicenseDocument.CC_BY_NC_ND_2_0)
