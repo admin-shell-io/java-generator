@@ -13,7 +13,7 @@
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>sparql-template-executor</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -113,7 +113,8 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <argument>${basedir}/src/vocabulary/rdf</argument>
-                                <argument>${basedir}/src/vocabulary/templates</argument>
+                                <argument>${basedir}/src/vocabulary/templates/diagram</argument>
+                                <argument>${basedir}/src/vocabulary/templates/java</argument>
                             </arguments>
                         </configuration>
                     </execution>

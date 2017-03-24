@@ -33,6 +33,9 @@ public class Demo {
         // create objects for communicating with the broker
         createBrokerRequests();
 
+        // describe a data assed
+        createDataAsset();
+
         // create a data endpoint description
         createDataEndpoint();
     }
@@ -56,7 +59,7 @@ public class Demo {
                 .build();
     }
 
-    private DataEndpoint createDataEndpoint() throws ConstraintViolationException, MalformedURLException {
+    private DataAsset createDataAsset() throws ConstraintViolationException, MalformedURLException {
         GeoPoint frankfurt = new GeoPointBuilder().latitude(50.1156f).longitude(8.70314f).build();
 
         Instant beginning = new InstantBuilder().inXSDDateTime(new XMLGregorianCalendarImpl(new GregorianCalendar())).build();
@@ -67,7 +70,7 @@ public class Demo {
                 .end(end)
                 .build();
 
-        DataAsset dataset = new DataAssetBuilder()
+        DataAsset dataAsset = new DataAssetBuilder()
                 .dataAssetTitle(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
                 .dataAssetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .origin(new URL("http://example.org/company/"))
@@ -76,6 +79,10 @@ public class Demo {
                 .coversSpatial(Arrays.asList(frankfurt))
                 .build();
 
+        return dataAsset;
+    }
+
+    private DataEndpoint createDataEndpoint() throws ConstraintViolationException, MalformedURLException {
         ServiceContract serviceContract = new ServiceContractBuilder().usagePolicy(createPolicy()).build();
 
         Representation representation = new RepresentationBuilder()
@@ -90,10 +97,11 @@ public class Demo {
 
             .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
             .representation(representation)
-            .content(dataset)
             .build();
 
-        Operation operation = new OperationBuilder().output(Arrays.asList(outputParameter)).build();
+        Operation operation = new OperationBuilder()
+            .opLabel(ResourceFactory.createLangLiteral("retrieve dump operation", "en"))
+            .output(Arrays.asList(outputParameter)).build();
 
         DataService dataService = new DataServiceBuilder()
             .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)

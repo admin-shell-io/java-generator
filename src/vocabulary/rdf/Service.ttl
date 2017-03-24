@@ -186,12 +186,6 @@ ids:representation a owl:ObjectProperty;
     rdfs:label "representation"@en;
     rdfs:comment "The Representation of the Parameter's value."@en.
 
-ids:content a owl:ObjectProperty;
-    rdfs:domain ids:Parameter;
-    rdfs:range ids:DataAsset;
-    rdfs:label "content"@en;
-    rdfs:comment "Describes the content that is delivered/passed by the Parameter."@en.
-
 # Properties for describing a Representation
 # ------------------------------------------
 
