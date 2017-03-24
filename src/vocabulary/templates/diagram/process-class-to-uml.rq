@@ -12,7 +12,6 @@ template ids:process-class-to-uml {
     str(?label)
 
     " | "
-#    "~ url : URL\\l"
 
     if (bound(?instance),
         st:call-template(ids:enum-values-to-uml, ?class),
