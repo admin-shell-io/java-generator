@@ -9,7 +9,7 @@ template ids:process-class-to-bean(?class) {
 
     "\n"
     "\n"
-    "/* " str(?comment) " */\n"
+    "/** " str(?comment) " */\n"
     "public class " concat(strafter(str(?class), "#"), "Impl")
     " implements " strafter(str(?class), "#")
 

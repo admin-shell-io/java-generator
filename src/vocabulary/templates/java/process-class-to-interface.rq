@@ -10,7 +10,7 @@ template ids:process-class-to-interface(?class) {
 
     "\n\n"
 
-    "/* " str(?comment) " */"
+    "/** " str(?comment) " */"
     "\n@RdfType(\"" str(?class) "\")"
     "\n"
     "public interface " strafter(str(?class), "#")

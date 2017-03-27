@@ -6,8 +6,9 @@ template ids:properties-to-interface-methods(?class) {
 
     # getter method signature
 
+    # javadoc
     if (bound(?comment),
-        concat("\n\t/* ", str(?comment), " */"),
+        concat("\n\t/** ", str(?comment), " */"),
         "")
 
     "\n\t@RdfProperty(\"" str(?property) "\")"
