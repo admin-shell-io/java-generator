@@ -11,4 +11,6 @@ where {
     ?instance a ?class;
         dct:identifier ?identifier.
 }
+limit 15
+
 

@@ -17,4 +17,3 @@ where {
 
     filter (!(strstarts(str(?range), str(<ids:>))))
 }
-

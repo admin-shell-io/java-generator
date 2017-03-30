@@ -28,4 +28,5 @@ where {
         ?instance a ?class
     }
 }
+group by ?class
 
