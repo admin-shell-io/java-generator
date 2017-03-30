@@ -3,7 +3,7 @@
 @prefix dct: <http://purl.org/dc/terms/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
-@prefix ids_lang: <http://industrialdataspace.org/2016/10/ids/core/isic#> .
+@prefix ids_lang: <http://industrialdataspace.org/2016/10/ids/ext/lang#> .
 
 # Classes
 # -------
