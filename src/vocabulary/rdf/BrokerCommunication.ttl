@@ -156,7 +156,7 @@ ids:queryRequestAction a owl:ObjectProperty;
 
 ids:coveredEntity a owl:ObjectProperty;
     rdfs:label "coveredEntity";
-    rdfs:domain ids:BrokerDataRequest;
+    rdfs:domain ids:BrokerRequestMessage;
     rdfs:range ids:EntityCoveredByDataRequest;
     rdfs:comment "The IDS entity covered in the data request."@en.
 
