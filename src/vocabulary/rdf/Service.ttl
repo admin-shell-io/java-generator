@@ -103,6 +103,7 @@ ids:usageCondition a owl:ObjectProperty;
     rdfs:domain ids:DataService;
     rdfs:range ids:ServiceContract;
     rdfs:label "usageCondition"@en;
+    idoc:labelPluralForm "usageConditions"@en;
     rdfs:comment "The ServiceContracts for using the DataService."@en.
 
 ids:coversIndustry a owl:ObjectProperty;
@@ -119,12 +120,14 @@ ids:input a owl:ObjectProperty;
     rdfs:domain ids:Operation;
     rdfs:range ids:InputParameter;
     rdfs:label "input"@en;
+    idoc:labelPluralForm "inputs"@en;
     rdfs:comment "Parameterizes the input of an Operation."@en.
 
 ids:output a owl:ObjectProperty;
     rdfs:domain ids:Operation;
     rdfs:range ids:OutputParameter;
     rdfs:label "output"@en;
+    idoc:labelPluralForm "outputs"@en;
     rdfs:comment "Holds the result of an Operation."@en.
 
 ids:opLabel rdfs:subPropertyOf rdfs:label;
@@ -161,6 +164,7 @@ ids:paramLabel rdfs:subPropertyOf rdfs:label;
     rdfs:domain ids:Parameter;
     rdfs:range rdfs:Literal;
     rdfs:label "paramLabel"@en;
+    idoc:labelPluralForm "paramLabels"@en;
     rdfs:comment "Freetext label of the Parameter as it should be shown in public indexes."@en.
 
 ids:paramName rdfs:subPropertyOf dct:identifier;

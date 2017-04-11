@@ -4,6 +4,7 @@
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
 
 # Classes
 # -------
@@ -22,11 +23,11 @@ ids:ExclusiveServiceContract rdfs:subClassOf ids:ServiceContract;
     rdfs:label "ExclusiveServiceContract"@en ;
     rdfs:comment "A ServiceContract that may include or exclude specific Participants."@en;
     ids:validation [
-        owl:onProperty ids:includedPartners;
+        owl:onProperty ids:includedPartner;
         valid:relationType "@OneToMany";
     ];
     ids:validation [
-        owl:onProperty ids:excludedPartners;
+        owl:onProperty ids:excludedPartner;
         valid:relationType "@OneToMany";
     ].
 
@@ -45,14 +46,16 @@ ids:usagePolicy a owl:ObjectProperty;
     rdfs:label "usagePolicy"@en;
     rdfs:comment "Policy describing rights and duties that are granted or must be fulfilled within the ServiceContract."@en.
 
-ids:includedPartners a owl:ObjectProperty;
+ids:includedPartner a owl:ObjectProperty;
     rdfs:domain ids:ExclusiveServiceContract;
     rdfs:range ids:Participant;
-    rdfs:label "includedPartners"@en;
+    rdfs:label "includedPartner"@en;
+    idoc:labelPluralForm "includedPartners"@en;
     rdfs:comment "Partners involved in the ServiceContract."@en.
 
-ids:excludedPartners a owl:ObjectProperty;
+ids:excludedPartner a owl:ObjectProperty;
     rdfs:domain ids:ExclusiveServiceContract;
     rdfs:range ids:Participant;
-    rdfs:label "excludedPartners"@en;
+    rdfs:label "excludedPartner"@en;
+    idoc:labelPluralForm "excludedPartners"@en;
     rdfs:comment "Partners excluded from the ServiceContract."@en.

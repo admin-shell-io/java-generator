@@ -7,6 +7,7 @@
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
 
 # Classes
 # -------
@@ -45,18 +46,21 @@ ids:Permission rdfs:subClassOf ids:Rule;
     rdfs:subClassOf odrl:Permission;
     a owl:Class;
     rdfs:label "Permission"@en;
+    idoc:labelPluralForm "Permissions"@en;
     rdfs:comment "The class of Permissions as defined in the ODRL ontology."@en.
 
 ids:Prohibition rdfs:subClassOf ids:Rule;
     rdfs:subClassOf odrl:Prohibition;
     a owl:Class;
     rdfs:label "Prohibition"@en;
+    idoc:labelPluralForm "Prohibitions"@en;
     rdfs:comment "The class of Prohibitions as defined in the ODRL ontology."@en.
 
 ids:Duty rdfs:subClassOf ids:Rule;
     rdfs:subClassOf odrl:Duty;
     a owl:Class;
     rdfs:label "Duty"@en;
+    idoc:labelPluralForm "Duties"@en;
     rdfs:comment "The class of Duties as defined in the ODRL ontology."@en.
 
 ids:PaymentDuty rdfs:subClassOf ids:Duty;
@@ -90,6 +94,7 @@ ids:PayPerVolume rdfs:subClassOf ids:PaymentModality;
 ids:Action rdfs:subClassOf odrl:Action;
     a owl:Class;
     rdfs:label "Action"@en;
+    idoc:labelPluralForm "Actions"@en;
     rdfs:comment "A thing one might be permitted to do or prohibited from doing to something."@en.
 
 ids:Read rdfs:subClassOf ids:Action;

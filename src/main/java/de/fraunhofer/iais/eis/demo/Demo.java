@@ -71,8 +71,8 @@ public class Demo {
                 .build();
 
         DataAsset dataAsset = new DataAssetBuilder()
-                .dataAssetName(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
-                .dataAssetDescription(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
+                .dataAssetNames(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
+                .dataAssetDescriptions(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .origin(new URL("http://example.org/company/"))
                 .licenseDocument(LicenseDocument.CC_BY_NC_ND_2_0)
                 .coversTemporal(Arrays.asList(interval))
@@ -87,12 +87,12 @@ public class Demo {
 
         Operation operation = new OperationBuilder()
             .opLabel(ResourceFactory.createLangLiteral("retrieve dump operation", "en"))
-            .output(Arrays.asList(createOutputParameter())).build();
+            .outputs(Arrays.asList(createOutputParameter())).build();
 
         DataService dataService = new DataServiceBuilder()
             .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)
             .operations(Arrays.asList(operation))
-            .usageCondition(Arrays.asList(serviceContract))
+            .usageConditions(Arrays.asList(serviceContract))
             .build();
 
         DataEndpoint dataEndpoint = new DataEndpointBuilder().offers(dataService).build();
@@ -108,7 +108,7 @@ public class Demo {
                 .build();
 
         OutputParameter outputParameter = new OutputParameterBuilder()
-                .paramLabel(Arrays.asList(ResourceFactory.createLangLiteral("whole dataset dump", "en")))
+                .paramLabels(Arrays.asList(ResourceFactory.createLangLiteral("whole dataset dump", "en")))
                 .paramName("dataset")
                 .paramDescription(ResourceFactory.createLangLiteral("default output parameter", "en"))
 

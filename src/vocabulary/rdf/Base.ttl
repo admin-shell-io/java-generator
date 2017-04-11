@@ -5,6 +5,7 @@
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
 
 # Classes
 # -------
@@ -73,6 +74,7 @@ ids:generationActivity rdfs:subPropertyOf prov:wasGeneratedBy;
 
 ids:lifecycleActivity a owl:ObjectProperty;
     rdfs:label "lifecycleActivity"@en;
+    idoc:labelPluralForm "lifecycleActivities"@en;
     rdfs:domain ids:EntityWithLifecycle;
     rdfs:range ids:Activity;
     rdfs:comment "Activity that occurs during the lifecycle of the InfrastructureComponent."@en.
