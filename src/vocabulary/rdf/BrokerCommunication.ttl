@@ -107,11 +107,15 @@ ids:BrokerQueryRequestAction a owl:Class;
     rdfs:label "BrokerQueryRequestAction"@en ;
     rdfs:comment "The class of all actions that can be issued to a broker in a query message.".
 
-ids:BrokerQueryGetAction a ids:BrokerQueryRequestAction;
+ids:BrokerQueryRequestGetAction a ids:BrokerQueryRequestAction;
     dct:identifier "GET"@en.
 
-ids:BrokerQueryListAction a ids:BrokerQueryRequestAction;
+ids:BrokerQueryRequestListAction a ids:BrokerQueryRequestAction;
     dct:identifier "LIST"@en.
+
+ids:BrokerQueryRequestQueryAction a ids:BrokerQueryRequestAction;
+    dct:identifier "QUERY"@en.
+
 
 ids:BrokerQueryMessageScope a owl:Class;
     rdfs:label "BrokerQueryMessageScope"@en ;
