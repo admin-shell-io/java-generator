@@ -1,12 +1,15 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#>
 
 template ids:getter-method-body(?property) {
 
     " {"
-    "\n\t\treturn " strafter(str(?property), "#") ";"
+    "\n\t\treturn " if (bound(?pluralLabel), str(?pluralLabel), str(?label)) ";"
     "\n\t}"
 
 }
 where{
+    ?property rdfs:label ?label.
+    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
 }

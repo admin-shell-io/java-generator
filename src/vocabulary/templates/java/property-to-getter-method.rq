@@ -1,4 +1,5 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#>
 
 template ids:property-to-getter-method(?property, ?class) {
 
@@ -13,10 +14,16 @@ template ids:property-to-getter-method(?property, ?class) {
     " "
 
     # method name
-    "get" ucase(substr(str(?label), 1, 1)) substr(str(?label), 2) "()"
+    "get"
+
+    if (bound(?pluralLabel),
+            concat(ucase(substr(str(?pluralLabel), 1, 1)), substr(str(?pluralLabel), 2), '()'),
+            concat(ucase(substr(str(?label), 1, 1)), substr(str(?label), 2), '()'))
 
 }
 where  {
-   ?property rdfs:label ?label;
-        rdfs:range ?range.
+    ?property rdfs:range ?range;
+        rdfs:label ?label.
+
+    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
 }

@@ -1,5 +1,5 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
-prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
+prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#>
 
 template ids:property-to-setter-method(?property, ?class) {
 
@@ -15,10 +15,13 @@ template ids:property-to-setter-method(?property, ?class) {
         " "
 
         # parameter label
-        strafter(str(?property), "#")
+        if (bound(?pluralLabel), str(?pluralLabel), str(?label))
     ")"
 
 }
 where  {
-   ?property rdfs:range ?range.
+    ?property rdfs:range ?range;
+        rdfs:label ?label.
+
+    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
 }

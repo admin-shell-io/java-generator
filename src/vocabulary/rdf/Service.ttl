@@ -5,6 +5,7 @@
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
 
 # Classes
 # -------
@@ -95,6 +96,7 @@ ids:operation a owl:ObjectProperty;
     rdfs:domain ids:DataService;
     rdfs:range ids:Operation;
     rdfs:label "operation"@en;
+    idoc:labelPluralForm "operations"@en;
     rdfs:comment "An Operation that can be performed on a DataService."@en.
 
 ids:usageCondition a owl:ObjectProperty;

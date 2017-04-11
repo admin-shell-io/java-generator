@@ -91,7 +91,7 @@ public class Demo {
 
         DataService dataService = new DataServiceBuilder()
             .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS)
-            .operation(Arrays.asList(operation))
+            .operations(Arrays.asList(operation))
             .usageCondition(Arrays.asList(serviceContract))
             .build();
 
