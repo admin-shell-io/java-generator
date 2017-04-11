@@ -17,7 +17,7 @@ template ids:process-class-to-bean(?class) {
 
     # boilerplate methods
 
-    "\n\t@javax.validation.constraints.NotNull java.net.URL url;"
+    "\n\t@javax.validation.constraints.NotNull java.net.URL id;"
     "\n"
 
     "\n\t// instance fields as derived from vocabulary\n"
@@ -29,7 +29,7 @@ template ids:process-class-to-bean(?class) {
     "\n"
     "\n\t@Override"
     "\n\tfinal public java.net.URL getId() {"
-    "\n\t\treturn url;"
+    "\n\t\treturn id;"
     "\n\t}"
     "\n"
     "\n\tpublic String toRdf() {"
