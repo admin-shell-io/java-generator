@@ -16,6 +16,15 @@ ids:EntityWithLifecycle a owl:Class;
     ids:validation [
         owl:onProperty ids:lifecycleActivity;
         valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:entityName;
+        valid:relationType "@OneToMany";
+        valid:constraint "@NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:entityDescription;
+        valid:relationType "@OneToMany";
     ].
 
 ids:InfrastructureComponent rdfs:subClassOf ids:EntityWithLifecycle;
@@ -53,16 +62,18 @@ ids:operator a owl:ObjectProperty;
 
 ids:entityName rdfs:subPropertyOf dct:title;
 	a owl:DatatypeProperty;
-	rdfs:label "entityName"@en;
 	rdfs:domain ids:EntityWithLifecycle;
 	rdfs:range rdfs:Literal;
+    rdfs:label "entityName"@en;
+    idoc:labelPluralForm "entityNames"@en;
 	rdfs:comment "Name of the EntityWithLifecycle."@en.
 
-ids:description rdfs:subPropertyOf dct:description;
+ids:entityDescription rdfs:subPropertyOf dct:description;
 	a owl:DatatypeProperty;
-	rdfs:label "description"@en;
 	rdfs:domain ids:EntityWithLifecycle;
 	rdfs:range rdfs:Literal;
+	rdfs:label "entityDescription"@en;
+	idoc:labelPluralForm "entityDescriptions"@en;
 	rdfs:comment "Freetext description of the EntityWithLifecycle.".
 
 ids:generationActivity rdfs:subPropertyOf prov:wasGeneratedBy;

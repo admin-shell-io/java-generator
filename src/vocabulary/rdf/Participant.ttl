@@ -10,14 +10,11 @@
 # Classes
 # -------
 
-ids:Participant a owl:Class;
+ids:Participant rdfs:subClassOf ids:EntityWithLifecycle;
+    a owl:Class;
     rdfs:subClassOf org:Organization;
 	rdfs:label "Participant"@en;
-	rdfs:comment "A person or company using the Industrial Data Space"@en;
-    ids:validation [
-        owl:onProperty ids:name;
-        valid:constraint "@NotNull";
-    ].
+	rdfs:comment "An organization being part of the Industrial Data Space"@en.
 
 ids:Site a owl:Class;
     rdfs:subclassOf org:Site;
@@ -26,13 +23,6 @@ ids:Site a owl:Class;
 
 # Properties for describing a Participant
 # ---------------------------------------
-
-ids:participantName rdfs:subPropertyOf foaf:name;
-    a owl:ObjectProperty;
-    rdfs:label "participantName"@en;
-    rdfs:domain ids:Participant;
-    rdfs:range rdfs:Literal;
-    rdfs:comment "Name of the company participating in the IDS."@en.
 
 ids:primarySite rdfs:subPropertyOf org:hasPrimarySite;
     a owl:ObjectProperty;

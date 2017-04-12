@@ -22,7 +22,7 @@ public class Demo {
         Demo demo = new Demo();
 
         demo.objectCreation();
-        //demo.objectSerialization();
+        demo.objectSerialization();
         demo.objectDeserialization();
     }
 
@@ -71,8 +71,8 @@ public class Demo {
                 .build();
 
         DataAsset dataAsset = new DataAssetBuilder()
-                .dataAssetNames(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
-                .dataAssetDescriptions(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
+                .entityNames(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
+                .entityDescriptions(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
                 .origin(new URL("http://example.org/company/"))
                 .licenseDocument(LicenseDocument.CC_BY_NC_ND_2_0)
                 .coversTemporal(Arrays.asList(interval))
@@ -95,7 +95,9 @@ public class Demo {
             .usageConditions(Arrays.asList(serviceContract))
             .build();
 
-        DataEndpoint dataEndpoint = new DataEndpointBuilder().offers(dataService).build();
+        DataEndpoint dataEndpoint = new DataEndpointBuilder()
+                .entityNames(Arrays.asList(ResourceFactory.createLangLiteral("my fancy endpoint", "en")))
+                .offers(dataService).build();
         return dataEndpoint;
     }
 
