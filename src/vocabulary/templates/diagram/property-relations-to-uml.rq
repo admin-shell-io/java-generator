@@ -21,6 +21,5 @@ where {
     ?range rdfs:label ?classB.
 
     FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
-
 }
 
