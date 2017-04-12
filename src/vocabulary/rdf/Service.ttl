@@ -99,7 +99,6 @@ ids:providedBy a owl:ObjectProperty;
     rdfs:domain ids:DataEndpoint;
     rdfs:range ids:Connector;
     trns:refByURI true;
-    owl:inverseOf ids:provides;
     rdfs:label "providedBy"@en;
     rdfs:comment "The Connector that provides this DataEndpoint."@en.
 
