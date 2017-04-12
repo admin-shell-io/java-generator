@@ -6,6 +6,7 @@
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 @prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
 # Classes
 # -------
@@ -48,6 +49,7 @@ ids:maintainer a owl:ObjectProperty;
     rdfs:label "maintainer"@en;
     rdfs:domain ids:InfrastructureComponent;
     rdfs:range ids:Participant;
+    trns:refByURI true;
     rdfs:comment "Participant responsible for maintaining the InfrastructureComponent."@en.
 
 ids:operator a owl:ObjectProperty;
@@ -55,6 +57,7 @@ ids:operator a owl:ObjectProperty;
     rdfs:label "operator"@en;
     rdfs:domain ids:InfrastructureComponent;
     rdfs:range ids:Participant;
+    trns:refByURI true;
     rdfs:comment "Participant responsible for operating the InfrastructureComponent."@en.
 
 # Properties of EntityWithLifecycle
