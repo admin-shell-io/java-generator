@@ -97,6 +97,7 @@ public class Demo {
 
         DataEndpoint dataEndpoint = new DataEndpointBuilder()
                 .entityNames(Arrays.asList(ResourceFactory.createLangLiteral("my fancy endpoint", "en")))
+                .providedBy(new URL("http://someUrl"))
                 .offers(dataService).build();
         return dataEndpoint;
     }

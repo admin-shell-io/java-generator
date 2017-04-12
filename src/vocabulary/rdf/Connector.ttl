@@ -4,6 +4,7 @@
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
 # Classes
 # -------
@@ -23,5 +24,7 @@ ids:Connector rdfs:subClassOf ids:InfrastructureComponent;
 ids:provides a owl:ObjectProperty;
     rdfs:domain ids:Connector;
     rdfs:range ids:DataEndpoint;
+    owl:inverseOf ids:providedBy;
+    trns:refByURI true;
     rdfs:label "provides"@en;
     rdfs:comment "The DataEndpoints provided by a Connector."@en.

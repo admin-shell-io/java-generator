@@ -6,7 +6,7 @@ template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracke
 
     if (bound(?relationType) && str(?relationType) = "@OneToMany", concat("Collection", str(?bracketOpen)), "")
 
-    st:call-template(ids:range-to-basic-type, ?range)
+    st:call-template(ids:range-to-basic-type, ?property, ?range)
 
     if (bound(?relationType) && str(?relationType) = "@OneToMany", str(?bracketClose), "")
 

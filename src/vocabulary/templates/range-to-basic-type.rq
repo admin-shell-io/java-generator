@@ -1,28 +1,36 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
+prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#>
 
-template ids:range-to-basic-type(?range) {
+template ids:range-to-basic-type(?property, ?range) {
 
-    if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:string>), "String",
-    if (str(?range) = str(<xsd:integer>), "BigInteger",
-    if (str(?range) = str(<xsd:int>), "int",
-    if (str(?range) = str(<xsd:long>), "long",
-    if (str(?range) = str(<xsd:short>), "short",
-    if (str(?range) = str(<xsd:float>), "float",
-    if (str(?range) = str(<xsd:double>), "double",
-    if (str(?range) = str(<xsd:boolean>), "boolean",
-    if (str(?range) = str(<xsd:byte>), "byte",
-    if (str(?range) = str(<xsd:base64Binary>), "byte[]",
-    if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:anyURI>), "URL",
-    if (str(?range) = str(<rdfs:Literal>), "Literal",
+    if (bound(?refByUri) && (?refByUri = true),
+        "URL",
 
-    if (strstarts(str(?range), str(<ids:>)), strafter(?range, "#"),
-        "!!unknownType!!"))))))))))))))))
+        if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:string>), "String",
+        if (str(?range) = str(<xsd:integer>), "BigInteger",
+        if (str(?range) = str(<xsd:int>), "int",
+        if (str(?range) = str(<xsd:long>), "long",
+        if (str(?range) = str(<xsd:short>), "short",
+        if (str(?range) = str(<xsd:float>), "float",
+        if (str(?range) = str(<xsd:double>), "double",
+        if (str(?range) = str(<xsd:boolean>), "boolean",
+        if (str(?range) = str(<xsd:byte>), "byte",
+        if (str(?range) = str(<xsd:base64Binary>), "byte[]",
+        if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:anyURI>), "URL",
+        if (str(?range) = str(<rdfs:Literal>), "Literal",
+
+        if (strstarts(str(?range), str(<ids:>)), strafter(?range, "#"),
+            "!!unknownType!!"))))))))))))))))
+    )
 
 }
 where {
+    ?property rdfs:range ?range.
+
+    OPTIONAL {?property trns:refByURI ?refByUri}
 }
