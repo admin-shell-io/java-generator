@@ -33,7 +33,7 @@ ids:InfrastructureComponent rdfs:subClassOf ids:EntityWithLifecycle;
     rdfs:label "InfrastructureComponent"@en ;
     rdfs:comment "The class of all infrastructure components of the IDS.";
     ids:validation [
-        owl:onProperty ids:componentGenerationActivity;
+        owl:onProperty ids:generationActivity;
         valid:constraint "@NotNull";
     ];
     ids:validation [
@@ -90,7 +90,7 @@ ids:entityDescription rdfs:subPropertyOf dct:description;
 ids:generationActivity rdfs:subPropertyOf prov:wasGeneratedBy;
     a owl:ObjectProperty;
     rdfs:label "generationActivity"@en;
-    rdfs:domain ids:EntityWithLifecycle;
+    rdfs:domain ids:InfrastructureComponent;
     rdfs:range ids:CreationActivity;
     rdfs:comment "Activity that led to the generation of the InfrastructureComponent."@en.
 

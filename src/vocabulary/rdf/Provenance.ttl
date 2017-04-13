@@ -28,10 +28,20 @@ ids:CreationActivity rdfs:subClassOf ids:Activity;
     rdfs:label "CreationActivity"@en ;
     rdfs:comment "Activity with the goal to generate or produce an entity."@en.
 
-ids:InvalidationActivity rdfs:subClassOf ids:Activity;
+ids:RemovalActivity rdfs:subClassOf ids:Activity;
     a owl:Class;
-    rdfs:label "InvalidationActivity"@en ;
-    rdfs:comment "Activity with the goal to destroy or indicate cessation or expiry of an existing entity."@en.
+    rdfs:label "RemovalActivity"@en ;
+    rdfs:comment "Activity with the goal to decommission an entity so that it can never be used anymore."@en.
+
+ids:ProvisioningActivity rdfs:subClassOf ids:Activity;
+    a owl:Class;
+    rdfs:label "ProvisioningActivity"@en ;
+    rdfs:comment "Activity with the goal to bring an entity into an operational state."@en.
+
+ids:ShutdownActivity rdfs:subClassOf ids:Activity;
+    a owl:Class;
+    rdfs:label "ShutdownActivity"@en ;
+    rdfs:comment "Activity with the goal to make an entity unoperational, while retaining it and make it operational again at a later point in time."@en.
 
 ids:PublicationActivity rdfs:subClassOf ids:Activity;
     a owl:Class;
@@ -41,12 +51,17 @@ ids:PublicationActivity rdfs:subClassOf ids:Activity;
 ids:WithdrawActivity rdfs:subClassOf ids:Activity;
     a owl:Class;
     rdfs:label "WithdrawActivity"@en ;
-    rdfs:comment "Activity with the goal to withdraw public or restricted availability of an entity."@en.
+    rdfs:comment "Activity with the goal to withdraw public or restrict availability of an entity."@en.
 
-ids:ModificationActivity rdfs:subClassOf ids:Activity;
+ids:SuspensionActivity rdfs:subClassOf ids:Activity;
     a owl:Class;
-    rdfs:label "ModificationActivity"@en ;
-    rdfs:comment "Activity indicating modification of an entity."@en.
+    rdfs:label "SuspensionActivity"@en ;
+    rdfs:comment "Activity with the goal to temporarily suspend operation of an entity."@en.
+
+ids:ResumptionActivity rdfs:subClassOf ids:Activity;
+    a owl:Class;
+    rdfs:label "ResumptionActivity"@en ;
+    rdfs:comment "Activity with the goal to resume operation of a temporarily suspended entity."@en.
 
 # Properties
 # ----------
