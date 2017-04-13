@@ -9,18 +9,21 @@
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 @prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
 # Classes
 # -------
 
 ids:SpatialEntity rdfs:subClassOf wgs84:SpatialThing;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "SpatialEntity"@en ;
     rdfs:comment "Anything with spatial extent, i.e. size, shape, or position, e.g., places and unique positions."@en.
 
 ids:Location rdfs:subClassOf ids:SpatialEntity;
     rdfs:subClassOf dct:Location;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "Location"@en ;
     rdfs:comment "Class of all locations on Earth."@en.
 
@@ -49,6 +52,7 @@ ids:GeoFeature rdfs:subClassOf ids:Location;
 ids:Geometry rdfs:subClassOf locn:Geometry;
     rdfs:subClassOf ids:Location;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "Geometry"@en ;
     rdfs:comment "Geometrical shape indicating a spatial area of interest."@en.
 

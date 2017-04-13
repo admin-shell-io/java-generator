@@ -12,6 +12,7 @@
 # -------
 
 ids:EntityWithLifecycle a owl:Class;
+    trns:isAbstract true;
     rdfs:label "EntityWithLifecycle"@en ;
     rdfs:comment "The class of all individuals that are subject of a lifecycle which needs to be tracked.";
     ids:validation [
@@ -30,6 +31,7 @@ ids:EntityWithLifecycle a owl:Class;
 
 ids:InfrastructureComponent rdfs:subClassOf ids:EntityWithLifecycle;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "InfrastructureComponent"@en ;
     rdfs:comment "The class of all infrastructure components of the IDS.";
     ids:validation [

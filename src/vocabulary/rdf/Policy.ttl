@@ -8,6 +8,7 @@
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 @prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
 # Classes
 # -------
@@ -31,6 +32,7 @@ ids:UsagePolicy rdfs:subClassOf odrl:Set;
 
 ids:Rule rdfs:subClassOf odrl:Rule;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "Rule"@en;
     rdfs:comment "Superclass of Permissions, Prohibitions and Duties."@en;
     ids:validation [
@@ -59,6 +61,7 @@ ids:Prohibition rdfs:subClassOf ids:Rule;
 ids:Duty rdfs:subClassOf ids:Rule;
     rdfs:subClassOf odrl:Duty;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "Duty"@en;
     idoc:labelPluralForm "Duties"@en;
     rdfs:comment "The class of Duties as defined in the ODRL ontology."@en.
@@ -70,6 +73,7 @@ ids:PaymentDuty rdfs:subClassOf ids:Duty;
 
 ids:PaymentModality rdfs:subClassOf ids:Duty;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "PaymentModality"@en;
     rdfs:comment "Specifies when to pay the specified amount."@en.
 
@@ -93,6 +97,7 @@ ids:PayPerVolume rdfs:subClassOf ids:PaymentModality;
 
 ids:Action rdfs:subClassOf odrl:Action;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "Action"@en;
     idoc:labelPluralForm "Actions"@en;
     rdfs:comment "A thing one might be permitted to do or prohibited from doing to something."@en.
