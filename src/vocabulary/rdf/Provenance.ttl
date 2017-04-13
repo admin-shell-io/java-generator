@@ -6,12 +6,14 @@
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
 # Classes
 # -------
 
 ids:Activity rdfs:subClassOf prov:Activity;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "Activity"@en ;
     rdfs:comment "Something that occurs over a period of time and acts upon or with entities."@en;
     ids:validation [

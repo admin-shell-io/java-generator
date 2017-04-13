@@ -1,18 +1,26 @@
 prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
 prefix dcat: <http://www.w3.org/ns/dcat#>
+prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#>
 
 template ids:class-tbox(?class) {
 
-    kg:write(concat("/tmp/",strafter(str(?class), "#"), "Impl.java"),
-        st:call-template(ids:process-class-to-bean, ?class))
+    if (!bound(?isAbstract) || (?isAbstract = false),
+        kg:write(concat("/tmp/",strafter(str(?class), "#"), "Impl.java"),
+            st:call-template(ids:process-class-to-bean, ?class)),
+        '')
 
-    kg:write(concat("/tmp/",strafter(str(?class), "#"), "Builder.java"),
-        st:call-template(ids:process-class-to-builder, ?class))
+    if (!bound(?isAbstract) || (?isAbstract = false),
+        kg:write(concat("/tmp/",strafter(str(?class), "#"), "Builder.java"),
+            st:call-template(ids:process-class-to-builder, ?class)),
+        '')
 
     kg:write(concat("/tmp/",strafter(str(?class), "#"), ".java"),
         st:call-template(ids:process-class-to-interface, ?class))
 
 }
 where  {
+    ?class a owl:Class.
+
+    OPTIONAL {?class trns:isAbstract ?isAbstract}
 }
 
