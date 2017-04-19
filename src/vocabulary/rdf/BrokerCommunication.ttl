@@ -5,12 +5,14 @@
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
 # Classes
 # -------
 
 ids:BrokerMessage a owl:Class;
     rdfs:label "BrokerMessage"@en ;
+    trns:isAbstract true;
     rdfs:comment "The class of all messages to interact with a Broker.";
     ids:validation [
         owl:onProperty ids:messageContent;
@@ -19,11 +21,13 @@ ids:BrokerMessage a owl:Class;
 
 ids:BrokerDataMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "BrokerDataMessage"@en ;
     rdfs:comment "The class of all messages intended for data transfer to/from a Broker.".
 
 ids:BrokerQueryMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "BrokerQueryMessage"@en ;
     rdfs:comment "The class of all messages that query the broker for data.";
     ids:validation [
@@ -33,11 +37,13 @@ ids:BrokerQueryMessage rdfs:subClassOf ids:BrokerMessage;
 
 ids:BrokerRequestMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "BrokerRequestMessage"@en ;
     rdfs:comment "The class of all messages that represent requests to a Broker.".
 
 ids:BrokerResponseMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;
+    trns:isAbstract true;
     rdfs:label "BrokerResponseMessage"@en ;
     rdfs:comment "The class of all messages that represent responses of a Broker.";
     ids:validation [
