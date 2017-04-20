@@ -118,3 +118,10 @@ ids:transferCreatedAt rdfs:subPropertyOf dct:dateSubmitted;
     rdfs:domain ids:DataTransfer;
     rdfs:range xsd:dateTime;
     rdfs:comment "Date of creation of the DataTransfer."@en.
+
+ids:hashFunction a owl:ObjectProperty;
+    rdfs:label "hashFunction"@en;
+    rdfs:domain ids:DataTransfer;
+    rdfs:range ids:HashFunction;
+    rdfs:comment "Algorithm used to calculate the payload digest of a DataTransfer."@en.
+
