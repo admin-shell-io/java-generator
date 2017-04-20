@@ -7,7 +7,7 @@ template ids:properties-to-uml(?class) {
 
     st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "&lt;", "&gt;")
 
-    "\\l"
+    "<BR/>"
 
 }
 where {
