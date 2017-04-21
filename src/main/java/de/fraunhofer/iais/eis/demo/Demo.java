@@ -5,7 +5,6 @@ import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.Currency;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.VocabUtil;
-import org.apache.jena.rdf.model.Literal;
 import org.apache.jena.rdf.model.ResourceFactory;
 
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -38,6 +37,9 @@ public class Demo {
 
         // create a data endpoint description
         createDataEndpoint();
+
+        // create a connector description
+        createConnector();
     }
 
     private DataTransfer createDataTransfer() throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
@@ -138,6 +140,30 @@ public class Demo {
                 .build();
 
         return policy;
+    }
+
+    private Connector createConnector() throws ConstraintViolationException, MalformedURLException {
+        // Step 1: document connector creation
+        CreationActivity creationActivity = new CreationActivityBuilder()
+                .startedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
+                .startedBy(new URL("http://example.org/someUser"))
+                .build();
+
+        // Step 2: document connector setup/configuration
+        ProvisioningActivity provisioningActivity = new ProvisioningActivityBuilder().build();
+
+        // Step 3: document connector publication
+        PublicationActivity publicationActivity = new PublicationActivityBuilder().build();
+
+        // Step 4: build the connector with its documented lifecycle
+        Connector connector = new ConnectorBuilder()
+                .entityNames(Arrays.asList(ResourceFactory.createLangLiteral("connector name", "en")))
+                .generationActivity(creationActivity)
+                .operator(new URL("http://example.org/someOperator"))
+                .lifecycleActivities(Arrays.asList(provisioningActivity, publicationActivity))
+                .build();
+
+        return connector;
     }
 
     private void objectSerialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {

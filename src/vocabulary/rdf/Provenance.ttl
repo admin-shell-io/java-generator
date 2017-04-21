@@ -79,6 +79,7 @@ ids:startedBy rdfs:subPropertyOf prov:wasStartedBy;
     a owl:ObjectProperty;
     rdfs:domain ids:Activity;
     rdfs:range ids:Participant;
+    trns:refByURI true;
     rdfs:label "startedBy"@en;
     rdfs:comment "The participant who started the Activity."@en.
 
