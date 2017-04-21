@@ -146,14 +146,20 @@ public class Demo {
         // Step 1: document connector creation
         CreationActivity creationActivity = new CreationActivityBuilder()
                 .startedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
-                .startedBy(new URL("http://example.org/someUser"))
+                .startedBy(new URL("http://example.org/someCreator"))
                 .build();
 
         // Step 2: document connector setup/configuration
-        ProvisioningActivity provisioningActivity = new ProvisioningActivityBuilder().build();
+        ProvisioningActivity provisioningActivity = new ProvisioningActivityBuilder()
+                .startedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
+                .startedBy(new URL("http://example.org/someConfigExpert"))
+                .build();
 
         // Step 3: document connector publication
-        PublicationActivity publicationActivity = new PublicationActivityBuilder().build();
+        PublicationActivity publicationActivity = new PublicationActivityBuilder()
+                .startedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
+                .startedBy(new URL("http://example.org/someFinalExaminer"))
+                .build();
 
         // Step 4: build the connector with its documented lifecycle
         Connector connector = new ConnectorBuilder()
