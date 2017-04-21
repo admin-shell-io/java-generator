@@ -24,7 +24,6 @@ ids:DataEndpoint rdfs:subClassOf ids:EntityWithLifecycle;
         valid:constraint "@NotNull";
     ].
 
-
 ids:DataService a owl:Class;
     rdfs:label "DataService"@en ;
     rdfs:comment "A certain view or interaction ability on the data provided by a DataEndpoint."@en;
@@ -58,6 +57,10 @@ ids:Parameter a owl:Class;
     rdfs:comment "Specifies how an Operation should be performed."@en;
     ids:validation [
         owl:onProperty ids:paramLabel;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:paramDescription;
         valid:relationType "@OneToMany";
     ].
 
@@ -198,6 +201,7 @@ ids:paramDescription rdfs:subPropertyOf dct:description;
     rdfs:domain ids:Parameter;
     rdfs:range rdfs:Literal;
     rdfs:label "paramDescription"@en;
+    idoc:labelPluralForm "paramDescriptions"@en;
     rdfs:comment "Freetext description of the Parameter as it should be shown in public indexes."@en.
 
 ids:semanticType a owl:DatatypeProperty;

@@ -115,7 +115,7 @@ public class Demo {
         OutputParameter outputParameter = new OutputParameterBuilder()
                 .paramLabels(Arrays.asList(ResourceFactory.createLangLiteral("whole dataset dump", "en")))
                 .paramName("dataset")
-                .paramDescription(ResourceFactory.createLangLiteral("default output parameter", "en"))
+                .paramDescriptions(Arrays.asList(ResourceFactory.createLangLiteral("default output parameter", "en")))
 
                 .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
                 .representation(representation)
@@ -173,10 +173,11 @@ public class Demo {
     }
 
     private void objectSerialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
-        System.out.println(createDataTransfer().toRdf());
+        //System.out.println(createDataTransfer().toRdf());
     }
 
     private void objectDeserialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
+
         /*
         DataTransfer transfer = createDataTransfer();
         String rdf = transfer.toRdf();
@@ -194,7 +195,6 @@ public class Demo {
         Object obj = VocabUtil.fromRdf(rdf);
 
 
-        System.out.println("xx");
     }
 
 }
