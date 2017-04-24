@@ -170,6 +170,7 @@ public class Demo {
     }
 
     private void objectSerialization() throws MalformedURLException, ConstraintViolationException, DatatypeConfigurationException {
+        System.out.println(createConnector().toRdf());
         //System.out.println(createDataTransfer().toRdf());
     }
 
@@ -187,10 +188,11 @@ public class Demo {
         Object obj = VocabUtil.fromRdf(rdf);
         */
 
+        /*
         String rdf = createOutputParameter().toRdf();
         System.out.println(rdf);
         Object obj = VocabUtil.fromRdf(rdf);
-
+        */
 
     }
 
