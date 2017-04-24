@@ -155,14 +155,14 @@ ids:output a owl:ObjectProperty;
 ids:opLabel rdfs:subPropertyOf rdfs:label;
     a owl:DatatypeProperty;
     rdfs:domain ids:Operation;
-    rdfs:range rdfs:Literal;
+    rdfs:range rdf:PlainLiteral;
     rdfs:label "opLabel"@en;
     rdfs:comment "Freetext label of the Operation as it should be shown in public indexes."@en.
 
 ids:opDescription rdfs:subPropertyOf dct:description;
     a owl:DatatypeProperty;
     rdfs:domain ids:Operation;
-    rdfs:range rdfs:Literal;
+    rdfs:range rdf:PlainLiteral;
     rdfs:label "opDescription"@en;
     rdfs:comment "Freetext description of the Operation as it should be shown in public indexes."@en.
 
@@ -184,7 +184,7 @@ ids:opImplementation a owl:DatatypeProperty;
 ids:paramLabel rdfs:subPropertyOf rdfs:label;
     a owl:DatatypeProperty;
     rdfs:domain ids:Parameter;
-    rdfs:range rdfs:Literal;
+    rdfs:range rdf:PlainLiteral;
     rdfs:label "paramLabel"@en;
     idoc:labelPluralForm "paramLabels"@en;
     rdfs:comment "Freetext label of the Parameter as it should be shown in public indexes."@en.
@@ -199,7 +199,7 @@ ids:paramName rdfs:subPropertyOf dct:identifier;
 ids:paramDescription rdfs:subPropertyOf dct:description;
     a owl:DatatypeProperty;
     rdfs:domain ids:Parameter;
-    rdfs:range rdfs:Literal;
+    rdfs:range rdf:PlainLiteral;
     rdfs:label "paramDescription"@en;
     idoc:labelPluralForm "paramDescriptions"@en;
     rdfs:comment "Freetext description of the Parameter as it should be shown in public indexes."@en.

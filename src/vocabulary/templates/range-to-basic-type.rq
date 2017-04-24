@@ -23,9 +23,10 @@ template ids:range-to-basic-type(?property, ?range) {
         if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:anyURI>), "URL",
         if (str(?range) = str(<rdfs:Literal>), "Literal",
+        if (str(?range) = str(<rdf:PlainLiteral>), "PlainLiteral",
 
         if (strstarts(str(?range), str(<ids:>)), strafter(?range, "#"),
-            "!!unknownType!!"))))))))))))))))
+            "!!unknownType!!")))))))))))))))))
     )
 
 }

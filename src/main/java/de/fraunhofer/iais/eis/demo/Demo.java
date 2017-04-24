@@ -4,17 +4,14 @@ import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.Currency;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
+import de.fraunhofer.iais.eis.util.PlainLiteral;
 import de.fraunhofer.iais.eis.util.VocabUtil;
-import org.apache.jena.rdf.model.ResourceFactory;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
 
-/**
- * Created by christian on 08.02.17.
- */
 public class Demo {
 
     public static void main(String[] args) throws ConstraintViolationException, MalformedURLException, DatatypeConfigurationException {
@@ -73,8 +70,8 @@ public class Demo {
                 .build();
 
         DataAsset dataAsset = new DataAssetBuilder()
-                .entityNames(Arrays.asList(ResourceFactory.createLangLiteral("Development of hop prices 1903-2015", "en")))
-                .entityDescriptions(Arrays.asList(ResourceFactory.createLangLiteral("Historic records, incomplete", "en")))
+                .entityNames(Arrays.asList(new PlainLiteral("Development of hop prices 1903-2015", "en")))
+                .entityDescriptions(Arrays.asList(new PlainLiteral("Historic records, incomplete", "en")))
                 .origin(new URL("http://example.org/company/"))
                 .licenseDocument(LicenseDocument.CC_BY_NC_ND_2_0)
                 .coversTemporal(Arrays.asList(interval))
@@ -88,7 +85,7 @@ public class Demo {
         ServiceContract serviceContract = new ServiceContractBuilder().usagePolicy(createPolicy()).build();
 
         Operation operation = new OperationBuilder()
-            .opLabel(ResourceFactory.createLangLiteral("retrieve dump operation", "en"))
+            .opLabel(new PlainLiteral("retrieve dump operation", "en"))
             .outputs(Arrays.asList(createOutputParameter())).build();
 
         DataService dataService = new DataServiceBuilder()
@@ -98,7 +95,7 @@ public class Demo {
             .build();
 
         DataEndpoint dataEndpoint = new DataEndpointBuilder()
-                .entityNames(Arrays.asList(ResourceFactory.createLangLiteral("my fancy endpoint", "en")))
+                .entityNames(Arrays.asList(new PlainLiteral("my fancy endpoint", "en")))
                 .providedBy(new URL("http://someUrl"))
                 .offers(dataService).build();
         return dataEndpoint;
@@ -113,9 +110,9 @@ public class Demo {
                 .build();
 
         OutputParameter outputParameter = new OutputParameterBuilder()
-                .paramLabels(Arrays.asList(ResourceFactory.createLangLiteral("whole dataset dump", "en")))
+                .paramLabels(Arrays.asList(new PlainLiteral("whole dataset dump", "en")))
                 .paramName("dataset")
-                .paramDescriptions(Arrays.asList(ResourceFactory.createLangLiteral("default output parameter", "en")))
+                .paramDescriptions(Arrays.asList(new PlainLiteral("default output parameter", "en")))
 
                 .semanticType(new URL("http://european-standards.org/manufactoring/steel#steelgrade"))
                 .representation(representation)
@@ -163,7 +160,7 @@ public class Demo {
 
         // Step 4: build the connector with its documented lifecycle
         Connector connector = new ConnectorBuilder()
-                .entityNames(Arrays.asList(ResourceFactory.createLangLiteral("connector name", "en")))
+                .entityNames(Arrays.asList(new PlainLiteral("connector name", "en")))
                 .generationActivity(creationActivity)
                 .operator(new URL("http://example.org/someOperator"))
                 .lifecycleActivities(Arrays.asList(provisioningActivity, publicationActivity))

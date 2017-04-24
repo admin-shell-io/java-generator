@@ -162,7 +162,7 @@ ids:ruleDescription rdfs:subPropertyOf dct:description;
     a owl:DatatypeProperty;
     rdfs:label "ruleDescription"@en;
     rdfs:domain ids:Rule;
-    rdfs:range rdfs:Literal;
+    rdfs:range rdf:PlainLiteral;
     rdfs:comment "Freetext description of the Rule.".
 
 ids:price a owl:ObjectProperty;
