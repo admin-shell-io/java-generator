@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.fraunhofer.iais.eis</groupId>
-    <artifactId>ids-vocabulary</artifactId>
+    <artifactId>ids-infomodel</artifactId>
     <version>0.3-SNAPSHOT</version>
 
     <dependencies>
@@ -69,13 +69,13 @@
 
         <resources>
             <resource>
-                <directory>src/vocabulary</directory>
+                <directory>src/infomodel</directory>
                 <includes>
                     <include>diagram/classes.png</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/vocabulary</directory>
+                <directory>src/infomodel</directory>
                 <includes>
                     <include>rdf/*.ttl</include>
                 </includes>
@@ -93,7 +93,7 @@
                 </configuration>
             </plugin>
 
-            <!-- execute the java beans and diagram generation based on the Vocabulary files and the SPARQL templates -->
+            <!-- execute the java beans and diagram generation based on the Infomodel files and the SPARQL templates -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -112,9 +112,9 @@
                             </executableDependency>
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
-                                <argument>${basedir}/src/vocabulary/rdf</argument>
-                                <argument>${basedir}/src/vocabulary/templates/diagram</argument>
-                                <argument>${basedir}/src/vocabulary/templates/java</argument>
+                                <argument>${basedir}/src/infomodel/rdf</argument>
+                                <argument>${basedir}/src/infomodel/templates/diagram</argument>
+                                <argument>${basedir}/src/infomodel/templates/java</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -164,7 +164,7 @@
                             </includes>
                         </resource>
                         <resource>
-                            <targetPath>${basedir}/src/vocabulary/diagram</targetPath>
+                            <targetPath>${basedir}/src/infomodel/diagram</targetPath>
                             <directory>/tmp</directory>
                             <includes>
                                 <include>**/*.png</include>
@@ -197,7 +197,7 @@
                             <followSymlinks>false</followSymlinks>
                         </fileset>
                         <fileset>
-                            <directory>${basedir}/src/vocabulary/diagram</directory>
+                            <directory>${basedir}/src/infomodel/diagram</directory>
                             <includes>
                                 <include>*.png</include>
                             </includes>
