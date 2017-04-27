@@ -16,29 +16,36 @@ ids:HashFunction a owl:Class;
 # ---------
 
 <ids_hash:MD2> a ids:HashFunction;
+    rdfs:label "MD2";
 	rdfs:comment "MD2";
 	dct:identifier "MD2".
 
 <ids_hash:MD5> a ids:HashFunction;
+    rdfs:label "MD5";
 	rdfs:comment "MD5";
 	dct:identifier "MD5".
 
 <ids_hash:SHA-1> a ids:HashFunction;
+    rdfs:label "SHA-1";
 	rdfs:comment "SHA-1";
 	dct:identifier "SHA_1".
 
 <ids_hash:SHA-224> a ids:HashFunction;
+    rdfs:label "SHA-224";
     rdfs:comment "SHA-224";
     dct:identifier "SHA_224".
 
 <ids_hash:SHA-256> a ids:HashFunction;
+    rdfs:label "SHA-256";
     rdfs:comment "SHA-256";
     dct:identifier "SHA_256".
 
 <ids_hash:SHA-384> a ids:HashFunction;
+    rdfs:label "SHA-384";
     rdfs:comment "SHA-384";
     dct:identifier "SHA_384".
 
 <ids_hash:SHA-512> a ids:HashFunction;
+    rdfs:label "SHA-512";
     rdfs:comment "SHA-512";
     dct:identifier "SHA_512".
