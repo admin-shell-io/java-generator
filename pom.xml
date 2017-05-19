@@ -6,7 +6,7 @@
 
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
-    <version>0.3-SNAPSHOT</version>
+    <version>0.4-SNAPSHOT</version>
 
     <properties>
         <testng-release-version>6.8.21</testng-release-version>
