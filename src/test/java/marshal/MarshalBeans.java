@@ -27,6 +27,7 @@ public class MarshalBeans {
     @Test
     public void participantHasProperties() throws MalformedURLException, ConstraintViolationException {
         String rdf = createParticipant().toRdf();
+        //System.out.println(rdf);
 
         Model model = createModelFromRdf(rdf);
         Property descProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#entityDescription");
@@ -44,10 +45,9 @@ public class MarshalBeans {
                 .build();
     }
 
-    /*
     @Test
     public void connectorHasProperties() throws MalformedURLException, ConstraintViolationException {
-        Participant participant = participantHasProperties();
+        Participant participant = createParticipant();
 
         Collection<URL> dataEndpoints = new ArrayList<>();
         dataEndpoints.add(new URL("http://www.isst.fraunhofer.de/Broker/EndpointBrokerQueryRequest"));
@@ -72,10 +72,17 @@ public class MarshalBeans {
 
         Connector connector = connectorBuilder.build();
         String rdf = connector.toRdf();
-        System.out.println(rdf);
-    }
-    */
+        //System.out.println(rdf);
 
+        Model model = createModelFromRdf(rdf);
+        Property operatorProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#operator");
+        Property providesProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#provides");
+        Resource broker = model.createResource("http://www.isst.fraunhofer.de/Broker");
+
+        // test for some sample properties
+        Assert.assertFalse(model.listObjectsOfProperty(broker, operatorProperty).toList().isEmpty());
+        Assert.assertFalse(model.listObjectsOfProperty(broker, providesProperty).toList().isEmpty());
+    }
 
     private Model createModelFromRdf(String rdfTTL) {
         Model model = ModelFactory.createDefaultModel();
