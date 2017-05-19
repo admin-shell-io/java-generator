@@ -11,11 +11,7 @@
 
 ids:ServiceContract a owl:Class;
     rdfs:label "ServiceContract"@en ;
-    rdfs:comment "Describes under what conditions a DataService Endpoint may be used by Participants."@en;
-    ids:validation [
-        owl:onProperty ids:refersTo;
-        valid:relationType "@OneToMany";
-    ].
+    rdfs:comment "Describes under what conditions a DataService Endpoint may be used by Participants."@en.
 
 ids:GenericServiceContract rdfs:subClassOf ids:ServiceContract;
     a owl:Class;
@@ -43,12 +39,6 @@ ids:contractDuration a owl:ObjectProperty;
     rdfs:range ids:TemporalEntity;
     rdfs:label "contractDuration"@en;
     rdfs:comment "The duration for which the ServiceContract is valid."@en.
-
-ids:refersTo a owl:ObjectProperty;
-    rdfs:domain ids:ServiceContract;
-    rdfs:range ids:DataService;
-    rdfs:label "refersTo"@en;
-    rdfs:comment "DataService that is subject of a ServiceContract."@en.
 
 ids:usagePolicy a owl:ObjectProperty;
     rdfs:domain ids:ServiceContract;
