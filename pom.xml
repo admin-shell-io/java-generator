@@ -8,6 +8,10 @@
     <artifactId>ids-infomodel</artifactId>
     <version>0.3-SNAPSHOT</version>
 
+    <properties>
+        <testng-release-version>6.8.21</testng-release-version>
+    </properties>
+
     <dependencies>
         <!-- IAIS tools -->
         <dependency>
@@ -61,6 +65,13 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>RELEASE</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng-release-version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

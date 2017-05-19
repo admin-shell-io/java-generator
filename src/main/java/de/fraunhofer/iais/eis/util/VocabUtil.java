@@ -2,7 +2,8 @@ package de.fraunhofer.iais.eis.util;
 
 import com.google.common.reflect.ClassPath;
 import de.fraunhofer.iais.eis.jrdfb.JrdfbException;
-import de.fraunhofer.iais.eis.jrdfb.serializer.RdfSerializer;
+import de.fraunhofer.iais.eis.jrdfb.serializer.marshaller.RdfMarshaller;
+import de.fraunhofer.iais.eis.jrdfb.serializer.unmarshaller.RdfUnmarshaller;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -20,7 +21,8 @@ public class VocabUtil {
 
     private final static String PROTOCOL = "http";
     private final static String HOST = "industrialdataspace.org";
-    private static RdfSerializer serializer;
+    private static RdfMarshaller serializer;
+    private static RdfUnmarshaller deserializer;
 
     public static URL createRandomUrl(String path) {
         try {
@@ -47,20 +49,29 @@ public class VocabUtil {
 
     public static String toRdf(Object obj) {
         try {
-            return getRdfSerializer().serialize(obj);
+            return getRdfMarshaller().marshal(obj);
         }
         catch (JrdfbException e) {
             throw new RdfSerializationException("Error serializing objects", e);
         }
     }
 
-    private static RdfSerializer getRdfSerializer() {
+    private static RdfMarshaller getRdfMarshaller() {
         if (serializer == null) {
             Collection<Class> annotatedClasses = collectAnnotatedClasses();
-            serializer = new RdfSerializer(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
+            serializer = new RdfMarshaller(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
         }
         return serializer;
     }
+
+    private static RdfUnmarshaller getRdfUnmarshaller() {
+        if (deserializer == null) {
+            Collection<Class> annotatedClasses = collectAnnotatedClasses();
+            deserializer = new RdfUnmarshaller(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
+        }
+        return deserializer;
+    }
+
 
     private static Collection<Class> collectAnnotatedClasses() {
         Collection<Class> annotatedClasses = new ArrayList<>();
@@ -89,7 +100,7 @@ public class VocabUtil {
 
     public static Object fromRdf(String rdf) {
         try {
-            return getRdfSerializer().deserialize(rdf);
+            return getRdfUnmarshaller().unmarshal(rdf);
         }
         catch (JrdfbException e) {
             throw new RdfSerializationException("Error deserializing objects", e);
