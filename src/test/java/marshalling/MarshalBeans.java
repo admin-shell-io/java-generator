@@ -1,4 +1,4 @@
-package marshal;
+package marshalling;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.*;
