@@ -6,7 +6,7 @@
 
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.6-SNAPSHOT</version>
 
     <properties>
         <testng-release-version>6.8.21</testng-release-version>
@@ -23,7 +23,7 @@
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>jrdfb</artifactId>
-            <version>0.2-SNAPSHOT</version>
+            <version>0.3-SNAPSHOT</version>
         </dependency>
 
         <!-- Bean validation -->

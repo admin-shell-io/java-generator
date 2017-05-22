@@ -3,6 +3,7 @@ package usage;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.PlainLiteral;
+import de.fraunhofer.iais.eis.util.VocabUtil;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
@@ -21,7 +22,6 @@ public class BrokerMessageUsage {
     @Test
     public void brokerMessageSerialization() throws ConstraintViolationException, MalformedURLException {
         String brokerMessage = createBrokerDataRequest().toRdf();
-        System.out.println(brokerMessage);
 
         Model model = TestUtil.createModelFromRdf(brokerMessage);
         Resource transfer = model.createResource("http://example.org/brokerdatarequest/1");
@@ -32,6 +32,30 @@ public class BrokerMessageUsage {
         for (Property property : Arrays.asList(coveredEntityProperty, dataRequestActionProperty, msgContentProperty)) {
             Assert.assertTrue(model.listObjectsOfProperty(transfer, property).hasNext());
         }
+    }
+
+    @Test
+    public void brokerMessageDeserialization() throws ConstraintViolationException, MalformedURLException {
+        String brokerMessage = createBrokerDataRequest().toRdf();
+        BrokerDataRequest brokerDataRequest = (BrokerDataRequest) VocabUtil.fromRdf(brokerMessage);
+
+        Assert.assertEquals(brokerDataRequest.getDataRequestAction(), BrokerDataRequestAction.REGISTER);
+        Assert.assertEquals(brokerDataRequest.getCoveredEntity(), EntityCoveredByDataRequest.DATA_ENDPOINT);
+        Assert.assertFalse(brokerDataRequest.getMessageContent().isEmpty());
+
+        DataEndpoint dataEndpoint = (DataEndpoint) VocabUtil.fromRdf(brokerDataRequest.getMessageContent());
+
+        // test only a sample of all fields
+
+        // "direct" properties of a data endpoint
+        Assert.assertFalse(dataEndpoint.getEntityNames().isEmpty());
+        Assert.assertNotNull(dataEndpoint.getProvidedBy());
+        Assert.assertNotNull(dataEndpoint.getOffers());
+
+        // format of the dataset the endpoint offers
+        Assert.assertEquals(
+            dataEndpoint.getOffers().getOperations().iterator().next().getOutputs().iterator().next().getRepresentation().getMediaType(),
+            IANAMediaType.APPLICATION_ZIP);
     }
 
     private BrokerDataRequest createBrokerDataRequest() throws ConstraintViolationException, MalformedURLException {
