@@ -36,10 +36,6 @@ ids:InfrastructureComponent rdfs:subClassOf ids:EntityWithLifecycle;
     rdfs:label "InfrastructureComponent"@en ;
     rdfs:comment "The class of all infrastructure components of the IDS.";
     ids:validation [
-        owl:onProperty ids:generationActivity;
-        valid:constraint "@NotNull";
-    ];
-    ids:validation [
         owl:onProperty ids:operator;
         valid:constraint "@NotNull";
     ].

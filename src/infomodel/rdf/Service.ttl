@@ -18,10 +18,6 @@ ids:DataEndpoint rdfs:subClassOf ids:EntityWithLifecycle;
     rdfs:label "DataEndpoint"@en ;
     rdfs:comment "Data Endpoint that may be invoked to retrieve (via service calls, subscription, etc) or push data."@en;
     ids:validation [
-        owl:onProperty ids:offers;
-        valid:constraint "@NotNull";
-    ];
-    ids:validation [
         owl:onProperty ids:providedBy;
         valid:constraint "@NotNull";
     ].
@@ -70,7 +66,6 @@ ids:InputParameter rdfs:subClassOf ids:Parameter;
     a owl:Class;
     rdfs:label "InputParameter"@en ;
     rdfs:comment "Input Parameter to control an Operation."@en.
-
 
 ids:OutputParameter rdfs:subClassOf ids:Parameter;
     a owl:Class;

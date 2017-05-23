@@ -29,11 +29,7 @@ ids:BrokerQueryMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;
     trns:isAbstract true;
     rdfs:label "BrokerQueryMessage"@en ;
-    rdfs:comment "The class of all messages that query the broker for data.";
-    ids:validation [
-        owl:onProperty ids:queryScope;
-        valid:constraint "@NotNull";
-    ].
+    rdfs:comment "The class of all messages that query the broker for data.".
 
 ids:BrokerRequestMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;

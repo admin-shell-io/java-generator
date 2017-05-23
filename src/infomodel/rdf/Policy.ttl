@@ -37,10 +37,6 @@ ids:Rule rdfs:subClassOf odrl:Rule;
     rdfs:label "Rule"@en;
     rdfs:comment "Superclass of Permissions, Prohibitions and Duties."@en;
     ids:validation [
-        owl:onProperty ids:target;
-        valid:constraint "@NotNull";
-    ];
-    ids:validation [
         owl:onProperty ids:action;
         valid:relationType "@OneToMany";
     ].
