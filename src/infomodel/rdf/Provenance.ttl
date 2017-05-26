@@ -95,6 +95,7 @@ ids:endedBy rdfs:subPropertyOf prov:wasEndedBy;
     a owl:ObjectProperty;
     rdfs:domain ids:Activity;
     rdfs:range ids:Participant;
+    trns:refByURI true;
     rdfs:label "endedBy"@en;
     rdfs:comment "The participant who ended the Activity."@en.
 

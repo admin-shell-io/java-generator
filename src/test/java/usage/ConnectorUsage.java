@@ -68,7 +68,7 @@ public class ConnectorUsage {
                 .activityDescription(new PlainLiteral("Lorem ipsum."))
                 .startedBy(participant.getId())
                 .startedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
-                .endedBy(participant)
+                .endedBy(participant.getId())
                 .endedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
                 .build();
         ConnectorBuilder connectorBuilder = new ConnectorBuilder(new URL("http://www.isst.fraunhofer.de/Broker"))
