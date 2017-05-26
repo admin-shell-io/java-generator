@@ -1,4 +1,4 @@
-package usage;
+package general;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;

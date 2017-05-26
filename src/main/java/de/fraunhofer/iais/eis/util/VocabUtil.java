@@ -1,9 +1,9 @@
 package de.fraunhofer.iais.eis.util;
 
-import com.google.common.reflect.ClassPath;
 import de.fraunhofer.iais.eis.jrdfb.JrdfbException;
 import de.fraunhofer.iais.eis.jrdfb.serializer.marshaller.RdfMarshaller;
 import de.fraunhofer.iais.eis.jrdfb.serializer.unmarshaller.RdfUnmarshaller;
+import io.github.lukehutch.fastclasspathscanner.FastClasspathScanner;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
@@ -72,24 +72,18 @@ public class VocabUtil {
         return deserializer;
     }
 
-
     private static Collection<Class> collectAnnotatedClasses() {
         Collection<Class> annotatedClasses = new ArrayList<>();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
-        try {
-            ClassPath classPath = ClassPath.from(classLoader);
-            Collection<ClassPath.ClassInfo> classInfos = classPath.getTopLevelClasses("de.fraunhofer.iais.eis");
+        FastClasspathScanner fastClasspathScanner = new FastClasspathScanner("de.fraunhofer.iais.eis");
+        List<String> interfaces = fastClasspathScanner.scan().getNamesOfAllInterfaceClasses();
 
-            for (ClassPath.ClassInfo classInfo : classInfos) {
-                Class clazz = classLoader.loadClass(classInfo.getName());
-                if (clazz.isInterface()) {
-                    annotatedClasses.add(clazz);
-                }
+        try {
+            for (String iface : interfaces) {
+                Class clazz = classLoader.loadClass(iface);
+                annotatedClasses.add(clazz);
             }
-        }
-        catch (IOException e) {
-            throw new RdfSerializationException("Error getting classpath", e);
         }
         catch (ClassNotFoundException e) {
             throw new RdfSerializationException("Error loading annotated class", e);

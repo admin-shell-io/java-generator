@@ -6,7 +6,7 @@
 
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
-    <version>0.6-SNAPSHOT</version>
+    <version>0.8-SNAPSHOT</version>
 
     <properties>
         <testng-release-version>6.8.21</testng-release-version>
@@ -60,11 +60,10 @@
             <version>1.4.01</version>
         </dependency>
 
-        <!-- Reflection -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>RELEASE</version>
+            <groupId>io.github.lukehutch</groupId>
+            <artifactId>fast-classpath-scanner</artifactId>
+            <version>LATEST</version>
         </dependency>
 
         <dependency>
