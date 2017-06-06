@@ -1,4 +1,4 @@
-package general;
+package de.fraunhofer.iais.eis.test.general;
 
 import de.fraunhofer.iais.eis.HashFunction;
 import org.testng.Assert;

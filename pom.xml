@@ -103,6 +103,20 @@
                 </configuration>
             </plugin>
 
+            <!-- include test classes to jar for documentation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- execute the java beans and diagram generation based on the Infomodel files and the SPARQL templates -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
