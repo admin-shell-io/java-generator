@@ -48,6 +48,10 @@ ids:Operation a owl:Class;
     ids:validation [
         owl:onProperty ids:output;
         valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:opDescription;
+        valid:relationType "@OneToMany";
     ].
 
 ids:Parameter a owl:Class;
@@ -160,6 +164,7 @@ ids:opDescription rdfs:subPropertyOf dct:description;
     a owl:DatatypeProperty;
     rdfs:domain ids:Operation;
     rdfs:range rdf:PlainLiteral;
+    idoc:labelPluralForm "opDescriptions"@en;
     rdfs:label "opDescription"@en;
     rdfs:comment "Freetext description of the Operation as it should be shown in public indexes."@en.
 

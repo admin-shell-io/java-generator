@@ -39,6 +39,10 @@ ids:Rule rdfs:subClassOf odrl:Rule;
     ids:validation [
         owl:onProperty ids:action;
         valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:ruleDescription;
+        valid:relationType "@OneToMany";
     ].
 
 ids:Permission rdfs:subClassOf ids:Rule;
@@ -157,6 +161,7 @@ ids:action rdfs:subPropertyOf odrl:action;
 
 ids:ruleDescription rdfs:subPropertyOf dct:description;
     a owl:DatatypeProperty;
+    idoc:labelPluralForm "ruleDescriptions"@en;
     rdfs:label "ruleDescription"@en;
     rdfs:domain ids:Rule;
     rdfs:range rdf:PlainLiteral;

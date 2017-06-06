@@ -65,7 +65,7 @@ public class ConnectorUsage {
         dataEndpoints.add(new URL("http://www.isst.fraunhofer.de/Broker/EndpointBrokerDataRequest"));
         CreationActivityBuilder creationActivityBuilder = new CreationActivityBuilder();
         CreationActivity creationActivity = creationActivityBuilder
-                .activityDescription(new PlainLiteral("Lorem ipsum."))
+                .activityDescriptions(Arrays.asList(new PlainLiteral("Lorem ipsum.")))
                 .startedBy(participant.getId())
                 .startedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
                 .endedBy(participant.getId())

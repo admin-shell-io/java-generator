@@ -8,6 +8,7 @@
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 @prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
+@prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
 
 # Classes
 # -------
@@ -24,6 +25,10 @@ ids:Activity rdfs:subClassOf prov:Activity;
     ids:validation [
         owl:onProperty ids:startedAt;
         valid:constraint "@NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:activityDescription;
+        valid:relationType "@OneToMany";
     ].
 
 ids:CreationActivity rdfs:subClassOf ids:Activity;
@@ -74,6 +79,7 @@ ids:activityDescription rdfs:subPropertyOf dct:description;
     rdfs:domain ids:Activity;
     rdfs:range rdf:PlainLiteral;
     rdfs:label "activityDescription"@en;
+    idoc:labelPluralForm "activityDescriptions"@en;
     rdfs:comment "Freetext description of what has been performed by the Activity."@en.
 
 ids:startedBy rdfs:subPropertyOf prov:wasStartedBy;
