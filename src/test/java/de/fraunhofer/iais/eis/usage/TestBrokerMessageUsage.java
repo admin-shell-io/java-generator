@@ -1,15 +1,15 @@
-package de.fraunhofer.iais.eis.test.usage;
+package de.fraunhofer.iais.eis.usage;
 
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.PlainLiteral;
 import de.fraunhofer.iais.eis.util.VocabUtil;
-import de.fraunhofer.iais.eis.test.general.TestUtil;
+import de.fraunhofer.iais.eis.general.TestUtil;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 /**
  * Created by christian on 22.05.17.
  */
-public class BrokerMessageUsage {
+public class TestBrokerMessageUsage {
 
     @Test
     public void brokerMessageSerialization() throws ConstraintViolationException, MalformedURLException {

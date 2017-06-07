@@ -1,8 +1,8 @@
-package de.fraunhofer.iais.eis.test.general;
+package de.fraunhofer.iais.eis.general;
 
 import de.fraunhofer.iais.eis.HashFunction;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.Optional;
 

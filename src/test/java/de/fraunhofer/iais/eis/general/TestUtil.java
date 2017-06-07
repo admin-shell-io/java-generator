@@ -1,4 +1,4 @@
-package de.fraunhofer.iais.eis.test.general;
+package de.fraunhofer.iais.eis.general;
 
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;

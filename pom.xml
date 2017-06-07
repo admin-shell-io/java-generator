@@ -8,10 +8,6 @@
     <artifactId>ids-infomodel</artifactId>
     <version>0.9-SNAPSHOT</version>
 
-    <properties>
-        <testng-release-version>6.8.21</testng-release-version>
-    </properties>
-
     <dependencies>
         <!-- IAIS tools -->
         <dependency>
@@ -66,10 +62,19 @@
             <version>LATEST</version>
         </dependency>
 
+        <!--
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng-release-version}</version>
+            <scope>test</scope>
+        </dependency>
+        -->
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-core</artifactId>
+            <version>3.4.2</version>
             <scope>test</scope>
         </dependency>
 

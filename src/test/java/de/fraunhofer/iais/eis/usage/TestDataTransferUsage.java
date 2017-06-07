@@ -1,33 +1,36 @@
-package de.fraunhofer.iais.eis.test.usage;
+package de.fraunhofer.iais.eis.usage;
 
 import de.fraunhofer.iais.eis.*;
+import de.fraunhofer.iais.eis.general.TestUtil;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.VocabUtil;
-import de.fraunhofer.iais.eis.test.general.TestUtil;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
+import org.unitils.reflectionassert.ReflectionAssert;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 
+
 /**
  * Created by christian on 22.05.17.
  */
-public class DataTransferUsage {
+public class TestDataTransferUsage {
 
     @Test
     public void dataTransferSerialization() throws MalformedURLException, DatatypeConfigurationException, ConstraintViolationException {
         String serializedHeader = createDataTransfer().toRdf();
-        System.out.println(serializedHeader);
 
         Model model = TestUtil.createModelFromRdf(serializedHeader);
         Resource transfer = model.createResource("http://example.org/transfer/1");
@@ -68,6 +71,23 @@ public class DataTransferUsage {
 
         XMLGregorianCalendar now = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
         Assert.assertEquals(obj.getTransferCreatedAt().compare(now), -1);
-        Assert.assertEquals(obj.getDigest(), "xxx".getBytes());
+        Assert.assertArrayEquals(obj.getDigest(), "xxx".getBytes());
+    }
+
+    @Test
+    public void preserveInformationThroughDeserialization()
+            throws ConstraintViolationException, DatatypeConfigurationException, MalformedURLException
+    {
+        DataTransfer original = createDataTransfer();
+        DataTransfer deserialized = (DataTransfer) VocabUtil.fromRdf(original.toRdf());
+
+        Model originalModel = ModelFactory.createDefaultModel();
+        originalModel.read(new ByteArrayInputStream(original.toRdf().getBytes()), null, "TURTLE");
+
+        Model deserializedModel = ModelFactory.createDefaultModel();
+        deserializedModel.read(new ByteArrayInputStream(deserialized.toRdf().getBytes()), null, "TURTLE");
+
+        Assert.assertTrue(originalModel.isIsomorphicWith(deserializedModel));
+        ReflectionAssert.assertReflectionEquals(original, deserialized);
     }
 }

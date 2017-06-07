@@ -118,7 +118,6 @@ ids:BrokerQueryRequestListAction a ids:BrokerQueryRequestAction;
 ids:BrokerQueryRequestQueryAction a ids:BrokerQueryRequestAction;
     dct:identifier "QUERY"@en.
 
-
 ids:BrokerQueryMessageScope a owl:Class;
     rdfs:label "BrokerQueryMessageScope"@en ;
     rdfs:comment "The class of scopes that filter datasets by their states when queried.".

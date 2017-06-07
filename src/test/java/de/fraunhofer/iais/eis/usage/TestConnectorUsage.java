@@ -1,15 +1,15 @@
-package de.fraunhofer.iais.eis.test.usage;
+package de.fraunhofer.iais.eis.usage;
 
 import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.PlainLiteral;
-import de.fraunhofer.iais.eis.test.general.TestUtil;
+import de.fraunhofer.iais.eis.general.TestUtil;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by christian on 22.05.17.
  */
-public class ConnectorUsage {
+public class TestConnectorUsage {
 
     @Test
     public void participantHasProperties() throws MalformedURLException, ConstraintViolationException {
