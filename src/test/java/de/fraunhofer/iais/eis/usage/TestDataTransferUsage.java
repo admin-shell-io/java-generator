@@ -19,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 
@@ -29,7 +30,7 @@ import java.util.GregorianCalendar;
 public class TestDataTransferUsage {
 
     @Test
-    public void dataTransferSerialization() throws MalformedURLException, DatatypeConfigurationException, ConstraintViolationException {
+    public void dataTransferSerialization() throws Exception {
         String serializedHeader = createDataTransfer().toRdf();
 
         Model model = TestUtil.createModelFromRdf(serializedHeader);
@@ -45,8 +46,7 @@ public class TestDataTransferUsage {
         }
     }
 
-    private DataTransfer createDataTransfer() throws MalformedURLException, DatatypeConfigurationException, ConstraintViolationException {
-        byte[] digest = "xxx".getBytes(Charset.defaultCharset());
+    private DataTransfer createDataTransfer() throws Exception {
 
         HashFunction hashFunction = HashFunction.SHA_512;
         return new DataTransferBuilder(new URL("http://example.org/transfer/1"))
@@ -54,13 +54,13 @@ public class TestDataTransferUsage {
             .receiver(new URL("http://www.fraunhofer.de/Broker"))
             .transferCreatedAt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()))
             .hashFunction(hashFunction)
-            .digest(digest)
+            .digest(createDigest())
             .authToken(new AuthTokenBuilder().tokenValue("token").build())
             .build();
     }
 
     @Test
-    public void dataTransferDeserialization() throws ConstraintViolationException, DatatypeConfigurationException, MalformedURLException {
+    public void dataTransferDeserialization() throws Exception {
         String serializedHeader = createDataTransfer().toRdf();
         DataTransferImpl obj = (DataTransferImpl) VocabUtil.fromRdf(serializedHeader);
 
@@ -71,13 +71,12 @@ public class TestDataTransferUsage {
 
         XMLGregorianCalendar now = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
         Assert.assertEquals(obj.getTransferCreatedAt().compare(now), -1);
-        Assert.assertArrayEquals(obj.getDigest(), "xxx".getBytes());
+        Assert.assertArrayEquals(createDigest(), obj.getDigest());
     }
 
     @Test
     public void preserveInformationThroughDeserialization()
-            throws ConstraintViolationException, DatatypeConfigurationException, MalformedURLException
-    {
+            throws Exception {
         DataTransfer original = createDataTransfer();
         DataTransfer deserialized = (DataTransfer) VocabUtil.fromRdf(original.toRdf());
 
@@ -90,4 +89,11 @@ public class TestDataTransferUsage {
         Assert.assertTrue(originalModel.isIsomorphicWith(deserializedModel));
         ReflectionAssert.assertReflectionEquals(original, deserialized);
     }
+
+    private byte[] createDigest() throws Exception{
+        MessageDigest md = MessageDigest.getInstance("SHA-512");
+        md.update("salt".getBytes("UTF-8"));
+        return md.digest("mymessage".getBytes("UTF-8"));
+    }
+
 }
