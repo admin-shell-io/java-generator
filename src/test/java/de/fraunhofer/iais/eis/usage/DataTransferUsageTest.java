@@ -27,7 +27,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by christian on 22.05.17.
  */
-public class TestDataTransferUsage {
+public class DataTransferUsageTest {
 
     @Test
     public void dataTransferSerialization() throws Exception {

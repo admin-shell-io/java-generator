@@ -85,7 +85,7 @@ public class Demo {
         ServiceContract serviceContract = new ServiceContractBuilder().usagePolicy(createPolicy()).build();
 
         Operation operation = new OperationBuilder()
-            .opLabel(new PlainLiteral("retrieve dump operation", "en"))
+            .opLabels(Arrays.asList(new PlainLiteral("somelabel")))
             .outputs(Arrays.asList(createOutputParameter())).build();
 
         DataService dataService = new DataServiceBuilder()

@@ -5,11 +5,21 @@ prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#>
 template ids:getter-method-body(?property) {
 
     " {"
-    "\n\t\treturn " if (bound(?pluralLabel), str(?pluralLabel), str(?label)) ";"
+
+    "\n\t\treturn "
+
+    if (strends(str(?range), "PlainLiteral"),
+        concat("PlainLiteral.toPlainLiteralCollection(", if (bound(?pluralLabel), str(?pluralLabel), str(?label)), ")"),
+        if (bound(?pluralLabel), str(?pluralLabel), str(?label)))
+
+     ";"
+
     "\n\t}"
 
 }
 where{
-    ?property rdfs:label ?label.
+    ?property rdfs:range ?range;
+        rdfs:label ?label.
+
     OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
 }

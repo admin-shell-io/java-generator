@@ -21,7 +21,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by christian on 22.05.17.
  */
-public class TestConnectorUsage {
+public class ConnectorUsageTest {
 
     @Test
     public void participantHasProperties() throws MalformedURLException, ConstraintViolationException {

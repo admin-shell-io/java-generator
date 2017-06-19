@@ -18,7 +18,7 @@ import java.util.Arrays;
 /**
  * Created by christian on 22.05.17.
  */
-public class TestBrokerMessageUsage {
+public class BrokerMessageUsageTest {
 
     @Test
     public void brokerMessageSerialization() throws ConstraintViolationException, MalformedURLException {
@@ -72,12 +72,13 @@ public class TestBrokerMessageUsage {
             .entityNames(Arrays.asList(new PlainLiteral("My Data Endpoint Name", "en")))
             .providedBy(new URL("http://companyA.com/ids/connector"))
             .offers(createDataService())
+            .entityDescriptions(Arrays.asList(new PlainLiteral("desc1", "en"), new PlainLiteral("desc2")))
             .build();
     }
 
     private DataService createDataService() throws ConstraintViolationException {
         Operation operation = new OperationBuilder()
-            .opLabel(new PlainLiteral("retrieve dump operation", "en"))
+            .opLabels(Arrays.asList(new PlainLiteral("label")))
             .outputs(Arrays.asList(createOutputParameter())).build();
 
         return new DataServiceBuilder()
