@@ -35,7 +35,11 @@ ids:BrokerRequestMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;
     trns:isAbstract true;
     rdfs:label "BrokerRequestMessage"@en ;
-    rdfs:comment "The class of all messages that represent requests to a Broker.".
+    rdfs:comment "The class of all messages that represent requests to a Broker.";
+    ids:validation [
+        owl:onProperty ids:coveredEntity;
+        valid:constraint "@NotNull";
+    ].
 
 ids:BrokerResponseMessage rdfs:subClassOf ids:BrokerMessage;
     a owl:Class;
@@ -53,10 +57,6 @@ ids:BrokerDataRequest rdfs:subClassOf ids:BrokerDataMessage, ids:BrokerRequestMe
     rdfs:comment "The class of all messages that represent data requests to a Broker.";
     ids:validation [
         owl:onProperty ids:dataRequestAction;
-        valid:constraint "@NotNull";
-    ];
-    ids:validation [
-        owl:onProperty ids:coveredEntity;
         valid:constraint "@NotNull";
     ].
 
