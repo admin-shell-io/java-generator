@@ -10,6 +10,7 @@ import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
 import org.junit.Assert;
 import org.junit.Test;
+import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.net.MalformedURLException;
 import java.net.URL;

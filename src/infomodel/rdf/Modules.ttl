@@ -1,0 +1,19 @@
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+
+#Stakeholders
+
+#DataAsset
+
+#DataService
+
+#ProtocolBinding
+
+#DataProvisioning
+
+#ApplicationLogicDelivery
+
+#LegalModels
+
+#ConnectorEnvironment
+
+#DataFlow
