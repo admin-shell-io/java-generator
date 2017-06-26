@@ -128,7 +128,7 @@ public class Demo {
 
         Duty duty = new PaymentDutyBuilder()
                 .action(Arrays.asList(new ReadBuilder().build()))
-                .paymentModality(new PayPerUseBuilder().build())
+                .paymentModality(new PayPerAccessBuilder().build())
                 .price(price)
                 .build();
 

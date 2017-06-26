@@ -78,10 +78,10 @@ ids:PaymentModality rdfs:subClassOf ids:Duty;
     rdfs:label "PaymentModality"@en;
     rdfs:comment "Specifies when to pay the specified amount."@en.
 
-ids:PayPerUse rdfs:subClassOf ids:PaymentModality;
+ids:PayPerAccess rdfs:subClassOf ids:PaymentModality;
     a owl:Class;
-    rdfs:label "PayPerUse"@en;
-    rdfs:comment "Price must be paid on each service call."@en.
+    rdfs:label "PayPerAccess"@en;
+    rdfs:comment "Price must be paid on each service access."@en.
 
 ids:PayPerVolume rdfs:subClassOf ids:PaymentModality;
     a owl:Class;
@@ -95,6 +95,16 @@ ids:PayPerVolume rdfs:subClassOf ids:PaymentModality;
         owl:onProperty ids:transferredVolume;
         valid:constraint "@NotNull";
     ].
+
+ids:PayPerUser rdfs:subClassOf ids:PaymentModality;
+    a owl:Class;
+    rdfs:label "PayPerUser"@en;
+    rdfs:comment "Price must be paid per user of the data."@en.
+
+ids:PayPeriodically  rdfs:subClassOf ids:PaymentModality;
+    a owl:Class;
+    rdfs:label "PayPeriodically"@en;
+    rdfs:comment "Price must be paid periodically."@en.
 
 ids:Action rdfs:subClassOf odrl:Action;
     a owl:Class;
@@ -204,3 +214,16 @@ ids:transferredVolume a owl:DatatypeProperty;
     rdfs:domain ids:PayPerVolume;
     rdfs:range xsd:float;
     rdfs:comment "The volume of a data transfer."@en.
+
+ids:numberOfUsers a owl:DatatypeProperty;
+    rdfs:label "numberOfUsers"@en;
+    rdfs:domain ids:PayPerUser;
+    rdfs:range xsd:int;
+    rdfs:comment "The number of users that can access the data."@en.
+
+ids:periodicity a owl:DatatypeProperty;
+    rdfs:label "periodicity"@en;
+    rdfs:domain ids:PayPeriodically;
+    rdfs:range xsd:string;
+    rdfs:comment "Description of the periodicity at which the payment must be performed."@en.
+
