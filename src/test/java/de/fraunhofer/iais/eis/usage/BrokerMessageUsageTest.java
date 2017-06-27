@@ -83,7 +83,6 @@ public class BrokerMessageUsageTest {
             .outputs(Arrays.asList(createOutputParameter())).build();
 
         return new DataServiceBuilder()
-            .coversIndustry(ISICIndustry.MANUFACTURE_OF_DAIRY_PRODUCTS)
             .operations(Arrays.asList(operation))
             .publishes(createDataAsset())
             .build();

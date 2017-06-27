@@ -35,6 +35,7 @@ ids:DataService a owl:Class;
     ].
 
 ids:Operation a owl:Class;
+    trns:isAbstract true;
     rdfs:label "Operation"@en ;
     rdfs:comment "An operation to be performed on a DataService, like the retrieval of a filtered subset of the data."@en;
     ids:validation [
@@ -54,6 +55,11 @@ ids:Operation a owl:Class;
         owl:onProperty ids:opDescription;
         valid:relationType "@OneToMany";
     ].
+
+ids:ReadOperation rdfs:subClassOf ids:Operation;
+   a owl:Class;
+   rdfs:label "ReadOperation"@en ;
+   rdfs:comment "An operation to access a DataService in a read-only way."@en.
 
 ids:Parameter a owl:Class;
     rdfs:label "Parameter"@en ;
@@ -123,12 +129,6 @@ ids:usageCondition a owl:ObjectProperty;
     rdfs:label "usageCondition"@en;
     idoc:labelPluralForm "usageConditions"@en;
     rdfs:comment "The ServiceContracts for using the DataService."@en.
-
-ids:coversIndustry a owl:ObjectProperty;
-    rdfs:label "coversIndustry"@en;
-    rdfs:domain ids:DataService;
-    rdfs:range ids:ISICIndustry;
-    rdfs:comment "Industry branch covered by the DataService."@en.
 
 ids:publishes a owl:ObjectProperty;
     rdfs:label "publishes"@en;

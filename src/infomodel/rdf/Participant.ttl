@@ -80,6 +80,12 @@ ids:memberParticipant rdfs:subPropertyOf org:hasMember;
     rdfs:label "memberParticipant"@en;
     rdfs:comment "Indicates that a participant has a member which is again a participant. This is useful for defining hierarchical relations in a participant's organization as well as identifying groups of participants to capture, e.g., members of a collaboration."@en.
 
+ids:coversIndustry a owl:ObjectProperty;
+    rdfs:label "coversIndustry"@en;
+    rdfs:domain ids:Participant;
+    rdfs:range ids:ISICIndustry;
+    rdfs:comment "Industry branch covered by the Participant."@en.
+
 # Properties for describing a Person
 # ----------------------------------
 

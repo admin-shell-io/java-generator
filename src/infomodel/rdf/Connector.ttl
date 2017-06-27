@@ -24,6 +24,5 @@ ids:Connector rdfs:subClassOf ids:InfrastructureComponent;
 ids:provides a owl:ObjectProperty;
     rdfs:domain ids:Connector;
     rdfs:range ids:DataEndpoint;
-    trns:refByURI true;
     rdfs:label "provides"@en;
     rdfs:comment "The DataEndpoints provided by a Connector."@en.

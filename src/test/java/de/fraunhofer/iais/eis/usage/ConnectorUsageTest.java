@@ -11,6 +11,7 @@ import org.apache.jena.rdf.model.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.xml.ws.Endpoint;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -42,12 +43,10 @@ public class ConnectorUsageTest {
 
         Model model = TestUtil.createModelFromRdf(rdf);
         Property operatorProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#operator");
-        Property providesProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#provides");
         Resource broker = model.createResource("http://www.isst.fraunhofer.de/Broker");
 
-        // test for some sample properties
+        // test for some sample property
         Assert.assertFalse(model.listObjectsOfProperty(broker, operatorProperty).toList().isEmpty());
-        Assert.assertFalse(model.listObjectsOfProperty(broker, providesProperty).toList().isEmpty());
     }
 
     private Participant createParticipant() throws MalformedURLException, ConstraintViolationException {
@@ -77,7 +76,6 @@ public class ConnectorUsageTest {
                 .owner(participant.getId())
                 .generationActivity(creationActivity)
                 .lifecycleActivities(Arrays.asList(creationActivity))
-                .provides(dataEndpoints)
                 .entityNames(Arrays.asList(new PlainLiteral("Broker")))
                 .entityDescriptions(Arrays.asList((new PlainLiteral("Broker API implementation for demonstration.", "en"))));
 
