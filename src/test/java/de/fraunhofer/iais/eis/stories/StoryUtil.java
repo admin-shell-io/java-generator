@@ -28,13 +28,13 @@ public class StoryUtil {
 
     private Operation describeOperation() throws ConstraintViolationException {
         if (operationUrl == null) {
-            return new ReadOperationBuilder(operationUrl)
+            return new ReadOperationBuilder()
                     .opLabels(Arrays.asList(new PlainLiteral("Retrieve the whole dataset", "en")))
                     .outputs(Arrays.asList(describeOutput()))
                     .build();
         }
         else {
-            return new ReadOperationBuilder()
+            return new ReadOperationBuilder(operationUrl)
                     .opLabels(Arrays.asList(new PlainLiteral("Retrieve the whole dataset", "en")))
                     .outputs(Arrays.asList(describeOutput()))
                     .build();
