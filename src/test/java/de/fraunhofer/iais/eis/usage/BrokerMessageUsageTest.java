@@ -78,7 +78,7 @@ public class BrokerMessageUsageTest {
     }
 
     private DataService createDataService() throws ConstraintViolationException {
-        Operation operation = new OperationBuilder()
+        Operation operation = new ReadOperationBuilder()
             .opLabels(Arrays.asList(new PlainLiteral("label")))
             .outputs(Arrays.asList(createOutputParameter())).build();
 

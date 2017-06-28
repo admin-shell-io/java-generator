@@ -1,6 +1,7 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
@@ -9,9 +10,22 @@
 # Classes
 # -------
 
-ids:ServiceContract a owl:Class;
+ids:ServiceContract rdfs:subClassOf odrl:Offer;
+    a owl:Class;
     rdfs:label "ServiceContract"@en ;
-    rdfs:comment "Describes under what conditions a DataService Endpoint may be used by Participants."@en.
+    rdfs:comment "An offered policy that describes how parties can act on a specified resource."@en;
+    ids:validation [
+        owl:onProperty ids:permission;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:prohibition;
+        valid:relationType "@OneToMany";
+    ];
+    ids:validation [
+        owl:onProperty ids:duty;
+        valid:relationType "@OneToMany";
+    ].
 
 ids:GenericServiceContract rdfs:subClassOf ids:ServiceContract;
     a owl:Class;
@@ -31,20 +45,14 @@ ids:ExclusiveServiceContract rdfs:subClassOf ids:ServiceContract;
         valid:relationType "@OneToMany";
     ].
 
-# Properties
-# ----------
+# Properties of ServiceContract
+# -----------------------------
 
 ids:contractDuration a owl:ObjectProperty;
     rdfs:domain ids:ServiceContract;
     rdfs:range ids:TemporalEntity;
     rdfs:label "contractDuration"@en;
     rdfs:comment "The duration for which the ServiceContract is valid."@en.
-
-ids:usagePolicy a owl:ObjectProperty;
-    rdfs:domain ids:ServiceContract;
-    rdfs:range ids:UsagePolicy;
-    rdfs:label "usagePolicy"@en;
-    rdfs:comment "Policy describing rights and duties that are granted or must be fulfilled within the ServiceContract."@en.
 
 ids:includedPartner a owl:ObjectProperty;
     rdfs:domain ids:ExclusiveServiceContract;
@@ -59,3 +67,24 @@ ids:excludedPartner a owl:ObjectProperty;
     rdfs:label "excludedPartner"@en;
     idoc:labelPluralForm "excludedPartners"@en;
     rdfs:comment "Partners excluded from the ServiceContract."@en.
+
+ids:permission rdfs:subPropertyOf odrl:permission;
+    a owl:ObjectProperty;
+    rdfs:label "permission"@en;
+    rdfs:domain ids:ServiceContract;
+    rdfs:range ids:Permission;
+    rdfs:comment "The Permissions granted by a ServiceContract."@en.
+
+ids:prohibition rdfs:subPropertyOf odrl:prohibition;
+    a owl:ObjectProperty;
+    rdfs:label "prohibition"@en;
+    rdfs:domain ids:ServiceContract;
+    rdfs:range ids:Prohibition;
+    rdfs:comment "The Prohibitions imposed by a ServiceContract."@en.
+
+ids:duty rdfs:subPropertyOf odrl:duty;
+    a owl:ObjectProperty;
+    rdfs:label "duty"@en;
+    rdfs:domain ids:ServiceContract;
+    rdfs:range ids:Duty;
+    rdfs:comment "The Duties imposed by a ServiceContract."@en.

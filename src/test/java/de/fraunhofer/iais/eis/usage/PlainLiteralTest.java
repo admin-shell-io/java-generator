@@ -34,7 +34,7 @@ public class PlainLiteralTest {
     }
 
     private Operation createOperation() throws MalformedURLException, ConstraintViolationException {
-        return new OperationBuilder(new URL("http://example.org/operation/1"))
+        return new ReadOperationBuilder(new URL("http://example.org/operation/1"))
                 .opLabels(Arrays.asList(new PlainLiteral("label")))
                 .opDescriptions(Arrays.asList(new PlainLiteral("desc1", "en"), new PlainLiteral("desc2")))
                 .build();

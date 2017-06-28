@@ -123,12 +123,12 @@ ids:operation a owl:ObjectProperty;
     idoc:labelPluralForm "operations"@en;
     rdfs:comment "An Operation that can be performed on a DataService."@en.
 
-ids:usageCondition a owl:ObjectProperty;
-    rdfs:domain ids:DataService;
+ids:usagePolicy a owl:ObjectProperty;
+    rdfs:domain ids:Operation;
     rdfs:range ids:ServiceContract;
-    rdfs:label "usageCondition"@en;
-    idoc:labelPluralForm "usageConditions"@en;
-    rdfs:comment "The ServiceContracts for using the DataService."@en.
+    rdfs:label "usagePolicy"@en;
+    idoc:labelPluralForm "usagePolicies"@en;
+    rdfs:comment "The ServiceContracts for invoking the Operation."@en.
 
 ids:publishes a owl:ObjectProperty;
     rdfs:label "publishes"@en;
