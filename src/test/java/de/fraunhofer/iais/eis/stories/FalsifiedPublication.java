@@ -1,6 +1,7 @@
 package de.fraunhofer.iais.eis.stories;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -9,6 +10,7 @@ import org.junit.Test;
 public class FalsifiedPublication {
     /** Falsify geo location of TSP, so that LSP does never see the exact position.*/
 
+    @Ignore
     @Test
     public void createOffering() {
         Assert.fail();
