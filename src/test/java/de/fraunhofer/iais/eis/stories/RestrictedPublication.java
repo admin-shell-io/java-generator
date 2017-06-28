@@ -14,14 +14,13 @@ import java.util.Collection;
 
 public class RestrictedPublication {
     /** As an IDS participant I want to provide my data offering to a restricted group of partners. Each partner is
-     *  obliged to pay 500eur for downloading the dataset, must not make it available to third parties and delete it
+     *  obliged to pay 500eur for downloading the dataset, must not redistribute it to third parties and delete it
      *  after 12 months.
      */
 
     // these SHOULD be resolvable
     private final URL CONNECTOR_URL = new URL("http://companyA.com/IDS/connector1");
     private final URL DATA_ENDPOINT_URL = new URL("http://industrialdataspace.org/connector1/endpoint1");
-    private final URL PROVIDER_URL = new URL("http://industrialdataspace.org/participants/companyA");
     private final URL PARTNER1_URL = new URL("http://industrialdataspace.org/participants/companyB");
     private final URL PARTNER2_URL = new URL("http://industrialdataspace.org/participants/companyC");
 
