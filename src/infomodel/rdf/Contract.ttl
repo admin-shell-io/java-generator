@@ -6,6 +6,7 @@
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
 @prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
 # Classes
 # -------
@@ -21,28 +22,6 @@ ids:ServiceContract rdfs:subClassOf odrl:Offer;
     ids:validation [
         owl:onProperty ids:prohibition;
         valid:relationType "@OneToMany";
-    ];
-    ids:validation [
-        owl:onProperty ids:duty;
-        valid:relationType "@OneToMany";
-    ].
-
-ids:GenericServiceContract rdfs:subClassOf ids:ServiceContract;
-    a owl:Class;
-    rdfs:label "GenericServiceContract"@en ;
-    rdfs:comment "A ServiceContract with unknown Participants."@en.
-
-ids:ExclusiveServiceContract rdfs:subClassOf ids:ServiceContract;
-    a owl:Class;
-    rdfs:label "ExclusiveServiceContract"@en ;
-    rdfs:comment "A ServiceContract that may include or exclude specific Participants."@en;
-    ids:validation [
-        owl:onProperty ids:includedPartner;
-        valid:relationType "@OneToMany";
-    ];
-    ids:validation [
-        owl:onProperty ids:excludedPartner;
-        valid:relationType "@OneToMany";
     ].
 
 # Properties of ServiceContract
@@ -53,20 +32,6 @@ ids:contractDuration a owl:ObjectProperty;
     rdfs:range ids:TemporalEntity;
     rdfs:label "contractDuration"@en;
     rdfs:comment "The duration for which the ServiceContract is valid."@en.
-
-ids:includedPartner a owl:ObjectProperty;
-    rdfs:domain ids:ExclusiveServiceContract;
-    rdfs:range ids:Participant;
-    rdfs:label "includedPartner"@en;
-    idoc:labelPluralForm "includedPartners"@en;
-    rdfs:comment "Partners involved in the ServiceContract."@en.
-
-ids:excludedPartner a owl:ObjectProperty;
-    rdfs:domain ids:ExclusiveServiceContract;
-    rdfs:range ids:Participant;
-    rdfs:label "excludedPartner"@en;
-    idoc:labelPluralForm "excludedPartners"@en;
-    rdfs:comment "Partners excluded from the ServiceContract."@en.
 
 ids:permission rdfs:subPropertyOf odrl:permission;
     a owl:ObjectProperty;
@@ -81,10 +46,3 @@ ids:prohibition rdfs:subPropertyOf odrl:prohibition;
     rdfs:domain ids:ServiceContract;
     rdfs:range ids:Prohibition;
     rdfs:comment "The Prohibitions imposed by a ServiceContract."@en.
-
-ids:duty rdfs:subPropertyOf odrl:duty;
-    a owl:ObjectProperty;
-    rdfs:label "duty"@en;
-    rdfs:domain ids:ServiceContract;
-    rdfs:range ids:Duty;
-    rdfs:comment "The Duties imposed by a ServiceContract."@en.

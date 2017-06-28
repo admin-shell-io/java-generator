@@ -3,6 +3,7 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix org: <http://www.w3.org/ns/org#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
 
 @prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
 @prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
@@ -14,6 +15,7 @@
 ids:Participant rdfs:subClassOf ids:EntityWithLifecycle;
     a owl:Class;
     rdfs:subClassOf org:Organization;
+    rdfs:subClassOf odrl:Party;
 	rdfs:label "Participant"@en;
 	rdfs:comment "An organization being part of the Industrial Data Space."@en;
     ids:validation [

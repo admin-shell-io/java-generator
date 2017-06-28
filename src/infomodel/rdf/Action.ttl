@@ -51,3 +51,8 @@ ids_act:grantUse a ids:Action;
     rdfs:seeAlso odrl:grantUse;
     rdfs:comment "The act of granting the use of the Asset to third parties.";
     dct:identifier "GRANT_USE".
+
+ids_act:distribute a ids:Action;
+    rdfs:seeAlso odrl:distribute;
+    rdfs:comment "The act of distributing the Asset.";
+    dct:identifier "DISTRIBUTE".

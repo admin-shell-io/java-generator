@@ -20,6 +20,10 @@ ids:DataEndpoint rdfs:subClassOf ids:EntityWithLifecycle;
     ids:validation [
         owl:onProperty ids:providedBy;
         valid:constraint "@NotNull";
+    ];
+    ids:validation [
+        owl:onProperty ids:usagePolicy;
+        valid:relationType "@OneToMany";
     ].
 
 ids:DataService a owl:Class;
@@ -27,10 +31,6 @@ ids:DataService a owl:Class;
     rdfs:comment "A certain view or interaction ability on the data provided by a DataEndpoint."@en;
     ids:validation [
         owl:onProperty ids:operation;
-        valid:relationType "@OneToMany";
-    ];
-    ids:validation [
-        owl:onProperty ids:usageCondition;
         valid:relationType "@OneToMany";
     ].
 
@@ -124,11 +124,11 @@ ids:operation a owl:ObjectProperty;
     rdfs:comment "An Operation that can be performed on a DataService."@en.
 
 ids:usagePolicy a owl:ObjectProperty;
-    rdfs:domain ids:Operation;
+    rdfs:domain ids:DataEndpoint;
     rdfs:range ids:ServiceContract;
     rdfs:label "usagePolicy"@en;
     idoc:labelPluralForm "usagePolicies"@en;
-    rdfs:comment "The ServiceContracts for invoking the Operation."@en.
+    rdfs:comment "The ServiceContracts describing usage policies for the DataEndpoint's offerings."@en.
 
 ids:publishes a owl:ObjectProperty;
     rdfs:label "publishes"@en;

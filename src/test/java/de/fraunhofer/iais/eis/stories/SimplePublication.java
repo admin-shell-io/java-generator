@@ -36,6 +36,8 @@ public class SimplePublication {
     private final URL DATA_ENDPOINT_URL = new URL("http://industrialdataspace.org/connector1/endpoint1");
     private final URL PARTICIPANT_URL = new URL("http://industrialdataspace.org/participants/companyA");
 
+    private final StoryUtil storyUtil = new StoryUtil();
+
     public SimplePublication() throws MalformedURLException {}
 
     @Test
@@ -67,41 +69,8 @@ public class SimplePublication {
     private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException {
         return new DataEndpointBuilder(DATA_ENDPOINT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
-                .offers(describeDataService())
+                .offers(storyUtil.describeDataService())
                 .providedBy(CONNECTOR_URL)
-                .build();
-    }
-
-    private DataService describeDataService() throws ConstraintViolationException, MalformedURLException {
-        return new DataServiceBuilder()
-                .operations(Arrays.asList(describeOperation()))
-                .publishes(describeDataAsset())
-                .build();
-    }
-
-    private DataAsset describeDataAsset() throws MalformedURLException, ConstraintViolationException {
-        return new DataAssetBuilder()
-                .entityNames(Arrays.asList(new PlainLiteral("Development of company revenue", "en")))
-                .coversCategories(Arrays.asList(new URL("http://dbpedia.org/resource/Category:Finance")))
-                .build();
-    }
-
-    private Operation describeOperation() throws ConstraintViolationException {
-        return new ReadOperationBuilder()
-                .opLabels(Arrays.asList(new PlainLiteral("Retrieve the whole dataset", "en")))
-                .outputs(Arrays.asList(describeOutput()))
-                .build();
-    }
-
-    private OutputParameter describeOutput() throws ConstraintViolationException {
-        return new OutputParameterBuilder()
-                .representation(describeRepresentation())
-                .build();
-    }
-
-    private Representation describeRepresentation() throws ConstraintViolationException {
-        return new RepresentationBuilder()
-                .mediaType(IANAMediaType.APPLICATION_XML)
                 .build();
     }
 
