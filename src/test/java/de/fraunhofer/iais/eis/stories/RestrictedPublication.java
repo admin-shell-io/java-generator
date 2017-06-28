@@ -39,8 +39,6 @@ public class RestrictedPublication {
         DataEndpoint endpoint = describeDataEndpoint();
         String rdf = endpoint.toRdf();
 
-        System.out.println(rdf);
-
         DataEndpoint deser = (DataEndpoint) VocabUtil.fromRdf(rdf);
         Assert.assertNotNull(deser);
     }
