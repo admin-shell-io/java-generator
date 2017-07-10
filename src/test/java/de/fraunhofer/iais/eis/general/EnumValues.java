@@ -13,10 +13,10 @@ public class EnumValues {
 
     @Test
     public void hashFunction_stringConversion() {
-        Optional<HashFunction> hashFunction = HashFunction.getByString(HashFunction.SHA_256.toString());
+        HashFunction hashFunction = HashFunction.getByString(HashFunction.SHA_256.toString());
 
-        Assert.assertTrue(hashFunction.isPresent());
-        Assert.assertEquals(hashFunction.get(), HashFunction.SHA_256);
+        Assert.assertNotNull(hashFunction);
+        Assert.assertEquals(hashFunction, HashFunction.SHA_256);
     }
 
 }

@@ -5,6 +5,7 @@ import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.PlainLiteral;
 import de.fraunhofer.iais.eis.general.TestUtil;
+import de.fraunhofer.iais.eis.util.VocabUtil;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.Property;
 import org.apache.jena.rdf.model.Resource;
@@ -47,6 +48,11 @@ public class ConnectorUsageTest {
 
         // test for some sample property
         Assert.assertFalse(model.listObjectsOfProperty(broker, operatorProperty).toList().isEmpty());
+
+        // test for deserialized object
+        Connector deserialized = (Connector) VocabUtil.fromRdf(rdf);
+        Assert.assertNotNull(deserialized);
+        Assert.assertFalse(deserialized.getLifecycleActivities().isEmpty());
     }
 
     private Participant createParticipant() throws MalformedURLException, ConstraintViolationException {
@@ -70,6 +76,7 @@ public class ConnectorUsageTest {
                 .endedBy(participant.getId())
                 .endedAt(new XMLGregorianCalendarImpl(new GregorianCalendar()))
                 .build();
+
         ConnectorBuilder connectorBuilder = new ConnectorBuilder(new URL("http://www.isst.fraunhofer.de/Broker"))
                 .operator(participant.getId())
                 .maintainer(participant.getId())

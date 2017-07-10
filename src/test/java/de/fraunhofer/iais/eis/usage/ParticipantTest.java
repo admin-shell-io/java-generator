@@ -30,8 +30,8 @@ public class ParticipantTest {
             .build();
         Participant deserialized = (Participant) VocabUtil.fromRdf(original.toRdf());
 
-        Collection<PlainLiteral> origEntityNames = original.getEntityNames();
-        Collection<PlainLiteral> deserEntityNames = deserialized.getEntityNames();
+        Collection<? extends PlainLiteral> origEntityNames = original.getEntityNames();
+        Collection<? extends PlainLiteral> deserEntityNames = deserialized.getEntityNames();
         Assert.assertArrayEquals(origEntityNames.toArray(), deserEntityNames.toArray());
 
         Person origSubOrgMemberPerson = original.getMemberParticipants().iterator().next().getMemberPersons().iterator().next();

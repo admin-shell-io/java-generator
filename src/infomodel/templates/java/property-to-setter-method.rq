@@ -10,7 +10,7 @@ template ids:property-to-setter-method(?property, ?class) {
 
         " "
 
-        st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<", ">")
+        st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
         " "
 

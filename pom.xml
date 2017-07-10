@@ -19,7 +19,7 @@
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>jrdfb</artifactId>
-            <version>0.5-SNAPSHOT</version>
+            <version>0.6-SNAPSHOT</version>
         </dependency>
 
         <!-- Bean validation -->
@@ -94,8 +94,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.3</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>1.7</source>
+                    <target>1.7</target>
                 </configuration>
             </plugin>
 

@@ -24,10 +24,9 @@ public class PlainLiteral extends LiteralImpl  {
         Collection<PlainLiteral> plainLiterals = new ArrayList<>();
 
         if (literals == null) return null;
-
-        literals.stream().forEach(lit -> {
-            plainLiterals.add(new PlainLiteral(lit.getLexicalForm(), lit.getLanguage()));
-        });
+        for (Literal literal : literals) {
+            plainLiterals.add(new PlainLiteral(literal.getLexicalForm(), literal.getLanguage()));
+        }
 
         return plainLiterals;
     }
