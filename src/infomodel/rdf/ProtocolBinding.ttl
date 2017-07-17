@@ -1,0 +1,140 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix ids: <http://industrialdataspace.org/2016/10/ids/core#> .
+@prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#> .
+@prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
+@prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
+
+# Classes
+# -------
+
+ids:ProtocolBinding a owl:Class;
+    rdfs:label "ProtocolBinding"@en ;
+    rdfs:comment "Describes how a DataEndpoint can be invoked by using a certain protocol."@en;
+    ids:validation [
+        owl:onProperty ids:operationBinding;
+        valid:relationType "@OneToMany";
+    ].
+
+ids:OperationBinding a owl:Class ;
+    rdfs:label "OperationBinding"@en ;
+    rdfs:comment "Binding of a specific operation of an endpoint."@en ;
+    ids:validation [
+        owl:onProperty ids:parameterBinding;
+        valid:relationType "@OneToMany";
+    ].
+
+ids:OperationHttpBinding rdfs:subClassOf ids:OperationBinding;
+    a owl:Class ;
+    rdfs:label "OperationHttpBinding"@en ;
+    rdfs:comment "Binding of a specific operation of an endpoint to the HTTP protocol."@en .
+
+ids:ParameterBinding a owl:Class ;
+    rdfs:label "ParameterBinding"@en ;
+    rdfs:comment "Description of a specific parameter of an endpoint."@en .
+
+ids:UriTemplate a owl:Class ;
+    rdfs:label "UriTemplate"@en ;
+    rdfs:comment "Structured string literal containing distinguished placeholders to be replaced by runtime arguments,
+    see for example URI Templates (RFC 6570)." .
+
+ids:HttpHeaderTemplate a owl:Class ;
+    rdfs:label "HttpHeaderTemplate"@en ;
+    rdfs:comment "Class of templates that contain HTTP header information." .
+
+ids:BindingApproach a owl:Class ;
+    trns:isAbstract true;
+    rdfs:label "BindingApproach"@en ;
+    rdfs:comment "Class of approaches how to bind parameters to an operation invocation."@en .
+
+ids:UriTemplateBindingApproach rdfs:subClassOf ids:BindingApproach;
+    a owl:Class ;
+    rdfs:label "UriTemplateBindingApproach"@en ;
+    rdfs:comment "Binding approach using a 1:1 mapping between the parameter's label and a key in the operation's URI template."@en .
+
+ids:httpHeaderBindingApproach rdfs:subClassOf ids:BindingApproach;
+    a owl:Class ;
+    rdfs:label "httpHeaderBindingApproach"@en ;
+    rdfs:comment "Binding approach using a 1:1 mapping between the parameters label and a HTTP header template."@en .
+
+# Properties
+# ----------
+
+idsv:operationBinding
+    a owl:ObjectProperty ;
+    rdfs:label "operationBinding"@en ;
+    idoc:labelPluralForm "operationBindings"@en;
+    rdfs:domain idsv:ProtocolBinding ;
+    rdfs:domain idsv:OperationBinding ;
+    rdfs:comment "Defines the available operations of an endpoint."@en .
+
+ids:boundOperation
+    a owl:ObjectProperty ;
+    rdfs:label "boundOperation"@en ;
+    rdfs:domain ids:OperationBinding ;
+    rdfs:range ids:Operation ;
+    rdfs:comment "The operation which is bound to the protocol."@en .
+
+ids:httpMethod
+    a owl:ObjectProperty ;
+    rdfs:label "httpMethod"@en ;
+    rdfs:domain ids:OperationHttpBinding ;
+    rdfs:range ids:HttpMethod;
+    rdfs:comment "Defines the method of an operation."@en .
+
+ids:uriTemplate
+    a owl:DatatypeProperty;
+    rdfs:label "uriTemplate"@en;
+    rdfs:domain ids:OperationBinding;
+    rdfs:range ids:UriTemplate;
+    rdfs:comment "URL template for invoking the operation including all its possible parameters." .
+
+ids:parameterBinding
+    a owl:ObjectProperty ;
+    rdfs:label "parameterBinding"@en ;
+    idoc:labelPluralForm "parameterBindings"@en;
+    rdfs:domain ids:OperationBinding ;
+    rdfs:range ids:ParameterBinding ;
+    rdfs:comment "Reference to the parameters of an operation."@en .
+
+ids:boundParameter
+    a owl:ObjectProperty ;
+    rdfs:label "boundParameter"@en ;
+    rdfs:domain ids:ParameterBinding ;
+    rdfs:range ids:Parameter ;
+    rdfs:comment "The parameter which is bound to the protocol."@en .
+
+ids:bindingMethod
+
+
+idsv:path
+    a owl:DatatypeProperty ;
+    rdfs:label "path"@en ;
+    rdfs:domain idsv:ParameterProtocolBinding ;
+    rdfs:range xsd:string  ;
+    rdfs:comment "Defines the path of an operation."@en .
+
+
+
+
+# References to top-level parameter structure out of the "embedded" parameters
+idsv:structureReference
+    a owl:DatatypeProperty ;
+    rdfs:label "structureReference"@en;
+    rdfs:domain idsv:Parameter;
+    rdfs:range xsd:string;
+    rdfs:comment "Generic reference (path expression) into a structured parameter value" .
+
+# Parameter hierarchy support added inline with: http://kmi.github.io/iserve/latest/data-model.html
+idsv:subParameter
+    a owl:ObjectProperty;
+    rdfs:label "subParameter"@en;
+    rdfs:domain idsv:Parameter;
+    rdfs:range idsv:Parameter;
+    rdfs:comment "Auxiliary predicate to expose relevant parts of a structured top-level parameter (XML, JSON).".
+

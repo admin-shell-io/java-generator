@@ -83,10 +83,6 @@ ids:OutputParameter rdfs:subClassOf ids:Parameter;
     rdfs:label "OutputParameter"@en ;
     rdfs:comment "Result of an Operation."@en.
 
-ids:ProtocolBinding a owl:Class;
-    rdfs:label "ProtocolBinding"@en ;
-    rdfs:comment "Describes how a DataEndpoint can be invoked by using a certain protocol."@en.
-
 ids:Representation a owl:Class;
     rdfs:label "Representation"@en ;
     rdfs:comment "Describes how a Parameter's value is represented."@en.
