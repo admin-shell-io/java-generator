@@ -64,7 +64,7 @@ ids:sender
 	rdfs:domain ids:DataTransfer;
 	rdfs:range ids:Participant;
 	trns:refByURI true;
-	rdfs:comment "The sender of the message."@en.
+	rdfs:comment "The data endpoint which is the origin of the message."@en.
 
 ids:receiver
 	a owl:DatatypeProperty;
@@ -72,7 +72,7 @@ ids:receiver
 	rdfs:domain ids:DataTransfer;
 	rdfs:range ids:Participant;
 	trns:refByURI true;
-	rdfs:comment "The receiver of the message."@en.
+	rdfs:comment "The data endpoint which is the recipient of the message."@en.
 
 ids:authToken
 	a owl:ObjectProperty;
