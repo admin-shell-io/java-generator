@@ -74,7 +74,7 @@ ids:operationBinding
     rdfs:label "operationBinding"@en ;
     idoc:labelPluralForm "operationBindings"@en;
     rdfs:domain ids:ProtocolBinding ;
-    rdfs:domain ids:OperationBinding ;
+    rdfs:range ids:OperationBinding ;
     rdfs:comment "Defines the available operations of an endpoint."@en .
 
 ids:boundOperation
