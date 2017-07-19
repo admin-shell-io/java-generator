@@ -83,6 +83,11 @@ ids:OutputParameter rdfs:subClassOf ids:Parameter;
     rdfs:label "OutputParameter"@en ;
     rdfs:comment "Result of an Operation."@en.
 
+ids:Fault rdfs:subClassOf ids:OutputParameter;
+    a owl:Class;
+    rdfs:label "Fault"@en ;
+    rdfs:comment "Result on Operation failure."@en.
+
 ids:Representation a owl:Class;
     rdfs:label "Representation"@en ;
     rdfs:comment "Describes how a Parameter's value is represented."@en.
@@ -149,6 +154,13 @@ ids:output a owl:ObjectProperty;
     rdfs:label "output"@en;
     idoc:labelPluralForm "outputs"@en;
     rdfs:comment "Holds the result of an Operation."@en.
+
+ids:fault a owl:ObjectProperty;
+    rdfs:domain ids:Operation;
+    rdfs:range ids:Fault;
+    rdfs:label "fault"@en;
+    idoc:labelPluralForm "faults"@en;
+    rdfs:comment "Holds information when an Operation has failed."@en.
 
 ids:opLabel rdfs:subPropertyOf rdfs:label;
     a owl:DatatypeProperty;

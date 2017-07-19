@@ -7,7 +7,7 @@ import org.junit.Test;
 /**
  * Created by christian on 28.06.17.
  */
-public class DistributeOnlyEncryptedPublication {
+public class DistributeOnlyEncryptedPublicationTest {
     /** Everyone that consumes the data can redistribute it as long as she uses encryption */
 
     @Ignore

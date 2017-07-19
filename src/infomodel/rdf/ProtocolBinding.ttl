@@ -54,17 +54,17 @@ ids:BindingApproach a owl:Class ;
 ids:UriTemplateBindingApproach rdfs:subClassOf ids:BindingApproach;
     a owl:Class ;
     rdfs:label "UriTemplateBindingApproach"@en ;
-    rdfs:comment "Binding approach using a 1:1 mapping between the parameter's label and a key in the operation's URI template."@en .
+    rdfs:comment "Binding approach using a 1:1 mapping between the parameter's name and a key in the operation's URI template."@en .
 
 ids:HttpHeaderBindingApproach rdfs:subClassOf ids:BindingApproach;
     a owl:Class ;
     rdfs:label "HttpHeaderBindingApproach"@en ;
-    rdfs:comment "Binding approach using a 1:1 mapping between the parameters label and a HTTP header template."@en .
+    rdfs:comment "Binding approach using a 1:1 mapping between the parameters name and a HTTP header template."@en .
 
 ids:HttpBodyBindingApproach rdfs:subClassOf ids:BindingApproach;
     a owl:Class ;
     rdfs:label "HttpBodyBindingApproach"@en ;
-    rdfs:comment "Binding approach using a 1:1 mapping between the parameters label and a HTTP body template."@en .
+    rdfs:comment "Binding approach using a 1:1 mapping between the parameters name and a HTTP body template."@en .
 
 # Properties
 # ----------

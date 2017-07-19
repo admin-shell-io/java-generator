@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
 
-public class SimplePublication {
+public class SimplePublicationTest {
     /** As an IDS participant I want to advertise the fact that I can provide xml data of the company's revenue development
      *
      *  To do this, the participant has to describe his connector, the data it provides, and in what way (format) it is provided.
@@ -38,7 +38,7 @@ public class SimplePublication {
 
     private final StoryUtil storyUtil = new StoryUtil();
 
-    public SimplePublication() throws MalformedURLException {}
+    public SimplePublicationTest() throws MalformedURLException {}
 
     @Test
     public void createOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException {

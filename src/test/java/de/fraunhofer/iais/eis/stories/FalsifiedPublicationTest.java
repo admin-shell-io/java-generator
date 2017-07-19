@@ -7,8 +7,8 @@ import org.junit.Test;
 /**
  * Created by christian on 28.06.17.
  */
-public class OneTimePublication {
-    /** Use data only once */
+public class FalsifiedPublicationTest {
+    /** Falsify geo location of TSP, so that LSP does never see the exact position.*/
 
     @Ignore
     @Test

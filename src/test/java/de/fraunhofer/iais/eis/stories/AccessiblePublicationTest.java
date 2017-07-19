@@ -10,7 +10,7 @@ import org.junit.Test;
 import javax.xml.datatype.DatatypeConfigurationException;
 import java.net.MalformedURLException;
 
-public class AccessiblePublication {
+public class AccessiblePublicationTest {
     /** As an IDS participant I want to make available xml data of the company's revenue development for retrieval via an HTTP-based interface */
 
     @Ignore

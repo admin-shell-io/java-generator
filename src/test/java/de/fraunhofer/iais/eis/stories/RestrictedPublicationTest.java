@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class RestrictedPublication {
+public class RestrictedPublicationTest {
     /** As an IDS participant I want to provide my data offering to a restricted group of partners. Each partner is
      *  obliged to pay 500eur for downloading the dataset, must not redistribute it to third parties and delete it
      *  after 12 months.
@@ -29,7 +29,7 @@ public class RestrictedPublication {
 
     private final StoryUtil storyUtil;
 
-    public RestrictedPublication() throws MalformedURLException {
+    public RestrictedPublicationTest() throws MalformedURLException {
         storyUtil = new StoryUtil();
         storyUtil.setOperationUrl(OPERATION_URL);
     }
