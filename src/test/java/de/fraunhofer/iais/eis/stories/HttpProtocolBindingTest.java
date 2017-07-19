@@ -17,6 +17,8 @@ public class HttpProtocolBindingTest {
      * accessible at <http://opcua-ids-connector:8080/sensors/{sensorId}> so that it can be directly invoked by other participants.
      */
 
+    private Operation readSensorDataOperation;
+
     @Test
     public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException {
         new DataEndpointBuilder()
@@ -29,19 +31,20 @@ public class HttpProtocolBindingTest {
             .build();
     }
 
-    private DataService createOffering() throws ConstraintViolationException {
+    private DataService createOffering() throws ConstraintViolationException, MalformedURLException {
         return new DataServiceBuilder()
             .operations(Arrays.asList(createOperation()))
             .build();
     }
 
-    private Operation createOperation() throws ConstraintViolationException {
-        return new ReadOperationBuilder()
+    private Operation createOperation() throws ConstraintViolationException, MalformedURLException {
+        readSensorDataOperation = new ReadOperationBuilder()
             .inputs(Arrays.asList(createInputParameter()))
             .outputs(Arrays.asList(createOutputParameter()))
 
             .opLabels(Arrays.asList(new PlainLiteral("Retrieve data of a single sensor", "en")))
             .build();
+        return readSensorDataOperation;
     }
 
     private InputParameter createInputParameter() throws ConstraintViolationException {
@@ -55,14 +58,28 @@ public class HttpProtocolBindingTest {
             .build();
     }
 
-    private OutputParameter createOutputParameter() throws ConstraintViolationException {
-        return new OutputParameterBuilder()
-                .continuehere
+    private OutputParameter createOutputParameter() throws ConstraintViolationException, MalformedURLException {
+        Representation rdfSsnType = new RepresentationBuilder()
+                .mediaType(IANAMediaType.APPLICATION_RDF_XML)
+                .conformsToStandard(new URL("http://purl.oclc.org/NET/ssnx/ssn"))
                 .build();
+
+        return new OutputParameterBuilder()
+            .representation(rdfSsnType)
+            .build();
     }
 
 
-    private ProtocolBinding createProtocolBinding() {
-        return null;
+    private ProtocolBinding createProtocolBinding() throws ConstraintViolationException {
+        return new ProtocolBindingBuilder()
+                .operationBindings(Arrays.asList(createOperationBinding()))
+                .build();
+    }
+
+    private OperationBinding createOperationBinding() throws ConstraintViolationException {
+        return new OperationHttpBindingBuilder()
+                .boundOperation(readSensorDataOperation)
+                .parameterBindings()
+                .build();
     }
 }
