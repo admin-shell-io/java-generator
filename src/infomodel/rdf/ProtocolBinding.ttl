@@ -40,8 +40,7 @@ ids:ParameterBinding a owl:Class ;
 
 ids:UriTemplate a owl:Class ;
     rdfs:label "UriTemplate"@en ;
-    rdfs:comment "Structured string literal containing distinguished placeholders to be replaced by runtime arguments,
-    see for example URI Templates (RFC 6570)." .
+    rdfs:comment "Structured string literal containing distinguished placeholders to be replaced by runtime arguments, see for example URI Templates (RFC 6570)." .
 
 ids:HttpHeaderTemplate a owl:Class ;
     rdfs:label "HttpHeaderTemplate"@en ;
@@ -57,20 +56,25 @@ ids:UriTemplateBindingApproach rdfs:subClassOf ids:BindingApproach;
     rdfs:label "UriTemplateBindingApproach"@en ;
     rdfs:comment "Binding approach using a 1:1 mapping between the parameter's label and a key in the operation's URI template."@en .
 
-ids:httpHeaderBindingApproach rdfs:subClassOf ids:BindingApproach;
+ids:HttpHeaderBindingApproach rdfs:subClassOf ids:BindingApproach;
     a owl:Class ;
-    rdfs:label "httpHeaderBindingApproach"@en ;
+    rdfs:label "HttpHeaderBindingApproach"@en ;
     rdfs:comment "Binding approach using a 1:1 mapping between the parameters label and a HTTP header template."@en .
+
+ids:HttpBodyBindingApproach rdfs:subClassOf ids:BindingApproach;
+    a owl:Class ;
+    rdfs:label "HttpBodyBindingApproach"@en ;
+    rdfs:comment "Binding approach using a 1:1 mapping between the parameters label and a HTTP body template."@en .
 
 # Properties
 # ----------
 
-idsv:operationBinding
+ids:operationBinding
     a owl:ObjectProperty ;
     rdfs:label "operationBinding"@en ;
     idoc:labelPluralForm "operationBindings"@en;
-    rdfs:domain idsv:ProtocolBinding ;
-    rdfs:domain idsv:OperationBinding ;
+    rdfs:domain ids:ProtocolBinding ;
+    rdfs:domain ids:OperationBinding ;
     rdfs:comment "Defines the available operations of an endpoint."@en .
 
 ids:boundOperation
@@ -88,7 +92,7 @@ ids:httpMethod
     rdfs:comment "Defines the method of an operation."@en .
 
 ids:uriTemplate
-    a owl:DatatypeProperty;
+    a owl:ObjectProperty;
     rdfs:label "uriTemplate"@en;
     rdfs:domain ids:OperationBinding;
     rdfs:range ids:UriTemplate;
@@ -100,41 +104,30 @@ ids:parameterBinding
     idoc:labelPluralForm "parameterBindings"@en;
     rdfs:domain ids:OperationBinding ;
     rdfs:range ids:ParameterBinding ;
-    rdfs:comment "Reference to the parameters of an operation."@en .
+    rdfs:comment "Links parameters of an Operation to their corresponding bindings for that Operation."@en .
 
 ids:boundParameter
     a owl:ObjectProperty ;
     rdfs:label "boundParameter"@en ;
     rdfs:domain ids:ParameterBinding ;
     rdfs:range ids:Parameter ;
-    rdfs:comment "The parameter which is bound to the protocol."@en .
+    rdfs:comment "Specified the parameter that is described by the ParameterBinding."@en .
 
-ids:bindingMethod
+ids:bindingApproach
+    a owl:ObjectProperty ;
+    rdfs:label "bindingApproach"@en ;
+    rdfs:domain ids:ParameterBinding ;
+    rdfs:range ids:BindingApproach ;
+    rdfs:comment "Specifies the approached used to bind the Operation Parameter."@en .
 
+ids:httpHeaderLine a owl:DatatypeProperty;
+    rdfs:label "httpHeaderLine"@en ;
+    rdfs:domain ids:HttpHeaderBindingApproach ;
+    rdfs:range xsd:string ;
+    rdfs:comment "A HTTP header line in the form key : value(s); may contains a placeholder which maps to the parameter's label."@en .
 
-idsv:path
-    a owl:DatatypeProperty ;
-    rdfs:label "path"@en ;
-    rdfs:domain idsv:ParameterProtocolBinding ;
-    rdfs:range xsd:string  ;
-    rdfs:comment "Defines the path of an operation."@en .
-
-
-
-
-# References to top-level parameter structure out of the "embedded" parameters
-idsv:structureReference
-    a owl:DatatypeProperty ;
-    rdfs:label "structureReference"@en;
-    rdfs:domain idsv:Parameter;
-    rdfs:range xsd:string;
-    rdfs:comment "Generic reference (path expression) into a structured parameter value" .
-
-# Parameter hierarchy support added inline with: http://kmi.github.io/iserve/latest/data-model.html
-idsv:subParameter
-    a owl:ObjectProperty;
-    rdfs:label "subParameter"@en;
-    rdfs:domain idsv:Parameter;
-    rdfs:range idsv:Parameter;
-    rdfs:comment "Auxiliary predicate to expose relevant parts of a structured top-level parameter (XML, JSON).".
-
+ids:httpBodyContent a owl:DatatypeProperty;
+    rdfs:label "httpBodyContent"@en ;
+    rdfs:domain ids:HttpBodyBindingApproach ;
+    rdfs:range xsd:string ;
+    rdfs:comment "HTTP body that may contains a placeholder which maps to the parameter's label."@en .
