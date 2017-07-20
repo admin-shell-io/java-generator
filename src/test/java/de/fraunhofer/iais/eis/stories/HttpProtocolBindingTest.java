@@ -136,7 +136,7 @@ public class HttpProtocolBindingTest {
 
     // Binds the output parameter description to the HTTP response body of the operation.
     private ParameterBinding createOutputParameterBinding() throws ConstraintViolationException {
-        BindingApproach bindingApproach = new HttpBodyBindingApproachBuilder().build();
+        BindingApproach bindingApproach = new HttpResponseBodyBindingApproachBuilder().build();
 
         return new ParameterBindingBuilder()
             .boundParameter(sensorValuesParam)
