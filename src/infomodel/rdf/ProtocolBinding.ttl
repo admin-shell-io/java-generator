@@ -38,14 +38,6 @@ ids:ParameterBinding a owl:Class ;
     rdfs:label "ParameterBinding"@en ;
     rdfs:comment "Description of a specific parameter of an endpoint."@en .
 
-ids:UriTemplate a owl:Class ;
-    rdfs:label "UriTemplate"@en ;
-    rdfs:comment "Structured string literal containing distinguished placeholders to be replaced by runtime arguments, see for example URI Templates (RFC 6570)." .
-
-ids:HttpHeaderTemplate a owl:Class ;
-    rdfs:label "HttpHeaderTemplate"@en ;
-    rdfs:comment "Class of templates that contain HTTP header information." .
-
 ids:BindingApproach a owl:Class ;
     trns:isAbstract true;
     rdfs:label "BindingApproach"@en ;
@@ -61,9 +53,9 @@ ids:HttpHeaderBindingApproach rdfs:subClassOf ids:BindingApproach;
     rdfs:label "HttpHeaderBindingApproach"@en ;
     rdfs:comment "Binding approach using a 1:1 mapping between the parameters name and a HTTP header template."@en .
 
-ids:HttpBodyBindingApproach rdfs:subClassOf ids:BindingApproach;
+ids:HttpResponseBodyBindingApproach rdfs:subClassOf ids:BindingApproach;
     a owl:Class ;
-    rdfs:label "HttpBodyBindingApproach"@en ;
+    rdfs:label "HttpResponseBodyBindingApproach"@en ;
     rdfs:comment "Binding approach using a 1:1 mapping between the parameters name and a HTTP body template."@en .
 
 # Properties
@@ -92,11 +84,11 @@ ids:httpMethod
     rdfs:comment "Defines the method of an operation."@en .
 
 ids:uriTemplate
-    a owl:ObjectProperty;
+    a owl:DatatypeProperty;
     rdfs:label "uriTemplate"@en;
     rdfs:domain ids:OperationBinding;
-    rdfs:range ids:UriTemplate;
-    rdfs:comment "URL template for invoking the operation including all its possible parameters." .
+    rdfs:range xsd:string;
+    rdfs:comment "URL template for invoking the operation including all its possible parameters. Structured string literal containing distinguished placeholders to be replaced by runtime arguments, see for example URI Templates (RFC 6570)." .
 
 ids:parameterBinding
     a owl:ObjectProperty ;
@@ -128,6 +120,6 @@ ids:httpHeaderLine a owl:DatatypeProperty;
 
 ids:httpBodyContent a owl:DatatypeProperty;
     rdfs:label "httpBodyContent"@en ;
-    rdfs:domain ids:HttpBodyBindingApproach ;
+    rdfs:domain ids:HttpResponseBodyBindingApproach ;
     rdfs:range xsd:string ;
     rdfs:comment "HTTP body that may contains a placeholder which maps to the parameter's label."@en .

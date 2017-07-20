@@ -13,11 +13,13 @@ import java.util.Collection;
 
 public class HttpProtocolBindingTest {
     /**
-     * As a data owner I want to provide a service that publishes data of a sensor with a certain id and which should be
-     * accessible at <http://opcua-ids-connector:8080/sensors/{sensorId}> so that it can be directly invoked by other participants.
+     * As a data owner I want to provide a service that publishes data of a sensor (RDF data using the SSN ontology)
+     * with a certain id and which should be accessible at <http://opcua-ids-connector:8080/sensors/{sensorId}> so that
+     * it can be directly invoked by other participants.
      */
 
     private Operation readSensorDataOperation;
+    private Parameter sensorIdParam, sensorValuesParam;
 
     @Test
     public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException {
@@ -52,34 +54,58 @@ public class HttpProtocolBindingTest {
             .dataType(ParameterDataType.XSD_INT)
             .build();
 
-        return new InputParameterBuilder()
+        sensorIdParam = new InputParameterBuilder()
             .paramName("sensorId")
             .representation(intType)
             .build();
+        return (InputParameter) sensorIdParam;
     }
 
     private OutputParameter createOutputParameter() throws ConstraintViolationException, MalformedURLException {
         Representation rdfSsnType = new RepresentationBuilder()
-                .mediaType(IANAMediaType.APPLICATION_RDF_XML)
-                .conformsToStandard(new URL("http://purl.oclc.org/NET/ssnx/ssn"))
-                .build();
+            .mediaType(IANAMediaType.APPLICATION_RDF_XML)
+            .conformsToStandard(new URL("http://purl.oclc.org/NET/ssnx/ssn"))
+            .build();
 
-        return new OutputParameterBuilder()
+        sensorValuesParam = new OutputParameterBuilder()
             .representation(rdfSsnType)
             .build();
+        return (OutputParameter) sensorValuesParam;
     }
-
 
     private ProtocolBinding createProtocolBinding() throws ConstraintViolationException {
         return new ProtocolBindingBuilder()
-                .operationBindings(Arrays.asList(createOperationBinding()))
-                .build();
+            .operationBindings(Arrays.asList(createOperationBinding()))
+            .build();
     }
 
+    // Specifies an URL (uriTemplate) to invoke the service
     private OperationBinding createOperationBinding() throws ConstraintViolationException {
         return new OperationHttpBindingBuilder()
-                .boundOperation(readSensorDataOperation)
-                .parameterBindings()
-                .build();
+            .boundOperation(readSensorDataOperation)
+            .httpMethod(HttpMethod.HTTP_GET)
+            .uriTemplate("http://opcua-ids-connector:8080/sensors/{sensorId}")
+            .parameterBindings(Arrays.asList(createInputParamBinding(), createOutputParameterBinding()))
+            .build();
+    }
+
+    // Binds the input parameter description to the invocation URL using the parameter's name "sensorId"
+    private ParameterBinding createInputParamBinding() throws ConstraintViolationException {
+        BindingApproach bindingApproach = new UriTemplateBindingApproachBuilder().build();
+
+        return new ParameterBindingBuilder()
+            .boundParameter(sensorIdParam)
+            .bindingApproach(bindingApproach)
+            .build();
+    }
+
+    // Binds the output parameter description to the HTTP response body of the operation.
+    private ParameterBinding createOutputParameterBinding() throws ConstraintViolationException {
+        BindingApproach bindingApproach = new HttpBodyBindingApproachBuilder().build();
+
+        return new ParameterBindingBuilder()
+            .boundParameter(sensorValuesParam)
+            .bindingApproach(bindingApproach)
+            .build();
     }
 }
