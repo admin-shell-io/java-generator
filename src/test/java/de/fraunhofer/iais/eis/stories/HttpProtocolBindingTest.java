@@ -3,9 +3,13 @@ package de.fraunhofer.iais.eis.stories;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.PlainLiteral;
+import de.fraunhofer.iais.eis.util.VocabUtil;
+import org.apache.jena.atlas.lib.ProgressMonitor;
 import org.junit.Assert;
 import org.junit.Test;
+import org.unitils.reflectionassert.ReflectionAssert;
 
+import javax.xml.ws.Endpoint;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
@@ -23,7 +27,38 @@ public class HttpProtocolBindingTest {
 
     @Test
     public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException {
-        new DataEndpointBuilder()
+        DataEndpoint endpoint = createEndpoint();
+        String rdf = endpoint.toRdf();
+
+        DataEndpoint deser = (DataEndpoint) VocabUtil.fromRdf(rdf);
+        Assert.assertNotNull(deser);
+
+        // test correct mapping of input and output parameter
+
+        // extract the param definitions
+        Operation opDefinition = deser.getOffers().getOperations().iterator().next();
+        Parameter inputParam = opDefinition.getInputs().iterator().next();
+        Parameter outputParam = opDefinition.getOutputs().iterator().next();
+
+        // extract the mappings and ensure they refer to the respective parameter definition
+        OperationBinding opBinding = deser.getProtocolBinding().getOperationBindings().iterator().next();
+        ReflectionAssert.assertReflectionEquals(opDefinition, opBinding.getBoundOperation());
+
+        for (ParameterBinding parameterBinding : opBinding.getParameterBindings()) {
+            Parameter boundParameter = parameterBinding.getBoundParameter();
+            if (boundParameter instanceof InputParameter) {
+                ReflectionAssert.assertReflectionEquals(boundParameter, inputParam);
+            }
+            else if (boundParameter instanceof OutputParameter) {
+                ReflectionAssert.assertReflectionEquals(boundParameter, outputParam);
+            }
+
+            Assert.assertNotNull(parameterBinding.getBindingApproach());
+        }
+    }
+
+    private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException {
+        return new DataEndpointBuilder()
             .offers(createOffering())
             .protocolBinding(createProtocolBinding())
 

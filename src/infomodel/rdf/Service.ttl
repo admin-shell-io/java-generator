@@ -65,6 +65,10 @@ ids:Parameter a owl:Class;
     rdfs:label "Parameter"@en ;
     rdfs:comment "Specifies how an Operation should be performed."@en;
     ids:validation [
+        owl:onProperty ids:paramName;
+        valid:constraint "@NotNull";
+    ];
+    ids:validation [
         owl:onProperty ids:paramLabel;
         valid:relationType "@OneToMany";
     ];
