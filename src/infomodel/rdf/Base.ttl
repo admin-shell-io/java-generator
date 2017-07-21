@@ -9,6 +9,23 @@
 @prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#> .
 @prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#> .
 
+
+# Description of this ontology
+# ----------------------------
+
+ids: a owl:Ontology;
+    dct:title "The Industrial Dataspace Information Model"@en;
+    rdfs:comment "This ontology defines classes and properties for describing participants, infrastructure, data and services of the Industrial Dataspace.";
+    dct:creator "Christian Mader" ;
+    dct:creator "Jaroslav Pullmann" ;
+    dct:creator "Niklas Petersen" ;
+    dct:creator "Christoph Lange-Bever" ;
+    dct:creator "Steffen Lohmann" ;
+    dct:publisher "Fraunhofer IAIS/EIS";
+    dct:publisher "Fraunhofer FIT";
+    dct:date "2017-06-20";
+    owl:versionInfo "0.9.0".
+
 # Classes
 # -------
 

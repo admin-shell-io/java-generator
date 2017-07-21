@@ -59,6 +59,11 @@ public class DataTransferUsageTest {
             .build();
     }
 
+    @Test(expected = ConstraintViolationException.class)
+    public void InvalidDataTransfer() throws ConstraintViolationException {
+        new DataTransferBuilder().build();
+    }
+
     @Test
     public void dataTransferDeserialization() throws Exception {
         String serializedHeader = createDataTransfer().toRdf();
