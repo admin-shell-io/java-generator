@@ -93,7 +93,6 @@ public class ConnectorUsageTest {
     private SecurityProfile createSecurityProfile() throws ConstraintViolationException {
         return new SecurityProfileBuilder()
                 .basedOn(PredefinedSecurityProfile.LEVEL_0)
-
                 .build();
     }
 
