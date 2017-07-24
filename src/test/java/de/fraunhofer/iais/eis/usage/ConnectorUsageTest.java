@@ -78,6 +78,7 @@ public class ConnectorUsageTest {
                 .build();
 
         ConnectorBuilder connectorBuilder = new ConnectorBuilder(new URL("http://www.isst.fraunhofer.de/Broker"))
+                .securityProfile(createSecurityProfile())
                 .operator(participant.getId())
                 .maintainer(participant.getId())
                 .owner(participant.getId())
@@ -87,6 +88,13 @@ public class ConnectorUsageTest {
                 .entityDescriptions(Arrays.asList((new PlainLiteral("Broker API implementation for demonstration.", "en"))));
 
         return connectorBuilder.build();
+    }
+
+    private SecurityProfile createSecurityProfile() throws ConstraintViolationException {
+        return new SecurityProfileBuilder()
+                .basedOn(PredefinedSecurityProfile.LEVEL_0)
+
+                .build();
     }
 
 }
