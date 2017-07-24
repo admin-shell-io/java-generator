@@ -74,6 +74,14 @@ ids:receiver
 	trns:refByURI true;
 	rdfs:comment "The data endpoint which is the recipient of the message."@en.
 
+ids:invokedOperation
+	a owl:DatatypeProperty;
+	rdfs:label "invokedOperation"@en;
+	rdfs:domain ids:DataTransfer;
+	rdfs:range ids:Operation;
+	trns:refByURI true;
+	rdfs:comment "The operation that has been invoked to retrieve the transferred data."@en.
+
 ids:authToken
 	a owl:ObjectProperty;
 	rdfs:label "authToken"@en;
