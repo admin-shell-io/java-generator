@@ -53,9 +53,9 @@ ids:LocalDataConfidentiality a owl:Class;
 # Properties
 # ----------
 
-ids:basedOn a owl:DatatypeProperty;
+ids:basedOn a owl:ObjectProperty;
     rdfs:domain ids:SecurityProfile;
-    rdfs:range ids:ObjectProperty;
+    rdfs:range ids:PredefinedSecurityProfile;
     rdfs:label "basedOn"@en;
     rdfs:comment "A predefined security profile this one is based on."@en.
 
@@ -202,8 +202,8 @@ ids:Kernel_and_Core_Container_and_Application_Containers a ids:IntegrityProtecti
     rdfs:comment "Kernel and Core Container and Application Containers";
     dct:identifier "KERNEL_AND_CORE_CONTAINER_AND_APP_CONTAINERS".
 
-ids:No_Integrity_Protection a ids:IntegrityProtectionScope;
-    rdfs:comment "No_Integrity_Protection";
+ids:Unknown_Integrity_Protection_Scope a ids:IntegrityProtectionScope;
+    rdfs:comment "Unknown Integrity Protection Scope";
     dct:identifier "NONE".
 
 # App Execution Resources
