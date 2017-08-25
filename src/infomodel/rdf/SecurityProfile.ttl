@@ -146,6 +146,18 @@ ids:Level2SecurityProfile a ids:PredefinedSecurityProfile;
     ids:auditLogging ids:Remote_Audit_Log_Tracing;
     ids:localDataConfidentiality ids:No_Confidentiality.
 
+ids:BaseConnectorSecurityProfile a ids:PredefinedSecurityProfile;
+    rdfs:comment "Base Connector Security Profile";
+    dct:identifier "BASE_CONNECTOR";
+    ids:integrityProtectionAndVerificationSupport ids:No_Integrity_Protection;
+    ids:authenticationSupport ids:Mutual;
+    ids:serviceIsolationSupport ids:Process_Group_Isolation;
+    ids:integrityProtectionScope ids:Unknown_Integrity_Protection_Scope;
+    ids:appExecutionResources ids:No_App_Execution;
+    ids:dataUsageControlSupport ids:No_Usage_Control;
+    ids:auditLogging ids:Local_Logging_Capabilities_And_Integrity_Protection;
+    ids:localDataConfidentiality ids:No_Confidentiality.
+
 # Integrity Protection and Verification
 # -------------------------------------
 
