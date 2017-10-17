@@ -108,25 +108,4 @@ public class BrokerMessageUsageTest {
             .build();
     }
 
-    @Test
-    public void brokerDataResponseSerialization() throws MalformedURLException, ConstraintViolationException {
-        URL requestId = createBrokerDataRequest().getId();
-
-        /*
-        new BrokerDataResponseBuilder()
-                .messageContent()
-                .correlationId(requestId)
-        */
-    }
-
-    @Test
-    public void brokerQueryRequestSerialization() {
-
-    }
-
-    @Test
-    public void brokerQueryResponseSerialization() {
-
-    }
-
 }

@@ -8,6 +8,11 @@
     <artifactId>ids-infomodel</artifactId>
     <version>0.16-SNAPSHOT</version>
 
+    <properties>
+        <!-- Adapt this path according to the location of the information model RDF sources -->
+        <infomodel-rdf-sourcedir>${user.home}/projects/ids/ids_infomodel/InformationModel/infomodel</infomodel-rdf-sourcedir>
+    </properties>
+
     <dependencies>
         <!-- IAIS tools -->
         <dependency>
@@ -64,15 +69,9 @@
 
         <resources>
             <resource>
-                <directory>src/infomodel</directory>
+                <directory>doc/diagram/</directory>
                 <includes>
-                    <include>diagram/classes.png</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/infomodel</directory>
-                <includes>
-                    <include>rdf/*.ttl</include>
+                    <include>classes.png</include>
                 </includes>
             </resource>
         </resources>
@@ -121,9 +120,9 @@
                             </executableDependency>
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
-                                <argument>${basedir}/src/infomodel/rdf</argument>
-                                <argument>${basedir}/src/infomodel/templates/diagram</argument>
-                                <argument>${basedir}/src/infomodel/templates/java</argument>
+                                <argument>${infomodel-rdf-sourcedir}</argument>
+                                <argument>${basedir}/src/templates/diagram</argument>
+                                <argument>${basedir}/src/templates/java</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -173,7 +172,7 @@
                             </includes>
                         </resource>
                         <resource>
-                            <targetPath>${basedir}/src/infomodel/diagram</targetPath>
+                            <targetPath>${basedir}/doc/diagram</targetPath>
                             <directory>/tmp</directory>
                             <includes>
                                 <include>**/*.png</include>
@@ -206,7 +205,7 @@
                             <followSymlinks>false</followSymlinks>
                         </fileset>
                         <fileset>
-                            <directory>${basedir}/src/infomodel/diagram</directory>
+                            <directory>${basedir}/doc/diagram</directory>
                             <includes>
                                 <include>*.png</include>
                             </includes>
