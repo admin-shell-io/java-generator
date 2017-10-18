@@ -4,19 +4,19 @@ prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
 template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
 
-    if (bound(?relationType) && str(?relationType) = "@OneToMany", concat("Collection", str(?bracketOpen)), "")
+    if (bound(?relationType) && (?relationType = <valid:OneToMany>), concat("Collection", str(?bracketOpen)), "")
 
     st:call-template(ids:range-to-basic-type, ?property, ?range)
 
-    if (bound(?relationType) && str(?relationType) = "@OneToMany", str(?bracketClose), "")
+    if (bound(?relationType) && (?relationType = <valid:OneToMany>), str(?bracketClose), "")
 
 }
 where {
     ?property rdfs:domain ?class
 
     OPTIONAL {
-        ?class ids:validation ?validation.
-        ?validation owl:onProperty ?property.
+        ?class valid:validation ?validation.
+        ?validation valid:forProperty ?property.
         ?validation valid:relationType ?relationType.
     }
 }

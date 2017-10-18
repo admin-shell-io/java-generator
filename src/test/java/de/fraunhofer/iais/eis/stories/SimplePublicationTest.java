@@ -44,7 +44,6 @@ public class SimplePublicationTest {
     public void createOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException {
         Connector connector = describeConnectorWithDataOffering();
         String rdf = connector.toRdf();
-        System.out.println(rdf);
 
         Connector deser = (Connector) VocabUtil.fromRdf(rdf);
         Assert.assertNotNull(deser);
