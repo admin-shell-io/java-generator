@@ -3,11 +3,13 @@ prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
 
 template ids:propertyAnnotation(?class, ?property, ?range) {
 
-    str(?constraint)
+    if (?constraint = <valid:NotNull>, "@NotNull",
+    if (?constraint = <valid:NotEmpty>, "@NotEmpty",
+      "!!unknownConstraint!!"))
 
 }
 where {
-    ?class ids:validation ?validation.
-    ?validation owl:onProperty ?property.
+    ?class valid:validation ?validation.
+    ?validation valid:forProperty ?property.
     ?validation valid:constraint ?constraint.
 }
