@@ -10,7 +10,8 @@
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
-        <infomodel-rdf-sourcedir>${user.home}/projects/ids/ids_infomodel/InformationModel/infomodel</infomodel-rdf-sourcedir>
+        <infomodel-rdf-sourcedir1>${user.home}/projects/ids/ids_infomodel/InformationModel/core</infomodel-rdf-sourcedir1>
+        <infomodel-rdf-sourcedir2>${user.home}/projects/ids/ids_infomodel/InformationModel/extCore</infomodel-rdf-sourcedir2>
     </properties>
 
     <dependencies>
@@ -120,7 +121,9 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <argument>-vd</argument>
-                                <argument>${infomodel-rdf-sourcedir}</argument>
+                                <argument>${infomodel-rdf-sourcedir1}</argument>
+                                <argument>-vd</argument>
+                                <argument>${infomodel-rdf-sourcedir2}</argument>
                                 <argument>-td</argument>
                                 <argument>${basedir}/src/templates/diagram</argument>
                                 <argument>-td</argument>

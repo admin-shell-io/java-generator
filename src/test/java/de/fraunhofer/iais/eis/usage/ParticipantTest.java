@@ -24,9 +24,10 @@ public class ParticipantTest {
     public void structuredOrganization() throws MalformedURLException, ConstraintViolationException {
         Participant original = new ParticipantBuilder(new URL("http://example.org/ACME"))
             .entityNames(Arrays.asList(new PlainLiteral("ACME Explosives GmbH")))
+//            .entityDescriptions(Collections.EMPTY_LIST)
             .corporateEmailAddresses(Arrays.asList("kaboom@acme.org"))
             .memberParticipants(Arrays.asList(createMemberParticipant()))
-            .entityDescriptions(Collections.EMPTY_LIST)
+            .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS.getId())
             .build();
         Participant deserialized = (Participant) VocabUtil.fromRdf(original.toRdf());
 

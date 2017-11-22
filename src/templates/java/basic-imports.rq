@@ -15,7 +15,6 @@ template ids:basic-imports {
     "\nimport org.apache.jena.rdf.model.Literal;"
     "\nimport org.hibernate.validator.constraints.*;"
     "\nimport javax.validation.constraints.*;"
-    "\nimport java.util.Optional;"
     "\nimport java.util.Arrays;"
 
 }

@@ -45,6 +45,8 @@ public class SimplePublicationTest {
         Connector connector = describeConnectorWithDataOffering();
         String rdf = connector.toRdf();
 
+        System.out.println(rdf);
+
         Connector deser = (Connector) VocabUtil.fromRdf(rdf);
         Assert.assertNotNull(deser);
     }
@@ -53,7 +55,7 @@ public class SimplePublicationTest {
         return new ConnectorBuilder(CONNECTOR_URL)
                 .owner(PARTICIPANT_URL)
                 .operator(PARTICIPANT_URL)
-                .generationActivity(describeConnectorCreation())
+//                .generationActivity(describeConnectorCreation())
                 .entityNames(Arrays.asList(new PlainLiteral("Official IDS Connector of companyA", "en")))
                 .provides(Arrays.asList(describeDataEndpoint()))
                 .build();
