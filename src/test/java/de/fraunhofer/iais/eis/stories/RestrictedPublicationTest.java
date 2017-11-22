@@ -83,7 +83,7 @@ public class RestrictedPublicationTest {
         return new ConstraintBuilder()
             .payAmount(500f)
             .operator(BinaryOperator.EQUALS)
-            .unit(Unit.EUR)
+            .unit(Unit.EUR.getId())
             .build();
     }
 
@@ -98,7 +98,7 @@ public class RestrictedPublicationTest {
         return new ConstraintBuilder()
             .dateTime("P12M")
             .operator(BinaryOperator.EQUALS)
-            .unit(Unit.EUR)
+            .unit(Unit.EUR.getId())
             .build();
     }
 
