@@ -30,8 +30,8 @@ public class ConnectorUsageTest {
         String rdf = createParticipant().toRdf();
 
         Model model = TestUtil.createModelFromRdf(rdf);
-        Property descProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#entityDescription");
-        Property nameProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#entityName");
+        Property descProperty = model.createProperty("https://schema.industrialdataspace.org/base/entityDescription");
+        Property nameProperty = model.createProperty("https://schema.industrialdataspace.org/base/entityName");
         Resource participant = model.createResource("http://www.isst.fraunhofer.de");
 
         Assert.assertFalse(model.listObjectsOfProperty(participant, descProperty).toList().isEmpty());
@@ -43,7 +43,7 @@ public class ConnectorUsageTest {
         String rdf = createConnector().toRdf();
 
         Model model = TestUtil.createModelFromRdf(rdf);
-        Property operatorProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#operator");
+        Property operatorProperty = model.createProperty("https://schema.industrialdataspace.org/base/operator");
         Resource broker = model.createResource("http://www.isst.fraunhofer.de/Broker");
 
         // test for some sample property

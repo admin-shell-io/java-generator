@@ -27,9 +27,9 @@ public class BrokerMessageUsageTest {
 
         Model model = TestUtil.createModelFromRdf(brokerMessage);
         Resource transfer = model.createResource("http://example.org/brokerdatarequest/1");
-        Property coveredEntityProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#coveredEntity");
-        Property dataRequestActionProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#dataRequestAction");
-        Property msgContentProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#messageContent");
+        Property coveredEntityProperty = model.createProperty("https://schema.industrialdataspace.org/brokerCommunication/coveredEntity");
+        Property dataRequestActionProperty = model.createProperty("https://schema.industrialdataspace.org/brokerCommunication/dataRequestAction");
+        Property msgContentProperty = model.createProperty("https://schema.industrialdataspace.org/brokerCommunication/messageContent");
 
         for (Property property : Arrays.asList(coveredEntityProperty, dataRequestActionProperty, msgContentProperty)) {
             Assert.assertTrue(model.listObjectsOfProperty(transfer, property).hasNext());

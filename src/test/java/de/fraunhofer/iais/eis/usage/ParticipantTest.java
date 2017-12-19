@@ -53,7 +53,6 @@ public class ParticipantTest {
             .givenName("Elmer")
             .familyName("Fudd")
             .phoneNumbers(Arrays.asList("+49123456789"))
-            .gender(Gender.MALE)
             .build();
     }
 

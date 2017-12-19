@@ -35,11 +35,11 @@ public class DataTransferUsageTest {
 
         Model model = TestUtil.createModelFromRdf(serializedHeader);
         Resource transfer = model.createResource("http://example.org/transfer/1");
-        Property authTokenProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#authToken");
-        Property hashFuncProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#hashFunction");
-        Property recvProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#receiver");
-        Property sendProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#sender");
-        Property creatProperty = model.createProperty("http://industrialdataspace.org/2016/10/ids/core#transferCreatedAt");
+        Property authTokenProperty = model.createProperty("https://schema.industrialdataspace.org/dataTransfer/authToken");
+        Property hashFuncProperty = model.createProperty("https://schema.industrialdataspace.org/dataTransfer/hashFunction");
+        Property recvProperty = model.createProperty("https://schema.industrialdataspace.org/dataTransfer/receiver");
+        Property sendProperty = model.createProperty("https://schema.industrialdataspace.org/dataTransfer/sender");
+        Property creatProperty = model.createProperty("https://schema.industrialdataspace.org/dataTransfer/transferCreatedAt");
 
         for (Property property : Arrays.asList(authTokenProperty, hashFuncProperty, recvProperty, sendProperty, creatProperty)) {
             Assert.assertTrue(model.listObjectsOfProperty(transfer, property).hasNext());

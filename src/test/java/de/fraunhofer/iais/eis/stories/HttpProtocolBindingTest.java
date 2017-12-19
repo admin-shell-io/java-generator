@@ -118,7 +118,7 @@ public class HttpProtocolBindingTest {
     private OperationBinding createOperationBinding() throws ConstraintViolationException {
         return new OperationHttpBindingBuilder()
             .boundOperation(readSensorDataOperation)
-            .httpMethod(HttpMethod.HTTP_GET)
+            .httpMethod(HTTPMethod.HTTP_GET)
             .uriTemplate("http://opcua-ids-connector:8080/sensors/{sensorId}")
             .parameterBindings(Arrays.asList(createInputParamBinding(), createOutputParameterBinding()))
             .build();

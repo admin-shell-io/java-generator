@@ -7,8 +7,8 @@ template ids:subclass-to-interface-extends(?class) {
 
 }
 where {
-    ?class rdfs:subClassOf ?superClass;
-        rdfs:label ?superClassLabel .
+    ?class rdfs:subClassOf ?superClass.
+    ?superClass rdfs:label ?superClassLabel .
 
     filter (strstarts(str(?superClass), str(<ids:>)) && lang(?superClassLabel) = "en")
 }
