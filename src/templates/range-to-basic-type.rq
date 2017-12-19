@@ -1,7 +1,6 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix ids: <https://schema.industrialdataspace.org/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
-prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#>
+prefix trns: <https://schema.iais.fraunhofer.de/ids/helper/transformation/>
 
 template ids:range-to-basic-type(?property, ?range) {
 
@@ -25,13 +24,13 @@ template ids:range-to-basic-type(?property, ?range) {
         if (str(?range) = str(<rdfs:Literal>), "Literal",
         if (str(?range) = str(<rdf:PlainLiteral>), "PlainLiteral",
 
-        if (strstarts(str(?range), str(<ids:>)), strafter(?range, "#"),
-            "!!unknownType!!")))))))))))))))))
+        if (bound(?rangeLabel), str(?rangeLabel), "!!unknownType!!")))))))))))))))))
     )
 
 }
 where {
     ?property rdfs:range ?range.
 
-    OPTIONAL {?property trns:refByURI ?refByUri}
+    optional {?range rdfs:label ?rangeLabel}
+    optional {?property trns:refByURI ?refByUri}
 }

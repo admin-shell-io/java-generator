@@ -1,4 +1,4 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix ids: <https://schema.industrialdataspace.org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template ids:process-class-to-bean(?class) {
@@ -10,8 +10,8 @@ template ids:process-class-to-bean(?class) {
     "\n"
     "\n"
     "/** " str(?comment) " */\n"
-    "public class " concat(strafter(str(?class), "#"), "Impl")
-    " implements " strafter(str(?class), "#")
+    "public class " concat(str(?label), "Impl")
+    " implements " str(?label)
 
     " {\n"
 
@@ -25,7 +25,7 @@ template ids:process-class-to-bean(?class) {
 
     "\n"
     "\n\t// no manual construction"
-    "\n\t" strafter(str(?class), "#") "Impl() {}"
+    "\n\t" str(?label) "Impl() {}"
     "\n"
     "\n\t@Override"
     "\n\tfinal public java.net.URL getId() {"
@@ -48,5 +48,8 @@ template ids:process-class-to-bean(?class) {
 }
 where{
     ?class a owl:Class;
-        rdfs:comment ?comment.
+        rdfs:comment ?comment;
+        rdfs:label ?label .
+
+    filter (lang(?label) = "en")
 }

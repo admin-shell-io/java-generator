@@ -1,26 +1,28 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix ids: <https://schema.industrialdataspace.org/>
 prefix dcat: <http://www.w3.org/ns/dcat#>
-prefix trns: <http://industrialdataspace.org/2017/01/ids/transformation#>
+prefix trns: <https://schema.iais.fraunhofer.de/ids/helper/transformation/>
 
 template ids:class-tbox(?class) {
 
     if (!bound(?isAbstract) || (?isAbstract = false),
-        kg:write(concat("/tmp/",strafter(str(?class), "#"), "Impl.java"),
+        kg:write(concat("/tmp/",str(?label), "Impl.java"),
             st:call-template(ids:process-class-to-bean, ?class)),
         '')
 
     if (!bound(?isAbstract) || (?isAbstract = false),
-        kg:write(concat("/tmp/",strafter(str(?class), "#"), "Builder.java"),
+        kg:write(concat("/tmp/", str(?label), "Builder.java"),
             st:call-template(ids:process-class-to-builder, ?class)),
         '')
 
-    kg:write(concat("/tmp/",strafter(str(?class), "#"), ".java"),
+    kg:write(concat("/tmp/", str(?label), ".java"),
         st:call-template(ids:process-class-to-interface, ?class))
 
 }
 where  {
     ?class a owl:Class.
+    ?class rdfs:label ?label .
 
-    OPTIONAL {?class trns:isAbstract ?isAbstract}
+    filter (lang(?label) = "en")
+    optional {?class trns:isAbstract ?isAbstract}
 }
 

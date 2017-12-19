@@ -1,5 +1,5 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
-prefix valid: <http://industrialdataspace.org/2017/01/ids/validation#>
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix valid: <https://schema.iais.fraunhofer.de/ids/helper/relation/>
 
 template ids:propertyAnnotation(?class, ?property, ?range) {
 

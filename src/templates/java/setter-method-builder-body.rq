@@ -1,6 +1,6 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix ids: <https://schema.industrialdataspace.org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#>
+prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
 
 template ids:setter-method-builder-body(?property, ?class) {
 

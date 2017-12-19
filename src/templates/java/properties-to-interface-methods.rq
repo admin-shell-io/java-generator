@@ -1,4 +1,4 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix ids: <https://schema.industrialdataspace.org/>
 
 template ids:properties-to-interface-methods(?class) {
 

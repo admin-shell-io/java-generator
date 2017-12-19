@@ -1,5 +1,5 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
-prefix idoc: <http://industrialdataspace.org/2017/01/ids/documentation#>
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
 
 template ids:property-to-setter-method(?property, ?class) {
 

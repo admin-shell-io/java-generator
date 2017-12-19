@@ -1,12 +1,15 @@
-prefix ids: <http://industrialdataspace.org/2016/10/ids/core#>
+prefix ids: <https://schema.industrialdataspace.org/>
 prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template ids:class-abox(?class) {
 
-    kg:write(concat("/tmp/",strafter(str(?class), "#"), ".java"),
+    kg:write(concat("/tmp/", str(?label), ".java"),
         st:call-template(ids:process-class-to-enum, ?class))
 
 }
 where  {
+    ?class rdfs:label ?label .
+    filter(lang(?label) = "en")
 }
+
 
