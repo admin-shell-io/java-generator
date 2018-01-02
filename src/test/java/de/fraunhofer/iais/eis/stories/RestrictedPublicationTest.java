@@ -9,13 +9,14 @@ import org.junit.Test;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
 public class RestrictedPublicationTest {
     /** As an IDS participant I want to provide my data offering to a restricted group of partners. Each partner is
-     *  obliged to pay 500eur for downloading the dataset, must not redistribute it to third parties and delete it
-     *  after 12 months.
+     *  obliged to pay either 500eur one-time, 100eur per 100kb or 200eur per week and must not redistribute it to
+     *  third parties and delete it after 12 months.
      */
 
     // these SHOULD be resolvable
@@ -60,11 +61,15 @@ public class RestrictedPublicationTest {
     }
 
     private Permission describeInvokeOperationPermission() throws ConstraintViolationException {
+        Collection<Duty> duties = new ArrayList<>();
+        duties.addAll(describePaymentDuties());
+        duties.add(describeDeletionDuty());
+
         return new PermissionBuilder()
             .action(Action.INVOKE_OPERATION)
             .target(OPERATION_URL)
             .assignees(getPartnerUrls())
-            .duties(Arrays.asList(describePaymentDuty(), describeDeletionDuty()))
+            .duties(duties)
             .build();
     }
 
@@ -72,18 +77,44 @@ public class RestrictedPublicationTest {
         return Arrays.asList(PARTNER1_URL, PARTNER2_URL);
     }
 
-    private Duty describePaymentDuty() throws ConstraintViolationException {
-        return new DutyBuilder()
+    private Collection<Duty> describePaymentDuties() throws ConstraintViolationException {
+        Duty payOnceDuty = new DutyBuilder()
             .action(Action.PAY_ONCE)
-            .constraint(Arrays.asList(describePaymentConstraint()))
+            .constraint(Arrays.asList(describeOneTimePaymentConstraint()))
+            .build();
+        Duty payPerVolumeDuty = new DutyBuilder()
+            .action(Action.PAY_PER_VOLUME)
+            .constraint(Arrays.asList(describeVolumePaymentConstraint()))
+            .build();
+        Duty payPeriodicallyDuty = new DutyBuilder()
+            .action(Action.PAY_PERIODICALLY)
+            .constraint(Arrays.asList(describePeriodicPaymentConstraint()))
+            .build();
+
+        return Arrays.asList(payOnceDuty, payPerVolumeDuty, payPeriodicallyDuty);
+    }
+
+    private Constraint describeOneTimePaymentConstraint() throws ConstraintViolationException {
+        return new PayOnceConstraintBuilder()
+            .payAmount(500f)
+            .paymentUnit(Unit.EUR.getId())
             .build();
     }
 
-    private Constraint describePaymentConstraint() throws ConstraintViolationException {
-        return new ConstraintBuilder()
-            .payAmount(500f)
-            .operator(BinaryOperator.EQUALS)
-            .unit(Unit.EUR.getId())
+    private Constraint describeVolumePaymentConstraint() throws ConstraintViolationException {
+        return new PayPerVolumeConstraintBuilder()
+            .payAmount(100f)
+            .paymentUnit(Unit.EUR.getId())
+            .volumeAmount(100f)
+            .volumeUnit(Unit.KB.getId())
+            .build();
+    }
+
+    private Constraint describePeriodicPaymentConstraint() throws ConstraintViolationException {
+        return new PayPeriodicallyConstraintBuilder()
+            .payAmount(200f)
+            .paymentUnit(Unit.EUR.getId())
+            .recurrenceRate(RecurrenceRate.WEEKLY)
             .build();
     }
 
@@ -97,8 +128,6 @@ public class RestrictedPublicationTest {
     private Constraint describeDeletionConstraint() throws ConstraintViolationException {
         return new ConstraintBuilder()
             .dateTime("P12M")
-            .operator(BinaryOperator.EQUALS)
-            .unit(Unit.EUR.getId())
             .build();
     }
 
