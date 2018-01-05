@@ -84,7 +84,7 @@ public class ConnectorUsageTest {
                 .owner(participant.getId())
                 .generationActivity(creationActivity)
                 .lifecycleActivities(Arrays.asList(creationActivity))
-                .authInfo(createAuthInfo())
+//                .authInfo(createAuthInfo())
                 .entityNames(Arrays.asList(new PlainLiteral("Broker")))
                 .entityDescriptions(Arrays.asList((new PlainLiteral("Broker API implementation for demonstration.", "en"))));
 
@@ -96,7 +96,7 @@ public class ConnectorUsageTest {
                 .basedOn(PredefinedSecurityProfile.LEVEL_0)
                 .build();
     }
-
+/*
     private AuthInfo createAuthInfo() throws ConstraintViolationException, MalformedURLException {
         AuthInfo authInfo = new AuthInfoBuilder()
             .authService(new URL("http://www.isst.fraunhofer.de/Broker/auth"))
@@ -107,5 +107,5 @@ public class ConnectorUsageTest {
 
         return authInfo;
     }
-
+*/
 }

@@ -3,10 +3,8 @@ package de.fraunhofer.iais.eis.stories;
 import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.PlainLiteral;
-import de.fraunhofer.iais.eis.util.VocabUtil;
 import org.junit.Assert;
 import org.junit.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -20,45 +18,14 @@ public class MqttProtocolBindingTest {
      */
 
     private Operation readSensorDataOperation;
-    private Parameter sensorIdParam, sensorValuesParam;
 
     @Test
     public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException {
-        /*
         DataEndpoint endpoint = createEndpoint();
-        String rdf = endpoint.toRdf();
-
-        DataEndpoint deser = (DataEndpoint) VocabUtil.fromRdf(rdf);
-        Assert.assertNotNull(deser);
-
-        // test correct mapping of input and output parameter
-
-        // extract the param definitions
-        Operation opDefinition = deser.getOffers().getOperations().iterator().next();
-        Parameter inputParam = opDefinition.getInputs().iterator().next();
-        Parameter outputParam = opDefinition.getOutputs().iterator().next();
-
-        // extract the mappings and ensure they refer to the respective parameter definition
-        OperationBinding opBinding = deser.getProtocolBinding().getOperationBindings().iterator().next();
-        ReflectionAssert.assertReflectionEquals(opDefinition, opBinding.getBoundOperation());
-
-        for (ParameterBinding parameterBinding : opBinding.getParameterBindings()) {
-            Parameter boundParameter = parameterBinding.getBoundParameter();
-            if (boundParameter instanceof InputParameter) {
-                ReflectionAssert.assertReflectionEquals(boundParameter, inputParam);
-            }
-            else if (boundParameter instanceof OutputParameter) {
-                ReflectionAssert.assertReflectionEquals(boundParameter, outputParam);
-            }
-
-            Assert.assertNotNull(parameterBinding.getBindingApproach());
-        }
-        */
         Assert.fail();
     }
 
     private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException {
-        /*
         return new DataEndpointBuilder()
             .offers(createOffering())
             .protocolBinding(createProtocolBinding())
@@ -67,73 +34,58 @@ public class MqttProtocolBindingTest {
             .providedBy(new URL("http://industrialdataspace.org/participants/companyA"))
             .entityNames(Arrays.asList(new PlainLiteral("Sensor Connector Endpoint", "en")))
             .build();
-            */
-        return null;
     }
 
     private DataService createOffering() throws ConstraintViolationException, MalformedURLException {
-        /*
         return new DataServiceBuilder()
-            .operations(Arrays.asList(createOperation()))
+            .operations(Arrays.asList(createSubscribeOperation()))
             .build();
-            */
-        return null;
     }
 
-    private Operation createOperation() throws ConstraintViolationException, MalformedURLException {
-        /*
-        readSensorDataOperation = new ReadOperationBuilder()
-            .inputs(Arrays.asList(createInputParameter()))
-            .outputs(Arrays.asList(createOutputParameter()))
-
-            .opLabels(Arrays.asList(new PlainLiteral("Retrieve data of a single sensor", "en")))
-            .build();
-        return readSensorDataOperation;
-        */
-        return null;
+    private Operation createSubscribeOperation() throws ConstraintViolationException, MalformedURLException {
+        // define a subscribe method to be notified on sensor values of a specific type of sensor
+        return new SubscribeOperationBuilder()
+                .inputs(Arrays.asList(createSubscriptionInputParameter()))
+                .outputs(Arrays.asList(createSubscriptionOutputParameter()))
+                .build();
     }
 
-    private InputParameter createInputParameter() throws ConstraintViolationException {
-        /*
-        Representation intType = new RepresentationBuilder()
-            .dataType(ParameterDataType.XSD_INT)
+    private InputParameter createSubscriptionInputParameter() throws ConstraintViolationException, MalformedURLException {
+
+        Representation stringIdentifier = new RepresentationBuilder()
+            .dataType(ParameterDataType.XSD_STRING)
+            .conformsToStandard(new URL("http://sensorcompany/sensorTypes"))
             .build();
 
-        sensorIdParam = new InputParameterBuilder()
-            .paramName("sensorId")
-            .representation(intType)
+        Parameter sensorIdParam = new InputParameterBuilder()
+            .paramName("sensorType")
+            .representation(stringIdentifier)
             .build();
         return (InputParameter) sensorIdParam;
-        */
-        return null;
     }
 
-    private OutputParameter createOutputParameter() throws ConstraintViolationException, MalformedURLException {
-        /*
+    private OutputParameter createSubscriptionOutputParameter() throws ConstraintViolationException, MalformedURLException {
         Representation rdfSsnType = new RepresentationBuilder()
             .mediaType(IANAMediaType.APPLICATION_RDF_XML)
             .conformsToStandard(new URL("http://purl.oclc.org/NET/ssnx/ssn"))
             .build();
 
-        sensorValuesParam = new OutputParameterBuilder()
+        Parameter sensorValuesParam = new OutputParameterBuilder()
             .representation(rdfSsnType)
             .build();
         return (OutputParameter) sensorValuesParam;
-        */
-        return null;
     }
 
     private ProtocolBinding createProtocolBinding() throws ConstraintViolationException {
-        /*
         return new ProtocolBindingBuilder()
             .operationBindings(Arrays.asList(createOperationBinding()))
             .build();
-            */
-        return null;
     }
 
     // Specifies an URL (uriTemplate) to invoke the service
     private OperationBinding createOperationBinding() throws ConstraintViolationException {
+        return new OperationMqttBindingBuilder()
+                .boundOperation()
         /*
         return new OperationHttpBindingBuilder()
             .boundOperation(readSensorDataOperation)
