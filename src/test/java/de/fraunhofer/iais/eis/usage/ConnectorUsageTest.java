@@ -14,6 +14,8 @@ import org.junit.Test;
 
 import javax.xml.ws.Endpoint;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,7 +41,7 @@ public class ConnectorUsageTest {
     }
 
     @Test
-    public void connectorHasProperties() throws MalformedURLException, ConstraintViolationException {
+    public void connectorHasProperties() throws MalformedURLException, ConstraintViolationException, URISyntaxException {
         String rdf = createConnector().toRdf();
 
         Model model = TestUtil.createModelFromRdf(rdf);
@@ -62,7 +64,7 @@ public class ConnectorUsageTest {
                 .build();
     }
 
-    private Connector createConnector() throws MalformedURLException, ConstraintViolationException {
+    private Connector createConnector() throws MalformedURLException, ConstraintViolationException, URISyntaxException {
         Participant participant = createParticipant();
 
         Collection<URL> dataEndpoints = new ArrayList<>();
@@ -84,7 +86,7 @@ public class ConnectorUsageTest {
                 .owner(participant.getId())
                 .generationActivity(creationActivity)
                 .lifecycleActivities(Arrays.asList(creationActivity))
-//                .authInfo(createAuthInfo())
+                .authInfo(createAuthInfo())
                 .entityNames(Arrays.asList(new PlainLiteral("Broker")))
                 .entityDescriptions(Arrays.asList((new PlainLiteral("Broker API implementation for demonstration.", "en"))));
 
@@ -96,10 +98,10 @@ public class ConnectorUsageTest {
                 .basedOn(PredefinedSecurityProfile.LEVEL_0)
                 .build();
     }
-/*
-    private AuthInfo createAuthInfo() throws ConstraintViolationException, MalformedURLException {
+
+    private AuthInfo createAuthInfo() throws ConstraintViolationException, URISyntaxException {
         AuthInfo authInfo = new AuthInfoBuilder()
-            .authService(new URL("http://www.isst.fraunhofer.de/Broker/auth"))
+            .authService(new URI("http://www.isst.fraunhofer.de/Broker/auth"))
             .authStandard(AuthStandard.OAUTH2_JWT)
             .build();
 
@@ -107,5 +109,5 @@ public class ConnectorUsageTest {
 
         return authInfo;
     }
-*/
+
 }

@@ -8,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ public class RestrictedPublicationTest {
     }
 
     @Test
-    public void createOffering() throws MalformedURLException, ConstraintViolationException {
+    public void createOffering() throws MalformedURLException, ConstraintViolationException, URISyntaxException {
         DataEndpoint endpoint = describeDataEndpoint();
         String rdf = endpoint.toRdf();
 
@@ -44,7 +45,7 @@ public class RestrictedPublicationTest {
         Assert.assertNotNull(deser);
     }
 
-    private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException {
+    private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder(DATA_ENDPOINT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
                 .offers(storyUtil.describeDataService())

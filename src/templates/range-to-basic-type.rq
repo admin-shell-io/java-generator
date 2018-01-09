@@ -20,7 +20,7 @@ template ids:range-to-basic-type(?property, ?range) {
         if (str(?range) = str(<xsd:base64Binary>), "byte[]",
         if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
-        if (str(?range) = str(<xsd:anyURI>), "URL",
+        if (str(?range) = str(<xsd:anyURI>), "URI",
         if (str(?range) = str(<rdfs:Literal>), "Literal",
         if (str(?range) = str(<rdf:PlainLiteral>), "PlainLiteral",
 

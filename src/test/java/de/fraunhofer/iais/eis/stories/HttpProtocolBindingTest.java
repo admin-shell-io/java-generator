@@ -11,6 +11,8 @@ import org.unitils.reflectionassert.ReflectionAssert;
 
 import javax.xml.ws.Endpoint;
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,7 +28,7 @@ public class HttpProtocolBindingTest {
     private Parameter sensorIdParam, sensorValuesParam;
 
     @Test
-    public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException {
+    public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         DataEndpoint endpoint = createEndpoint();
         String rdf = endpoint.toRdf();
 
@@ -57,7 +59,7 @@ public class HttpProtocolBindingTest {
         }
     }
 
-    private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException {
+    private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder()
             .offers(createOffering())
             .protocolBinding(createProtocolBinding())
@@ -68,13 +70,13 @@ public class HttpProtocolBindingTest {
             .build();
     }
 
-    private DataService createOffering() throws ConstraintViolationException, MalformedURLException {
+    private DataService createOffering() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataServiceBuilder()
             .operations(Arrays.asList(createOperation()))
             .build();
     }
 
-    private Operation createOperation() throws ConstraintViolationException, MalformedURLException {
+    private Operation createOperation() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         readSensorDataOperation = new ReadOperationBuilder()
             .inputs(Arrays.asList(createInputParameter()))
             .outputs(Arrays.asList(createOutputParameter()))
@@ -96,10 +98,10 @@ public class HttpProtocolBindingTest {
         return (InputParameter) sensorIdParam;
     }
 
-    private OutputParameter createOutputParameter() throws ConstraintViolationException, MalformedURLException {
+    private OutputParameter createOutputParameter() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         Representation rdfSsnType = new RepresentationBuilder()
             .mediaType(IANAMediaType.APPLICATION_RDF_XML)
-            .conformsToStandard(new URL("http://purl.oclc.org/NET/ssnx/ssn"))
+            .conformsToStandard(new URI("http://purl.oclc.org/NET/ssnx/ssn"))
             .build();
 
         sensorValuesParam = new OutputParameterBuilder()
@@ -119,14 +121,14 @@ public class HttpProtocolBindingTest {
         return new OperationHttpBindingBuilder()
             .boundOperation(readSensorDataOperation)
             .httpMethod(HTTPMethod.HTTP_GET)
-            .uriTemplate("http://opcua-ids-connector:8080/sensors/{sensorId}")
+            .urlTemplate("http://opcua-ids-connector:8080/sensors/{sensorId}")
             .parameterBindings(Arrays.asList(createInputParamBinding(), createOutputParameterBinding()))
             .build();
     }
 
     // Binds the input parameter description to the invocation URL using the parameter's name "sensorId"
     private ParameterBinding createInputParamBinding() throws ConstraintViolationException {
-        BindingApproach bindingApproach = new UriTemplateBindingApproachBuilder().build();
+        BindingApproach bindingApproach = new HttpUrlTemplateBindingApproachBuilder().build();
 
         return new ParameterBindingBuilder()
             .boundParameter(sensorIdParam)

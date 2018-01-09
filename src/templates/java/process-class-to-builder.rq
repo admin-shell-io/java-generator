@@ -28,7 +28,7 @@ template ids:process-class-to-builder(?class) {
         "\");"
     "\n\t}"
     "\n"
-    "\n\tpublic " str(?label) "Builder(@javax.validation.constraints.NotNull java.net.URL id) {"
+    "\n\tpublic " str(?label) "Builder(@javax.validation.constraints.NotNull URL id) {"
     "\n\t\t"
     "this();"
     "\n\t\t"

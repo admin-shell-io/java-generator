@@ -11,6 +11,7 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.GregorianCalendar;
@@ -41,17 +42,15 @@ public class SimplePublicationTest {
     public SimplePublicationTest() throws MalformedURLException {}
 
     @Test
-    public void createOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException {
+    public void createOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException, URISyntaxException {
         Connector connector = describeConnectorWithDataOffering();
         String rdf = connector.toRdf();
-
-        System.out.println(rdf);
 
         Connector deser = (Connector) VocabUtil.fromRdf(rdf);
         Assert.assertNotNull(deser);
     }
 
-    private Connector describeConnectorWithDataOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException {
+    private Connector describeConnectorWithDataOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new ConnectorBuilder(CONNECTOR_URL)
                 .owner(PARTICIPANT_URL)
                 .operator(PARTICIPANT_URL)
@@ -68,7 +67,7 @@ public class SimplePublicationTest {
                 .build();
     }
 
-    private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException {
+    private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder(DATA_ENDPOINT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
                 .offers(storyUtil.describeDataService())
