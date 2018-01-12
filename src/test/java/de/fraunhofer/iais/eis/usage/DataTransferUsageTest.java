@@ -54,7 +54,7 @@ public class DataTransferUsageTest {
             .receiver(new URL("http://www.fraunhofer.de/Broker"))
             .transferCreatedAt(DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar()))
             .hashFunction(hashFunction)
-            .digest(createDigest())
+            .payloadDigest(createDigest())
             .authToken(new AuthTokenBuilder().tokenValue("token").build())
             .build();
     }
@@ -76,7 +76,7 @@ public class DataTransferUsageTest {
 
         XMLGregorianCalendar now = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
         Assert.assertEquals(obj.getTransferCreatedAt().compare(now), -1);
-        Assert.assertArrayEquals(createDigest(), obj.getDigest());
+        Assert.assertArrayEquals(createDigest(), obj.getPayloadDigest());
     }
 
     @Test

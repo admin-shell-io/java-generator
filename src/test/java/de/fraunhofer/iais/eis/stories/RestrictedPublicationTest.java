@@ -4,6 +4,10 @@ import de.fraunhofer.iais.eis.*;
 import de.fraunhofer.iais.eis.util.ConstraintViolationException;
 import de.fraunhofer.iais.eis.util.PlainLiteral;
 import de.fraunhofer.iais.eis.util.VocabUtil;
+import org.apache.jena.datatypes.RDFDatatype;
+import org.apache.jena.datatypes.xsd.impl.XSDFloat;
+import org.apache.jena.graph.NodeFactory;
+import org.apache.jena.rdf.model.Literal;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -54,8 +58,8 @@ public class RestrictedPublicationTest {
                 .build();
     }
 
-    private ServiceContract describeServiceContract() throws MalformedURLException, ConstraintViolationException {
-        return new ServiceContractBuilder()
+    private OfferedContract describeServiceContract() throws MalformedURLException, ConstraintViolationException {
+        return new OfferedContractBuilder()
             .permission(Arrays.asList(describeInvokeOperationPermission()))
             .prohibition(Arrays.asList(describeGrantUseProhibition()))
             .build();
@@ -79,47 +83,73 @@ public class RestrictedPublicationTest {
     }
 
     private Collection<Duty> describePaymentDuties() throws ConstraintViolationException {
+
+
+
         Duty payOnceDuty = new DutyBuilder()
-            .action(Action.PAY_ONCE)
-            .constraint(Arrays.asList(describeOneTimePaymentConstraint()))
+            .action(createOneTimePaymentAction())
             .build();
+
         Duty payPerVolumeDuty = new DutyBuilder()
-            .action(Action.PAY_PER_VOLUME)
-            .constraint(Arrays.asList(describeVolumePaymentConstraint()))
+            .action(describeVolumePaymentConstraint())
             .build();
+
         Duty payPeriodicallyDuty = new DutyBuilder()
-            .action(Action.PAY_PERIODICALLY)
-            .constraint(Arrays.asList(describePeriodicPaymentConstraint()))
+            .action(describePeriodicPaymentConstraint())
             .build();
 
         return Arrays.asList(payOnceDuty, payPerVolumeDuty, payPeriodicallyDuty);
     }
 
-    private Constraint describeOneTimePaymentConstraint() throws ConstraintViolationException {
-        return new PayOnceConstraintBuilder()
-            .payAmount(500f)
-            .paymentUnit(Unit.EUR.getId())
-            .build();
+    private Action createOneTimePaymentAction() throws ConstraintViolationException {
+        Literal amount = (Literal) NodeFactory.createLiteral("500", new XSDFloat("xsd:float")).getLiteral();
+        Constraint moneyConstraint = new ConstraintBuilder()
+                .leftOperand(LeftOperand.PAY_AMOUNT)
+                .operator(BinaryOperator.EQUALS)
+                .rightOperand(amount)
+                .unit(Unit.EUR.getId()).build();
+        return new PaymentActionBuilder().refinements(Arrays.asList(moneyConstraint)).build();
     }
 
-    private Constraint describeVolumePaymentConstraint() throws ConstraintViolationException {
-        return new PayPerVolumeConstraintBuilder()
-            .payAmount(100f)
-            .paymentUnit(Unit.EUR.getId())
-            .volumeAmount(100f)
-            .volumeUnit(Unit.KB.getId())
-            .build();
+    private Action describeVolumePaymentConstraint() throws ConstraintViolationException {
+        Literal amount = (Literal) NodeFactory.createLiteral("100", new XSDFloat("xsd:float")).getLiteral();
+        Constraint moneyConstraint = new ConstraintBuilder()
+                .leftOperand(LeftOperand.PAY_AMOUNT)
+                .operator(BinaryOperator.EQUALS)
+                .rightOperand(amount)
+                .unit(Unit.EUR.getId()).build();
+
+        Literal quantity = (Literal) NodeFactory.createLiteral("100", new XSDFloat("xsd:float")).getLiteral();
+        Constraint quantityConstraint = new ConstraintBuilder()
+                .leftOperand(LeftOperand.QUANTITY)
+                .operator(BinaryOperator.EQUALS)
+                .rightOperand(quantity)
+                .unit(Unit.KB.getId()).build();
+
+        return new PaymentActionBuilder().refinements(Arrays.asList(moneyConstraint, quantityConstraint)).build();
     }
 
-    private Constraint describePeriodicPaymentConstraint() throws ConstraintViolationException {
-        return new PayPeriodicallyConstraintBuilder()
-            .payAmount(200f)
-            .paymentUnit(Unit.EUR.getId())
-            .recurrenceRate(RecurrenceRate.WEEKLY)
-            .build();
+    private Action describePeriodicPaymentConstraint() throws ConstraintViolationException {
+        Literal amount = (Literal) NodeFactory.createLiteral("200", new XSDFloat("xsd:float")).getLiteral();
+        Constraint moneyConstraint = new ConstraintBuilder()
+                .leftOperand(LeftOperand.PAY_AMOUNT)
+                .operator(BinaryOperator.EQUALS)
+                .rightOperand(amount)
+                .unit(Unit.EUR.getId()).build();
+
+        Literal times = (Literal) NodeFactory.createLiteral("1", new XSDFloat("xsd:float")).getLiteral();
+        Constraint recurrenceConstraint = new ConstraintBuilder()
+                .leftOperand(LeftOperand.RECURRENCE_RATE)
+                .operator(BinaryOperator.EQUALS)
+                .rightOperand(times)
+                .unit(Unit.WEEK.getId()).build();
+
+        return new PaymentActionBuilder().refinements(Arrays.asList(moneyConstraint, recurrenceConstraint)).build();
     }
 
     private Duty describeDeletionDuty() throws ConstraintViolationException {
+        new DeleteActionBuilder().refinements(describeDeletionConstraint())
+
         return new DutyBuilder()
             .action(Action.DELETE)
             .constraint(Arrays.asList(describeDeletionConstraint()))

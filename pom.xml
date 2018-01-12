@@ -13,10 +13,8 @@
         <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-rdf-basedir>
 
         <!-- module directories -->
-        <infomodel-rdf-sourcedir1>${infomodel-rdf-basedir}/action</infomodel-rdf-sourcedir1>
         <infomodel-rdf-sourcedir2>${infomodel-rdf-basedir}/activity</infomodel-rdf-sourcedir2>
         <infomodel-rdf-sourcedir3>${infomodel-rdf-basedir}/base</infomodel-rdf-sourcedir3>
-        <infomodel-rdf-sourcedir4>${infomodel-rdf-basedir}/binaryOperator</infomodel-rdf-sourcedir4>
         <infomodel-rdf-sourcedir5>${infomodel-rdf-basedir}/broker</infomodel-rdf-sourcedir5>
         <infomodel-rdf-sourcedir6>${infomodel-rdf-basedir}/brokerCommunication</infomodel-rdf-sourcedir6>
         <infomodel-rdf-sourcedir7>${infomodel-rdf-basedir}/connector</infomodel-rdf-sourcedir7>
@@ -33,7 +31,6 @@
         <infomodel-rdf-sourcedir18>${infomodel-rdf-basedir}/parameterDataType</infomodel-rdf-sourcedir18>
         <infomodel-rdf-sourcedir19>${infomodel-rdf-basedir}/participant</infomodel-rdf-sourcedir19>
         <infomodel-rdf-sourcedir20>${infomodel-rdf-basedir}/protocolBinding</infomodel-rdf-sourcedir20>
-        <infomodel-rdf-sourcedir21>${infomodel-rdf-basedir}/rule</infomodel-rdf-sourcedir21>
         <infomodel-rdf-sourcedir22>${infomodel-rdf-basedir}/securityProfile</infomodel-rdf-sourcedir22>
         <infomodel-rdf-sourcedir23>${infomodel-rdf-basedir}/spatialEntity</infomodel-rdf-sourcedir23>
         <infomodel-rdf-sourcedir24>${infomodel-rdf-basedir}/temporal</infomodel-rdf-sourcedir24>
@@ -146,10 +143,8 @@
                             <classpathScope>compile</classpathScope>
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir1}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir2}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir3}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir4}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir5}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir6}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir7}</argument>
@@ -166,7 +161,6 @@
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir18}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir19}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir20}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir21}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir22}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir23}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir24}</argument>
