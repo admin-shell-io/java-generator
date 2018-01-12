@@ -22,6 +22,7 @@ import java.util.Collection;
 public class ControlledPublicationTest {
     /** As an IDS participant I want to provide my data under the conditions to either  to pay 500eur one-time,
      * 100eur per 100kb or 200eur per week and must not redistribute it to third parties and delete it after 12 months.
+     * todo: this example currently only uses plain literals for right operands, it should be typed literals
      */
 
     // these SHOULD be resolvable
