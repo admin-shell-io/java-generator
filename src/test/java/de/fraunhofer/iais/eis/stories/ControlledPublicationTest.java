@@ -8,6 +8,7 @@ import org.apache.jena.datatypes.RDFDatatype;
 import org.apache.jena.datatypes.xsd.impl.XSDFloat;
 import org.apache.jena.graph.NodeFactory;
 import org.apache.jena.rdf.model.Literal;
+import org.apache.jena.rdf.model.ResourceFactory;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,24 +19,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-public class RestrictedPublicationTest {
-    /** As an IDS participant I want to provide my data offering to a restricted group of partners. Each partner is
-     *  obliged to pay either 500eur one-time, 100eur per 100kb or 200eur per week and must not redistribute it to
-     *  third parties and delete it after 12 months.
+public class ControlledPublicationTest {
+    /** As an IDS participant I want to provide my data under the conditions to either  to pay 500eur one-time,
+     * 100eur per 100kb or 200eur per week and must not redistribute it to third parties and delete it after 12 months.
      */
 
     // these SHOULD be resolvable
     private final URL CONNECTOR_URL = new URL("http://companyA.com/IDS/connector1");
     private final URL DATA_ENDPOINT_URL = new URL("http://industrialdataspace.org/connector1/endpoint1");
-    private final URL PARTNER1_URL = new URL("http://industrialdataspace.org/participants/companyB");
-    private final URL PARTNER2_URL = new URL("http://industrialdataspace.org/participants/companyC");
 
     // this does not need to be resolvable, it is needed here fore ODRL compatibility
     private final URL OPERATION_URL = new URL("http://industrialdataspace.org/connector1/endpoint1/service/getDataOp");
 
     private final StoryUtil storyUtil;
 
-    public RestrictedPublicationTest() throws MalformedURLException {
+    public ControlledPublicationTest() throws MalformedURLException {
         storyUtil = new StoryUtil();
         storyUtil.setOperationUrl(OPERATION_URL);
     }
@@ -61,7 +59,7 @@ public class RestrictedPublicationTest {
     private OfferedContract describeServiceContract() throws MalformedURLException, ConstraintViolationException {
         return new OfferedContractBuilder()
             .permission(Arrays.asList(describeInvokeOperationPermission()))
-            .prohibition(Arrays.asList(describeGrantUseProhibition()))
+            .prohibition(Arrays.asList(describeDistributeProhibition()))
             .build();
     }
 
@@ -71,21 +69,13 @@ public class RestrictedPublicationTest {
         duties.add(describeDeletionDuty());
 
         return new PermissionBuilder()
-            .action(Action.INVOKE_OPERATION)
+            .action(new InvokeOperationActionBuilder().build())
             .target(OPERATION_URL)
-            .assignees(getPartnerUrls())
             .duties(duties)
             .build();
     }
 
-    private Collection<URL> getPartnerUrls() {
-        return Arrays.asList(PARTNER1_URL, PARTNER2_URL);
-    }
-
     private Collection<Duty> describePaymentDuties() throws ConstraintViolationException {
-
-
-
         Duty payOnceDuty = new DutyBuilder()
             .action(createOneTimePaymentAction())
             .build();
@@ -102,71 +92,66 @@ public class RestrictedPublicationTest {
     }
 
     private Action createOneTimePaymentAction() throws ConstraintViolationException {
-        Literal amount = (Literal) NodeFactory.createLiteral("500", new XSDFloat("xsd:float")).getLiteral();
         Constraint moneyConstraint = new ConstraintBuilder()
                 .leftOperand(LeftOperand.PAY_AMOUNT)
                 .operator(BinaryOperator.EQUALS)
-                .rightOperand(amount)
+                .rightOperand(ResourceFactory.createStringLiteral("500"))
                 .unit(Unit.EUR.getId()).build();
         return new PaymentActionBuilder().refinements(Arrays.asList(moneyConstraint)).build();
     }
 
     private Action describeVolumePaymentConstraint() throws ConstraintViolationException {
-        Literal amount = (Literal) NodeFactory.createLiteral("100", new XSDFloat("xsd:float")).getLiteral();
         Constraint moneyConstraint = new ConstraintBuilder()
                 .leftOperand(LeftOperand.PAY_AMOUNT)
                 .operator(BinaryOperator.EQUALS)
-                .rightOperand(amount)
+                .rightOperand(ResourceFactory.createStringLiteral("100"))
                 .unit(Unit.EUR.getId()).build();
 
-        Literal quantity = (Literal) NodeFactory.createLiteral("100", new XSDFloat("xsd:float")).getLiteral();
         Constraint quantityConstraint = new ConstraintBuilder()
                 .leftOperand(LeftOperand.QUANTITY)
                 .operator(BinaryOperator.EQUALS)
-                .rightOperand(quantity)
+                .rightOperand(ResourceFactory.createStringLiteral("100"))
                 .unit(Unit.KB.getId()).build();
 
         return new PaymentActionBuilder().refinements(Arrays.asList(moneyConstraint, quantityConstraint)).build();
     }
 
     private Action describePeriodicPaymentConstraint() throws ConstraintViolationException {
-        Literal amount = (Literal) NodeFactory.createLiteral("200", new XSDFloat("xsd:float")).getLiteral();
         Constraint moneyConstraint = new ConstraintBuilder()
                 .leftOperand(LeftOperand.PAY_AMOUNT)
                 .operator(BinaryOperator.EQUALS)
-                .rightOperand(amount)
+                .rightOperand(ResourceFactory.createStringLiteral("200"))
                 .unit(Unit.EUR.getId()).build();
 
-        Literal times = (Literal) NodeFactory.createLiteral("1", new XSDFloat("xsd:float")).getLiteral();
         Constraint recurrenceConstraint = new ConstraintBuilder()
                 .leftOperand(LeftOperand.RECURRENCE_RATE)
                 .operator(BinaryOperator.EQUALS)
-                .rightOperand(times)
+                .rightOperand(ResourceFactory.createStringLiteral("1"))
                 .unit(Unit.WEEK.getId()).build();
 
         return new PaymentActionBuilder().refinements(Arrays.asList(moneyConstraint, recurrenceConstraint)).build();
     }
 
     private Duty describeDeletionDuty() throws ConstraintViolationException {
-        new DeleteActionBuilder().refinements(describeDeletionConstraint())
+        Action deleteAction = new DeleteActionBuilder().refinements(Arrays.asList(describeDeletionConstraint())).build();
 
         return new DutyBuilder()
-            .action(Action.DELETE)
-            .constraint(Arrays.asList(describeDeletionConstraint()))
+            .action(deleteAction)
             .build();
     }
 
     private Constraint describeDeletionConstraint() throws ConstraintViolationException {
         return new ConstraintBuilder()
-            .dateTime("P12M")
+            .leftOperand(LeftOperand.TIME_INTERVAL)
+            .operator(BinaryOperator.EQUALS)
+            .rightOperand(ResourceFactory.createStringLiteral("P12M"))
             .build();
     }
 
-    private Prohibition describeGrantUseProhibition() throws ConstraintViolationException {
+    private Prohibition describeDistributeProhibition() throws ConstraintViolationException {
         return new ProhibitionBuilder()
-            .action(Action.DISTRIBUTE)
+            .action(new DistributeActionBuilder().build())
             .target(OPERATION_URL)
-            .assignees(getPartnerUrls())
             .build();
     }
 
