@@ -6,7 +6,7 @@
 
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
-    <version>0.17-SNAPSHOT</version>
+    <version>0.19-SNAPSHOT</version>
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
@@ -45,8 +45,9 @@
             <version>2.0-SNAPSHOT</version>
             <optional>true</optional>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/sparql-template-executor-2.0-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+            <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.0-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
+
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>jrdfb</artifactId>
@@ -89,6 +90,7 @@
             <artifactId>slf4j-api</artifactId>
             <version>RELEASE</version>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -131,7 +133,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>1.5.0</version>
+                <version>1.6.0</version>
                 <executions>
                     <execution>
                         <id>generate-java-and-diagram</id>
