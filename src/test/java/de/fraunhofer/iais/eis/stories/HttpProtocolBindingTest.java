@@ -38,31 +38,21 @@ public class HttpProtocolBindingTest {
         // test correct mapping of input and output parameter
 
         // extract the param definitions
-        Operation opDefinition = deser.getOffers().getOperations().iterator().next();
+        Operation opDefinition = deser.getOperations().iterator().next();
         Parameter inputParam = opDefinition.getInputs().iterator().next();
         Parameter outputParam = opDefinition.getOutputs().iterator().next();
 
         // extract the mappings and ensure they refer to the respective parameter definition
-        OperationBinding opBinding = deser.getProtocolBinding().getOperationBindings().iterator().next();
-        ReflectionAssert.assertReflectionEquals(opDefinition, opBinding.getBoundOperation());
+        OperationBinding opBinding = opDefinition.getBindings().iterator().next();
 
         for (ParameterBinding parameterBinding : opBinding.getParameterBindings()) {
-            Parameter boundParameter = parameterBinding.getBoundParameter();
-            if (boundParameter instanceof InputParameter) {
-                ReflectionAssert.assertReflectionEquals(boundParameter, inputParam);
-            }
-            else if (boundParameter instanceof OutputParameter) {
-                ReflectionAssert.assertReflectionEquals(boundParameter, outputParam);
-            }
-
             Assert.assertNotNull(parameterBinding.getBindingApproach());
         }
     }
 
     private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder()
-            .offers(createOffering())
-            .protocolBinding(createProtocolBinding())
+            .operations(Arrays.asList(createOperation()))
 
             // mandatory fields
             .providedBy(new URL("http://industrialdataspace.org/participants/companyA"))
@@ -70,16 +60,11 @@ public class HttpProtocolBindingTest {
             .build();
     }
 
-    private DataService createOffering() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
-        return new DataServiceBuilder()
-            .operations(Arrays.asList(createOperation()))
-            .build();
-    }
-
     private Operation createOperation() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         readSensorDataOperation = new ReadOperationBuilder()
             .inputs(Arrays.asList(createInputParameter()))
             .outputs(Arrays.asList(createOutputParameter()))
+            .bindings(Arrays.asList(createOperationBinding()))
 
             .opLabels(Arrays.asList(new PlainLiteral("Retrieve data of a single sensor", "en")))
             .build();
@@ -110,16 +95,11 @@ public class HttpProtocolBindingTest {
         return (OutputParameter) sensorValuesParam;
     }
 
-    private ProtocolBinding createProtocolBinding() throws ConstraintViolationException {
-        return new ProtocolBindingBuilder()
-            .operationBindings(Arrays.asList(createOperationBinding()))
-            .build();
-    }
+
 
     // Specifies an URL (uriTemplate) to invoke the service
     private OperationBinding createOperationBinding() throws ConstraintViolationException {
         return new OperationHttpBindingBuilder()
-            .boundOperation(readSensorDataOperation)
             .httpMethod(HTTPMethod.HTTP_GET)
             .urlTemplate("http://opcua-ids-connector:8080/sensors/{sensorId}")
             .parameterBindings(Arrays.asList(createInputParamBinding(), createOutputParameterBinding()))
@@ -131,7 +111,7 @@ public class HttpProtocolBindingTest {
         BindingApproach bindingApproach = new HttpUrlTemplateBindingApproachBuilder().build();
 
         return new ParameterBindingBuilder()
-            .boundParameter(sensorIdParam)
+            .boundParameter(sensorIdParam.getId())
             .bindingApproach(bindingApproach)
             .build();
     }
@@ -141,7 +121,7 @@ public class HttpProtocolBindingTest {
         BindingApproach bindingApproach = new HttpResponseBodyBindingApproachBuilder().build();
 
         return new ParameterBindingBuilder()
-            .boundParameter(sensorValuesParam)
+            .boundParameter(sensorValuesParam.getId())
             .bindingApproach(bindingApproach)
             .build();
     }

@@ -52,11 +52,12 @@ public class BrokerMessageUsageTest {
         // "direct" properties of a data endpoint
         Assert.assertFalse(dataEndpoint.getEntityNames().isEmpty());
         Assert.assertNotNull(dataEndpoint.getProvidedBy());
-        Assert.assertNotNull(dataEndpoint.getOffers());
+        Assert.assertNotNull(dataEndpoint.getPublishes());
+        Assert.assertNotNull(dataEndpoint.getOperations());
 
         // format of the dataset the endpoint offers
         Assert.assertEquals(
-            dataEndpoint.getOffers().getOperations().iterator().next().getOutputs().iterator().next().getRepresentation().getMediaType(),
+            dataEndpoint.getOperations().iterator().next().getOutputs().iterator().next().getRepresentation().getMediaType(),
             IANAMediaType.APPLICATION_ZIP);
     }
 
@@ -72,20 +73,17 @@ public class BrokerMessageUsageTest {
         return new DataEndpointBuilder()
             .entityNames(Arrays.asList(new PlainLiteral("My Data Endpoint Name", "en")))
             .providedBy(new URL("http://companyA.com/ids/connector"))
-            .offers(createDataService())
+            .publishes(createDataAsset())
+            .operations(Arrays.asList(createOperations()))
             .entityDescriptions(Arrays.asList(new PlainLiteral("desc1", "en"), new PlainLiteral("desc2")))
             .build();
     }
 
-    private DataService createDataService() throws ConstraintViolationException {
-        Operation operation = new ReadOperationBuilder()
-            .opLabels(Arrays.asList(new PlainLiteral("label")))
-            .outputs(Arrays.asList(createOutputParameter())).build();
-
-        return new DataServiceBuilder()
-            .operations(Arrays.asList(operation))
-            .publishes(createDataAsset())
-            .build();
+    private Operation createOperations() throws ConstraintViolationException {
+        return new ReadOperationBuilder()
+                .opLabels(Arrays.asList(new PlainLiteral("label")))
+                .outputs(Arrays.asList(createOutputParameter()))
+                .build();
     }
 
     private OutputParameter createOutputParameter() throws ConstraintViolationException {

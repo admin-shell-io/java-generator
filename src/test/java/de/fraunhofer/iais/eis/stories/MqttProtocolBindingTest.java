@@ -28,17 +28,16 @@ public class MqttProtocolBindingTest {
         String rdf = endpoint.toRdf();
         DataEndpoint deser = (DataEndpoint) VocabUtil.fromRdf(rdf);
 
-        Assert.assertFalse(deser.getOffers().getOperations().isEmpty());
-        Assert.assertFalse(deser.getProtocolBinding().getOperationBindings().isEmpty());
+        Assert.assertFalse(deser.getOperations().isEmpty());
+        Assert.assertFalse(deser.getOperations().iterator().next().getBindings().isEmpty());
 
-        OperationBinding opBinding = deser.getProtocolBinding().getOperationBindings().iterator().next();
+        OperationBinding opBinding = deser.getOperations().iterator().next().getBindings().iterator().next();
         Assert.assertTrue(opBinding instanceof OperationMqttBinding);
     }
 
     private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder()
-            .offers(createOffering())
-            .protocolBinding(createProtocolBinding())
+            .operations(Arrays.asList(createSubscribeOperation()))
 
             // mandatory fields
             .providedBy(new URL("http://industrialdataspace.org/participants/companyA"))
@@ -46,22 +45,14 @@ public class MqttProtocolBindingTest {
             .build();
     }
 
-    private DataService createOffering() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
-        subscribeSensorDataOperation = createSubscribeOperation();
-
-        return new DataServiceBuilder()
-            .operations(Arrays.asList(subscribeSensorDataOperation))
-            .build();
-    }
-
     private Operation createSubscribeOperation() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         // define a subscribe method to be notified on sensor values of a specific type of sensor
         return new SubscribeOperationBuilder()
-
                 .opLabels(Arrays.asList(new PlainLiteral("Subscription operation for data of a sensor of a certain type.", "en")))
 
                 .inputs(Arrays.asList(createSubscriptionInputParameter()))
                 .outputs(Arrays.asList(createSubscriptionOutputParameter()))
+                .bindings(Arrays.asList(createOperationBinding()))
                 .build();
     }
 
@@ -91,15 +82,9 @@ public class MqttProtocolBindingTest {
         return (OutputParameter) subscriptionOutputParam;
     }
 
-    private ProtocolBinding createProtocolBinding() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
-        return new ProtocolBindingBuilder()
-            .operationBindings(Arrays.asList(createOperationBinding()))
-            .build();
-    }
 
     private OperationBinding createOperationBinding() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new OperationMqttBindingBuilder()
-            .boundOperation(subscribeSensorDataOperation)
             .mqttBrokerUri(new URI("tcp://www.ids-participant/connector/mqttbroker:1883"))
             .parameterBindings(Arrays.asList(createOutputParameterBinding()))
             .build();
@@ -111,7 +96,6 @@ public class MqttProtocolBindingTest {
                 .build();
 
         return new ParameterBindingBuilder()
-            .boundParameter(subscriptionOutputParam)
             .bindingApproach(bindingApproach)
             .build();
     }

@@ -13,6 +13,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -32,11 +33,7 @@ public class ControlledPublicationTest {
     // this does not need to be resolvable, it is needed here fore ODRL compatibility
     private final URL OPERATION_URL = new URL("http://industrialdataspace.org/connector1/endpoint1/service/getDataOp");
 
-    private final StoryUtil storyUtil;
-
     public ControlledPublicationTest() throws MalformedURLException {
-        storyUtil = new StoryUtil();
-        storyUtil.setOperationUrl(OPERATION_URL);
     }
 
     @Test
@@ -51,9 +48,36 @@ public class ControlledPublicationTest {
     private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder(DATA_ENDPOINT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
-                .offers(storyUtil.describeDataService())
+                .operations(Arrays.asList(describeOperation()))
+                .publishes(describeDataAsset())
                 .providedBy(CONNECTOR_URL)
                 .usagePolicies(Arrays.asList(describeServiceContract()))
+                .build();
+    }
+
+    private Operation describeOperation() throws ConstraintViolationException {
+        return new ReadOperationBuilder(OPERATION_URL)
+                .opLabels(Arrays.asList(new PlainLiteral("Retrieve the whole dataset", "en")))
+                .outputs(Arrays.asList(describeOutput()))
+                .build();
+    }
+
+    private OutputParameter describeOutput() throws ConstraintViolationException {
+        return new OutputParameterBuilder()
+                .representation(describeRepresentation())
+                .build();
+    }
+
+    private Representation describeRepresentation() throws ConstraintViolationException {
+        return new RepresentationBuilder()
+                .mediaType(IANAMediaType.APPLICATION_XML)
+                .build();
+    }
+
+    public DataAsset describeDataAsset() throws MalformedURLException, ConstraintViolationException, URISyntaxException {
+        return new DataAssetBuilder()
+                .entityNames(Arrays.asList(new PlainLiteral("Development of company revenue", "en")))
+                .coversCategories(Arrays.asList(new URI("http://dbpedia.org/resource/Category:Finance")))
                 .build();
     }
 

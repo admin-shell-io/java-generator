@@ -37,8 +37,6 @@ public class SimplePublicationTest {
     private final URL DATA_ENDPOINT_URL = new URL("http://industrialdataspace.org/connector1/endpoint1");
     private final URL PARTICIPANT_URL = new URL("http://industrialdataspace.org/participants/companyA");
 
-    private final StoryUtil storyUtil = new StoryUtil();
-
     public SimplePublicationTest() throws MalformedURLException {}
 
     @Test
@@ -54,7 +52,7 @@ public class SimplePublicationTest {
         return new ConnectorBuilder(CONNECTOR_URL)
                 .owner(PARTICIPANT_URL)
                 .operator(PARTICIPANT_URL)
-//                .generationActivity(describeConnectorCreation())
+                .generationActivity(describeConnectorCreation())
                 .entityNames(Arrays.asList(new PlainLiteral("Official IDS Connector of companyA", "en")))
                 .provides(Arrays.asList(describeDataEndpoint()))
                 .build();
@@ -70,7 +68,6 @@ public class SimplePublicationTest {
     private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder(DATA_ENDPOINT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
-                .offers(storyUtil.describeDataService())
                 .providedBy(CONNECTOR_URL)
                 .build();
     }

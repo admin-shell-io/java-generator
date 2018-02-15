@@ -30,7 +30,7 @@
         <infomodel-rdf-sourcedir17>${infomodel-rdf-basedir}/mediaType</infomodel-rdf-sourcedir17>
         <infomodel-rdf-sourcedir18>${infomodel-rdf-basedir}/parameterDataType</infomodel-rdf-sourcedir18>
         <infomodel-rdf-sourcedir19>${infomodel-rdf-basedir}/participant</infomodel-rdf-sourcedir19>
-        <infomodel-rdf-sourcedir20>${infomodel-rdf-basedir}/protocolBinding</infomodel-rdf-sourcedir20>
+        <infomodel-rdf-sourcedir20>${infomodel-rdf-basedir}/operationBinding</infomodel-rdf-sourcedir20>
         <infomodel-rdf-sourcedir22>${infomodel-rdf-basedir}/securityProfile</infomodel-rdf-sourcedir22>
         <infomodel-rdf-sourcedir23>${infomodel-rdf-basedir}/spatialEntity</infomodel-rdf-sourcedir23>
         <infomodel-rdf-sourcedir24>${infomodel-rdf-basedir}/temporal</infomodel-rdf-sourcedir24>
