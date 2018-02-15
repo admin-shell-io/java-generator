@@ -51,7 +51,6 @@ public class BrokerMessageUsageTest {
 
         // "direct" properties of a data endpoint
         Assert.assertFalse(dataEndpoint.getEntityNames().isEmpty());
-        Assert.assertNotNull(dataEndpoint.getProvidedBy());
         Assert.assertNotNull(dataEndpoint.getPublishes());
         Assert.assertNotNull(dataEndpoint.getOperations());
 
@@ -72,7 +71,6 @@ public class BrokerMessageUsageTest {
     private DataEndpoint createDataEndpoint() throws ConstraintViolationException, MalformedURLException {
         return new DataEndpointBuilder()
             .entityNames(Arrays.asList(new PlainLiteral("My Data Endpoint Name", "en")))
-            .providedBy(new URL("http://companyA.com/ids/connector"))
             .publishes(createDataAsset())
             .operations(Arrays.asList(createOperations()))
             .entityDescriptions(Arrays.asList(new PlainLiteral("desc1", "en"), new PlainLiteral("desc2")))

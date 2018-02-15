@@ -68,7 +68,6 @@ public class SimplePublicationTest {
     private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder(DATA_ENDPOINT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
-                .providedBy(CONNECTOR_URL)
                 .build();
     }
 

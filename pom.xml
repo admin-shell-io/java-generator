@@ -6,7 +6,7 @@
 
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
-    <version>0.19-SNAPSHOT</version>
+    <version>0.20-SNAPSHOT</version>
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->

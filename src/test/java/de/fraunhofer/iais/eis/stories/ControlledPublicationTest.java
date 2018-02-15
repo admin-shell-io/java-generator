@@ -26,11 +26,7 @@ public class ControlledPublicationTest {
      * todo: this example currently only uses plain literals for right operands, it should be typed literals
      */
 
-    // these SHOULD be resolvable
-    private final URL CONNECTOR_URL = new URL("http://companyA.com/IDS/connector1");
     private final URL DATA_ENDPOINT_URL = new URL("http://industrialdataspace.org/connector1/endpoint1");
-
-    // this does not need to be resolvable, it is needed here fore ODRL compatibility
     private final URL OPERATION_URL = new URL("http://industrialdataspace.org/connector1/endpoint1/service/getDataOp");
 
     public ControlledPublicationTest() throws MalformedURLException {
@@ -50,7 +46,6 @@ public class ControlledPublicationTest {
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
                 .operations(Arrays.asList(describeOperation()))
                 .publishes(describeDataAsset())
-                .providedBy(CONNECTOR_URL)
                 .usagePolicies(Arrays.asList(describeServiceContract()))
                 .build();
     }

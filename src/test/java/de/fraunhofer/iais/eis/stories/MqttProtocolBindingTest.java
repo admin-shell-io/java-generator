@@ -40,7 +40,6 @@ public class MqttProtocolBindingTest {
             .operations(Arrays.asList(createSubscribeOperation()))
 
             // mandatory fields
-            .providedBy(new URL("http://industrialdataspace.org/participants/companyA"))
             .entityNames(Arrays.asList(new PlainLiteral("Sensor Connector Endpoint", "en")))
             .build();
     }

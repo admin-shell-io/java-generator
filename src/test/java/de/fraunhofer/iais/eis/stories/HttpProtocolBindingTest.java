@@ -55,7 +55,6 @@ public class HttpProtocolBindingTest {
             .operations(Arrays.asList(createOperation()))
 
             // mandatory fields
-            .providedBy(new URL("http://industrialdataspace.org/participants/companyA"))
             .entityNames(Arrays.asList(new PlainLiteral("Sensor Connector Endpoint", "en")))
             .build();
     }
