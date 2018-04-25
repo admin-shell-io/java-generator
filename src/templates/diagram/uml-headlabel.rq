@@ -8,13 +8,13 @@ template ids:uml-headlabel(?class, ?property) {
 
         # collection
         if (bound(?constraint) && (?constraint = <valid:NotEmpty>),
-            " 1..* ",
-            " * "),
+            " \"1..*\" ",
+            " \"*\" "),
 
         # single reference
         if (bound(?constraint) && ((?constraint = <valid:NotEmpty>) || (?constraint = <valid:NotNull>)),
-            " 1 ",
-            "")
+            " \"1\" ",
+            " ")
 
         )
 

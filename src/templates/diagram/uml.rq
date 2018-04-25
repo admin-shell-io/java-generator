@@ -8,7 +8,7 @@ template ids:uml {
     "title Industrial Data Space Information Model - Class Diagram\n"
 
     st:call-template(ids:process-class-to-uml)
-    #st:call-template(ids:property-relations-to-uml)
+    st:call-template(ids:property-relations-to-uml)
     #st:call-template(ids:subclass-relations-to-uml)
 
     "@enduml\n"
