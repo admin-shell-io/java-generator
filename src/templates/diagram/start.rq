@@ -3,7 +3,7 @@ prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template st:start {
 
-    kg:write("/tmp/classes.dot", st:call-template(ids:uml))
+    kg:write("/tmp/classes.plantuml", st:call-template(ids:uml))
 
 }
 where  {

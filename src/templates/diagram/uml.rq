@@ -3,32 +3,15 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template ids:uml {
 
-    "digraph G {\n\n"
-
-    "\tgraph[splines=ortho\n"
-    "\t\trankdir = BT\n"
-    "\t];\n"
-
-    "\tfontname = \"Bitstream Vera Sans\"\n"
-    "\tfontsize = 8\n"
-
-    "\tnode [\n"
-    "\t\tfontname = \"Bitstream Vera Sans\"\n"
-    "\t\tfontsize = 8\n"
-    "\t\tshape = \"record\"\n"
-    "\t]\n"
-    "\n"
-    "\tedge [\n"
-    "\t\tfontname = \"Bitstream Vera Sans\"\n"
-    "\t\tfontsize = 8\n"
-    "\t]\n"
-    "\n"
+    "@startuml\n\n"
+    "skinparam linetype ortho\n"
+    "title Industrial Data Space Information Model - Class Diagram\n"
 
     st:call-template(ids:process-class-to-uml)
-    st:call-template(ids:property-relations-to-uml)
-    st:call-template(ids:subclass-relations-to-uml)
+    #st:call-template(ids:property-relations-to-uml)
+    #st:call-template(ids:subclass-relations-to-uml)
 
-    "}\n"
+    "@enduml\n"
 
 }
 where {
