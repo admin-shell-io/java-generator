@@ -9,7 +9,6 @@ template ids:package-content-general-relations(?package) {
 
     "\t" str(?firstClassLabel) " .. " str(?otherClassLabel)
 
-
 }
 where {
     ?firstClass ids_vis:belongsToPackage ?package;
