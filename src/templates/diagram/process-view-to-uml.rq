@@ -1,0 +1,19 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix ids_vis: <https://schema.iais.fraunhofer.de/ids/helper/visualization/>
+
+template ids:process-view-to-uml {
+
+    "\n"
+
+    "title Industrial Data Space Information Model - " str(?label) " \n"
+
+    st:call-template(ids:process-packages-of-view, ?view)
+
+}
+where {
+    ?view a ids_vis:View;
+        rdfs:label ?label.
+}
+
+

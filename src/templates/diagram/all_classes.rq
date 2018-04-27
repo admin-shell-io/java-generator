@@ -1,7 +1,7 @@
 prefix ids: <https://schema.industrialdataspace.org/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:uml {
+template ids:all_classes {
 
     "@startuml\n\n"
     "skinparam linetype ortho\n"

@@ -1,0 +1,24 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix ids_vis: <https://schema.iais.fraunhofer.de/ids/helper/visualization/>
+
+template ids:process-packages-of-view(?view) {
+
+    "\n"
+    "package \"" str(?label) "\" {\n"
+
+    st:call-template(ids:process-package-content, ?package)
+    st:call-template(ids:package-content-subclass-relations, ?package)
+    st:call-template(ids:package-content-general-relations, ?package)
+
+    "\n}\n"
+
+}
+where {
+    ?package ids_vis:belongsToView ?view;
+        rdfs:label ?label.
+}
+
+
+
