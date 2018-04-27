@@ -170,7 +170,9 @@
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir25}</argument>
                                 <argument>-vd</argument><argument>${infomodel-rdf-sourcedir26}</argument>
                                 <argument>-td</argument>
-                                <argument>${basedir}/src/templates/diagram</argument>
+                                <argument>${basedir}/src/templates/diagram_all_classes</argument>
+                                <argument>-td</argument>
+                                <argument>${basedir}/src/templates/diagram_views</argument>
                                 <argument>-td</argument>
                                 <argument>${basedir}/src/templates/java</argument>
                             </arguments>
