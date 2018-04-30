@@ -17,10 +17,10 @@ where {
         rdfs:label ?packageBLabel.
 
     ?classA ids_vis:belongsToPackage ?packageA;
-            a owl:Class.
+        a owl:Class.
 
     ?classB ids_vis:belongsToPackage ?packageB;
-            a owl:Class.
+        a owl:Class.
 
     ?connectingProperty a owl:ObjectProperty;
         rdfs:domain ?classA;
@@ -28,6 +28,7 @@ where {
 
     filter ((?packageA != ?packageB) && (?classA != ?classB))
 }
+group by ?packageALabel ?packageBLabel
 
 
 
