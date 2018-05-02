@@ -7,7 +7,7 @@ template ids:package-content-subclass-relations(?package) {
 
     "\n"
 
-    "\t" str(?firstClassLabel) " ..|> " str(?otherClass)
+    "\t" str(?firstClassLabel) " ..|> " str(?otherClassLabel)
 
 
 }
