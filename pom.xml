@@ -129,6 +129,8 @@
                                 <argument>-td</argument>
                                 <argument>${basedir}/src/templates/diagram_views</argument>
                                 <argument>-td</argument>
+                                <argument>${basedir}/src/templates/diagram_focusclasses</argument>
+                                <argument>-td</argument>
                                 <argument>${basedir}/src/templates/java</argument>
                             </arguments>
                         </configuration>

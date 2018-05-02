@@ -1,0 +1,16 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:focusclasses {
+
+    "@startuml\n\n"
+    "skinparam linetype ortho\n"
+
+    st:call-template(ids:process-focusclass-to-uml)
+
+    "@enduml\n"
+
+}
+where {
+}
+

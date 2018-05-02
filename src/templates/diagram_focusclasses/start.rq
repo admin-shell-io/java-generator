@@ -1,0 +1,10 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix dcat: <http://www.w3.org/ns/dcat#>
+
+template st:start {
+
+    kg:write("/tmp/diagram_focusclasses.plantuml", st:call-template(ids:focusclasses))
+
+}
+where  {
+}
