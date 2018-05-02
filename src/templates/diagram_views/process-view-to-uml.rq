@@ -9,7 +9,8 @@ template ids:process-view-to-uml {
     "title Industrial Data Space Information Model - " str(?label) " \n"
 
     st:call-template(ids:process-packages-of-view, ?view)
-    st:call-template(ids:package-relations-of-view, ?view)
+    st:call-template(ids:general-relations-between-packages, ?view)
+    st:call-template(ids:subclass-relations-between-packages, ?view)
 
 }
 where {
