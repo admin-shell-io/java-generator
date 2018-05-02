@@ -11,6 +11,7 @@
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
         <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel</infomodel-rdf-basedir>
+        <visualization-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModelViews</visualization-rdf-basedir>
     </properties>
 
     <dependencies>
@@ -122,6 +123,7 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
+                                <argument>-vd</argument><argument>${visualization-rdf-basedir}</argument>
                                 <argument>-td</argument>
                                 <argument>${basedir}/src/templates/diagram_all_classes</argument>
                                 <argument>-td</argument>
