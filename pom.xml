@@ -11,6 +11,7 @@
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
         <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-rdf-basedir>
+        <corevocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/CoreVocabularies/vocabs</corevocabs-rdf-basedir>
     </properties>
 
     <dependencies>
@@ -122,6 +123,7 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
+                                <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
                                 <argument>-td</argument>
                                 <argument>${basedir}/src/templates/diagram</argument>
                                 <argument>-td</argument>
@@ -277,18 +279,19 @@
     </build>
 
     <distributionManagement>
-        <repository>
-            <id>isst-repo</id>
-            <name>Maven repository at ISST</name>
-            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
-        </repository>
+        <snapshotRepository>
+            <id>IaisRepoSnapshots</id>
+            <url>https://maven.iais.fraunhofer.de/artifactory/eis-public-snapshot-local</url>
+        </snapshotRepository>
     </distributionManagement>
 
     <repositories>
         <repository>
-            <id>isst-repo</id>
-            <name>Maven repository at ISST</name>
-            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
+            <id>snapshots</id>
+            <url>https://maven.iais.fraunhofer.de/artifactory/eis-public-snapshot-local</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
     </repositories>
 
