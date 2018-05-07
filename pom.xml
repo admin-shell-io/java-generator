@@ -11,30 +11,6 @@
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
         <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-rdf-basedir>
-
-        <!-- module directories -->
-        <infomodel-rdf-sourcedir2>${infomodel-rdf-basedir}/activity</infomodel-rdf-sourcedir2>
-        <infomodel-rdf-sourcedir3>${infomodel-rdf-basedir}/base</infomodel-rdf-sourcedir3>
-        <infomodel-rdf-sourcedir5>${infomodel-rdf-basedir}/broker</infomodel-rdf-sourcedir5>
-        <infomodel-rdf-sourcedir6>${infomodel-rdf-basedir}/brokerCommunication</infomodel-rdf-sourcedir6>
-        <infomodel-rdf-sourcedir7>${infomodel-rdf-basedir}/connector</infomodel-rdf-sourcedir7>
-        <infomodel-rdf-sourcedir8>${infomodel-rdf-basedir}/contract</infomodel-rdf-sourcedir8>
-        <infomodel-rdf-sourcedir9>${infomodel-rdf-basedir}/dataAsset</infomodel-rdf-sourcedir9>
-        <infomodel-rdf-sourcedir10>${infomodel-rdf-basedir}/dataEndpoint</infomodel-rdf-sourcedir10>
-        <infomodel-rdf-sourcedir11>${infomodel-rdf-basedir}/dataTransfer</infomodel-rdf-sourcedir11>
-        <infomodel-rdf-sourcedir12>${infomodel-rdf-basedir}/hashFunction</infomodel-rdf-sourcedir12>
-        <infomodel-rdf-sourcedir13>${infomodel-rdf-basedir}/httpMethod</infomodel-rdf-sourcedir13>
-        <infomodel-rdf-sourcedir14>${infomodel-rdf-basedir}/industry</infomodel-rdf-sourcedir14>
-        <infomodel-rdf-sourcedir15>${infomodel-rdf-basedir}/language</infomodel-rdf-sourcedir15>
-        <infomodel-rdf-sourcedir16>${infomodel-rdf-basedir}/license</infomodel-rdf-sourcedir16>
-        <infomodel-rdf-sourcedir17>${infomodel-rdf-basedir}/mediaType</infomodel-rdf-sourcedir17>
-        <infomodel-rdf-sourcedir18>${infomodel-rdf-basedir}/parameterDataType</infomodel-rdf-sourcedir18>
-        <infomodel-rdf-sourcedir19>${infomodel-rdf-basedir}/participant</infomodel-rdf-sourcedir19>
-        <infomodel-rdf-sourcedir20>${infomodel-rdf-basedir}/operationBinding</infomodel-rdf-sourcedir20>
-        <infomodel-rdf-sourcedir22>${infomodel-rdf-basedir}/securityProfile</infomodel-rdf-sourcedir22>
-        <infomodel-rdf-sourcedir23>${infomodel-rdf-basedir}/spatialEntity</infomodel-rdf-sourcedir23>
-        <infomodel-rdf-sourcedir24>${infomodel-rdf-basedir}/temporal</infomodel-rdf-sourcedir24>
-        <infomodel-rdf-sourcedir25>${infomodel-rdf-basedir}/unit</infomodel-rdf-sourcedir25>
     </properties>
 
     <dependencies>
@@ -42,10 +18,10 @@
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>sparql-template-executor</artifactId>
-            <version>2.0-SNAPSHOT</version>
+            <version>2.1-SNAPSHOT</version>
             <optional>true</optional>
             <scope>system</scope>
-            <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.0-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+            <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.1-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
 
         <dependency>
@@ -145,28 +121,7 @@
                             <classpathScope>compile</classpathScope>
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir2}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir3}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir5}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir6}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir7}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir8}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir9}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir10}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir11}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir12}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir13}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir14}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir15}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir16}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir17}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir18}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir19}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir20}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir22}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir23}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir24}</argument>
-                                <argument>-vd</argument><argument>${infomodel-rdf-sourcedir25}</argument>
+                                <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
                                 <argument>-td</argument>
                                 <argument>${basedir}/src/templates/diagram</argument>
                                 <argument>-td</argument>
