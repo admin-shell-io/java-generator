@@ -1,6 +1,6 @@
 .idea/
 */target/
-ids-infomodel-lean/src/main/java/de/fraunhofer/iais/eis/*.java
-ids-infomodel-serializable/src/main/java/de/fraunhofer/iais/eis/*.java
+ids-infomodel-java-lean/src/main/java/de/fraunhofer/iais/eis/*.java
+ids-infomodel-java-full/src/main/java/de/fraunhofer/iais/eis/*.java
 ids-infomodel-visualization/classes.png
 *.iml
