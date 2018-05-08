@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ids-infomodel</artifactId>
+        <groupId>de.fraunhofer.iais.eis</groupId>
+        <version>0.20-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ids-infomodel-visualization</artifactId>
+
+    <build>
+        <plugins>
+            <!-- execute the diagram generation based on the Infomodel files and the SPARQL templates -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-java-and-diagram</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <classpathScope>compile</classpathScope>
+                            <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                            <arguments>
+                                <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
+                                <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
+                                <argument>-td</argument><argument>${basedir}/src/templates/diagram</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>render-diagram</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>dot</executable>
+                            <workingDirectory>/tmp</workingDirectory>
+                            <arguments>
+                                <argument>-T</argument>
+                                <argument>png</argument>
+                                <argument>-o</argument>
+                                <argument>classes.png</argument>
+                                <argument>classes.dot</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+</project>

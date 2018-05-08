@@ -6,11 +6,18 @@
 
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
+    <packaging>pom</packaging>
     <version>0.20-SNAPSHOT</version>
+    <modules>
+        <module>ids-infomodel-lean</module>
+        <module>ids-infomodel-serializable</module>
+        <module>ids-infomodel-visualization</module>
+    </modules>
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
         <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-rdf-basedir>
+        <corevocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/CoreVocabularies/vocabs</corevocabs-rdf-basedir>
     </properties>
 
     <dependencies>
@@ -23,259 +30,9 @@
             <scope>system</scope>
             <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.1-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
-
-        <dependency>
-            <groupId>de.fraunhofer.iais.eis</groupId>
-            <artifactId>jrdfb</artifactId>
-            <version>0.7-SNAPSHOT</version>
-        </dependency>
-
-        <!-- Bean validation -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <version>5.2.4.Final</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-
-        <!-- Others -->
-        <dependency>
-            <groupId>io.github.lukehutch</groupId>
-            <artifactId>fast-classpath-scanner</artifactId>
-            <version>LATEST</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.unitils</groupId>
-            <artifactId>unitils-core</artifactId>
-            <version>3.4.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>RELEASE</version>
-        </dependency>
-
     </dependencies>
 
-    <build>
-
-        <resources>
-            <resource>
-                <directory>doc/diagram/</directory>
-                <includes>
-                    <include>classes.png</include>
-                </includes>
-            </resource>
-        </resources>
-
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.3</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-
-            <!-- include test classes to jar for documentation -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- execute the java beans and diagram generation based on the Infomodel files and the SPARQL templates -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <id>generate-java-and-diagram</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <classpathScope>compile</classpathScope>
-                            <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
-                            <arguments>
-                                <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
-                                <argument>-td</argument>
-                                <argument>${basedir}/src/templates/diagram</argument>
-                                <argument>-td</argument>
-                                <argument>${basedir}/src/templates/java</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>render-diagram</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>dot</executable>
-                            <workingDirectory>/tmp</workingDirectory>
-                            <arguments>
-                                <argument>-T</argument>
-                                <argument>png</argument>
-                                <argument>-o</argument>
-                                <argument>classes.png</argument>
-                                <argument>classes.dot</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- copy generated code to package src directory -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <id>copy-java-beans</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <outputDirectory>${basedir}</outputDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
-                            <directory>/tmp</directory>
-                            <includes>
-                                <include>**/*.java</include>
-                            </includes>
-                        </resource>
-                        <resource>
-                            <targetPath>${basedir}/doc/diagram</targetPath>
-                            <directory>/tmp</directory>
-                            <includes>
-                                <include>**/*.png</include>
-                            </includes>
-                        </resource>
-                    </resources>
-                </configuration>
-
-            </plugin>
-
-            <!-- remove generated code from tmp and package directory -->
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.0.0</version>
-                <configuration>
-                    <filesets>
-                        <fileset>
-                            <directory>/tmp</directory>
-                            <includes>
-                                <include>*.java</include>
-                                <include>*.png</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
-                            <includes>
-                                <include>*.java</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                        <fileset>
-                            <directory>${basedir}/doc/diagram</directory>
-                            <includes>
-                                <include>*.png</include>
-                            </includes>
-                            <followSymlinks>false</followSymlinks>
-                        </fileset>
-                    </filesets>
-                </configuration>
-            </plugin>
-
-            <!-- attach source to jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                            <goal>test-jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- javdoc generation -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadoc</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <additionalparam>-Xdoclint:none</additionalparam>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
-
-                <configuration>
-                    <descriptorRefs>
-                        <descriptorRef>jar-with-dependencies</descriptorRef>
-                    </descriptorRefs>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>assemble-all</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-    </build>
-
+    <!--
     <distributionManagement>
         <repository>
             <id>isst-repo</id>
@@ -291,5 +48,6 @@
             <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
         </repository>
     </repositories>
+    -->
 
 </project>
