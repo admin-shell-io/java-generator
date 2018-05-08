@@ -1,0 +1,22 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix valid: <https://schema.iais.fraunhofer.de/ids/helper/relation/>
+
+template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
+
+    if (bound(?relationType) && (?relationType = <valid:OneToMany>), concat("Collection", str(?bracketOpen)), "")
+
+    st:call-template(ids:range-to-basic-type, ?property, ?range)
+
+    if (bound(?relationType) && (?relationType = <valid:OneToMany>), str(?bracketClose), "")
+
+}
+where {
+    ?property rdfs:domain ?class
+
+    OPTIONAL {
+        ?class valid:validation ?validation.
+        ?validation valid:forProperty ?property.
+        ?validation valid:relationType ?relationType.
+    }
+}

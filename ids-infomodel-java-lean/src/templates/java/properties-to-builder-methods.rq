@@ -1,0 +1,31 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
+
+template ids:properties-to-builder-methods(?rootClass, ?class) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    "\n"
+	"\n\t"
+
+    # visibility modifier
+    "final public "
+
+    # return type and name
+    str(?rootClassLabel) "Builder " if (bound(?pluralLabel), str(?pluralLabel), str(?label))
+
+	st:call-template(ids:property-to-setter-method, ?property, ?class)
+
+    # method body
+	st:call-template(ids:setter-method-builder-body, ?property, ?rootClass)
+
+}
+where  {   
+    ?property rdfs:domain ?class;
+        rdfs:label ?label.
+
+    ?rootClass rdfs:label ?rootClassLabel .
+
+    filter((lang(?label) = "en") && ((lang(?rootClassLabel) = "en")))
+    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
+}

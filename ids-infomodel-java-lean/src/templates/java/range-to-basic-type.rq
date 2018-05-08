@@ -1,0 +1,36 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix trns: <https://schema.iais.fraunhofer.de/ids/helper/transformation/>
+
+template ids:range-to-basic-type(?property, ?range) {
+
+    if (bound(?refByUri) && (?refByUri = true),
+        "URL",
+
+        if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:string>), "String",
+        if (str(?range) = str(<xsd:integer>), "BigInteger",
+        if (str(?range) = str(<xsd:int>), "int",
+        if (str(?range) = str(<xsd:long>), "long",
+        if (str(?range) = str(<xsd:short>), "short",
+        if (str(?range) = str(<xsd:float>), "float",
+        if (str(?range) = str(<xsd:double>), "double",
+        if (str(?range) = str(<xsd:boolean>), "boolean",
+        if (str(?range) = str(<xsd:byte>), "byte",
+        if (str(?range) = str(<xsd:base64Binary>), "byte[]",
+        if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:anyURI>), "URI",
+        if (str(?range) = str(<rdfs:Literal>), "Literal",
+        if (str(?range) = str(<rdf:PlainLiteral>), "PlainLiteral",
+
+        if (bound(?rangeLabel), str(?rangeLabel), "!!unknownType!!")))))))))))))))))
+    )
+
+}
+where {
+    ?property rdfs:range ?range.
+
+    optional {?range rdfs:label ?rangeLabel}
+    optional {?property trns:refByURI ?refByUri}
+}
