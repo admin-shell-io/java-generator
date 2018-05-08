@@ -1,0 +1,66 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:process-class-to-builder(?class) {
+
+    "package de.fraunhofer.iais.eis;\n"
+
+    st:call-template(ids:basic-imports)
+
+    "\n"
+    "\n"
+    "public class " concat(str(?label), "Builder")
+
+    " {\n"
+
+    "\n\tprivate " str(?label) "Impl " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ";"
+
+    # constructor
+
+    "\n"
+    "\n\tpublic " str(?label) "Builder() {"
+    "\n\t\t"
+        lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) " = new " str(?label) "Impl();"
+        "\n\t\t"
+        lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+        ".id = VocabUtil.createRandomUrl(\""
+        lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+        "\");"
+    "\n\t}"
+    "\n"
+    "\n\tpublic " str(?label) "Builder(@javax.validation.constraints.NotNull URL id) {"
+    "\n\t\t"
+    "this();"
+    "\n\t\t"
+    lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ".id = id;"
+    "\n\t}"
+
+    # method implementation
+
+    st:call-template(ids:subclass-properties-to-methods, ?class, 'builder')
+
+    # build method
+
+     "\n\tpublic final " str(?label) " build() throws ConstraintViolationException {"
+     "\n\t\tcreationHook("
+     lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+     ");"
+     "\n\t\tVocabUtil.validate(" lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ");"
+     "\n\t\treturn " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ";"
+     "\n\t}"
+
+    # creation hook
+    "\n"
+    "\n\tpublic void creationHook("
+    str(?label) " " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
+    ") throws ConstraintViolationException {"
+    "\n\t\t// override me!"
+    "\n\t}"
+
+    "\n}\n"
+
+}
+where{
+    ?class rdfs:label ?label.
+    filter (lang(?label) = "en")
+}

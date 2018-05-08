@@ -1,0 +1,24 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:basic-imports {
+
+    "\nimport de.fraunhofer.iais.eis.util.*;"
+    "\nimport de.fraunhofer.iais.eis.*;"
+    "\n"
+    "\nimport de.fraunhofer.iais.eis.jrdfb.annotation.*;"
+    "\nimport javax.xml.datatype.XMLGregorianCalendar;"
+    "\nimport java.lang.String;"
+    "\nimport java.math.BigInteger;"
+    "\nimport java.net.URL;"
+    "\nimport java.net.URI;"
+    "\nimport java.util.Collection;"
+    "\nimport org.apache.jena.rdf.model.Literal;"
+    "\nimport org.hibernate.validator.constraints.*;"
+    "\nimport javax.validation.constraints.*;"
+    "\nimport java.util.Arrays;"
+
+}
+where {
+
+}
