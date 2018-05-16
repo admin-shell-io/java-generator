@@ -1,9 +1,8 @@
 package de.fraunhofer.iais.eis.util;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import de.fraunhofer.iais.eis.spi.BeanSerializer;
+import de.fraunhofer.iais.eis.spi.BeanValidator;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
@@ -13,10 +12,24 @@ import java.util.*;
  */
 public class VocabUtil {
 
+    private ServiceLoader<BeanSerializer> serializerLoader;
+    private ServiceLoader<BeanValidator> validatorLoader;
+
     private final static String PROTOCOL = "http";
     private final static String HOST = "industrialdataspace.org";
 
-    public static URL createRandomUrl(String path) {
+    private static final VocabUtil instance = new VocabUtil();
+
+    private VocabUtil() {
+        serializerLoader = ServiceLoader.load(BeanSerializer.class);
+        validatorLoader = ServiceLoader.load(BeanValidator.class);
+    }
+
+    public static VocabUtil getInstance() {
+        return instance;
+    }
+
+    public URL createRandomUrl(String path) {
         try {
             return new URL(PROTOCOL, HOST, "/" + path + "/" + UUID.randomUUID());
         }
@@ -26,23 +39,24 @@ public class VocabUtil {
         }
     }
 
-    public static <T> void validate(T objToValidate) throws ConstraintViolationException {
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
-        Set<ConstraintViolation<T>> constraintViolations = validator.validate(objToValidate);
-        if (!constraintViolations.isEmpty()) {
-            Collection<String> messages = new HashSet<>();
-
-            for (ConstraintViolation<T> constraintViolation : constraintViolations) {
-                messages.add(constraintViolation.getPropertyPath() + " " + constraintViolation.getMessage());
-            }
-
-            ConstraintViolationException exc = new ConstraintViolationException(messages);
-            throw exc;
+    public <T> void validate(T objToValidate) throws ConstraintViolationException {
+        Iterator<BeanValidator> validators = validatorLoader.iterator();
+        while (validators.hasNext()) {
+            validators.next().validate(objToValidate);
         }
     }
 
-    public static <T> T getByString(T[] values, String label) {
+    public String toRdf(Object obj) {
+        Iterator<BeanSerializer> iterator = serializerLoader.iterator();
+        return iterator.hasNext() ? iterator.next().toRdf(obj) : "";
+    }
+
+    public Object fromRdf(String rdf) {
+        Iterator<BeanSerializer> iterator = serializerLoader.iterator();
+        return iterator.hasNext() ? iterator.next().fromRdf(rdf) : null;
+    }
+
+    public <T> T getByString(T[] values, String label) {
         for (T value : values) {
             if (value.toString().equals(label)) return value;
         }

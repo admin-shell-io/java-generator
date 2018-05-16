@@ -32,6 +32,10 @@ template ids:process-class-to-bean(?class) {
     "\n\t\treturn id;"
     "\n\t}"
     "\n"
+    "\n\tpublic String toRdf() {"
+    "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
+    "\n\t}"
+    "\n"
 
     # method implementation
 

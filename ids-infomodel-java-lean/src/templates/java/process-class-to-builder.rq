@@ -23,7 +23,7 @@ template ids:process-class-to-builder(?class) {
         lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) " = new " str(?label) "Impl();"
         "\n\t\t"
         lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
-        ".id = VocabUtil.createRandomUrl(\""
+        ".id = VocabUtil.getInstance().createRandomUrl(\""
         lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
         "\");"
     "\n\t}"
@@ -41,11 +41,11 @@ template ids:process-class-to-builder(?class) {
 
     # build method
 
-     "\n\tpublic final " str(?label) " build() {"
+     "\n\tpublic final " str(?label) " build() throws ConstraintViolationException {"
      "\n\t\tcreationHook("
      lcase(substr(str(?label), 1, 1)) substr(str(?label), 2)
      ");"
-     "\n\t\tVocabUtil.validate(" lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ");"
+     "\n\t\tVocabUtil.getInstance().validate(" lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ");"
      "\n\t\treturn " lcase(substr(str(?label), 1, 1)) substr(str(?label), 2) ";"
      "\n\t}"
 

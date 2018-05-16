@@ -35,7 +35,7 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
-                        <id>generate-java-and-diagram</id>
+                        <id>generate-java</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>java</goal>

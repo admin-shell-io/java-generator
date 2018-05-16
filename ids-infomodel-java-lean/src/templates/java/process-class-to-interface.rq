@@ -25,6 +25,7 @@ template ids:process-class-to-interface(?class) {
 
         "\n\t@RdfId"
         "\n\t@javax.validation.constraints.NotNull URL getId();"
+        "\n\tString toRdf();"
         "\n"
         "\n\t// accessor methods as derived from information model"
         "\n"

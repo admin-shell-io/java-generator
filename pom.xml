@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>0.20-SNAPSHOT</version>
     <modules>
-        <module>ids-infomodel-java-lean</module>
+        <module>ids-infomodel-visualization</module>
         <module>ids-infomodel-java-full</module>
         <module>ids-infomodel-java-lean</module>
     </modules>
