@@ -40,13 +40,17 @@ public class SimplePublicationTest {
 
     @Test
     public void createOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException, URISyntaxException {
+        Assert.fail();
+        /*
         Connector connector = describeConnectorWithDataOffering();
         String rdf = connector.toRdf();
 
         Connector deser = (Connector) VocabUtil.fromRdf(rdf);
         Assert.assertNotNull(deser);
+        */
     }
 
+    /*
     private Connector describeConnectorWithDataOffering() throws DatatypeConfigurationException, ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new ConnectorBuilder(CONNECTOR_URL)
                 .owner(PARTICIPANT_URL)
@@ -69,5 +73,6 @@ public class SimplePublicationTest {
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
                 .build();
     }
+    */
 
 }

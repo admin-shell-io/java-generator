@@ -22,6 +22,8 @@ public class BrokerMessageUsageTest {
 
     @Test
     public void brokerMessageSerialization() throws ConstraintViolationException, MalformedURLException {
+        Assert.fail();
+        /*
         String brokerMessage = createBrokerDataRequest().toRdf();
 
         Model model = TestUtil.createModelFromRdf(brokerMessage);
@@ -33,10 +35,13 @@ public class BrokerMessageUsageTest {
         for (Property property : Arrays.asList(coveredEntityProperty, dataRequestActionProperty, msgContentProperty)) {
             Assert.assertTrue(model.listObjectsOfProperty(transfer, property).hasNext());
         }
+        */
     }
 
     @Test
     public void brokerMessageDeserialization() throws ConstraintViolationException, MalformedURLException {
+        Assert.fail();
+        /*
         String brokerMessage = createBrokerDataRequest().toRdf();
         BrokerDataRequest brokerDataRequest = (BrokerDataRequest) VocabUtil.fromRdf(brokerMessage);
 
@@ -57,8 +62,10 @@ public class BrokerMessageUsageTest {
         Assert.assertEquals(
             dataEndpoint.getOperations().iterator().next().getOutputs().iterator().next().getRepresentation().getMediaType(),
             IANAMediaType.APPLICATION_ZIP);
+        */
     }
 
+    /*
     private BrokerDataRequest createBrokerDataRequest() throws ConstraintViolationException, MalformedURLException {
         return new BrokerDataRequestBuilder(new URL("http://example.org/brokerdatarequest/1"))
             .dataRequestAction(BrokerDataRequestAction.REGISTER)
@@ -102,5 +109,5 @@ public class BrokerMessageUsageTest {
             .entityNames(Arrays.asList(new PlainLiteral("Dataset short name", "en")))
             .build();
     }
-
+    */
 }

@@ -31,13 +31,17 @@ public class ControlledPublicationTest {
 
     @Test
     public void createOffering() throws MalformedURLException, ConstraintViolationException, URISyntaxException {
+        Assert.fail();
+        /*
         DataEndpoint endpoint = describeDataEndpoint();
         String rdf = endpoint.toRdf();
 
         DataEndpoint deser = (DataEndpoint) VocabUtil.fromRdf(rdf);
         Assert.assertNotNull(deser);
+        */
     }
 
+    /*
     private DataEndpoint describeDataEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder(DATA_ENDPOINT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my revenue dataset", "en")))
@@ -171,5 +175,5 @@ public class ControlledPublicationTest {
             .target(OPERATION_URL)
             .build();
     }
-
+    */
 }

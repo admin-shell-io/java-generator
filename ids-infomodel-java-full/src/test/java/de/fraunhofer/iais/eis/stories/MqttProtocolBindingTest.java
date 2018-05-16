@@ -23,6 +23,8 @@ public class MqttProtocolBindingTest {
 
     @Test
     public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
+        Assert.fail();
+        /*
         DataEndpoint endpoint = createEndpoint();
         String rdf = endpoint.toRdf();
         DataEndpoint deser = (DataEndpoint) VocabUtil.fromRdf(rdf);
@@ -32,8 +34,10 @@ public class MqttProtocolBindingTest {
 
         OperationBinding opBinding = deser.getOperations().iterator().next().getBindings().iterator().next();
         Assert.assertTrue(opBinding instanceof OperationMqttBinding);
+        */
     }
 
+    /*
     private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder()
             .operations(Arrays.asList(createSubscribeOperation()))
@@ -97,4 +101,5 @@ public class MqttProtocolBindingTest {
             .bindingApproach(bindingApproach)
             .build();
     }
+    */
 }

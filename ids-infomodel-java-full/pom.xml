@@ -14,6 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
+            <artifactId>jrdfb-annotations</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>jrdfb</artifactId>
             <version>0.7-SNAPSHOT</version>
         </dependency>
@@ -80,7 +86,7 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
-                        <id>generate-java-and-diagram</id>
+                        <id>generate-java</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>java</goal>

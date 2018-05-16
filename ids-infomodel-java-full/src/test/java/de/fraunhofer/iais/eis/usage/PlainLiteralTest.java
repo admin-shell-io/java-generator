@@ -18,13 +18,17 @@ public class PlainLiteralTest {
 
     @Test
     public void deserializeMessageContent() throws MalformedURLException, ConstraintViolationException {
+        Assert.fail();
+        /*
         Operation origOp = createOperation();
         Operation op = (Operation) VocabUtil.fromRdf(createBrokerDataRequest().getMessageContent());
 
         Assert.assertArrayEquals(origOp.getOpLabels().toArray(), op.getOpLabels().toArray());
         Assert.assertArrayEquals(origOp.getOpDescriptions().toArray(), op.getOpDescriptions().toArray());
+        */
     }
 
+    /*
     private BrokerDataRequest createBrokerDataRequest() throws ConstraintViolationException, MalformedURLException {
         return new BrokerDataRequestBuilder(new URL("http://example.org/brokerdatarequest/1"))
                 .dataRequestAction(BrokerDataRequestAction.REGISTER)
@@ -39,5 +43,6 @@ public class PlainLiteralTest {
                 .opDescriptions(Arrays.asList(new PlainLiteral("desc1", "en"), new PlainLiteral("desc2")))
                 .build();
     }
+    */
 
 }

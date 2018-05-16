@@ -80,9 +80,9 @@ public class ConnectorUsageTest {
 
         ConnectorBuilder connectorBuilder = new ConnectorBuilder(new URL("http://www.isst.fraunhofer.de/Broker"))
                 .securityProfile(createSecurityProfile())
-                .operator(participant.getId())
+                .technicalResponsibility(participant.getId())
                 .maintainer(participant.getId())
-                .owner(participant.getId())
+                .contentResponsibility(participant.getId())
                 .generationActivity(creationActivity)
                 .lifecycleActivities(Arrays.asList(creationActivity))
                 .authInfo(createAuthInfo())

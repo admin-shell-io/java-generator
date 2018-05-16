@@ -24,6 +24,8 @@ public class HttpProtocolBindingTest {
 
     @Test
     public void createEndpointWithProtocolBinding() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
+        Assert.fail();
+        /*
         DataEndpoint endpoint = createEndpoint();
         String rdf = endpoint.toRdf();
 
@@ -43,8 +45,10 @@ public class HttpProtocolBindingTest {
         for (ParameterBinding parameterBinding : opBinding.getParameterBindings()) {
             Assert.assertNotNull(parameterBinding.getBindingApproach());
         }
+        */
     }
 
+    /*
     private DataEndpoint createEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataEndpointBuilder()
             .operations(Arrays.asList(createOperation()))
@@ -119,4 +123,5 @@ public class HttpProtocolBindingTest {
             .bindingApproach(bindingApproach)
             .build();
     }
+    */
 }
