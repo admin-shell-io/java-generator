@@ -46,6 +46,7 @@
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
                                 <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
+                                <argument>-vd</argument><argument>${extvocabs-rdf-basedir}</argument>
                                 <argument>-td</argument>
                                 <argument>${basedir}/src/templates/java</argument>
                             </arguments>

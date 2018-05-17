@@ -18,6 +18,7 @@
         <!-- Adapt this path according to the location of the information model RDF sources -->
         <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-rdf-basedir>
         <corevocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/CoreVocabularies/vocabs</corevocabs-rdf-basedir>
+        <extvocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/ExtensionVocabularies/vocabs</extvocabs-rdf-basedir>
     </properties>
 
     <dependencies>
