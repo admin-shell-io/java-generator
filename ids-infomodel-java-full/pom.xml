@@ -21,7 +21,7 @@
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>jrdfb</artifactId>
-            <version>0.7-SNAPSHOT</version>
+            <version>0.9-SNAPSHOT</version>
         </dependency>
 
         <!-- Bean validation -->
