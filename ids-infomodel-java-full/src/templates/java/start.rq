@@ -1,17 +1,1 @@
-prefix ids: <https://schema.industrialdataspace.org/>
-prefix dcat: <http://www.w3.org/ns/dcat#>
-
-template st:start {
-
-    if (bound(?instance),
-        st:call-template(ids:class-abox, ?class),
-        st:call-template(ids:class-tbox, ?class))
-
-}
-where  {
-    ?class a owl:Class.
-    OPTIONAL {
-        ?instance a ?class
-    }
-}
-group by ?class
+/home/christian/projects/ids/ids-infomodel-codegen/common/src/templates/start.rq

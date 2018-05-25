@@ -1,13 +1,1 @@
-prefix ids: <https://schema.industrialdataspace.org/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-template ids:subclass-properties-to-fields(?class) {
-
-    st:call-template(ids:properties-to-fields, ?superClass, 'bean')
-
-}
-where {
-    ?class a owl:Class;
-        rdfs:subClassOf* ?superClass.
-
-}
+/home/christian/projects/ids/ids-infomodel-codegen/common/src/templates/subclass-properties-to-fields.rq

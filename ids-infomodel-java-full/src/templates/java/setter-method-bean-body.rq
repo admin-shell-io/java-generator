@@ -1,15 +1,1 @@
-prefix ids: <https://schema.industrialdataspace.org/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-
-template ids:setter-method-bean-body(?property) {
-
-    " {"
-    "\n\t\tassertModifiable();"
-    "\n\t\tthis." str(?label) " = " str(?label) ";"
-    "\n\t}"
-
-}
-where{
-    ?property rdfs:label ?label .
-    filter(lang(?label) = "en")
-}
+/home/christian/projects/ids/ids-infomodel-codegen/common/src/templates/setter-method-bean-body.rq

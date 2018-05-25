@@ -7,7 +7,7 @@
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
     <packaging>pom</packaging>
-    <version>0.20-SNAPSHOT</version>
+    <version>0.21-SNAPSHOT</version>
     <modules>
         <module>ids-infomodel-visualization</module>
         <module>ids-infomodel-java-full</module>
@@ -47,7 +47,6 @@
         </plugins>
     </build>
 
-    <!--
     <distributionManagement>
         <repository>
             <id>isst-repo</id>
@@ -63,6 +62,5 @@
             <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
         </repository>
     </repositories>
-    -->
 
 </project>

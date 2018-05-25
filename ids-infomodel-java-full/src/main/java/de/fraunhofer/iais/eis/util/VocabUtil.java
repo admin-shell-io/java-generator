@@ -20,10 +20,17 @@ public class VocabUtil {
 
     private final static String PROTOCOL = "http";
     private final static String HOST = "industrialdataspace.org";
+
     private static RdfMarshaller serializer;
     private static RdfUnmarshaller deserializer;
 
-    public static URL createRandomUrl(String path) {
+    private static final VocabUtil instance = new VocabUtil();
+
+    public static VocabUtil getInstance() {
+        return instance;
+    }
+
+    public URL createRandomUrl(String path) {
         try {
             return new java.net.URL(PROTOCOL, HOST, "/" + path + "/" + UUID.randomUUID());
         }
@@ -33,7 +40,7 @@ public class VocabUtil {
         }
     }
 
-    public static <T> void validate(T objToValidate) throws ConstraintViolationException {
+    public <T> void validate(T objToValidate) throws ConstraintViolationException {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<T>> constraintViolations = validator.validate(objToValidate);
@@ -49,7 +56,7 @@ public class VocabUtil {
         }
     }
 
-    public static String toRdf(Object obj) {
+    public String toRdf(Object obj) {
         try {
             return getRdfMarshaller().marshal(obj);
         }
@@ -58,7 +65,7 @@ public class VocabUtil {
         }
     }
 
-    private static RdfMarshaller getRdfMarshaller() {
+    private RdfMarshaller getRdfMarshaller() {
         if (serializer == null) {
             Collection<Class> annotatedClasses = collectAnnotatedClasses();
             serializer = new RdfMarshaller(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
@@ -66,7 +73,7 @@ public class VocabUtil {
         return serializer;
     }
 
-    private static RdfUnmarshaller getRdfUnmarshaller() {
+    private RdfUnmarshaller getRdfUnmarshaller() {
         if (deserializer == null) {
             Collection<Class> annotatedClasses = collectAnnotatedClasses();
             deserializer = new RdfUnmarshaller(annotatedClasses.toArray(new Class[annotatedClasses.size()]));
@@ -74,7 +81,7 @@ public class VocabUtil {
         return deserializer;
     }
 
-    private static Collection<Class> collectAnnotatedClasses() {
+    private Collection<Class> collectAnnotatedClasses() {
         Collection<Class> annotatedClasses = new ArrayList<>();
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
@@ -94,7 +101,7 @@ public class VocabUtil {
         return annotatedClasses;
     }
 
-    public static Object fromRdf(String rdf) {
+    public Object fromRdf(String rdf) {
         try {
             return getRdfUnmarshaller().unmarshal(rdf);
         }
@@ -103,7 +110,7 @@ public class VocabUtil {
         }
     }
 
-    public static <T> T getByString(T[] values, String label) {
+    public <T> T getByString(T[] values, String label) {
         for (T value : values) {
             if (value.toString().equals(label)) return value;
         }
