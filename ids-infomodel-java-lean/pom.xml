@@ -24,10 +24,67 @@
             <artifactId>validation-api</artifactId>
             <version>2.0.1.Final</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.unitils</groupId>
+            <artifactId>unitils-core</artifactId>
+            <version>3.4.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <!-- assemble the relevant templates into /tmp/templates -->
+                    <execution>
+                        <id>assemble-templates</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>/tmp/templates</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/src/templates</directory>
+                                </resource>
+                                <resource>
+                                    <directory>${basedir}/../common/src/templates</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- copy generated sources to package src directory -->
+                    <execution>
+                        <id>copy-java-beans</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
+                                    <directory>/tmp</directory>
+                                    <includes>
+                                        <include>**/*.java</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- execute the java bean generation based on the Infomodel files and the SPARQL templates -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -35,8 +92,8 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
-                        <id>generate-java</id>
-                        <phase>generate-resources</phase>
+                        <id>generate-java-sources</id>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
@@ -48,38 +105,42 @@
                                 <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
                                 <argument>-vd</argument><argument>${extvocabs-rdf-basedir}</argument>
                                 <argument>-td</argument>
-                                <argument>${basedir}/src/templates/java</argument>
+                                <argument>/tmp/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- copy generated code to package src directory -->
+            <!-- cleanup generated java sources and temporary stuff in /tmp -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <id>copy-java-beans</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                    </execution>
-                </executions>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
                 <configuration>
-                    <outputDirectory>${basedir}</outputDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
-                            <directory>/tmp</directory>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
-                        </resource>
-                    </resources>
+                            <excludes>
+                                <exclude>util/</exclude>
+                                <exclude>spi/</exclude>
+                            </excludes>
+                        </fileset>
+                        <fileset>
+                            <directory>/tmp/</directory>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>/tmp/templates</directory>
+                            <includes>
+                                <include>**/*.rq</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
                 </configuration>
             </plugin>
 

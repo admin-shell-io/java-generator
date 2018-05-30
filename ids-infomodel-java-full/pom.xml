@@ -105,10 +105,10 @@
                         </configuration>
                     </execution>
 
-                    <!-- copy generated code to package src directory -->
+                    <!-- copy generated sources to package src directory -->
                     <execution>
                         <id>copy-java-beans</id>
-                        <phase>prepare-package</phase>
+                        <phase>process-sources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -135,7 +135,7 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
-                        <id>generate-java</id>
+                        <id>generate-java-sources</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>java</goal>
