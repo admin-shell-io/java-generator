@@ -24,7 +24,7 @@ public class ParticipantTest {
             .memberParticipants(Arrays.asList(createMemberParticipant()))
             .coversIndustry(ISICIndustry.GROWING_OF_BEVERAGE_CROPS.getId())
             .build();
-        Participant deserialized = (Participant) VocabUtil.fromRdf(original.toRdf());
+        Participant deserialized = (Participant) VocabUtil.getInstance().fromRdf(original.toRdf());
 
         Collection<? extends PlainLiteral> origEntityNames = original.getEntityNames();
         Collection<? extends PlainLiteral> deserEntityNames = deserialized.getEntityNames();

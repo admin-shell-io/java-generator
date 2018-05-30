@@ -78,6 +78,56 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <!-- assemble the relevant templates into /tmp/templates -->
+                    <execution>
+                        <id>assemble-templates</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>/tmp/templates</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/../common/src/templates</directory>
+                                </resource>
+                                <resource>
+                                    <directory>${basedir}/src/templates</directory>
+                                </resource>
+
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- copy generated code to package src directory -->
+                    <execution>
+                        <id>copy-java-beans</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
+                                    <directory>/tmp</directory>
+                                    <includes>
+                                        <include>**/*.java</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- execute the java bean generation based on the Infomodel files and the SPARQL templates -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -86,7 +136,7 @@
                 <executions>
                     <execution>
                         <id>generate-java</id>
-                        <phase>generate-resources</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
@@ -98,40 +148,13 @@
                                 <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
                                 <argument>-vd</argument><argument>${extvocabs-rdf-basedir}</argument>
                                 <argument>-td</argument>
-                                <argument>${basedir}/src/templates/java</argument>
+                                <argument>/tmp/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- copy generated code to package src directory -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-resources-plugin</artifactId>
-                <version>3.0.2</version>
-                <executions>
-                    <execution>
-                        <id>copy-java-beans</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <outputDirectory>${basedir}</outputDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
-                            <directory>/tmp</directory>
-                            <includes>
-                                <include>**/*.java</include>
-                            </includes>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
 
             <!-- attach source to jar -->
             <plugin>

@@ -64,7 +64,7 @@ public class DataTransferUsageTest {
     @Test
     public void dataTransferDeserialization() throws Exception {
         String serializedHeader = createDataTransfer().toRdf();
-        DataTransferImpl obj = (DataTransferImpl) VocabUtil.fromRdf(serializedHeader);
+        DataTransferImpl obj = (DataTransferImpl) VocabUtil.getInstance().fromRdf(serializedHeader);
 
         Assert.assertEquals(obj.getAuthToken().getTokenValue(), "token");
         Assert.assertEquals(obj.getHashFunction(), HashFunction.SHA_512);
@@ -80,7 +80,7 @@ public class DataTransferUsageTest {
     public void preserveInformationThroughDeserialization()
             throws Exception {
         DataTransfer original = createDataTransfer();
-        DataTransfer deserialized = (DataTransfer) VocabUtil.fromRdf(original.toRdf());
+        DataTransfer deserialized = (DataTransfer) VocabUtil.getInstance().fromRdf(original.toRdf());
 
         Model originalModel = ModelFactory.createDefaultModel();
         originalModel.read(new ByteArrayInputStream(original.toRdf().getBytes()), null, "TURTLE");

@@ -51,7 +51,7 @@ public class ConnectorUsageTest {
         Assert.assertFalse(model.listObjectsOfProperty(broker, operatorProperty).toList().isEmpty());
 
         // test for deserialized object
-        Connector deserialized = (Connector) VocabUtil.fromRdf(rdf);
+        Connector deserialized = (Connector) VocabUtil.getInstance().fromRdf(rdf);
         Assert.assertNotNull(deserialized);
         Assert.assertFalse(deserialized.getLifecycleActivities().isEmpty());
     }
