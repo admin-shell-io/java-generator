@@ -65,7 +65,7 @@
                                     <directory>${basedir}/src/templates</directory>
                                 </resource>
                                 <resource>
-                                    <directory>${basedir}/../common/src/templates</directory>
+                                    <directory>${basedir}/../common/templates</directory>
                                 </resource>
                             </resources>
                         </configuration>

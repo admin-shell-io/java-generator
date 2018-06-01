@@ -95,7 +95,7 @@
                             <outputDirectory>/tmp/templates</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/../common/src/templates</directory>
+                                    <directory>${basedir}/../common/templates</directory>
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/src/templates</directory>
