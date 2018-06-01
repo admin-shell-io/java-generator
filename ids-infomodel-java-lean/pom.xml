@@ -25,12 +25,21 @@
             <version>2.0.1.Final</version>
         </dependency>
 
+        <!-- test scope only -->
         <dependency>
             <groupId>org.unitils</groupId>
             <artifactId>unitils-core</artifactId>
             <version>3.4.2</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis</groupId>
+            <artifactId>jrdfb</artifactId>
+            <version>0.10-SNAPSHOT</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

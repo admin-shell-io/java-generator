@@ -2,5 +2,5 @@
 */target/
 ids-infomodel-java-lean/src/main/java/de/fraunhofer/iais/eis/*.java
 ids-infomodel-java-full/src/main/java/de/fraunhofer/iais/eis/*.java
-ids-infomodel-visualization/classes.png
+ids-infomodel-visualization/classes.*
 *.iml

@@ -53,7 +53,7 @@
                                     <targetPath>${basedir}</targetPath>
                                     <directory>/tmp</directory>
                                     <includes>
-                                        <include>**/diagram.*</include>
+                                        <include>**/classes.*</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -80,13 +80,13 @@
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
                                 <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
-                                <argument>-td</argument><argument>${basedir}/src/templates/diagram</argument>
+                                <argument>-td</argument><argument>${basedir}/src/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>
                     <execution>
                         <id>render-diagram</id>
-                        <phase>generate-resources</phase>
+                        <phase>process-sources</phase>
                         <goals>
                             <goal>exec</goal>
                         </goals>
@@ -97,8 +97,8 @@
                                 <argument>-T</argument>
                                 <argument>png</argument>
                                 <argument>-o</argument>
-                                <argument>diagram.png</argument>
-                                <argument>diagram.dot</argument>
+                                <argument>classes.png</argument>
+                                <argument>classes.dot</argument>
                             </arguments>
                         </configuration>
                     </execution>
@@ -114,13 +114,13 @@
                         <fileset>
                             <directory>${basedir}</directory>
                             <includes>
-                                <include>**/diagram.*</include>
+                                <include>**/classes.*</include>
                             </includes>
                         </fileset>
                         <fileset>
                             <directory>/tmp/</directory>
                             <includes>
-                                <include>**/diagram.*</include>
+                                <include>**/classes.*</include>
                             </includes>
                         </fileset>
                         <fileset>
