@@ -13,6 +13,21 @@
 
     <build>
         <plugins>
+            <!-- don't create a jar -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
+                        <configuration>
+                            <finalName>unwanted</finalName>
+                            <classifier>unwanted</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
@@ -39,7 +54,7 @@
                         </configuration>
                     </execution>
 
-                    <!-- copy generated sources to package src directory -->
+                    <!-- copy generated sources to package resources directory -->
                     <execution>
                         <id>copy-diagram</id>
                         <phase>package</phase>
@@ -101,6 +116,30 @@
                                 <argument>classes.dot</argument>
                             </arguments>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- assemble diagram files into a zip -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+
+                <configuration>
+                    <finalName>${artifactId}-${version}-diagrams</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>${basedir}/distribution.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assemble-diagrams</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
                     </execution>
                 </executions>
             </plugin>
