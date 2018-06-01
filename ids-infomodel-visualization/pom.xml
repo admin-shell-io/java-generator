@@ -13,6 +13,55 @@
 
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.0.2</version>
+                <executions>
+                    <!-- assemble the relevant templates into /tmp/templates -->
+                    <execution>
+                        <id>assemble-templates</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>/tmp/templates</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/../common/src/templates</directory>
+                                </resource>
+                                <resource>
+                                    <directory>${basedir}/src/templates</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- copy generated sources to package src directory -->
+                    <execution>
+                        <id>copy-diagram</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${basedir}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <targetPath>${basedir}</targetPath>
+                                    <directory>/tmp</directory>
+                                    <includes>
+                                        <include>**/diagram.*</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- execute the diagram generation based on the Infomodel files and the SPARQL templates -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -21,7 +70,7 @@
                 <executions>
                     <execution>
                         <id>generate-java-and-diagram</id>
-                        <phase>generate-resources</phase>
+                        <phase>generate-sources</phase>
                         <goals>
                             <goal>java</goal>
                         </goals>
@@ -48,12 +97,40 @@
                                 <argument>-T</argument>
                                 <argument>png</argument>
                                 <argument>-o</argument>
-                                <argument>classes.png</argument>
-                                <argument>classes.dot</argument>
+                                <argument>diagram.png</argument>
+                                <argument>diagram.dot</argument>
                             </arguments>
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <!-- cleanup generated java sources and temporary stuff in /tmp -->
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <includes>
+                                <include>**/diagram.*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>/tmp/</directory>
+                            <includes>
+                                <include>**/diagram.*</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>/tmp/templates</directory>
+                            <includes>
+                                <include>**/*.rq</include>
+                            </includes>
+                        </fileset>
+                    </filesets>
+                </configuration>
             </plugin>
         </plugins>
 
