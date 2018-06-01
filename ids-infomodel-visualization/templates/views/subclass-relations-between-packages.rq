@@ -1,0 +1,32 @@
+prefix ids: <https://schema.industrialdataspace.org/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix ids_vis: <https://schema.iais.fraunhofer.de/ids/helper/visualization/>
+
+template ids:subclass-relations-between-packages(?view) {
+
+    "\n"
+    "\"" str(?packageALabel) "\" -- \"" str(?packageBLabel) "\"\n"
+
+}
+where {
+    ?packageA ids_vis:belongsToView ?view;
+        rdfs:label ?packageALabel.
+
+    ?packageB ids_vis:belongsToView ?view;
+        rdfs:label ?packageBLabel.
+
+    ?classA ids_vis:belongsToPackage ?packageA;
+        a owl:Class.
+
+    ?classB ids_vis:belongsToPackage ?packageB;
+        a owl:Class.
+
+    ?classA rdfs:subClassOf ?classB.
+
+    filter ((?packageA != ?packageB) && (?classA != ?classB))
+}
+group by ?packageALabel ?packageBLabel
+
+
+

@@ -19,6 +19,7 @@
         <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-rdf-basedir>
         <corevocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/CoreVocabularies/vocabs</corevocabs-rdf-basedir>
         <extvocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/ExtensionVocabularies/vocabs</extvocabs-rdf-basedir>
+        <visualization-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModelViews</visualization-rdf-basedir>
     </properties>
 
     <dependencies>

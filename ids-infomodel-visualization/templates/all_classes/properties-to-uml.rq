@@ -3,11 +3,9 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template ids:properties-to-uml(?class) {
 
-    "~ " str(?label) " : "
+    "# " str(?label) " : "
 
-    st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "&lt;", "&gt;")
-
-    "<BR/>"
+    st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<", ">")
 
 }
 where {

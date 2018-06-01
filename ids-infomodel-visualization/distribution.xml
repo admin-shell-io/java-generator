@@ -8,7 +8,7 @@
         <fileSet>
             <directory>${basedir}</directory>
             <includes>
-                <include>classes.*</include>
+                <include>*.plantuml</include>
             </includes>
         </fileSet>
     </fileSets>

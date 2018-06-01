@@ -4,12 +4,12 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 template ids:property-relations-to-uml {
 
     "\n"
-    "\t" str(?classA) " -> " str(?classB) " [\n\t\tarrowhead=vee\n"
+    str(?classA)
 
-    "\t\theadlabel = \"" st:call-template(ids:uml-headlabel, ?domain, ?property) "\""
-    "\t\txlabel= \"" str(?propLabel) "\""
+    " --> "
 
-    "\n\t]"
+    st:call-template(ids:uml-headlabel, ?domain, ?property)
+    str(?classB) ": " str(?propLabel) "\n"
 
 }
 where {

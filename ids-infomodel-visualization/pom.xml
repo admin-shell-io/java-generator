@@ -46,9 +46,13 @@
                             <resources>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <includes>
+                                        <include>range-to-java-type.rq</include>
+                                        <include>range-to-basic-type.rq</include>
+                                    </includes>
                                 </resource>
                                 <resource>
-                                    <directory>${basedir}/src/templates</directory>
+                                    <directory>${basedir}/templates/all_classes</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -68,7 +72,7 @@
                                     <targetPath>${basedir}</targetPath>
                                     <directory>/tmp</directory>
                                     <includes>
-                                        <include>**/classes.*</include>
+                                        <include>**/*.plantuml</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -84,7 +88,7 @@
                 <version>1.6.0</version>
                 <executions>
                     <execution>
-                        <id>generate-java-and-diagram</id>
+                        <id>generate-diagrams</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>java</goal>
@@ -95,10 +99,16 @@
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
                                 <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
-                                <argument>-td</argument><argument>${basedir}/src/templates</argument>
+                                <argument>-vd</argument><argument>${visualization-rdf-basedir}</argument>
+
+                                <argument>-td</argument><argument>${basedir}/templates/focusclasses</argument>
+                                <argument>-td</argument><argument>${basedir}/templates/views</argument>
+                                <argument>-td</argument><argument>/tmp/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>
+
+                    <!--
                     <execution>
                         <id>render-diagram</id>
                         <phase>process-sources</phase>
@@ -117,6 +127,7 @@
                             </arguments>
                         </configuration>
                     </execution>
+                    -->
                 </executions>
             </plugin>
 
@@ -153,13 +164,13 @@
                         <fileset>
                             <directory>${basedir}</directory>
                             <includes>
-                                <include>**/classes.*</include>
+                                <include>**/*.plantuml</include>
                             </includes>
                         </fileset>
                         <fileset>
                             <directory>/tmp/</directory>
                             <includes>
-                                <include>**/classes.*</include>
+                                <include>**/*.plantuml</include>
                             </includes>
                         </fileset>
                         <fileset>
