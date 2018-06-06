@@ -7,7 +7,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import de.fraunhofer.iais.eis.*;
 
-import javax.xml.datatype.DatatypeConfigurationException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -35,17 +34,22 @@ public class EchoServicePublicationTest {
                 .technicalResponsibility(PARTICIPANT_URL)
                 .entityNames(Arrays.asList(new PlainLiteral("Official IDS Connector of companyA", "en")))
 
-                // the DataEndpoints which are provided by the Connector
-                .provides(Arrays.asList(describeEchoEndpoint()))
+                // the DataAssets which are provided by the Connector
+                .provides(Arrays.asList(describeEchoDataAsset()))
+
                 .build();
     }
 
-    private DataAsset describeEchoEndpoint() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
+    private DataAsset describeEchoDataAsset() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
         return new DataAssetBuilder()
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my echo service", "en")))
 
                 // a DataEndpoint defines a couple of Operations that may be invoked by the communication partner to receive the provided data
                 .kinds(Arrays.asList(createUnspecifiedKind()))
+
+                // the Interfaces to retrieve the DataAssets
+                .retrievableBy(Arrays.asList(createServiceInterface()))
+
                 .build();
     }
 
@@ -81,7 +85,6 @@ public class EchoServicePublicationTest {
     private Representation createJsonRepresentation() throws ConstraintViolationException {
         return new RepresentationBuilder()
                 .mediaType(IANAMediaType.APPLICATION_JSON)
-                .offeredBy(Arrays.asList(createServiceInterface()))
                 .build();
     }
 
@@ -94,13 +97,9 @@ public class EchoServicePublicationTest {
                 .apiDocument(apiDocument)
                 .build();
 
-        DataService implementer = new DataServiceBuilder()
-                .binding(binding)
-                .build();
-
         return new ServiceInterfaceBuilder()
             .operation(describeEchoOperation())
-            .implementer(implementer)
+            .binding(binding)
             .build();
     }
 
