@@ -52,7 +52,7 @@
         <repository>
             <id>isst-repo</id>
             <name>Maven repository at ISST</name>
-            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
+            <url>https://mvn.isst.fraunhofer.de/nexus/repository/ids-local</url>
         </repository>
     </distributionManagement>
 
@@ -60,7 +60,7 @@
         <repository>
             <id>isst-repo</id>
             <name>Maven repository at ISST</name>
-            <url>https://mvn.isst.fraunhofer.de/artifactory/ids-local</url>
+            <url>https://mvn.isst.fraunhofer.de/nexus/repository/ids-local</url>
         </repository>
     </repositories>
 
