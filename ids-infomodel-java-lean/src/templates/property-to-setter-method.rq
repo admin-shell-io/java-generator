@@ -3,6 +3,14 @@ prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
 
 template ids:property-to-setter-method(?property, ?class) {
 
+    # method name
+    "set"
+
+    if (bound(?pluralLabel),
+            concat(ucase(substr(str(?pluralLabel), 1, 1)), substr(str(?pluralLabel), 2)),
+            concat(ucase(substr(str(?label), 1, 1)), substr(str(?label), 2)))
+
+
     # method params
     "("
         # parameter type and annotation

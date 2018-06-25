@@ -19,13 +19,15 @@ template ids:properties-to-bean-methods(?class) {
 
     # setter method
 
+    "\n\t"
+
     # visibility modifier
     "final public void "
 
     st:call-template(ids:property-to-setter-method, ?property, ?class)
 
     # method body
-    st:call-template(ids:setter-method-body, ?property, ??class)
+    st:call-template(ids:setter-method-body, ?property)
 
 }
 where  {   
