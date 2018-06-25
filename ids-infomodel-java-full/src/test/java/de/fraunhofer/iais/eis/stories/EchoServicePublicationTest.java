@@ -20,11 +20,14 @@ public class EchoServicePublicationTest {
 
     @Test
     public void createOffering() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
+        Assert.fail();
+        /*
         Connector connector = describeConnectorWithDataOffering();
         String rdf = connector.toRdf();
 
         Connector deser = (Connector) VocabUtil.getInstance().fromRdf(rdf);
         Assert.assertNotNull(deser);
+        */
     }
 
     private Connector describeConnectorWithDataOffering() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
@@ -41,6 +44,8 @@ public class EchoServicePublicationTest {
     }
 
     private DataAsset describeEchoDataAsset() throws ConstraintViolationException, MalformedURLException, URISyntaxException {
+        return null;
+        /*
         return new DataAssetBuilder()
                 .entityNames(Arrays.asList(new PlainLiteral("Endpoint providing my echo service", "en")))
 
@@ -51,6 +56,7 @@ public class EchoServicePublicationTest {
                 .retrievableBy(Arrays.asList(createServiceInterface()))
 
                 .build();
+                */
     }
 
     private Kind createUnspecifiedKind() throws ConstraintViolationException {
@@ -99,7 +105,7 @@ public class EchoServicePublicationTest {
 
         return new ServiceInterfaceBuilder()
             .operation(describeEchoOperation())
-            .binding(binding)
+//            .binding(binding)
             .build();
     }
 
