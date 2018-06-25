@@ -16,10 +16,9 @@
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
-        <infomodel-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-rdf-basedir>
-        <corevocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/CoreVocabularies/vocabs</corevocabs-rdf-basedir>
-        <extvocabs-rdf-basedir>${user.home}/projects/ids/ids_infomodel/ExtensionVocabularies/vocabs</extvocabs-rdf-basedir>
-        <visualization-rdf-basedir>${user.home}/projects/ids/ids_infomodel/InformationModelViews</visualization-rdf-basedir>
+        <infomodel-modules>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-modules>
+        <infomodel-codes>${user.home}/projects/ids/ids_infomodel/InformationModel/CoreVocabularies/vocabs</infomodel-codes>
+        <infomodel-other>${user.home}/projects/ids/ids_infomodel/InformationModel/ExtensionVocabularies/vocabs</infomodel-other>
     </properties>
 
     <dependencies>
@@ -27,10 +26,10 @@
         <dependency>
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>sparql-template-executor</artifactId>
-            <version>2.1-SNAPSHOT</version>
+            <version>2.2-SNAPSHOT</version>
             <optional>true</optional>
             <scope>system</scope>
-            <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.1-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+            <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.2-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
     </dependencies>
 

@@ -144,9 +144,8 @@
                             <classpathScope>compile</classpathScope>
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
-                                <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
-                                <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
-                                <argument>-vd</argument><argument>${extvocabs-rdf-basedir}</argument>
+                                <argument>-vd</argument><argument>${infomodel-modules}</argument>
+                                <argument>-vd</argument><argument>${infomodel-codes}</argument>
                                 <argument>-td</argument>
                                 <argument>/tmp/templates</argument>
                             </arguments>
