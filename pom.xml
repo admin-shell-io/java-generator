@@ -7,7 +7,7 @@
     <groupId>de.fraunhofer.iais.eis</groupId>
     <artifactId>ids-infomodel</artifactId>
     <packaging>pom</packaging>
-    <version>0.22-SNAPSHOT</version>
+    <version>0.23-SNAPSHOT</version>
     <modules>
         <module>visualization</module>
         <module>java</module>
