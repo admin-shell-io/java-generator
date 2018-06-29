@@ -1,0 +1,26 @@
+prefix ids: <https://w3id.org/ids/core/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
+
+template ids:properties-to-builder-methods(?rootClass, ?class) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    "\n"
+	"\n\t"
+
+    # visibility modifier
+    "final public "
+
+    # return type and name
+    st:call-template(idstt:to_class_name, ?rootClass) "Builder "
+
+	st:call-template(ids:property-to-setter-method, ?property, ?class)
+
+    # method body
+	st:call-template(ids:setter-method-builder-body, ?property, ?rootClass)
+
+}
+where  {   
+    ?property rdfs:domain ?class.
+}

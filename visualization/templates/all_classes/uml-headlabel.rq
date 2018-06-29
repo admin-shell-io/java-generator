@@ -1,0 +1,34 @@
+prefix ids: <https://w3id.org/ids/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idsm: <https://w3id.org/ids/metamodel/>
+
+template ids:uml-headlabel(?class, ?property) {
+
+    if (bound(?relationType) && (?relationType = <idsm:OneToMany>),
+
+        # collection
+        if (bound(?constraint) && (?constraint = <idsm:NotEmpty>),
+            " \"1..*\" ",
+            " \"*\" "),
+
+        # single reference
+        if (bound(?constraint) && ((?constraint = <idsm:NotEmpty>) || (?constraint = <idsm:NotNull>)),
+            " \"1\" ",
+            " ")
+
+        )
+
+}
+where {
+    ?class idsm:validation ?validation.
+    ?validation idsm:forProperty ?property.
+
+    OPTIONAL {
+        ?validation idsm:relationType ?relationType.
+    }
+
+    OPTIONAL {
+        ?validation idsm:constraint ?constraint;
+    }
+}
+

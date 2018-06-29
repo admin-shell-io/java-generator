@@ -1,0 +1,11 @@
+prefix ids: <https://w3id.org/ids/core/>
+
+template ids:properties-to-fields(?class) {
+
+	# Iterates on selected properties
+	st:call-template(ids:property-to-field, ?property, ?class)
+
+}
+where  {
+  ?property rdfs:domain ?class.
+}

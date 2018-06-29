@@ -1,0 +1,25 @@
+prefix ids: <https://w3id.org/ids/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:property-relations-to-uml {
+
+    "\n"
+    str(?classA)
+
+    " --> "
+
+    st:call-template(ids:uml-headlabel, ?domain, ?property)
+    str(?classB) ": " str(?propLabel) "\n"
+
+}
+where {
+    ?property rdfs:domain ?domain;
+        rdfs:range ?range;
+        rdfs:label ?propLabel.
+
+    ?domain rdfs:label ?classA.
+    ?range rdfs:label ?classB.
+
+    FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
+}
+

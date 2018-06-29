@@ -1,0 +1,16 @@
+prefix ids: <https://w3id.org/ids/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:views {
+
+    "@startuml\n\n"
+    "skinparam linetype ortho\n"
+
+    st:call-template(ids:process-view-to-uml)
+
+    "@enduml\n"
+
+}
+where {
+}
+

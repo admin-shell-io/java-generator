@@ -1,0 +1,25 @@
+prefix ids: <https://w3id.org/ids/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template ids:basic-imports {
+
+    "\nimport de.fraunhofer.iais.eis.util.*;"
+    "\nimport de.fraunhofer.iais.eis.*;"
+    "\n"
+    "\nimport javax.xml.datatype.XMLGregorianCalendar;"
+    "\nimport java.lang.String;"
+    "\nimport java.math.BigInteger;"
+    "\nimport java.net.URL;"
+    "\nimport java.net.URI;"
+    "\nimport java.util.Collection;"
+    "\nimport javax.validation.constraints.*;"
+    "\nimport java.util.Arrays;"
+    "\nimport java.io.Serializable;"
+    "\n"
+    "\nimport annotation.*;"
+    "\nimport javax.validation.constraints.*;"
+
+}
+where {
+
+}

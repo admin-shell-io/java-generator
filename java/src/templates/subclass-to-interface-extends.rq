@@ -1,0 +1,14 @@
+prefix ids: <https://w3id.org/ids/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
+
+template ids:subclass-to-interface-extends(?class) {
+
+    ", " st:call-template(idstt:to_class_name, ?superClass)
+
+}
+where {
+    ?class rdfs:subClassOf ?superClass.
+
+    filter (strstarts(str(?superClass), str(<ids:>)))
+}
