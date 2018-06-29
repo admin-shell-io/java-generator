@@ -15,7 +15,7 @@
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
-        <infomodel-modules>${user.home}/projects/ids/ids_infomodel/InformationModel</infomodel-modules>
+        <infomodel-sourcebase>${user.home}/projects/ids/ids_infomodel/InformationModel</infomodel-sourcebase>
     </properties>
 
     <dependencies>

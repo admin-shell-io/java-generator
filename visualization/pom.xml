@@ -97,9 +97,7 @@
                             <classpathScope>compile</classpathScope>
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
-                                <argument>-vd</argument><argument>${infomodel-rdf-basedir}</argument>
-                                <argument>-vd</argument><argument>${corevocabs-rdf-basedir}</argument>
-                                <argument>-vd</argument><argument>${visualization-rdf-basedir}</argument>
+                                <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
 
                                 <argument>-td</argument><argument>${basedir}/templates/focusclasses</argument>
                                 <argument>-td</argument><argument>${basedir}/templates/views</argument>
