@@ -1,15 +1,12 @@
 prefix ids: <https://w3id.org/ids/core/>
 prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
 
 template ids:property-to-setter-method(?property, ?class) {
 
     # method name
-    "set"
 
-    if (bound(?pluralLabel),
-            concat(ucase(substr(str(?pluralLabel), 1, 1)), substr(str(?pluralLabel), 2)),
-            concat(ucase(substr(str(?label), 1, 1)), substr(str(?label), 2)))
-
+    st:call-template(idstt:to_property_name, ?property)
 
     # method params
     "("
@@ -23,13 +20,10 @@ template ids:property-to-setter-method(?property, ?class) {
         " "
 
         # parameter label
-        if (bound(?pluralLabel), str(?pluralLabel), str(?label))
+        st:call-template(idstt:to_property_name, ?property)
     ")"
 
 }
 where  {
-    ?property rdfs:range ?range;
-        rdfs:label ?label.
-
-    OPTIONAL {?property idsm:labelPluralForm ?pluralLabel}
+    ?property rdfs:range ?range.
 }

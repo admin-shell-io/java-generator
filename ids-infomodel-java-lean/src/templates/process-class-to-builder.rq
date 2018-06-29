@@ -56,7 +56,4 @@ template ids:process-class-to-builder(?class) {
     "\n}\n"
 
 }
-where{
-    ?class rdfs:label ?label.
-    filter (lang(?label) = "en")
-}
+where {}
