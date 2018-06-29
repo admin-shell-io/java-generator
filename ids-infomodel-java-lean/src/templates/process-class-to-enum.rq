@@ -1,5 +1,6 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
 
 template ids:process-class-to-enum(?class) {
 
@@ -12,7 +13,7 @@ template ids:process-class-to-enum(?class) {
     "/** " str(?comment) " */\n"
     "\n@RdfType(\"" str(?class) "\")"
     "\n"
-    "public enum " str(?label) " {\n"
+    "public enum " st:call-template(idstt:to_class_name, ?class) " {\n"
 
     st:call-template(ids:process-enum-individuals, ?class)
 
@@ -22,7 +23,7 @@ template ids:process-class-to-enum(?class) {
     "\n\tprivate URL id;"
 
     "\n"
-	"\n\tprivate " str(?label) "(String label) {"
+	"\n\tprivate " st:call-template(idstt:to_class_name, ?class) "(String label) {"
 	"\n\t\ttry {"
 	"\n\t\t\tthis.id = new URL(\"" str(?class) "\");"
     "\n\t\t}"
@@ -45,7 +46,7 @@ template ids:process-class-to-enum(?class) {
 	"\n\t}"
 
 	"\n"
-	"\n\tpublic static " str(?label) " getByString(String label) {"
+	"\n\tpublic static " st:call-template(idstt:to_class_name, ?class) " getByString(String label) {"
 	"\n\t\treturn VocabUtil.getInstance().getByString(values(), label);"
     "\n\t}"
 
@@ -54,8 +55,5 @@ template ids:process-class-to-enum(?class) {
 }
 where{
     ?class a owl:Class;
-        rdfs:comment ?comment;
-        rdfs:label ?label .
-
-    filter (lang(?label) = "en")
+        rdfs:comment ?comment.
 }

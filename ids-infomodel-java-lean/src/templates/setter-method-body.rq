@@ -1,21 +1,16 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
 
 template ids:setter-method-body(?property) {
 
     " {"
 
     "\n\t\t"
-    "this."
-    if (bound(?pluralLabel), str(?pluralLabel), str(?label))
-    " = "
-    if (bound(?pluralLabel), str(?pluralLabel), str(?label))
+    "this." st:call-template(idstt:to_property_name, ?property) " = " st:call-template(idstt:to_property_name, ?property)
     ";"
     "\n\t}"
 
 }
-where{
-    ?property rdfs:label ?label.
-    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
-}
+where{}

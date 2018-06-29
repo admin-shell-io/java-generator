@@ -1,5 +1,6 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
 
 template ids:process-class-to-bean(?class) {
 
@@ -10,8 +11,8 @@ template ids:process-class-to-bean(?class) {
     "\n"
     "\n"
     "/** " str(?comment) " */\n"
-    "public class " concat(str(?label), "Impl")
-    " implements " str(?label)
+    "public class " concat(st:call-template(idstt:to_class_name, ?class), "Impl")
+    " implements " st:call-template(idstt:to_class_name, ?class)
 
     " {\n"
 
@@ -25,7 +26,7 @@ template ids:process-class-to-bean(?class) {
 
     "\n"
     "\n\t// no manual construction"
-    "\n\t" str(?label) "Impl() {}"
+    "\n\t" st:call-template(idstt:to_class_name, ?class) "Impl() {}"
     "\n"
     "\n\t@Override"
     "\n\tfinal public URL getId() {"
@@ -48,8 +49,5 @@ template ids:process-class-to-bean(?class) {
 }
 where{
     ?class a owl:Class;
-        rdfs:comment ?comment;
-        rdfs:label ?label .
-
-    filter (lang(?label) = "en")
+        rdfs:comment ?comment.
 }

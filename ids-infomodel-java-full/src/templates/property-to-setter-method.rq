@@ -1,5 +1,5 @@
-prefix ids: <https://schema.industrialdataspace.org/>
-prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
+prefix ids: <https://w3id.org/ids/core/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:property-to-setter-method(?property, ?class) {
 
@@ -23,5 +23,5 @@ where  {
     ?property rdfs:range ?range;
         rdfs:label ?label.
 
-    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
+    OPTIONAL {?property idsm:labelPluralForm ?pluralLabel}
 }

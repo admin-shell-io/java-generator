@@ -1,4 +1,4 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 
 template ids:properties-to-fields(?class) {
 

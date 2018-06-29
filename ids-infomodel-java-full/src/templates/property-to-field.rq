@@ -1,6 +1,6 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix valid: <https://schema.iais.fraunhofer.de/ids/helper/relation/>
-prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:property-to-field(?property, ?class) {
 
@@ -20,5 +20,5 @@ where  {
    ?property rdfs:range ?range.
 
    ?property rdfs:label ?label.
-   OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
+   OPTIONAL {?property idsm:labelPluralForm ?pluralLabel}
 }

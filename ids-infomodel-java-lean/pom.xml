@@ -111,10 +111,10 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-modules}</argument>
-                                <argument>-vd</argument><argument>${infomodel-codes}</argument>
-                                <argument>-vd</argument><argument>${infomodel-other}</argument>
                                 <argument>-td</argument>
                                 <argument>/tmp/templates</argument>
+                                <argument>-pp</argument>
+                                <argument>**/[cm]*/*/*.ttl</argument>
                             </arguments>
                         </configuration>
                     </execution>

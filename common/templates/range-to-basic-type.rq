@@ -1,6 +1,7 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix trns: <https://schema.iais.fraunhofer.de/ids/helper/transformation/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
 
 template ids:range-to-basic-type(?property, ?range) {
 
@@ -21,16 +22,15 @@ template ids:range-to-basic-type(?property, ?range) {
         if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:anyURI>), "URI",
-        if (str(?range) = str(<rdfs:Literal>), "Literal",
+        if (str(?range) = str(<rdfs:Literal>), "PlainLiteral",
         if (str(?range) = str(<rdf:PlainLiteral>), "PlainLiteral",
 
-        if (bound(?rangeLabel), str(?rangeLabel), "!!unknownType!!")))))))))))))))))
+        st:call-template(idstt:to_class_name, ?range)))))))))))))))))
     )
 
 }
 where {
     ?property rdfs:range ?range.
 
-    optional {?range rdfs:label ?rangeLabel}
-    optional {?property trns:refByURI ?refByUri}
+    optional {?property idsm:refByURI ?refByUri}
 }

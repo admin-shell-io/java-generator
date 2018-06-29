@@ -1,5 +1,6 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
 
 template ids:process-class-to-interface(?class) {
 
@@ -13,7 +14,7 @@ template ids:process-class-to-interface(?class) {
     "/** " str(?comment) " */"
     "\n@RdfType(\"" str(?class) "\")"
     "\n"
-    "public interface " str(?label)
+    "public interface " st:call-template(idstt:to_class_name, ?class)
 
     if (bound(?superClass) && strstarts(str(?superClass), str(<ids:>)),
         concat(" extends ", strafter(st:call-template(ids:subclass-to-interface-extends, ?class), ", ")),
@@ -37,10 +38,8 @@ template ids:process-class-to-interface(?class) {
 }
 where{
     ?class a owl:Class;
-        rdfs:comment ?comment;
-        rdfs:label ?label .
+        rdfs:comment ?comment.
 
-    filter (lang(?label) = "en")
     optional {
         ?class rdfs:subClassOf ?superClass.
     }

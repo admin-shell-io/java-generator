@@ -1,0 +1,14 @@
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
+
+template idstt:to_property_name(?property) {
+    if (bound(?pluralLabel),
+        str(?pluralLabel),
+        st:call-template(idstt:to_class_name, ?property))
+}
+where {
+    ?property a ?type.
+
+    OPTIONAL {?property idsm:labelPluralForm ?pluralLabel}
+    FILTER (?type IN (owl:ObjectProperty, owl:DatatypeProperty))
+}

@@ -1,0 +1,7 @@
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
+
+template idstt:to_class_name(?classresource) {
+    replace(str(?classresource), "^.*/([^/]+)/?", "$1")
+}
+where {}

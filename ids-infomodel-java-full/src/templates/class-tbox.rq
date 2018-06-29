@@ -1,6 +1,6 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix dcat: <http://www.w3.org/ns/dcat#>
-prefix trns: <https://schema.iais.fraunhofer.de/ids/helper/transformation/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:class-tbox(?class) {
 
@@ -23,6 +23,6 @@ where  {
     ?class rdfs:label ?label .
 
     filter (lang(?label) = "en")
-    optional {?class trns:isAbstract ?isAbstract}
+    optional {?class idsm:isAbstract ?isAbstract}
 }
 

@@ -1,5 +1,5 @@
-prefix ids: <https://schema.industrialdataspace.org/>
-prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
+prefix ids: <https://w3id.org/ids/core/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:properties-to-builder-methods(?rootClass, ?class) {
 
@@ -27,5 +27,5 @@ where  {
     ?rootClass rdfs:label ?rootClassLabel .
 
     filter((lang(?label) = "en") && ((lang(?rootClassLabel) = "en")))
-    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
+    OPTIONAL {?property idsm:labelPluralForm ?pluralLabel}
 }

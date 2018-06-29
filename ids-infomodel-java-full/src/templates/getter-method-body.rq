@@ -1,6 +1,6 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idoc: <https://schema.iais.fraunhofer.de/ids/helper/documentation/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:getter-method-body(?property) {
 
@@ -21,5 +21,5 @@ where{
     ?property rdfs:range ?range;
         rdfs:label ?label.
 
-    OPTIONAL {?property idoc:labelPluralForm ?pluralLabel}
+    OPTIONAL {?property idsm:labelPluralForm ?pluralLabel}
 }

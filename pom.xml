@@ -16,9 +16,7 @@
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
-        <infomodel-modules>${user.home}/projects/ids/ids_infomodel/InformationModel/modules</infomodel-modules>
-        <infomodel-codes>${user.home}/projects/ids/ids_infomodel/CoreVocabularies/vocabs</infomodel-codes>
-        <infomodel-other>${user.home}/projects/ids/ids_infomodel/ExtensionVocabularies/vocabs</infomodel-other>
+        <infomodel-modules>${user.home}/projects/ids/ids_infomodel/InformationModel</infomodel-modules>
     </properties>
 
     <dependencies>

@@ -1,18 +1,18 @@
-prefix ids: <https://schema.industrialdataspace.org/>
+prefix ids: <https://w3id.org/ids/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix valid: <https://schema.iais.fraunhofer.de/ids/helper/relation/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:uml-headlabel(?class, ?property) {
 
-    if (bound(?relationType) && (?relationType = <valid:OneToMany>),
+    if (bound(?relationType) && (?relationType = <idsm:OneToMany>),
 
         # collection
-        if (bound(?constraint) && (?constraint = <valid:NotEmpty>),
+        if (bound(?constraint) && (?constraint = <idsm:NotEmpty>),
             " \"1..*\" ",
             " \"*\" "),
 
         # single reference
-        if (bound(?constraint) && ((?constraint = <valid:NotEmpty>) || (?constraint = <valid:NotNull>)),
+        if (bound(?constraint) && ((?constraint = <idsm:NotEmpty>) || (?constraint = <idsm:NotNull>)),
             " \"1\" ",
             " ")
 
@@ -20,15 +20,15 @@ template ids:uml-headlabel(?class, ?property) {
 
 }
 where {
-    ?class valid:validation ?validation.
-    ?validation valid:forProperty ?property.
+    ?class idsm:validation ?validation.
+    ?validation idsm:forProperty ?property.
 
     OPTIONAL {
-        ?validation valid:relationType ?relationType.
+        ?validation idsm:relationType ?relationType.
     }
 
     OPTIONAL {
-        ?validation valid:constraint ?constraint;
+        ?validation idsm:constraint ?constraint;
     }
 }
 
