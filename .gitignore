@@ -1,6 +1,5 @@
 .idea/
 */target/
-ids-infomodel-java-lean/src/main/java/de/fraunhofer/iais/eis/*.java
-ids-infomodel-java-full/src/main/java/de/fraunhofer/iais/eis/*.java
-ids-infomodel-visualization/*.plantuml
-*.iml
+java/src/main/java/de/fraunhofer/iais/eis/*.java
+visualization/*.plantuml
+**/*.iml

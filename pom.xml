@@ -9,9 +9,8 @@
     <packaging>pom</packaging>
     <version>0.22-SNAPSHOT</version>
     <modules>
-        <module>ids-infomodel-visualization</module>
-        <module>ids-infomodel-java-full</module>
-        <module>ids-infomodel-java-lean</module>
+        <module>visualization</module>
+        <module>java</module>
     </modules>
 
     <properties>
