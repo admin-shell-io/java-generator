@@ -12,7 +12,7 @@ template ids:process-class-to-bean(?class) {
     "\n"
     "/** " str(?comment) " */\n"
     "public class " concat(st:call-template(idstt:to_class_name, ?class), "Impl")
-    " implements " st:call-template(idstt:to_class_name, ?class)
+    " implements Serializable, " st:call-template(idstt:to_class_name, ?class)
 
     " {\n"
 
