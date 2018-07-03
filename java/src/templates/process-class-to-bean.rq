@@ -28,7 +28,6 @@ template ids:process-class-to-bean(?class) {
     "\n\t// no manual construction"
     "\n\t" st:call-template(idstt:to_class_name, ?class) "Impl() {}"
     "\n"
-    "\n\t@Override"
     "\n\tfinal public URL getId() {"
     "\n\t\treturn id;"
     "\n\t}"

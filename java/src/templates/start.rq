@@ -11,22 +11,8 @@ template st:start {
 where  {
     ?class a owl:Class.
 
-    # either the class is directly used in a domain or range specification of some property
-    OPTIONAL {?definedAsDomain rdfs:domain ?class}
-    OPTIONAL {?definedAsRange rdfs:range ?class}
-
-    # or a subclass of this class is mentioned by some property as domain or range
-    OPTIONAL {
-        ?subClass rdfs:subClassOf ?class.
-
-        OPTIONAL {?definedAsDomain rdfs:domain ?subClass}
-        OPTIONAL {?definedAsRange rdfs:range ?subClass}
-    }
-
     OPTIONAL {
         ?instance a ?class
     }
-
-    FILTER (bound(?definedAsDomain) || bound(?definedAsRange))
 }
-group by ?class
+GROUP BY ?class
