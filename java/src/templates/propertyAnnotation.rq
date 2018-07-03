@@ -1,15 +1,15 @@
 prefix ids: <https://w3id.org/ids/core/>
-prefix valid: <https://schema.iais.fraunhofer.de/ids/helper/relation/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:propertyAnnotation(?class, ?property, ?range) {
 
-    if (?constraint = <valid:NotNull>, "@NotNull",
-    if (?constraint = <valid:NotEmpty>, "@NotEmpty",
+    if (?constraint = <idsm:NotNull>, "@NotNull",
+    if (?constraint = <idsm:NotEmpty>, "@NotEmpty",
       "!!unknownConstraint!!"))
 
 }
 where {
-    ?class valid:validation ?validation.
-    ?validation valid:forProperty ?property.
-    ?validation valid:constraint ?constraint.
+    ?class idsm:validation ?validation.
+    ?validation idsm:forProperty ?property.
+    ?validation idsm:constraint ?constraint.
 }
