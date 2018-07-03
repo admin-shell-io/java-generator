@@ -1,0 +1,17 @@
+prefix idstt: <https://w3id.org/ids/transformationtemplates/>
+prefix idsm: <https://w3id.org/ids/metamodel/>
+
+template idstt:jackson-annotation(?range, ?isCollection) {
+
+    "@JsonDeserialize("
+
+    if (?isCollection, "contentAs", "as")
+
+    " = "
+
+    st:call-template(idstt:to_class_name, ?range)
+
+    "Impl.class)\n\t"
+}
+where {}
+
