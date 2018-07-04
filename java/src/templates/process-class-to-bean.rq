@@ -11,6 +11,7 @@ template ids:process-class-to-bean(?class) {
     "\n"
     "\n"
     "/** " str(?comment) " */\n"
+    "@JsonIgnoreProperties(ignoreUnknown = true)\n"
     "public class " concat(st:call-template(idstt:to_class_name, ?class), "Impl")
     " implements Serializable, " st:call-template(idstt:to_class_name, ?class)
 
