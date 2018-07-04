@@ -7,14 +7,7 @@ template ids:process-enum-individuals(?class) {
         concat("\n\t/** ", str(?comment), " */"),
         '')
 
-    "\n\t@RdfUri(\"" str(?individual) "\")"
-
-    "\n\t" str(?identifier)
-
-    if (bound(?label),
-        concat("(\"", str(?label), "\"),"),
-        concat("(\"", str(?identifier), "\"),"))
-
+    "\n\t" str(?identifier) "(\"" str(?individual) "\"),"
 }
 where  {
     ?individual a ?class;
@@ -23,9 +16,4 @@ where  {
     OPTIONAL {
         ?individual rdfs:comment ?comment.
     }
-
-    OPTIONAL {
-        ?individual rdfs:label ?label.
-    }
-
 }
