@@ -99,34 +99,11 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-
-                                <argument>-td</argument><argument>${basedir}/templates/focusclasses</argument>
-                                <argument>-td</argument><argument>${basedir}/templates/views</argument>
+                                <argument>-pp</argument><argument>**/*.ttl</argument>
                                 <argument>-td</argument><argument>/tmp/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>
-
-                    <!--
-                    <execution>
-                        <id>render-diagram</id>
-                        <phase>process-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>dot</executable>
-                            <workingDirectory>/tmp</workingDirectory>
-                            <arguments>
-                                <argument>-T</argument>
-                                <argument>png</argument>
-                                <argument>-o</argument>
-                                <argument>classes.png</argument>
-                                <argument>classes.dot</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                    -->
                 </executions>
             </plugin>
 
