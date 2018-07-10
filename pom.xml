@@ -7,7 +7,7 @@
     <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>0.23-SNAPSHOT</version>
+    <version>0.24-SNAPSHOT</version>
     <modules>
         <module>visualization</module>
         <module>java</module>
@@ -15,7 +15,7 @@
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
-        <infomodel-sourcebase>${user.home}/projects/ids/ids_infomodel/InformationModel</infomodel-sourcebase>
+        <infomodel-sourcebase>${user.home}/projects/ids/InformationModel</infomodel-sourcebase>
     </properties>
 
     <dependencies>
