@@ -10,6 +10,7 @@ template ids:range-to-basic-type(?property, ?range) {
     if (str(?range) = str(<xsd:string>), "String",
     if (str(?range) = str(<xsd:integer>), "BigInteger",
     if (str(?range) = str(<xsd:int>), "int",
+    if (str(?range) = str(<xsd:nonNegativeInteger>), "int",
     if (str(?range) = str(<xsd:long>), "long",
     if (str(?range) = str(<xsd:short>), "short",
     if (str(?range) = str(<xsd:float>), "float",
@@ -27,7 +28,7 @@ template ids:range-to-basic-type(?property, ?range) {
     if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.PlainLiteral",
 
     # custom types
-    st:call-template(idstt:to_class_name, ?range))))))))))))))))))
+    st:call-template(idstt:to_class_name, ?range)))))))))))))))))))
 
 }
 where {

@@ -99,7 +99,7 @@
                             <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                <argument>-pp</argument><argument>**/*.ttl</argument>
+                                <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
                                 <argument>-td</argument><argument>/tmp/templates</argument>
                             </arguments>
                         </configuration>
