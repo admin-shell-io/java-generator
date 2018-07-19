@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,14 +15,12 @@ import java.util.StringTokenizer;
 public class PlainLiteral implements Serializable {
 
     @JsonProperty("@value")
-    private String value;
+    private String value = "";
 
     @JsonProperty("@language")
-    private String language;
+    private String language = "";
 
     public PlainLiteral() {
-        value = "";
-        language = "";
     }
 
     public PlainLiteral(String valueAndLanguage) {
