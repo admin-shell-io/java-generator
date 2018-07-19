@@ -9,7 +9,7 @@ template ids:setter-method-builder-body(?property, ?class) {
 
     "\n\t\tthis."
     lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
-    "."
+    "Impl."
     st:call-template(idstt:to_property_name, ?property)
     " = "
     st:call-template(idstt:to_property_name, ?property)

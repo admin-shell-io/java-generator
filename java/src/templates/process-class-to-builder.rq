@@ -19,17 +19,17 @@ template ids:process-class-to-builder(?class) {
     lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1))
     substr(st:call-template(idstt:to_class_name, ?class), 2)
 
-    ";"
+    "Impl;"
 
     # constructor
 
     "\n"
     "\n\tpublic " st:call-template(idstt:to_class_name, ?class) "Builder() {"
     "\n\t\t"
-        lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) " = new " st:call-template(idstt:to_class_name, ?class) "Impl();"
+        lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) "Impl = new " st:call-template(idstt:to_class_name, ?class) "Impl();"
         "\n\t\t"
         lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
-        ".id = VocabUtil.getInstance().createRandomUrl(\""
+        "Impl.id = VocabUtil.getInstance().createRandomUrl(\""
         lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
         "\");"
     "\n\t}"
@@ -38,7 +38,7 @@ template ids:process-class-to-builder(?class) {
     "\n\t\t"
     "this();"
     "\n\t\t"
-    lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) ".id = id;"
+    lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) "Impl.id = id;"
     "\n\t}"
 
     # method implementation
@@ -49,8 +49,8 @@ template ids:process-class-to-builder(?class) {
 
     "\n"
     "\n\tpublic final " st:call-template(idstt:to_class_name, ?class) " build() throws ConstraintViolationException {"
-    "\n\t\tVocabUtil.getInstance().validate(" lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) ");"
-    "\n\t\treturn " lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) ";"
+    "\n\t\tVocabUtil.getInstance().validate(" lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) "Impl);"
+    "\n\t\treturn " lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) "Impl;"
     "\n\t}"
 
     "\n}\n"

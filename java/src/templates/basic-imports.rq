@@ -11,7 +11,7 @@ template ids:basic-imports {
     "\nimport java.math.BigInteger;"
     "\nimport java.net.URL;"
     "\nimport java.net.URI;"
-    "\nimport java.util.Collection;"
+    "\nimport java.util.*;"
     "\nimport javax.validation.constraints.*;"
     "\nimport java.util.Arrays;"
     "\nimport java.io.Serializable;"
