@@ -4,7 +4,7 @@ prefix idsm: <https://w3id.org/ids/metamodel/>
 
 template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
 
-    if (bound(?relationType) && (?relationType = <idsm:OneToMany>), concat("java.util.Collection", str(?bracketOpen)), "")
+    if (bound(?relationType) && (?relationType = <idsm:OneToMany>), concat("java.util.ArrayList", str(?bracketOpen)), "")
 
     st:call-template(ids:range-to-basic-type, ?property, ?range)
 
