@@ -16,7 +16,7 @@ template ids:property-to-field(?property, ?class) {
 
     st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
-    " "
+    " _"
     st:call-template(idstt:to_property_name, ?property)
     ";"
 }

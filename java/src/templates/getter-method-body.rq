@@ -7,7 +7,7 @@ template ids:getter-method-body(?property) {
 
     " {"
 
-    "\n\t\treturn "
+    "\n\t\treturn _"
 
         st:call-template(idstt:to_property_name, ?property)
 

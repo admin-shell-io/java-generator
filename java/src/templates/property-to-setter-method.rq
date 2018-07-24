@@ -6,7 +6,9 @@ template ids:property-to-setter-method(?property, ?class) {
 
     # method name
 
-    st:call-template(idstt:to_property_name, ?property)
+    "set"
+     ucase(substr(str(st:call-template(idstt:to_property_name, ?property)), 1, 1))
+     substr(str(st:call-template(idstt:to_property_name, ?property)), 2)
 
     # method params
     "("
@@ -17,7 +19,7 @@ template ids:property-to-setter-method(?property, ?class) {
 
         st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
-        " "
+        " _"
 
         # parameter label
         st:call-template(idstt:to_property_name, ?property)
