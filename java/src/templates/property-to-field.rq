@@ -6,10 +6,6 @@ template ids:property-to-field(?property, ?class) {
 
     "\n\t"
 
-    if (!bound(?isAbstract) && !bound(?instance) && strstarts(str(?range), str(<ids:>)),
-        st:call-template(idstt:jackson-annotation, ?range, bound(?relationType) && (?relationType = <idsm:OneToMany>)),
-        "")
-
     st:call-template(ids:propertyAnnotation, ?class, ?property, ?range)
 
     " "
@@ -21,16 +17,5 @@ template ids:property-to-field(?property, ?class) {
     ";"
 }
 where  {
-   ?property rdfs:range ?range;
-        rdfs:domain ?class
-
-   OPTIONAL {?instance a ?range}
-   OPTIONAL {?range idsm:isAbstract ?isAbstract}
-
-   OPTIONAL {
-       ?class idsm:validation ?validation.
-       ?validation idsm:forProperty ?property.
-       ?validation idsm:relationType ?relationType.
-   }
+   ?property rdfs:range ?range.
 }
-GROUP BY ?range
