@@ -13,7 +13,7 @@ template ids:setter-method-builder-body(?property, ?class) {
     st:call-template(idstt:to_property_name, ?property)
     " = _"
     st:call-template(idstt:to_property_name, ?property)
-    ";"
+    "_;"
     "\n\t\treturn this;"
 
     "\n\t}"
