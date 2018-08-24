@@ -114,6 +114,8 @@
                                 <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}/codes</argument>
                                 <argument>-pp</argument><argument>**/*.ttl</argument>
+                                <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
+                                <argument>-pp</argument><argument>**/*.ttl</argument>
                                 <argument>-td</argument>
                                 <argument>/tmp/templates</argument>
                             </arguments>
