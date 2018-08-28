@@ -5,32 +5,37 @@ prefix idstt: <https://w3id.org/ids/transformationtemplates/>
 
 template ids:range-to-basic-type(?property, ?range) {
 
-    # basic types
-    if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:string>), "String",
-    if (str(?range) = str(<xsd:integer>), "BigInteger",
-    if (str(?range) = str(<xsd:int>), "int",
-    if (str(?range) = str(<xsd:nonNegativeInteger>), "int",
-    if (str(?range) = str(<xsd:long>), "long",
-    if (str(?range) = str(<xsd:short>), "short",
-    if (str(?range) = str(<xsd:float>), "float",
-    if (str(?range) = str(<xsd:double>), "double",
-    if (str(?range) = str(<xsd:boolean>), "boolean",
-    if (str(?range) = str(<xsd:byte>), "byte",
-    if (str(?range) = str(<xsd:base64Binary>), "byte[]",
-    if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
-    if (str(?range) = str(<xsd:anyURI>), "URI",
+    if (bound(?refByUri) && (?refByUri = true),
+        "URI",
 
-    # rdf types
-    if (str(?range) = str(<rdfs:Resource>), "de.fraunhofer.iais.eis.util.RdfResource",
-    if (str(?range) = str(<rdfs:Literal>), "de.fraunhofer.iais.eis.util.PlainLiteral",
-    if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.PlainLiteral",
+        # basic types
+        if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:string>), "String",
+        if (str(?range) = str(<xsd:integer>), "BigInteger",
+        if (str(?range) = str(<xsd:int>), "int",
+        if (str(?range) = str(<xsd:nonNegativeInteger>), "int",
+        if (str(?range) = str(<xsd:long>), "long",
+        if (str(?range) = str(<xsd:short>), "short",
+        if (str(?range) = str(<xsd:float>), "float",
+        if (str(?range) = str(<xsd:double>), "double",
+        if (str(?range) = str(<xsd:boolean>), "boolean",
+        if (str(?range) = str(<xsd:byte>), "byte",
+        if (str(?range) = str(<xsd:base64Binary>), "byte[]",
+        if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:anyURI>), "URI",
 
-    # custom types
-    st:call-template(idstt:to_class_name, ?range)))))))))))))))))))
+        # rdf types
+        if (str(?range) = str(<rdfs:Resource>), "de.fraunhofer.iais.eis.util.RdfResource",
+        if (str(?range) = str(<rdfs:Literal>), "de.fraunhofer.iais.eis.util.PlainLiteral",
+        if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.PlainLiteral",
+
+        # custom types
+        st:call-template(idstt:to_class_name, ?range)))))))))))))))))))
+    )
 
 }
 where {
     ?property rdfs:range ?range.
+    OPTIONAL {?property idsm:referencyByUri ?refByUri}
 }
