@@ -37,5 +37,5 @@ template ids:range-to-basic-type(?property, ?range) {
 }
 where {
     ?property rdfs:range ?range.
-    OPTIONAL {?property idsm:referencyByUri ?refByUri}
+    OPTIONAL {?property idsm:referenceByUri ?refByUri}
 }
