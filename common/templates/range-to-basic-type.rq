@@ -20,6 +20,7 @@ template ids:range-to-basic-type(?property, ?range) {
         if (str(?range) = str(<xsd:double>), "double",
         if (str(?range) = str(<xsd:boolean>), "boolean",
         if (str(?range) = str(<xsd:byte>), "byte",
+        if (str(?range) = str(<xsd:decimal>), "java.math.BigDecimal",
         if (str(?range) = str(<xsd:base64Binary>), "byte[]",
         if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
@@ -31,7 +32,7 @@ template ids:range-to-basic-type(?property, ?range) {
         if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.PlainLiteral",
 
         # custom types
-        st:call-template(idstt:to_class_name, ?range)))))))))))))))))))
+        st:call-template(idstt:to_class_name, ?range))))))))))))))))))))
     )
 
 }
