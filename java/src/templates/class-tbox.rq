@@ -27,6 +27,6 @@ template ids:class-tbox(?class) {
 }
 where  {
     ?class a owl:Class.
-    optional {?class idsm:isAbstract ?isAbstract}
+    optional {?class idsm:abstract ?isAbstract}
 }
 
