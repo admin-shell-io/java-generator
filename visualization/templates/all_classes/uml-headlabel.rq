@@ -1,6 +1,6 @@
-prefix ids: <https://w3id.org/ids/core/>
+prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template ids:uml-headlabel(?class, ?property) {
 

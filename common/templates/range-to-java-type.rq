@@ -1,6 +1,6 @@
-prefix ids: <https://w3id.org/ids/core/>
+prefix ids: <https://w3id.org/idsa/core/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
 

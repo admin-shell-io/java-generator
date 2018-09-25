@@ -1,6 +1,6 @@
-prefix ids: <https://w3id.org/ids/core/>
+prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idstt: <https://w3id.org/ids/transformationtemplates/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:process-class-to-enum(?class) {
 

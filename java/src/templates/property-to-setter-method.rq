@@ -1,6 +1,6 @@
-prefix ids: <https://w3id.org/ids/core/>
-prefix idsm: <https://w3id.org/ids/metamodel/>
-prefix idstt: <https://w3id.org/ids/transformationtemplates/>
+prefix ids: <https://w3id.org/idsa/core/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:property-to-setter-method(?property, ?class) {
 

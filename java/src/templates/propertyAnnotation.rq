@@ -1,5 +1,5 @@
-prefix ids: <https://w3id.org/ids/core/>
-prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix ids: <https://w3id.org/idsa/core/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template ids:propertyAnnotation(?class, ?property, ?range) {
 

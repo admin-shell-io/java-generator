@@ -1,5 +1,5 @@
-prefix idstt: <https://w3id.org/ids/transformationtemplates/>
-prefix idsm: <https://w3id.org/ids/metamodel/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template idstt:jackson-annotation(?range, ?isCollection) {
 
