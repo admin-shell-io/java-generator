@@ -6,11 +6,11 @@ template ids:subclass-relations-to-uml {
 
     "\n"
 
-    concat(st:call-template(idstt:to_class_name, ?classA))
+    st:call-template(idstt:to_class_name, ?classA)
 
     " --|> "
 
-    concat(st:call-template(idstt:to_class_name, ?classB))
+    st:call-template(idstt:to_class_name, ?classB)
 
     "\n"
 

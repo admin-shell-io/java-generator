@@ -6,12 +6,12 @@ template ids:property-relations-to-uml {
 
     "\n"
 
-    concat(st:call-template(idstt:to_class_name, ?domain))
+    st:call-template(idstt:to_class_name, ?domain)
 
     " --> "
 
     st:call-template(ids:uml-headlabel, ?domain, ?property)
-    concat(st:call-template(idstt:to_class_name, ?range))
+    st:call-template(idstt:to_class_name, ?range)
 
     ": "
 

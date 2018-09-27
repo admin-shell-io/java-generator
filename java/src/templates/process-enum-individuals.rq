@@ -1,6 +1,7 @@
 prefix ids: <https://w3id.org/idsa/core/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:process-enum-individuals(?class) {
 
@@ -12,11 +13,14 @@ template ids:process-enum-individuals(?class) {
         )
 
 
-    "\n\t" str(?identifier) "(\"" str(?individual) "\"),"
+    "\n\t"
+
+    ucase(st:call-template(idstt:to_class_name, ?individual))
+
+    "(\"" str(?individual) "\"),"
 }
 where  {
-    ?individual a ?class;
-        idsm:constantIdentifier ?identifier.
+    ?individual a ?class.
 
     OPTIONAL {
         ?individual rdfs:label ?label.
