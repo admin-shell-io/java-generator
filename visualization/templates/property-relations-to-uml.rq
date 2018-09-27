@@ -15,13 +15,12 @@ template ids:property-relations-to-uml {
 
     ": "
 
-    str(?propLabel) "\n"
+    st:call-template(idstt:to_property_name, ?property)
 
 }
 where {
     ?property rdfs:domain ?domain;
-        rdfs:range ?range;
-        rdfs:label ?propLabel.
+        rdfs:range ?range.
 
     FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
 }
