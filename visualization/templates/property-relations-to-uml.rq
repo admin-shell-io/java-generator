@@ -1,6 +1,7 @@
 prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template ids:property-relations-to-uml {
 
@@ -10,7 +11,11 @@ template ids:property-relations-to-uml {
 
     " --> "
 
-    st:call-template(ids:uml-headlabel, ?domain, ?property)
+    if (bound(?validation),
+        st:call-template(ids:uml-headlabel, ?domain, ?property),
+        " \"0..1\" "
+    )
+
     st:call-template(idstt:to_class_name, ?range)
 
     ": "
@@ -21,6 +26,11 @@ template ids:property-relations-to-uml {
 where {
     ?property rdfs:domain ?domain;
         rdfs:range ?range.
+
+    OPTIONAL {
+        ?domain idsm:validation ?validation.
+        ?validation idsm:forProperty ?property.
+    }
 
     FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
 }

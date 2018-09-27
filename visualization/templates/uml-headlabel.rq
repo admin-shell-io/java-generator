@@ -14,9 +14,9 @@ template ids:uml-headlabel(?class, ?property) {
         # single reference
         if (bound(?constraint) && ((?constraint = <idsm:NotEmpty>) || (?constraint = <idsm:NotNull>)),
             " \"1\" ",
-            " ")
+            " \"0..1\" ")
 
-        )
+    )
 
 }
 where {
