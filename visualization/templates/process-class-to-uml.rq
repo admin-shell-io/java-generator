@@ -1,11 +1,16 @@
 prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:process-class-to-uml {
 
     "\n"
 
-    if (bound(?instance), "enum ", "class ") str(?label) " {\n"
+    if (bound(?instance), "enum ", "class ")
+
+    concat(st:call-template(idstt:to_class_name, ?class))
+
+    " {\n"
 
     if (bound(?instance),
         st:call-template(ids:enum-values-to-uml, ?class),
@@ -15,8 +20,7 @@ template ids:process-class-to-uml {
 
 }
 where {
-    ?class a owl:Class;
-        rdfs:label ?label.
+    ?class a owl:Class.
 
     OPTIONAL {
         ?instance a ?class

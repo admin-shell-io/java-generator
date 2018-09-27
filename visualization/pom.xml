@@ -34,7 +34,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.2</version>
                 <executions>
-                    <!-- assemble the relevant templates into /tmp/templates -->
+                    <!-- assemble the relevant templates into /tmp/templates
                     <execution>
                         <id>assemble-templates</id>
                         <phase>initialize</phase>
@@ -54,6 +54,28 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/templates/all_classes</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                    -->
+
+                    <!-- assemble the relevant templates into /tmp/templates -->
+                    <execution>
+                        <id>assemble-templates</id>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+
+                        <configuration>
+                            <outputDirectory>/tmp/templates</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/templates</directory>
+                                </resource>
+                                <resource>
+                                    <directory>${basedir}/../common/templates</directory>
                                 </resource>
                             </resources>
                         </configuration>
@@ -103,30 +125,6 @@
                                 <argument>-td</argument><argument>/tmp/templates</argument>
                             </arguments>
                         </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- assemble diagram files into a zip -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
-
-                <configuration>
-                    <finalName>${project.artifactId}-${project.version}-diagrams</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <descriptors>
-                        <descriptor>${basedir}/distribution.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>assemble-diagrams</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
                     </execution>
                 </executions>
             </plugin>
