@@ -22,6 +22,8 @@ template ids:property-relations-to-uml {
 
     st:call-template(idstt:to_property_name, ?property)
 
+    if (bound(?refByUrl), " # URL ref ", " # local ref")
+
 }
 where {
     ?property rdfs:domain ?domain;
@@ -31,6 +33,10 @@ where {
         ?domain idsm:validation ?validation.
         ?validation idsm:forProperty ?someProperty.
         ?property rdfs:subPropertyOf? ?someProperty.
+    }
+
+    OPTIONAL {
+        ?property idsm:referenceByUrl ?refByUrl.
     }
 
     FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
