@@ -21,7 +21,8 @@ template ids:uml-headlabel(?class, ?property) {
 }
 where {
     ?class idsm:validation ?validation.
-    ?validation idsm:forProperty ?property.
+    ?validation idsm:forProperty ?someProperty.
+    ?property rdfs:subPropertyOf? ?someProperty.
 
     OPTIONAL {
         ?validation idsm:relationType ?relationType.

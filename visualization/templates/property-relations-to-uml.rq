@@ -29,7 +29,8 @@ where {
 
     OPTIONAL {
         ?domain idsm:validation ?validation.
-        ?validation idsm:forProperty ?property.
+        ?validation idsm:forProperty ?someProperty.
+        ?property rdfs:subPropertyOf? ?someProperty.
     }
 
     FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
