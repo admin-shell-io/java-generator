@@ -9,6 +9,7 @@
             <directory>${basedir}</directory>
             <includes>
                 <include>*.plantuml</include>
+                <include>*.png</include>
             </includes>
         </fileSet>
     </fileSets>
