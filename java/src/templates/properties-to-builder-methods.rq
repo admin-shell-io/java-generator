@@ -15,7 +15,7 @@ template ids:properties-to-builder-methods(?rootClass, ?class) {
     # return type and name
     st:call-template(idstt:to_class_name, ?rootClass) "Builder "
 
-	st:call-template(ids:property-to-setter-method, ?property, ?class)
+	st:call-template(ids:property-to-setter-method, ?property, ?class, true)
 
     # method body
 	st:call-template(ids:setter-method-builder-body, ?property, ?rootClass)

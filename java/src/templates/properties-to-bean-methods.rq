@@ -24,7 +24,7 @@ template ids:properties-to-bean-methods(?class) {
     # visibility modifier
     "final public void "
 
-    st:call-template(ids:property-to-setter-method, ?property, ?class)
+    st:call-template(ids:property-to-setter-method, ?property, ?class, false)
 
     # method body
     st:call-template(ids:setter-method-body, ?property)

@@ -2,15 +2,18 @@ prefix ids: <https://w3id.org/idsa/core/>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:property-to-setter-method(?property, ?class) {
+template ids:property-to-setter-method(?property, ?class, ?forBuilder) {
 
     # method name
 
-    "set"
-    concat(
-        ucase(substr(str(st:call-template(idstt:to_property_name, ?property)), 1, 1)),
-        substr(str(st:call-template(idstt:to_property_name, ?property)), 2))
-    " "
+    if (?forBuilder,
+        concat ("_",
+            str(st:call-template(idstt:to_property_name, ?property)),
+            "_"),
+        concat("set",
+            ucase(substr(str(st:call-template(idstt:to_property_name, ?property)), 1, 1)),
+            substr(str(st:call-template(idstt:to_property_name, ?property)), 2),
+            " "))
 
     # method params
     "("
