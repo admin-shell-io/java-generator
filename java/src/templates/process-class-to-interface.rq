@@ -13,6 +13,7 @@ template ids:process-class-to-interface(?class) {
 
     "/** " str(?comment) " */"
     "\n@RdfType(\"" str(?class) "\")"
+    "\n@JsonTypeInfo(use=JsonTypeInfo.Id.MINIMAL_CLASS, property=\"@class\")"
     "\n"
     "public interface " st:call-template(idstt:to_class_name, ?class)
 

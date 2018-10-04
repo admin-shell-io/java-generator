@@ -18,7 +18,7 @@ template ids:basic-imports {
     "\n"
     "\nimport annotation.*;"
     "\nimport javax.validation.constraints.*;"
-    "\nimport com.fasterxml.jackson.databind.annotation.JsonDeserialize;"
+    "\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
     "\nimport com.fasterxml.jackson.annotation.JsonIgnoreProperties;"
     "\nimport com.fasterxml.jackson.annotation.JsonValue;"
 

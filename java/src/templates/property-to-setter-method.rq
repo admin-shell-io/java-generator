@@ -6,9 +6,11 @@ template ids:property-to-setter-method(?property, ?class) {
 
     # method name
 
-    "_"
-    st:call-template(idstt:to_property_name, ?property)
-    "_"
+    "set"
+    concat(
+        ucase(substr(str(st:call-template(idstt:to_property_name, ?property)), 1, 1)),
+        substr(str(st:call-template(idstt:to_property_name, ?property)), 2))
+    " "
 
     # method params
     "("
