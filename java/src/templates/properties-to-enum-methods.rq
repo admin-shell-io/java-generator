@@ -15,8 +15,10 @@ template ids:properties-to-enum-methods(?class) {
     # signature
 	st:call-template(ids:property-to-getter-method, ?property, ?class)
 
-    # method body
-	st:call-template(ids:getter-method-bean-body, ?property)
+	" {\n\t"
+	"\t//not implemented for enums\n\t"
+	"\tthrow new UnsupportedOperationException();\n\t"
+	"}\n\t"
 
 }
 where  {   

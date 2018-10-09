@@ -26,9 +26,6 @@ template ids:process-class-to-enum(?class) {
     "\n\t@JsonValue"
     "\n\tprivate URL id;"
 
-    "\n\t// instance fields as derived from information model\n"
-    st:call-template(ids:subclass-properties-to-fields, ?class)
-
     "\n"
 	"\n\t" st:call-template(idstt:to_class_name, ?class) "(String id) {"
 	"\n\t\ttry {"
