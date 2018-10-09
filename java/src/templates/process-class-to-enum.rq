@@ -13,7 +13,7 @@ template ids:process-class-to-enum(?class) {
     "/** " str(?comment) " */\n"
     "public enum " st:call-template(idstt:to_class_name, ?class)
 
-     if (bound(?superClass) && strstarts(str(?superClass), str(<ids:>)),
+     if (bound(?superClass),
             concat(" implements ", strafter(st:call-template(ids:subclasses-to-list, ?class), ", ")),
             "")
 
@@ -65,6 +65,7 @@ WHERE
 
     optional {
         ?class rdfs:subClassOf ?superClass.
+        filter(strstarts(str(?superClass), str(<ids:>)))
     }
 }
 GROUP BY ?class

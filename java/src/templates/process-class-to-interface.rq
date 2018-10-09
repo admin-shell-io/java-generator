@@ -17,7 +17,7 @@ template ids:process-class-to-interface(?class) {
     "\n"
     "public interface " st:call-template(idstt:to_class_name, ?class)
 
-    if (bound(?superClass) && strstarts(str(?superClass), str(<ids:>)),
+    if (bound(?superClass),
         concat(" extends ", strafter(st:call-template(ids:subclasses-to-list, ?class), ", ")),
         "")
 
@@ -43,6 +43,7 @@ where{
 
     optional {
         ?class rdfs:subClassOf ?superClass.
+        filter(strstarts(str(?superClass), str(<ids:>)))
     }
 }
 GROUP BY ?class
