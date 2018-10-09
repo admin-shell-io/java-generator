@@ -3,4 +3,5 @@
 java/src/main/java/de/fraunhofer/iais/eis/*.java
 visualization/*.plantuml
 **/*.iml
+**/*.png
 *.log
