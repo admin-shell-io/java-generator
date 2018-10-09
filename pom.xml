@@ -7,7 +7,7 @@
     <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <modules>
         <module>visualization</module>
         <module>java</module>
