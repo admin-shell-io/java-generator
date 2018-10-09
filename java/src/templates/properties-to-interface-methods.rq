@@ -17,8 +17,7 @@ template ids:properties-to-interface-methods(?class) {
 
 }
 where  {   
-  ?property rdfs:domain ?class;
-    rdfs:label ?label.
+  ?property rdfs:domain ?class.
 
   OPTIONAL {
     ?property rdfs:comment ?comment.

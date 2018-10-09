@@ -18,7 +18,7 @@ template ids:process-class-to-interface(?class) {
     "public interface " st:call-template(idstt:to_class_name, ?class)
 
     if (bound(?superClass) && strstarts(str(?superClass), str(<ids:>)),
-        concat(" extends ", strafter(st:call-template(ids:subclass-to-interface-extends, ?class), ", ")),
+        concat(" extends ", strafter(st:call-template(ids:subclasses-to-list, ?class), ", ")),
         "")
 
     " {\n"

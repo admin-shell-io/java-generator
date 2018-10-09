@@ -11,7 +11,13 @@ template ids:process-class-to-enum(?class) {
     "\n\n"
 
     "/** " str(?comment) " */\n"
-    "public enum " st:call-template(idstt:to_class_name, ?class) " {\n"
+    "public enum " st:call-template(idstt:to_class_name, ?class)
+
+     if (bound(?superClass) && strstarts(str(?superClass), str(<ids:>)),
+            concat(" implements ", strafter(st:call-template(ids:subclasses-to-list, ?class), ", ")),
+            "")
+
+    " {\n"
 
     st:call-template(ids:process-enum-individuals, ?class)
 
@@ -19,6 +25,9 @@ template ids:process-class-to-enum(?class) {
     "\n"
     "\n\t@JsonValue"
     "\n\tprivate URL id;"
+
+    "\n\t// instance fields as derived from information model\n"
+    st:call-template(ids:subclass-properties-to-fields, ?class)
 
     "\n"
 	"\n\t" st:call-template(idstt:to_class_name, ?class) "(String id) {"
@@ -34,6 +43,9 @@ template ids:process-class-to-enum(?class) {
     "\n\tfinal public URL getId() {"
     "\n\t\treturn id;"
     "\n\t}"
+    "\n\tpublic String toRdf() {"
+    "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
+    "\n\t}"
     "\n"
 
     "\n"
@@ -42,10 +54,21 @@ template ids:process-class-to-enum(?class) {
 		"\n\t\treturn id.toString();"
 	"\n\t}"
 
+    # superclass methods
+    "\n"
+    st:call-template(ids:subclass-properties-to-methods, ?class, 'enum')
+
     "\n}\n"
 
 }
-where{
+WHERE
+{
     ?class a owl:Class;
         rdfs:comment ?comment.
+
+    optional {
+        ?class rdfs:subClassOf ?superClass.
+    }
 }
+GROUP BY ?class
+

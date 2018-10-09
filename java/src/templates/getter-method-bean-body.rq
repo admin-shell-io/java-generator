@@ -3,7 +3,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:getter-method-body(?property) {
+template ids:getter-method-bean-body(?property) {
 
     " {"
 
@@ -16,6 +16,4 @@ template ids:getter-method-body(?property) {
     "\n\t}"
 
 }
-where{
-    ?property rdfs:range ?range.
-}
+where {}

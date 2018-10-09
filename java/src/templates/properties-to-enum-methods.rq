@@ -1,0 +1,24 @@
+prefix ids: <https://w3id.org/idsa/core/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template ids:properties-to-enum-methods(?class) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    "\n"
+	"\n\t"
+
+    # visibility modifier
+    "final public "
+
+    # signature
+	st:call-template(ids:property-to-getter-method, ?property, ?class)
+
+    # method body
+	st:call-template(ids:getter-method-bean-body, ?property)
+
+}
+where  {   
+    ?property rdfs:domain ?class.
+}

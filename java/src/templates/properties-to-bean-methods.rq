@@ -15,7 +15,7 @@ template ids:properties-to-bean-methods(?class) {
 	st:call-template(ids:property-to-getter-method, ?property, ?class)
 
     # method body
-	st:call-template(ids:getter-method-body, ?property)
+	st:call-template(ids:getter-method-bean-body, ?property)
 
     # setter method
 
