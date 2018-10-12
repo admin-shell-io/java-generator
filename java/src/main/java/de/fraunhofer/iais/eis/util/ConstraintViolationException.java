@@ -5,7 +5,7 @@ import java.util.Collection;
 /**
  * Created by christian on 19.01.17.
  */
-public class ConstraintViolationException extends Exception {
+public class ConstraintViolationException extends RuntimeException {
 
     private Collection<String> messages;
 
