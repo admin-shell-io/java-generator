@@ -5,20 +5,13 @@
     <parent>
         <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
         <artifactId>common</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>java</artifactId>
 
     <dependencies>
-        <!--annotations -->
-        <dependency>
-            <groupId>de.fraunhofer.iais.eis</groupId>
-            <artifactId>jrdfb-annotations</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -138,6 +131,7 @@
                             <excludes>
                                 <exclude>util/</exclude>
                                 <exclude>spi/</exclude>
+                                <exclude>annotation/</exclude>
                             </excludes>
                         </fileset>
                         <fileset>

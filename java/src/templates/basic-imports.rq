@@ -4,6 +4,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 template ids:basic-imports {
 
     "\nimport de.fraunhofer.iais.eis.util.*;"
+    "\nimport de.fraunhofer.iais.eis.annotation.*;"
     "\nimport de.fraunhofer.iais.eis.*;"
     "\n"
     "\nimport javax.xml.datatype.XMLGregorianCalendar;"
@@ -16,7 +17,6 @@ template ids:basic-imports {
     "\nimport java.util.Arrays;"
     "\nimport java.io.Serializable;"
     "\n"
-    "\nimport annotation.*;"
     "\nimport javax.validation.constraints.*;"
     "\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
     "\nimport com.fasterxml.jackson.annotation.JsonIgnoreProperties;"
