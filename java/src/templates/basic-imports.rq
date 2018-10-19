@@ -21,6 +21,7 @@ template ids:basic-imports {
     "\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
     "\nimport com.fasterxml.jackson.annotation.JsonIgnoreProperties;"
     "\nimport com.fasterxml.jackson.annotation.JsonValue;"
+    "\nimport com.fasterxml.jackson.annotation.JsonFormat;"
 
 }
 where {
