@@ -1,6 +1,7 @@
 prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template ids:process-class-to-interface(?class) {
 
@@ -13,7 +14,8 @@ template ids:process-class-to-interface(?class) {
 
     "/** " str(?comment) " */"
     "\n@RdfType(\"" str(?class) "\")"
-    "\n@JsonTypeInfo(use=JsonTypeInfo.Id.MINIMAL_CLASS, property=\"@class\")"
+    "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
+    "\n@JsonSubTypes({" st:call-template(ids:class-to-json-annotation, ?class) "})"
     "\n"
     "public interface " st:call-template(idstt:to_class_name, ?class)
 
@@ -37,7 +39,7 @@ template ids:process-class-to-interface(?class) {
     "\n}\n"
 
 }
-where{
+where {
     ?class a owl:Class;
         rdfs:comment ?comment.
 

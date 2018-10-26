@@ -15,8 +15,8 @@ public class VocabUtil {
     private ServiceLoader<BeanSerializer> serializerLoader;
     private ServiceLoader<BeanValidator> validatorLoader;
 
-    private final static String PROTOCOL = "http";
-    private final static String HOST = "industrialdataspace.org";
+    private final static String PROTOCOL = "https";
+    private final static String HOST = "w3id.org/idsa/autogen";
 
     private static final VocabUtil instance = new VocabUtil();
 

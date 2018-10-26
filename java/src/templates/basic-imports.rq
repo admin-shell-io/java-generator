@@ -18,11 +18,7 @@ template ids:basic-imports {
     "\nimport java.io.Serializable;"
     "\n"
     "\nimport javax.validation.constraints.*;"
-    "\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
-    "\nimport com.fasterxml.jackson.annotation.JsonIgnoreProperties;"
-    "\nimport com.fasterxml.jackson.annotation.JsonValue;"
-    "\nimport com.fasterxml.jackson.annotation.JsonFormat;"
-
+    "\nimport com.fasterxml.jackson.annotation.*;"
 }
 where {
 

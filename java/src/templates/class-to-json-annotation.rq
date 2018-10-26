@@ -1,0 +1,28 @@
+prefix ids: <https://w3id.org/idsa/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template ids:class-to-json-annotation(?class) {
+
+    if (bound(?abstract),
+        "",
+        concat(
+            "\n@JsonSubTypes.Type(value = ",
+            st:call-template(idstt:to_class_name, ?class),
+            "Impl.class),"
+        )
+    )
+
+    st:call-template(ids:subclass-to-json-annotation, ?class)
+}
+WHERE {
+    ?class a owl:Class.
+
+    optional {
+        ?class idsm:abstract ?abstract.
+    }
+
+}
+
+

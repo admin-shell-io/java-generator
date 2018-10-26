@@ -12,11 +12,12 @@ template ids:process-class-to-bean(?class) {
     "\n"
     "/** " str(?comment) " */\n"
     "@JsonIgnoreProperties(ignoreUnknown = true)\n"
+    "@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
+    "\n"
     "public class " concat(st:call-template(idstt:to_class_name, ?class), "Impl")
     " implements Serializable, " st:call-template(idstt:to_class_name, ?class)
 
     " {\n"
-
     # boilerplate methods
 
     "\n\t@javax.validation.constraints.NotNull URL id;"
