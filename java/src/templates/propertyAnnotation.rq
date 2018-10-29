@@ -9,7 +9,8 @@ template ids:propertyAnnotation(?class, ?property, ?range) {
 
 }
 where {
-    ?class idsm:validation ?validation.
+    ?class (^rdfs:subClassOf)*/idsm:validation ?validation.
     ?validation idsm:forProperty ?property.
     ?validation idsm:constraint ?constraint.
 }
+group by ?class
