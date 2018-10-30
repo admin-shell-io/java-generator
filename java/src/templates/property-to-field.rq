@@ -6,7 +6,7 @@ template ids:property-to-field(?property, ?class) {
 
     "\n\t"
 
-    st:call-template(ids:propertyAnnotation, ?class, ?property, ?range)
+    st:call-template(ids:propertyAnnotation, ?class, ?property)
 
     " "
 
