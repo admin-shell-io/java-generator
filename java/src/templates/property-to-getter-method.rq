@@ -5,10 +5,6 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template ids:property-to-getter-method(?property, ?class) {
 
     "\n\t"
-
-    st:call-template(ids:propertyAnnotation, ?class, ?property)
-
-    "\n\t"
     st:call-template(ids:range-jackson-annotation, ?property, ?range)
     "\n\t"
     st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")

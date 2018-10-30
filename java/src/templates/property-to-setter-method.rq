@@ -17,10 +17,7 @@ template ids:property-to-setter-method(?property, ?class, ?forBuilder) {
 
     # method params
     "("
-        # parameter type and annotation
-        st:call-template(ids:propertyAnnotation, ?class, ?property)
-
-        " "
+        # parameter type
         st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
         " _"
 
