@@ -11,11 +11,12 @@
     <modules>
         <module>visualization</module>
         <module>java</module>
+        <module>jsonld-contextgen</module>
     </modules>
 
     <properties>
         <!-- Adapt this path according to the location of the information model RDF sources -->
-        <infomodel-sourcebase>${user.home}/projects/ids/InformationModel</infomodel-sourcebase>
+        <infomodel-sourcebase>${user.home}/Documents/IDS/InformationModel</infomodel-sourcebase>
     </properties>
 
     <dependencies>
@@ -26,7 +27,7 @@
             <version>2.3-SNAPSHOT</version>
             <optional>true</optional>
             <scope>system</scope>
-            <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.3-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+            <systemPath>${user.home}/Documents/IDS/ids-infomodel-codegen/sparql-template-executor-2.3-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
     </dependencies>
 
