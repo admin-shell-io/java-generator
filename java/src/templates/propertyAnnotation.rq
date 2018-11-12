@@ -1,7 +1,7 @@
 prefix ids: <https://w3id.org/idsa/core/>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:propertyAnnotation(?class, ?property, ?range) {
+template ids:propertyAnnotation(?class, ?property) {
 
     if (?constraint = <idsm:NotNull>, "@NotNull",
     if (?constraint = <idsm:NotEmpty>, "@NotEmpty",
@@ -9,8 +9,7 @@ template ids:propertyAnnotation(?class, ?property, ?range) {
 
 }
 where {
-    ?class (^rdfs:subClassOf)*/idsm:validation ?validation.
+    ?class idsm:validation ?validation.
     ?validation idsm:forProperty ?property.
     ?validation idsm:constraint ?constraint.
 }
-group by ?class

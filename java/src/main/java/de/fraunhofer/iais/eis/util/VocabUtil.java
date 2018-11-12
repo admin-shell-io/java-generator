@@ -51,9 +51,9 @@ public class VocabUtil {
         return iterator.hasNext() ? iterator.next().toRdf(obj) : "";
     }
 
-    public Object fromRdf(String rdf) {
+    public <T> T fromRdf(String rdf, Class<T> valueType) {
         Iterator<BeanSerializer> iterator = serializerLoader.iterator();
-        return iterator.hasNext() ? iterator.next().fromRdf(rdf) : null;
+        return iterator.hasNext() ? iterator.next().fromRdf(rdf, valueType) : null;
     }
 
     public <T> T getByString(T[] values, String label) {
