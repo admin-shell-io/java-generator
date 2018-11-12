@@ -1,13 +1,17 @@
 prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template ids:subclass-properties-to-fields(?class) {
 
-    st:call-template(ids:properties-to-fields, ?superClass, 'bean')
+    # Iterates on selected properties
+    st:call-template(ids:property-to-field, ?property, ?superClass)
 
 }
 where {
     ?class a owl:Class;
         rdfs:subClassOf* ?superClass.
 
+    ?superClass ^rdfs:domain|(idsm:validation/idsm:forProperty) ?property .
 }
+group by ?property
