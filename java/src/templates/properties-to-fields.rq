@@ -1,4 +1,5 @@
 prefix ids: <https://w3id.org/idsa/core/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template ids:properties-to-fields(?class) {
 
@@ -7,5 +8,6 @@ template ids:properties-to-fields(?class) {
 
 }
 where  {
-  ?property rdfs:domain ?class.
+    ?class ^rdfs:domain|(idsm:validation/idsm:forProperty) ?property .
 }
+group by ?property

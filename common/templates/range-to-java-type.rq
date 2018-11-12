@@ -12,7 +12,7 @@ template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracke
 
 }
 where {
-    ?property rdfs:domain ?class
+    ?property rdfs:range ?range.
 
     OPTIONAL {
         ?class idsm:validation ?validation.
