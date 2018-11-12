@@ -7,11 +7,16 @@ template ids:process-class-to-enum(?class) {
     "package de.fraunhofer.iais.eis;\n"
 
     st:call-template(ids:basic-imports)
+    "\nimport com.fasterxml.jackson.databind.JsonNode;"
+    "\nimport java.util.Map;"
+    "\nimport java.util.stream.Collectors;"
+    "\nimport java.util.stream.Stream;"
 
     "\n\n"
 
     "/** " str(?comment) " */\n"
-    "public enum " st:call-template(idstt:to_class_name, ?class)
+    "@JsonFormat(shape = JsonFormat.Shape.OBJECT)"
+    "\npublic enum " st:call-template(idstt:to_class_name, ?class)
 
      if (bound(?superClass),
             concat(" implements ", strafter(st:call-template(ids:subclasses-to-list, ?class), ", ")),
@@ -22,8 +27,13 @@ template ids:process-class-to-enum(?class) {
     st:call-template(ids:process-enum-individuals, ?class)
 
     ";"
+
     "\n"
-    "\n\t@JsonValue"
+    "\n\tprivate static final Map<String," st:call-template(idstt:to_class_name, ?class) "> uriInstanceMapping;"
+    "\n\tstatic {"
+    "\n\t\turiInstanceMapping = Stream.of(values()).collect(Collectors.toMap(instance -> instance.toString(), instance -> instance));"
+    "\n\t}"
+    "\n"
     "\n\tprivate URL id;"
 
     "\n"
@@ -37,6 +47,7 @@ template ids:process-class-to-enum(?class) {
 	"\n\t}"
 
     "\n"
+    "\n\t@JsonProperty(\"@id\")"
     "\n\tfinal public URL getId() {"
     "\n\t\treturn id;"
     "\n\t}"
@@ -44,6 +55,12 @@ template ids:process-class-to-enum(?class) {
     "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
     "\n\t}"
     "\n"
+
+    "\n"
+    "\n\t@JsonCreator"
+    "\n\tpublic static " st:call-template(idstt:to_class_name, ?class) " deserialize(JsonNode node) {"
+    "\n\t\treturn uriInstanceMapping.get(node.get(\"@id\").textValue());"
+    "\n\t}"
 
     "\n"
 	"\n\t@Override"
