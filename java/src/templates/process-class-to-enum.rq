@@ -8,6 +8,7 @@ template ids:process-class-to-enum(?class) {
 
     st:call-template(ids:basic-imports)
     "\nimport com.fasterxml.jackson.databind.JsonNode;"
+
     "\nimport java.util.Map;"
     "\nimport java.util.stream.Collectors;"
     "\nimport java.util.stream.Stream;"
@@ -15,7 +16,7 @@ template ids:process-class-to-enum(?class) {
     "\n\n"
 
     "/** " str(?comment) " */\n"
-    "@JsonFormat(shape = JsonFormat.Shape.OBJECT)"
+    "\n@JsonFormat(shape = JsonFormat.Shape.OBJECT)"
     "\npublic enum " st:call-template(idstt:to_class_name, ?class)
 
      if (bound(?superClass),
@@ -59,7 +60,7 @@ template ids:process-class-to-enum(?class) {
     "\n"
     "\n\t@JsonCreator"
     "\n\tpublic static " st:call-template(idstt:to_class_name, ?class) " deserialize(JsonNode node) {"
-    "\n\t\treturn uriInstanceMapping.get(node.get(\"@id\").textValue());"
+    "\n\t\treturn uriInstanceMapping.get(node.has(\"@id\") ? node.get(\"@id\").textValue() : node.textValue());"
     "\n\t}"
 
     "\n"
