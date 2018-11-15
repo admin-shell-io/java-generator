@@ -5,11 +5,8 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template ids:property-to-getter-method(?property, ?class) {
 
     "\n\t"
-
-    st:call-template(ids:propertyAnnotation, ?class, ?property)
-
-    "\n\t"
     st:call-template(ids:range-jackson-annotation, ?property, ?range)
+
     "\n\t"
     st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
@@ -25,8 +22,5 @@ template ids:property-to-getter-method(?property, ?class) {
 
 }
 where  {
-    ?property rdfs:range ?range;
-        rdfs:label ?label.
-
-    OPTIONAL {?property idsm:labelPluralForm ?pluralLabel}
+    ?property rdfs:range ?range.
 }
