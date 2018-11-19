@@ -35,7 +35,6 @@ public class Generator {
         sourceTtl.forEach(sourceFile -> {
             try {
                 InputStream in = new FileInputStream(sourceFile);
-                System.out.println(sourceFile.getName());
                 Model model = Rio.parse(in, "/", RDFFormat.TURTLE);
                 model.getNamespaces().forEach(ns -> contextMap.put(ns.getPrefix(), ns.getName()));
                 model.subjects().stream().distinct()
