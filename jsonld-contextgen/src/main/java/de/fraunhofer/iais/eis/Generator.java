@@ -13,24 +13,25 @@ public class Generator {
     private static final Map<String,String> contextMap = new HashMap<>();
 
     public static void main(String[] args) throws IOException {
-        if(args.length != 1) {
-            System.out.println("call with dest directory path");
+        if(args.length != 2) {
+            System.out.println("call with dest directory path and infomodel path");
         } else {
-            File f  = new File(args[0]);
-            if(f.exists()) {
+            File target  = new File(args[0]);
+            if(target.exists()) {
                 System.out.println("existing file is overwritten");
-                f.delete();
-                f.createNewFile();
+                target.delete();
+                target.createNewFile();
             }
-            PrintWriter printer = new PrintWriter(f);
-            printer.write(generate());
+            File infomodelPath = new File(args[1]);
+            PrintWriter printer = new PrintWriter(target);
+            printer.write(generate(infomodelPath));
             printer.flush();
             printer.close();
         }
     }
 
-    public static String generate() throws IOException {
-        List<File> sourceTtl = getSourceTurtleFiles(new File("/home/benedikt/Documents/IDS/InformationModel/model/"));
+    public static String generate(File infomodelPath) throws IOException {
+        List<File> sourceTtl = getSourceTurtleFiles(infomodelPath);
         sourceTtl.forEach(sourceFile -> {
             try {
                 InputStream in = new FileInputStream(sourceFile);
