@@ -68,10 +68,10 @@ public class Generator {
 
     private static String buildContextString() {
         final StringBuilder sbuilder = new StringBuilder();
-        sbuilder.append("{\r\n\"@context\" : {\r\n");
-        contextMap.entrySet().forEach(entry -> sbuilder.append("\t\"" + entry.getKey() + "\" : \"" + entry.getValue() + "\",\r\n"));
+        sbuilder.append("{\r\n\t\"@context\" : {\r\n");
+        contextMap.entrySet().forEach(entry -> sbuilder.append("\t\t\"" + entry.getKey() + "\" : \"" + entry.getValue() + "\",\r\n"));
         sbuilder.deleteCharAt(sbuilder.lastIndexOf(",")); // remove comma after last entry
-        sbuilder.append("}\r\n}\r\n");
+        sbuilder.append("\t}\r\n}\r\n");
         return sbuilder.toString();
     }
 }
