@@ -40,6 +40,13 @@ template ids:process-class-to-bean(?class) {
     "\n\t}"
     "\n"
 
+    "\n"
+    "\n\t@JsonSetter(\"id\")"
+    "\n\tpublic void setIdLegacy(URL id) {"
+    "\n\t\tthis.id = id;"
+    "\n\t}"
+    "\n"
+
     # method implementation
 
     "\n\t// accessor method implementations as derived from information model"
