@@ -45,7 +45,7 @@
                             <mainClass>de.fraunhofer.iais.eis.Generator</mainClass>
                             <arguments>
                                 <argument>context.json</argument>
-                                <argument>/home/benedikt/Documents/IDS/InformationModel/model/</argument>
+                                <argument>${infomodel-sourcebase}/model</argument>
                             </arguments>
                         </configuration>
                     </execution>

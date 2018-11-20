@@ -27,7 +27,7 @@
             <version>2.3-SNAPSHOT</version>
             <optional>true</optional>
             <scope>system</scope>
-            <systemPath>${user.home}/Documents/IDS/ids-infomodel-codegen/sparql-template-executor-2.3-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+            <systemPath>${user.home}/projects/ids/ids-infomodel-codegen/sparql-template-executor-2.3-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
     </dependencies>
 
