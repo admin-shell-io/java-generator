@@ -1,9 +1,8 @@
 prefix ids: <https://w3id.org/idsa/core/>
-prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template st:start {
 
-    kg:write("/tmp/context.json", st:call-template(ids:all_classes))
+    kg:write("/tmp/context.json", st:call-template(ids:classes-and-properties))
 
 }
 where  {
