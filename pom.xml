@@ -24,9 +24,6 @@
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>sparql-template-executor</artifactId>
             <version>2.3-SNAPSHOT</version>
-            <optional>true</optional>
-            <scope>system</scope>
-            <systemPath>${user.home}/projects/ids/sparqlTemplateExecutor/target/sparql-template-executor-2.3-SNAPSHOT-jar-with-dependencies.jar</systemPath>
         </dependency>
     </dependencies>
 
