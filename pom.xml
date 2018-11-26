@@ -13,10 +13,32 @@
         <module>java</module>
     </modules>
 
-    <properties>
-        <!-- Adapt this path according to the location of the information model RDF sources -->
-        <infomodel-sourcebase>${user.home}/projects/ids/InformationModel</infomodel-sourcebase>
-    </properties>
+    <profiles>
+        <profile>
+            <id>dev-cmader</id>
+            <properties>
+                <infmodel-sourcebase>
+                    ${user.home}/projects/ids/InformationModel
+                </infmodel-sourcebase>
+            </properties>
+        </profile>
+        <profile>
+            <id>dev-bimbusch</id>
+            <properties>
+                <infomodel-sourcebase>
+                    ${user.home}/Documents/IDS/InformationModel
+                </infomodel-sourcebase>
+            </properties>
+        </profile>
+        <profile>
+            <id>CI</id>
+            <properties>
+                <infomodel-sourcebase>
+                    InformationModel
+                </infomodel-sourcebase>
+            </properties>
+        </profile>
+    </profiles>
 
     <dependencies>
         <!-- IAIS tools -->
