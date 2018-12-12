@@ -1,0 +1,16 @@
+prefix ids: <https://w3id.org/idsa/core/>
+
+template ids:classes-and-properties {
+
+    "{\n  \"@context\" : {\n"
+
+    "  \"ids\" : \"https://w3id.org/idsa/core/\",\n"
+
+    st:call-template(ids:process-class-to-context)
+    st:call-template(ids:process-property-to-context)
+
+    "\n  }\n}"
+}
+where {
+}
+
