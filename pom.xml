@@ -18,9 +18,9 @@
         <profile>
             <id>dev-cmader</id>
             <properties>
-                <infmodel-sourcebase>
+                <infomodel-sourcebase>
                     ${user.home}/projects/ids/InformationModel
-                </infmodel-sourcebase>
+                </infomodel-sourcebase>
             </properties>
         </profile>
         <profile>
