@@ -28,6 +28,7 @@ template ids:process-class-to-interface(?class) {
         "\n\t// standard methods\n"
 
         "\n\t@RdfId"
+        "\n\t@JsonProperty(\"@id\")"
         "\n\t@javax.validation.constraints.NotNull URL getId();"
         "\n\tString toRdf();"
         "\n"

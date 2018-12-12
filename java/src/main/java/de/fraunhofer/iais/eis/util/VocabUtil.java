@@ -16,7 +16,7 @@ public class VocabUtil {
     private ServiceLoader<BeanValidator> validatorLoader;
 
     private final static String PROTOCOL = "https";
-    private final static String HOST = "w3id.org/idsa/autogen";
+    private final static String HOST = "w3id.org";
 
     private static final VocabUtil instance = new VocabUtil();
 
@@ -31,7 +31,7 @@ public class VocabUtil {
 
     public URL createRandomUrl(String path) {
         try {
-            return new URL(PROTOCOL, HOST, "/" + path + "/" + UUID.randomUUID());
+            return new URL(PROTOCOL, HOST, "/idsa/autogen/" + path + "/" + UUID.randomUUID());
         }
         catch (MalformedURLException e) {
             // should never happen
