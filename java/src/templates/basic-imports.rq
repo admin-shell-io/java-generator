@@ -4,7 +4,6 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 template ids:basic-imports {
 
     "\nimport de.fraunhofer.iais.eis.util.*;"
-    "\nimport de.fraunhofer.iais.eis.annotation.*;"
     "\nimport de.fraunhofer.iais.eis.*;"
     "\n"
     "\nimport javax.xml.datatype.XMLGregorianCalendar;"

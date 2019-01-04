@@ -13,7 +13,6 @@ template ids:process-class-to-interface(?class) {
     "\n\n"
 
     "/** " str(?comment) " */"
-    "\n@RdfType(\"" str(?class) "\")"
     "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
     "\n@JsonSubTypes({" st:call-template(ids:class-to-json-annotation, ?class) "})"
     "\n"
@@ -27,7 +26,6 @@ template ids:process-class-to-interface(?class) {
 
         "\n\t// standard methods\n"
 
-        "\n\t@RdfId"
         "\n\t@JsonProperty(\"@id\")"
         "\n\t@javax.validation.constraints.NotNull URL getId();"
         "\n\tString toRdf();"

@@ -12,6 +12,7 @@
         <module>visualization</module>
         <module>java</module>
         <module>jsonld-context</module>
+        <module>spi</module>
     </modules>
 
     <profiles>
