@@ -4,8 +4,8 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:process-property-to-context {
 
-    "  \"" st:call-template(idstt:to_property_name, ?property) "\" : "
-    "\"ids:" st:call-template(idstt:to_property_name, ?property) "\","
+    "  ,\"" st:call-template(idstt:to_property_name, ?property) "\" : "
+    "\"ids:" st:call-template(idstt:to_property_name, ?property) "\""
 
 }
 where {

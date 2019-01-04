@@ -4,8 +4,8 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:process-class-to-context {
 
-    "  \"" st:call-template(idstt:to_class_name, ?class) "\" : "
-    "\"ids:" st:call-template(idstt:to_class_name, ?class) "\","
+    "  ,\"" st:call-template(idstt:to_class_name, ?class) "\" : "
+    "\"ids:" st:call-template(idstt:to_class_name, ?class) "\""
 
 }
 where {
