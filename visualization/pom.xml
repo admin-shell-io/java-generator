@@ -102,8 +102,7 @@
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
                                 <argument>-pp</argument><argument>**/*.ttl</argument>
                                 <argument>-td</argument>
-                                <!--<argument>/tmp/templates</argument>-->
-                              	<argument>${basedir}/templates</argument>
+                                <argument>/tmp/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>
