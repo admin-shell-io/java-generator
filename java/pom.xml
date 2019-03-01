@@ -181,8 +181,6 @@
                     </execution>
                 </executions>
             </plugin>
-
-            <!-- include LICENSE to jar -->
         </plugins>
     </build>
 
