@@ -106,21 +106,6 @@
                             </arguments>
                         </configuration>
                     </execution>
-
-                    <execution>
-                        <id>generate-image-from-plantuml</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>plantuml</executable>
-                            <arguments>
-                                <argument>/tmp/all_classes.plantuml</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-
                 </executions>
             </plugin>
 
