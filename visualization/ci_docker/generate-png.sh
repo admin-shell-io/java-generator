@@ -1,0 +1,8 @@
+#!/bin/sh
+
+OLDPWD=$PWD
+cd "$(dirname "$0")"
+cd ../../   # switch to ids-infomodel-codegen main dir
+mvn clean package -P CI -pl :visualization -s bamboo-config/maven-settings.xml
+cd visualization
+java -Djava.awt.headless=true -jar /usr/share/plantuml/plantuml.jar all_classes.plantuml
