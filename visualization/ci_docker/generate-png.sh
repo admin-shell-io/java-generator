@@ -2,7 +2,6 @@
 
 ### This script has to be executed in the Docker container!
 
-OLDPWD=$PWD
 cd "$(dirname "$0")"
 cd ../../   # switch to ids-infomodel-codegen main dir
 mvn clean package -P CI -pl :visualization -s bamboo-config/maven-settings.xml
