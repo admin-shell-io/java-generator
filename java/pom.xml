@@ -11,7 +11,6 @@
 
     <artifactId>java</artifactId>
 
-
     <dependencies>
         <dependency>
             <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
@@ -34,15 +33,6 @@
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>.</directory>
-                <includes>
-                    <include>LICENSE</include>
-                </includes>
-            </resource>
-        </resources>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -181,6 +171,7 @@
                     </execution>
                 </executions>
             </plugin>
+
         </plugins>
     </build>
 
