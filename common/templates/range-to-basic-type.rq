@@ -5,8 +5,8 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:range-to-basic-type(?property, ?range) {
 
-    if (bound(?refByUrl) && (?refByUrl = true),
-        "URL",
+    if (bound(?refByUri) && (?refByUri = true),
+        "URI",
 
         # basic types
         if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
@@ -39,5 +39,5 @@ template ids:range-to-basic-type(?property, ?range) {
 }
 where {
     ?property rdfs:range ?range.
-    OPTIONAL {?property idsm:referenceByUrl ?refByUrl}
+    OPTIONAL {?property idsm:referenceByUri ?refByUri}
 }

@@ -22,7 +22,7 @@ template ids:property-relations-to-uml {
 
     st:call-template(idstt:to_property_name, ?property)
 
-    if (bound(?refByUrl), " # URL ref ", " # local ref")
+    if (bound(?refByUri), " # URI ref ", " # local ref")
 
 }
 where {
@@ -36,7 +36,7 @@ where {
     }
 
     OPTIONAL {
-        ?property idsm:referenceByUrl ?refByUrl.
+        ?property idsm:referenceByUri ?refByUri.
     }
 
     FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))

@@ -5,7 +5,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template ids:range-jackson-annotation(?property, ?range) {
 
-    if ((!bound(?refByUrl) || (bound(?refByUrl) && (?refByUrl = false))) &&
+    if ((!bound(?refByUri) || (bound(?refByUri) && (?refByUri = false))) &&
         ((str(?range) = str(<xsd:dateTime>)) || (str(?range) = str(<xsd:time>)) || (str(?range) = str(<xsd:date>))),
         "@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = \"yyyy-MM-dd'T'HH:mm:ss.SSSXXX\")",
         "")
@@ -13,5 +13,5 @@ template ids:range-jackson-annotation(?property, ?range) {
 }
 where {
     ?property rdfs:range ?range.
-    OPTIONAL {?property idsm:referenceByUrl ?refByUrl}
+    OPTIONAL {?property idsm:referenceByUri ?refByUri}
 }
