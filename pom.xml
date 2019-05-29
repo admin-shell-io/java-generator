@@ -48,20 +48,29 @@
             <groupId>de.fraunhofer.iais.eis</groupId>
             <artifactId>sparql-template-executor</artifactId>
             <version>2.3-SNAPSHOT</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <distributionManagement>
         <repository>
-            <id>central</id>
+            <id>eis-release-repo</id>
             <name>maven-releases</name>
-            <url>http://maven.iais.fraunhofer.de/artifactory/ids-eis</url>
+            <url>http://maven.iais.fraunhofer.de/artifactory/eis-ids-release</url>
         </repository>
         <snapshotRepository>
-            <id>snapshots</id>
+            <id>eis-snapshot-repo</id>
             <name>maven-snapshots</name>
-            <url>http://maven.iais.fraunhofer.de/artifactory/ids-eis</url>
+            <url>http://maven.iais.fraunhofer.de/artifactory/eis-ids-snapshot</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>eis-snapshot-repo</id>
+            <name>maven-snapshots</name>
+            <url>http://maven.iais.fraunhofer.de/artifactory/eis-ids-snapshot</url>
+        </repository>
+    </repositories>
 
 </project>
