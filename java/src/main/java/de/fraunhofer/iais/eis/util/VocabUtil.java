@@ -4,6 +4,8 @@ import de.fraunhofer.iais.eis.spi.BeanSerializer;
 import de.fraunhofer.iais.eis.spi.BeanValidator;
 
 import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.*;
 
@@ -29,12 +31,11 @@ public class VocabUtil {
         return instance;
     }
 
-    public URL createRandomUrl(String path) {
+    public URI createRandomUrl(String path) {
         try {
-            return new URL(PROTOCOL, HOST, "/idsa/autogen/" + path + "/" + UUID.randomUUID());
+            return new URL(PROTOCOL, HOST, "/idsa/autogen/" + path + "/" + UUID.randomUUID()).toURI();
         }
-        catch (MalformedURLException e) {
-            // should never happen
+        catch (MalformedURLException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
     }

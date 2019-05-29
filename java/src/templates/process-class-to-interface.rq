@@ -27,7 +27,7 @@ template ids:process-class-to-interface(?class) {
         "\n\t// standard methods\n"
 
         "\n\t@JsonProperty(\"@id\")"
-        "\n\t@javax.validation.constraints.NotNull URL getId();"
+        "\n\t@javax.validation.constraints.NotNull URI getId();"
         "\n\tString toRdf();"
         "\n"
         "\n\t// accessor methods as derived from information model"

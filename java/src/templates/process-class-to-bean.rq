@@ -20,7 +20,7 @@ template ids:process-class-to-bean(?class) {
     " {\n"
     # boilerplate methods
 
-    "\n\t@javax.validation.constraints.NotNull URL id;"
+    "\n\t@javax.validation.constraints.NotNull URI id;"
     "\n"
 
     "\n\t// instance fields as derived from information model\n"
@@ -31,7 +31,7 @@ template ids:process-class-to-bean(?class) {
     "\n\t" st:call-template(idstt:to_class_name, ?class) "Impl() {}"
     "\n"
     "\n\t@JsonProperty(\"@id\")"
-    "\n\tfinal public URL getId() {"
+    "\n\tfinal public URI getId() {"
     "\n\t\treturn id;"
     "\n\t}"
     "\n"
@@ -42,7 +42,7 @@ template ids:process-class-to-bean(?class) {
 
     "\n"
     "\n\t@JsonSetter(\"id\")"
-    "\n\tpublic void setIdLegacy(URL id) {"
+    "\n\tpublic void setIdLegacy(URI id) {"
     "\n\t\tthis.id = id;"
     "\n\t}"
     "\n"

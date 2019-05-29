@@ -34,7 +34,7 @@ template ids:process-class-to-builder(?class) {
         "\");"
     "\n\t}"
     "\n"
-    "\n\tpublic " st:call-template(idstt:to_class_name, ?class) "Builder(@javax.validation.constraints.NotNull URL id) {"
+    "\n\tpublic " st:call-template(idstt:to_class_name, ?class) "Builder(@javax.validation.constraints.NotNull URI id) {"
     "\n\t\t"
     "this();"
     "\n\t\t"
