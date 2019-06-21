@@ -69,7 +69,7 @@
                                     <targetPath>${basedir}</targetPath>
                                     <directory>/tmp</directory>
                                     <includes>
-                                        <include>**/context.json</include>
+                                        <include>**/context.jsonld</include>
                                     </includes>
                                 </resource>
                             </resources>

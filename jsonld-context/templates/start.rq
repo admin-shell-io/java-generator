@@ -2,7 +2,7 @@ prefix ids: <https://w3id.org/idsa/core/>
 
 template st:start {
 
-    kg:write("/tmp/context.json", st:call-template(ids:classes-and-properties))
+    kg:write("/tmp/context.jsonld", st:call-template(ids:classes-and-properties))
 
 }
 where  {
