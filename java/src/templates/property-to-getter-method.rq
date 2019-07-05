@@ -1,14 +1,13 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:property-to-getter-method(?property, ?class) {
-
-    "\n\t"
-    st:call-template(ids:range-jackson-annotation, ?property, ?range)
+template idstt:property-to-getter-method(?property, ?class) {
 
     "\n\t"
-    st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
+    st:call-template(idstt:range-jackson-annotation, ?property, ?range)
+
+    "\n\t"
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
     " "
 

@@ -1,6 +1,6 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:properties-to-interface-methods(?class) {
+template idstt:properties-to-interface-methods(?class) {
 
 	# Iterates on selected properties and writes getter and setter methods
 
@@ -11,7 +11,7 @@ template ids:properties-to-interface-methods(?class) {
         concat("\n\t/** ", str(?comment), " */"),
         "")
 
-	st:call-template(ids:property-to-getter-method, ?property, ?class) ";"
+	st:call-template(idstt:property-to-getter-method, ?property, ?class) ";"
 
 }
 where  {   

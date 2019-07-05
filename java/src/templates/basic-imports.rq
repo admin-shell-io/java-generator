@@ -1,7 +1,7 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:basic-imports {
+template idstt:basic-imports {
 
     "\nimport de.fraunhofer.iais.eis.util.*;"
     "\nimport de.fraunhofer.iais.eis.*;"
