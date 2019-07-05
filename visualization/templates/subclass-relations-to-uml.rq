@@ -1,8 +1,7 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:subclass-relations-to-uml {
+template idstt:subclass-relations-to-uml {
 
     "\n"
 

@@ -1,8 +1,7 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:properties-to-uml(?class) {
+template idstt:properties-to-uml(?class) {
 
     "# "
 
@@ -10,7 +9,7 @@ template ids:properties-to-uml(?class) {
 
     " : "
 
-    st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<", ">")
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
 
 }
 where {
