@@ -1,8 +1,7 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:property-to-setter-method(?property, ?class, ?forBuilder) {
+template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
 
     # method name
 
@@ -18,7 +17,7 @@ template ids:property-to-setter-method(?property, ?class, ?forBuilder) {
     # method params
     "("
         # parameter type
-        st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
+        st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
         " _"
 
         # parameter label

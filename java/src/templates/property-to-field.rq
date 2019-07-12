@@ -1,8 +1,7 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:property-to-field(?property, ?class) {
+template idstt:property-to-field(?property, ?class) {
 
     "\n\t"
     st:call-template(idstt:jackson-plural-setter-annotation, ?property)
@@ -10,11 +9,11 @@ template ids:property-to-field(?property, ?class) {
     st:call-template(idstt:jackson-plural-getter-annotation, ?property)
     "\n\t"
 
-    st:call-template(ids:propertyAnnotation, ?class, ?property)
+    st:call-template(idstt:propertyAnnotation, ?class, ?property)
 
     " "
 
-    st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
     " _"
     st:call-template(idstt:to_property_name, ?property)

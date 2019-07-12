@@ -1,27 +1,26 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix dcat: <http://www.w3.org/ns/dcat#>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
-prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:class-tbox(?class) {
+template idstt:class-tbox(?class) {
 
     if (!bound(?isAbstract) || (?isAbstract = false),
         kg:write(
             concat("/tmp/", st:call-template(idstt:to_class_name, ?class), "Impl.java"),
-            st:call-template(ids:process-class-to-bean, ?class)
+            st:call-template(idstt:process-class-to-bean, ?class)
         ),
     '')
 
     if (!bound(?isAbstract) || (?isAbstract = false),
         kg:write(
             concat("/tmp/", st:call-template(idstt:to_class_name, ?class), "Builder.java"),
-            st:call-template(ids:process-class-to-builder, ?class)
+            st:call-template(idstt:process-class-to-builder, ?class)
         ),
     '')
 
     kg:write(
         concat("/tmp/", st:call-template(idstt:to_class_name, ?class), ".java"),
-        st:call-template(ids:process-class-to-interface, ?class)
+        st:call-template(idstt:process-class-to-interface, ?class)
     )
 
 }

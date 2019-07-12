@@ -1,12 +1,11 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:process-class-to-builder(?class) {
+template idstt:process-class-to-builder(?class) {
 
     "package de.fraunhofer.iais.eis;\n"
 
-    st:call-template(ids:basic-imports)
+    st:call-template(idstt:basic-imports)
 
     "\n"
     "\n"
@@ -43,7 +42,7 @@ template ids:process-class-to-builder(?class) {
 
     # method implementation
 
-    st:call-template(ids:subclass-properties-to-methods, ?class, 'builder')
+    st:call-template(idstt:subclass-properties-to-methods, ?class, 'builder')
 
     # build method
 

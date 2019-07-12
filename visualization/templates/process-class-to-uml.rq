@@ -1,8 +1,7 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:process-class-to-uml {
+template idstt:process-class-to-uml {
 
     "\n"
 
@@ -13,8 +12,8 @@ template ids:process-class-to-uml {
     " {\n"
 
     if (bound(?instance),
-        st:call-template(ids:enum-values-to-uml, ?class),
-        st:call-template(ids:properties-to-uml, ?class))
+        st:call-template(idstt:enum-values-to-uml, ?class),
+        st:call-template(idstt:properties-to-uml, ?class))
 
     "\n}\n"
 

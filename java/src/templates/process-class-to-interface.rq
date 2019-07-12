@@ -1,25 +1,25 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:process-class-to-interface(?class) {
+template idstt:process-class-to-interface(?class) {
 
     "package de.fraunhofer.iais.eis;"
     "\n"
 
-    st:call-template(ids:basic-imports)
+    st:call-template(idstt:basic-imports)
 
     "\n\n"
 
     "/** " str(?comment) " */"
     "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
-    "\n@JsonSubTypes({" st:call-template(ids:class-to-json-annotation, ?class) "})"
+    "\n@JsonSubTypes({" st:call-template(idstt:class-to-json-annotation, ?class) "})"
     "\n"
     "public interface " st:call-template(idstt:to_class_name, ?class)
 
     if (bound(?superClass),
-        concat(" extends ", strafter(st:call-template(ids:subclasses-to-list, ?class), ", ")),
+        concat(" extends ", strafter(st:call-template(idstt:subclasses-to-list, ?class), ", ")),
         "")
 
     " {\n"
@@ -33,7 +33,7 @@ template ids:process-class-to-interface(?class) {
         "\n\t// accessor methods as derived from information model"
         "\n"
 
-        st:call-template(ids:properties-to-interface-methods, ?class)
+        st:call-template(idstt:properties-to-interface-methods, ?class)
 
     "\n}\n"
 

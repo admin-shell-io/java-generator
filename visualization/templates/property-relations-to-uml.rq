@@ -1,9 +1,8 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:property-relations-to-uml {
+template idstt:property-relations-to-uml {
 
     "\n"
 
@@ -12,7 +11,7 @@ template ids:property-relations-to-uml {
     " --> "
 
     if (bound(?validation),
-        st:call-template(ids:uml-headlabel, ?domain, ?property),
+        st:call-template(idstt:uml-headlabel, ?domain, ?property),
         " \"0..1\" "
     )
 
