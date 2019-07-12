@@ -1,9 +1,8 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix dct: <http://purl.org/dc/terms/>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
-prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:process-enum-individuals(?class) {
+template idstt:process-enum-individuals(?class) {
 
     if (bound(?comment),
         concat("\n\t/** ", str(?comment), " */"),

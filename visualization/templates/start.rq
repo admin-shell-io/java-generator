@@ -1,9 +1,9 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template st:start {
 
-    kg:write("/tmp/all_classes.plantuml", st:call-template(ids:all_classes))
+    kg:write("/tmp/all_classes.plantuml", st:call-template(idstt:all_classes))
 
 }
 where  {

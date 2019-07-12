@@ -1,8 +1,8 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template st:start {
 
-    kg:write("/tmp/context.jsonld", st:call-template(ids:classes-and-properties))
+    kg:write("/tmp/context.jsonld", st:call-template(idstt:classes-and-properties))
 
 }
 where  {

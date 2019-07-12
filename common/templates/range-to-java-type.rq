@@ -1,12 +1,12 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
+template idstt:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
 
     if (bound(?relationType) && (?relationType = <idsm:OneToMany>), concat("java.util.ArrayList", str(?bracketOpen)), "")
 
-    st:call-template(ids:range-to-basic-type, ?property, ?range)
+    st:call-template(idstt:range-to-basic-type, ?property, ?range)
 
     if (bound(?relationType) && (?relationType = <idsm:OneToMany>), str(?bracketClose), "")
 

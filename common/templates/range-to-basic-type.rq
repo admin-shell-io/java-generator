@@ -1,9 +1,8 @@
-prefix ids: <https://w3id.org/idsa/core/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:range-to-basic-type(?property, ?range) {
+template idstt:range-to-basic-type(?property, ?range) {
 
     if (bound(?refByUri) && (?refByUri = true),
         "URI",

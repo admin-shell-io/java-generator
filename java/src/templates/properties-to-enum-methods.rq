@@ -1,8 +1,7 @@
-prefix ids: <https://w3id.org/idsa/core/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:properties-to-enum-methods(?class) {
+template idstt:properties-to-enum-methods(?class) {
 
 	# Iterates on selected properties and writes getter and setter methods
 
@@ -14,7 +13,7 @@ template ids:properties-to-enum-methods(?class) {
     "final public "
 
     # signature
-	st:call-template(ids:property-to-getter-method, ?property, ?class)
+	st:call-template(idstt:property-to-getter-method, ?property, ?class)
 
 	" {\n\t"
 	"\t//not implemented for enums\n\t"

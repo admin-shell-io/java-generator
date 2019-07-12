@@ -1,11 +1,11 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template ids:subclass-properties-to-fields(?class) {
+template idstt:subclass-properties-to-fields(?class) {
 
     # Iterates on selected properties
-    st:call-template(ids:property-to-field, ?property, ?superClass)
+    st:call-template(idstt:property-to-field, ?property, ?superClass)
 
 }
 where {

@@ -1,6 +1,6 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:properties-to-bean-methods(?class) {
+template idstt:properties-to-bean-methods(?class) {
 
 	# Iterates on selected properties and writes getter and setter methods
 
@@ -12,10 +12,10 @@ template ids:properties-to-bean-methods(?class) {
     "final public "
 
     # signature
-	st:call-template(ids:property-to-getter-method, ?property, ?class)
+	st:call-template(idstt:property-to-getter-method, ?property, ?class)
 
     # method body
-	st:call-template(ids:getter-method-bean-body, ?property)
+	st:call-template(idstt:getter-method-bean-body, ?property)
 
     # setter method
 
@@ -24,10 +24,10 @@ template ids:properties-to-bean-methods(?class) {
     # visibility modifier
     "final public void "
 
-    st:call-template(ids:property-to-setter-method, ?property, ?class, false)
+    st:call-template(idstt:property-to-setter-method, ?property, ?class, false)
 
     # method body
-    st:call-template(ids:setter-method-body, ?property)
+    st:call-template(idstt:setter-method-body, ?property)
 
 }
 where  {   

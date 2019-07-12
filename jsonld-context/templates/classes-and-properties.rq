@@ -1,13 +1,13 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:classes-and-properties {
+template idstt:classes-and-properties {
 
     "{\n  \"@context\" : {\n"
 
     "  \"ids\" : \"https://w3id.org/idsa/core/\"\n"
 
-    st:call-template(ids:process-class-to-context)
-    st:call-template(ids:process-property-to-context)
+    st:call-template(idstt:process-class-to-context)
+    st:call-template(idstt:process-property-to-context)
 
     "\n  }\n}"
 }

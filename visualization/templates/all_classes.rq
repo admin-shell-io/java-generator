@@ -1,15 +1,15 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:all_classes {
+template idstt:all_classes {
 
     "@startuml\n\n"
     "skinparam linetype ortho\n"
     "title Industrial Data Space Information Model - Class Diagram\n"
 
-    st:call-template(ids:process-class-to-uml)
-    st:call-template(ids:property-relations-to-uml)
-    st:call-template(ids:subclass-relations-to-uml)
+    st:call-template(idstt:process-class-to-uml)
+    st:call-template(idstt:property-relations-to-uml)
+    st:call-template(idstt:subclass-relations-to-uml)
 
     "@enduml\n"
 

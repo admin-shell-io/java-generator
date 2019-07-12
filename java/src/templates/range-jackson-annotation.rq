@@ -1,9 +1,8 @@
-prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix idsm: <https://w3id.org/idsa/metamodel/>
-prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template ids:range-jackson-annotation(?property, ?range) {
+template idstt:range-jackson-annotation(?property, ?range) {
 
     if ((!bound(?refByUri) || (bound(?refByUri) && (?refByUri = false))) &&
         ((str(?range) = str(<xsd:dateTime>)) || (str(?range) = str(<xsd:time>)) || (str(?range) = str(<xsd:date>))),
