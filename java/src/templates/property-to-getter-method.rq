@@ -8,6 +8,8 @@ template ids:property-to-getter-method(?property, ?class) {
     st:call-template(ids:range-jackson-annotation, ?property, ?range)
 
     "\n\t"
+    st:call-template(idstt:jackson-plural-getter-annotation, ?property)
+    "\n\t"
     st:call-template(ids:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
     " "

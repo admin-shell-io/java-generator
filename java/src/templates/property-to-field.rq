@@ -5,6 +5,10 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template ids:property-to-field(?property, ?class) {
 
     "\n\t"
+    st:call-template(idstt:jackson-plural-setter-annotation, ?property)
+    "\n\t"
+    st:call-template(idstt:jackson-plural-getter-annotation, ?property)
+    "\n\t"
 
     st:call-template(ids:propertyAnnotation, ?class, ?property)
 
