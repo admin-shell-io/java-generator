@@ -19,6 +19,8 @@ template idstt:process-class-to-bean(?class) {
     " {\n"
     # boilerplate methods
 
+    "\n\t@JsonProperty(\"@id\")"
+    "\n\t@JsonAlias({\"@id\", \"id\"})"
     "\n\t@javax.validation.constraints.NotNull URI id;"
     "\n"
 
@@ -36,13 +38,6 @@ template idstt:process-class-to-bean(?class) {
     "\n"
     "\n\tpublic String toRdf() {"
     "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
-    "\n\t}"
-    "\n"
-
-    "\n"
-    "\n\t@JsonSetter(\"id\")"
-    "\n\tpublic void setIdLegacy(URI id) {"
-    "\n\t\tthis.id = id;"
     "\n\t}"
     "\n"
 
