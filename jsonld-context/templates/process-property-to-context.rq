@@ -1,7 +1,7 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template ids:process-property-to-context {
+template idstt:process-property-to-context {
 
     "  ,\"" st:call-template(idstt:to_property_name, ?property) "\" : "
     "\"ids:" st:call-template(idstt:to_property_name, ?property) "\""
