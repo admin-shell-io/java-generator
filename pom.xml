@@ -33,6 +33,14 @@
             </properties>
         </profile>
         <profile>
+            <id>dev-bader</id>
+            <properties>
+                <infomodel-sourcebase>
+                    /Users/sbader/git/InformationModel
+                </infomodel-sourcebase>
+            </properties>
+        </profile>
+        <profile>
             <id>CI</id>
             <properties>
                 <infomodel-sourcebase>
