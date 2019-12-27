@@ -29,8 +29,32 @@
             <artifactId>jackson-annotations</artifactId>
             <version>2.9.6</version>
         </dependency>
-
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>win</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <tmp-path>C:/tmp</tmp-path>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <os>
+                    <family>Unix</family>
+                </os>
+            </activation>
+            <properties>
+                <tmp-path>/tmp</tmp-path>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -49,7 +73,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.2</version>
                 <executions>
-                    <!-- assemble the relevant templates into /tmp/templates -->
+                    <!-- assemble the relevant templates into ${tmp-path}/templates -->
                     <execution>
                         <id>assemble-templates</id>
                         <phase>initialize</phase>
@@ -58,7 +82,7 @@
                         </goals>
 
                         <configuration>
-                            <outputDirectory>/tmp/templates</outputDirectory>
+                            <outputDirectory>${tmp-path}/templates</outputDirectory>
                             <resources>
                                 <resource>
                                     <directory>${basedir}/src/templates</directory>
@@ -82,7 +106,7 @@
                             <resources>
                                 <resource>
                                     <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
-                                    <directory>/tmp</directory>
+                                    <directory>${tmp-path}</directory>
                                     <includes>
                                         <include>**/*.java</include>
                                     </includes>
@@ -116,14 +140,14 @@
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
                                 <argument>-pp</argument><argument>**/*.ttl</argument>
                                 <argument>-td</argument>
-                                <argument>/tmp/templates</argument>
+                                <argument>${tmp-path}/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- cleanup generated java sources and temporary stuff in /tmp -->
+            <!-- cleanup generated java sources and temporary stuff in ${tmp-path} -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
@@ -141,13 +165,13 @@
                             </excludes>
                         </fileset>
                         <fileset>
-                            <directory>/tmp/</directory>
+                            <directory>${tmp-path}/</directory>
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
                         </fileset>
                         <fileset>
-                            <directory>/tmp/templates</directory>
+                            <directory>${tmp-path}/templates</directory>
                             <includes>
                                 <include>**/*.rq</include>
                             </includes>
