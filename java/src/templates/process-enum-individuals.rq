@@ -11,9 +11,7 @@ template idstt:process-enum-individuals(?class) {
             '')
         )
 
-
     "\n\t"
-
     ucase(st:call-template(idstt:to_class_name, ?individual))
 
     "(\"" str(?individual) "\"),"
