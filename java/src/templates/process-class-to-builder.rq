@@ -26,11 +26,6 @@ template idstt:process-class-to-builder(?class) {
     "\n\tpublic " st:call-template(idstt:to_class_name, ?class) "Builder() {"
     "\n\t\t"
         lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2) "Impl = new " st:call-template(idstt:to_class_name, ?class) "Impl();"
-        "\n\t\t"
-        lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
-        "Impl.id = VocabUtil.getInstance().createRandomUrl(\""
-        lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
-        "\");"
     "\n\t}"
     "\n"
     "\n\tpublic " st:call-template(idstt:to_class_name, ?class) "Builder(@javax.validation.constraints.NotNull URI id) {"
