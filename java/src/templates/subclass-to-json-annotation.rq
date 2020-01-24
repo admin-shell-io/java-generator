@@ -9,11 +9,6 @@ template idstt:subclass-to-json-annotation(?class) {
 
     st:call-template(idstt:to_class_name, ?subClass)
 
-    if (bound(?instance),
-        "",
-        if (bound(?abstract), "", "Impl")
-    )
-
     ".class),"
 }
 WHERE {
