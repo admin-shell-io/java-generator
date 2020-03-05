@@ -9,6 +9,7 @@ template idstt:range-to-basic-type(?property, ?range) {
 
         # basic types
         if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:dateTimeStamp>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:string>), "String",
         if (str(?range) = str(<xsd:integer>), "BigInteger",
         if (str(?range) = str(<xsd:int>), "int",
@@ -32,7 +33,7 @@ template idstt:range-to-basic-type(?property, ?range) {
         if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.PlainLiteral",
 
         # custom types
-        st:call-template(idstt:to_class_name, ?range)))))))))))))))))))))
+        st:call-template(idstt:to_class_name, ?range))))))))))))))))))))))
     )
 
 }

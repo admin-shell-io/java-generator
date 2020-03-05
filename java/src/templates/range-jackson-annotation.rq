@@ -5,8 +5,8 @@ prefix idsm: <https://w3id.org/idsa/metamodel/>
 template idstt:range-jackson-annotation(?property, ?range) {
 
     if ((!bound(?refByUri) || (bound(?refByUri) && (?refByUri = false))) &&
-        ((str(?range) = str(<xsd:dateTime>)) || (str(?range) = str(<xsd:time>)) || (str(?range) = str(<xsd:date>))),
-        "@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = \"yyyy-MM-dd'T'HH:mm:ss.SSSXXX\")",
+        ((str(?range) = str(<xsd:dateTime>)) || (str(?range) = str(<xsd:time>)) || (str(?range) = str(<xsd:date>)) || (str(?range) = str(<xsd:dateTimeStamp>))),
+        "@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = \"yyyy-MM-dd'T'HH:mm:ss.SSSXXX'z'Z\")",
         "")
 
 }
