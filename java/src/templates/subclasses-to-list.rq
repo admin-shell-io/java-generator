@@ -1,0 +1,14 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix ids: <https://w3id.org/idsa/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:subclasses-to-list(?class) {
+
+    ", " st:call-template(idstt:to_class_name, ?superClass)
+
+}
+where {
+    ?class rdfs:subClassOf ?superClass.
+
+    filter (strstarts(str(?superClass), str(<ids:>)))
+}

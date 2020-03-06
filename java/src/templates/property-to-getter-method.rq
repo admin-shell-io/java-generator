@@ -1,0 +1,33 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template idstt:property-to-getter-method(?property, ?class) {
+
+    "\n\t"
+    st:call-template(idstt:range-jackson-annotation, ?property, ?range)
+
+    "\n\t"
+    st:call-template(idstt:jackson-plural-getter-annotation, ?property)
+    "\n\t"
+    st:call-template(idstt:propertyAnnotation, ?class, ?property)
+    "\n\t"
+    # prefixed property for all classes but DatPayload
+    if(contains(str(?class), "DatPayload"), "",
+        concat("@JsonProperty(\"ids:", st:call-template(idstt:to_property_name, ?property), "\")\n\t")
+    )
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
+
+    " "
+
+    # method name
+    "get"
+
+    concat(
+        ucase(substr(str(st:call-template(idstt:to_property_name, ?property)), 1, 1)),
+        substr(str(st:call-template(idstt:to_property_name, ?property)), 2),
+        '()')
+
+}
+where  {
+    ?property rdfs:range ?range.
+}

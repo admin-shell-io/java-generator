@@ -1,0 +1,60 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-class-to-bean(?class) {
+
+    "package de.fraunhofer.iais.eis;\n"
+
+    st:call-template(idstt:basic-imports)
+
+    "\n"
+    "\n"
+    "/** " str(?comment) " */\n"
+    "@JsonIgnoreProperties(ignoreUnknown = true)\n"
+    "@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
+    "\n"
+    "public class " concat(st:call-template(idstt:to_class_name, ?class), "Impl")
+    " implements Serializable, " st:call-template(idstt:to_class_name, ?class)
+
+    " {\n"
+    # boilerplate methods
+
+    "\n\t@JsonProperty(\"@id\")"
+    "\n\t@JsonAlias({\"@id\", \"id\"})"
+    "\n\t@javax.validation.constraints.NotNull URI id;"
+    "\n"
+
+    "\n\t// instance fields as derived from information model\n"
+    st:call-template(idstt:subclass-properties-to-fields, ?class)
+
+    "\n"
+    "\n\t// no manual construction"
+    "\n\t" st:call-template(idstt:to_class_name, ?class) "Impl() {"
+    "\n\t\tid = VocabUtil.getInstance().createRandomUrl(\""
+                             lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
+                             "\");"
+    "\n\t}"
+    "\n"
+    "\n\t@JsonProperty(\"@id\")"
+    "\n\tfinal public URI getId() {"
+    "\n\t\treturn id;"
+    "\n\t}"
+    "\n"
+    "\n\tpublic String toRdf() {"
+    "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
+    "\n\t}"
+    "\n"
+
+    # method implementation
+
+    "\n\t// accessor method implementations as derived from information model"
+    "\n"
+    st:call-template(idstt:subclass-properties-to-methods, ?class, 'bean')
+
+    "\n}\n"
+
+}
+where{
+    ?class a owl:Class;
+        rdfs:comment ?comment.
+}

@@ -1,0 +1,21 @@
+prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:properties-to-uml(?class) {
+
+    "# "
+
+    st:call-template(idstt:to_property_name, ?property)
+
+    " : "
+
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+
+}
+where {
+    ?property rdfs:domain ?class;
+        rdfs:range ?range.
+
+    filter (!(strstarts(str(?range), str(<ids:>))))
+}

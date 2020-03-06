@@ -1,0 +1,23 @@
+prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:subclass-relations-to-uml {
+
+    "\n"
+
+    st:call-template(idstt:to_class_name, ?classA)
+
+    " --|> "
+
+    st:call-template(idstt:to_class_name, ?classB)
+
+    "\n"
+
+}
+where {
+    ?classA rdfs:subClassOf ?classB.
+
+    FILTER (strstarts(str(?classA), str(<ids:>)) && strstarts(str(?classB), str(<ids:>)))
+}
+

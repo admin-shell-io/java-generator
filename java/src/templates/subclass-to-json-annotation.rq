@@ -1,0 +1,29 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix ids: <https://w3id.org/idsa/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template idstt:subclass-to-json-annotation(?class) {
+
+    "\n@JsonSubTypes.Type(value = "
+
+    st:call-template(idstt:to_class_name, ?subClass)
+
+    ".class),"
+}
+WHERE {
+    ?class ^rdfs:subClassOf ?subClass.
+
+    optional {
+        ?subClass idsm:abstract ?abstract
+    }
+
+    optional {
+        ?instance a ?subClass.
+    }
+
+    filter(strstarts(str(?subClass), str(<ids:>)))
+}
+GROUP BY ?subClass
+
+

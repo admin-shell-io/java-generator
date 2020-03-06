@@ -1,0 +1,31 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
+
+    # method name
+
+    if (?forBuilder,
+        concat ("_",
+            str(st:call-template(idstt:to_property_name, ?property)),
+            "_"),
+        concat("set",
+            ucase(substr(str(st:call-template(idstt:to_property_name, ?property)), 1, 1)),
+            substr(str(st:call-template(idstt:to_property_name, ?property)), 2),
+            " "))
+
+    # method params
+    "("
+        # parameter type
+        st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
+        " _"
+
+        # parameter label
+        st:call-template(idstt:to_property_name, ?property)
+        "_"
+    ")"
+
+}
+where  {
+    ?property rdfs:range ?range.
+}

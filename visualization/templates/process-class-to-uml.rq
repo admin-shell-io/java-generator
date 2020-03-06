@@ -1,0 +1,29 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-class-to-uml {
+
+    "\n"
+
+    if (bound(?instance), "enum ", "class ")
+
+    st:call-template(idstt:to_class_name, ?class)
+
+    " {\n"
+
+    if (bound(?instance),
+        st:call-template(idstt:enum-values-to-uml, ?class),
+        st:call-template(idstt:properties-to-uml, ?class))
+
+    "\n}\n"
+
+}
+where {
+    ?class a owl:Class.
+
+    OPTIONAL {
+        ?instance a ?class
+    }
+}
+group by ?class
+

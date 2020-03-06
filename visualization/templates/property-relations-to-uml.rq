@@ -1,0 +1,44 @@
+prefix ids: <https://w3id.org/idsa/core/>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template idstt:property-relations-to-uml {
+
+    "\n"
+
+    st:call-template(idstt:to_class_name, ?domain)
+
+    " --> "
+
+    if (bound(?validation),
+        st:call-template(idstt:uml-headlabel, ?domain, ?property),
+        " \"0..1\" "
+    )
+
+    st:call-template(idstt:to_class_name, ?range)
+
+    ": "
+
+    st:call-template(idstt:to_property_name, ?property)
+
+    if (bound(?refByUri), " # URI ref ", " # local ref")
+
+}
+where {
+    ?property rdfs:domain ?domain;
+        rdfs:range ?range.
+
+    OPTIONAL {
+        ?domain idsm:validation ?validation.
+        ?validation idsm:forProperty ?someProperty.
+        ?property rdfs:subPropertyOf? ?someProperty.
+    }
+
+    OPTIONAL {
+        ?property idsm:referenceByUri ?refByUri.
+    }
+
+    FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
+}
+

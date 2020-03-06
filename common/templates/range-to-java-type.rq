@@ -1,0 +1,23 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template idstt:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
+
+    if (bound(?relationType) && (?relationType = <idsm:OneToMany>), concat("java.util.ArrayList", str(?bracketOpen)), "")
+
+    st:call-template(idstt:range-to-basic-type, ?property, ?range)
+
+    if (bound(?relationType) && (?relationType = <idsm:OneToMany>), str(?bracketClose), "")
+
+}
+where {
+    ?property rdfs:range ?range.
+
+    OPTIONAL {
+        ?class idsm:validation ?validation.
+        ?validation idsm:forProperty ?someProperty.
+        ?property rdfs:subPropertyOf? ?someProperty.
+        ?validation idsm:relationType ?relationType.
+    }
+}

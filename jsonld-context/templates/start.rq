@@ -1,0 +1,9 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template st:start {
+
+    kg:write("/tmp/context.jsonld", st:call-template(idstt:classes-properties-instances))
+
+}
+where  {
+}

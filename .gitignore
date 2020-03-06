@@ -1,5 +1,11 @@
+**/*.iml
+**/*.png
+*.log
+*/target/
+
 .idea/
-/target/
-src/main/java/de/fraunhofer/iais/eis/*.java
-classes.png
-*.iml
+
+java/src/main/java/de/fraunhofer/iais/eis/*.java
+visualization/*.plantuml
+jsonld-context/context.json
+jsonld-context/context.jsonld

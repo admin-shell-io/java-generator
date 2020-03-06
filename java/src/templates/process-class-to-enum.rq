@@ -1,0 +1,102 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix ids: <https://w3id.org/idsa/core/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-class-to-enum(?class) {
+
+    "package de.fraunhofer.iais.eis;\n"
+
+    st:call-template(idstt:basic-imports)
+    "\nimport com.fasterxml.jackson.databind.JsonNode;"
+
+    "\nimport java.util.Map;"
+    "\nimport java.util.stream.Collectors;"
+    "\nimport java.util.stream.Stream;"
+
+    "\n\n"
+
+    "/** " str(?comment) " */\n"
+    "\n@JsonFormat(shape = JsonFormat.Shape.OBJECT)"
+    "\n@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
+    "\npublic enum " st:call-template(idstt:to_class_name, ?class)
+
+     if (bound(?superClass),
+            concat(" implements ", strafter(st:call-template(idstt:subclasses-to-list, ?class), ", ")),
+            "")
+
+    " {\n"
+
+    st:call-template(idstt:process-enum-individuals, ?class)
+
+    ";"
+
+    "\n"
+    "\n\tprivate static final Map<String," st:call-template(idstt:to_class_name, ?class) "> uriInstanceMapping;"
+    "\n\tstatic {"
+    "\n\t\turiInstanceMapping = new HashMap<>();"
+    "\n\t\turiInstanceMapping.putAll(Stream.of(values()).collect(Collectors.toMap(instance -> instance.toString(), instance -> instance)));"
+    "\n\t\turiInstanceMapping.putAll(Stream.of(values()).collect(Collectors.toMap(instance -> instance.getSerializedId().toString(), instance -> instance)));"
+    "\n\t}"
+    "\n"
+    "\n\tprivate URI id;"
+
+    "\n"
+	"\n\t" st:call-template(idstt:to_class_name, ?class) "(String id) {"
+	"\n\t\ttry {"
+	"\n\t\t\tthis.id = new URI(id);"
+    "\n\t\t}"
+    "\n\t\tcatch (java.net.URISyntaxException e) {"
+    "\n\t\t\tthrow new IllegalArgumentException(e);"
+    "\n\t\t}"
+	"\n\t}"
+
+	"\n"
+	"\n\t@JsonIgnore"
+    "\n\tfinal public URI getId() {"
+    "\n\t\treturn id;"
+    "\n\t}"
+    "\n\tpublic String toRdf() {"
+    "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
+    "\n\t}"
+
+    "\n"
+    "\n\t@JsonProperty(\"@id\")"
+    "\n\tfinal public URI getSerializedId() {"
+    "\n\t\ttry {"
+    "\n\t\t\t return new URI(\"idsc:\" + id.toString().substring(id.toString().lastIndexOf(\"/\") + 1));"
+    "\n\t\t} catch (Exception e) {}"
+    "\n\t\treturn null;"
+    "\n\t}"
+    "\n\t"
+
+    "\n"
+    "\n\t@JsonCreator"
+    "\n\tpublic static " st:call-template(idstt:to_class_name, ?class) " deserialize(JsonNode node) {"
+    "\n\t\treturn uriInstanceMapping.get(node.has(\"@id\") ? node.get(\"@id\").textValue() : node.textValue());"
+    "\n\t}"
+
+    "\n"
+	"\n\t@Override"
+	"\n\tpublic String toString() {"
+		"\n\t\treturn id.toString();"
+	"\n\t}"
+
+    # superclass methods
+    "\n"
+    st:call-template(idstt:subclass-properties-to-methods, ?class, 'enum')
+
+    "\n}\n"
+
+}
+WHERE
+{
+    ?class a owl:Class;
+        rdfs:comment ?comment.
+
+    optional {
+        ?class rdfs:subClassOf ?superClass.
+        filter(strstarts(str(?superClass), str(<ids:>)))
+    }
+}
+GROUP BY ?class
+

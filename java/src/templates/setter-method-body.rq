@@ -1,0 +1,14 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template idstt:setter-method-body(?property) {
+
+    " {"
+
+    "\n\t\t"
+    "this._" st:call-template(idstt:to_property_name, ?property) " = _" st:call-template(idstt:to_property_name, ?property) "_;"
+    "\n\t}"
+
+}
+where{}

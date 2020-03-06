@@ -1,0 +1,16 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix idsm: <https://w3id.org/idsa/metamodel/>
+
+template idstt:enum-values-to-uml(?class) {
+
+    "# " ucase(st:call-template(idstt:to_class_name, ?instance))
+
+}
+where {
+    ?instance a ?class.
+}
+limit 15
+
+

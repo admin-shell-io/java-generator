@@ -1,0 +1,16 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-instance-to-context {
+
+    "  ,\"" st:call-template(idstt:to_class_name, ?instance) "\" : "
+    "\"idsc:" st:call-template(idstt:to_class_name, ?instance) " \""
+
+}
+where {
+    ?class a owl:Class.
+    ?instance a ?class.
+    filter(strstarts(str(?instance), str(<https://w3id.org/idsa/code/>)))
+}
+GROUP BY ?instance
+
