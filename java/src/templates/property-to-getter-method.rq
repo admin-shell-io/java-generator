@@ -11,6 +11,10 @@ template idstt:property-to-getter-method(?property, ?class) {
     "\n\t"
     st:call-template(idstt:propertyAnnotation, ?class, ?property)
     "\n\t"
+    # prefixed property for all classes but DatPayload
+    if(contains(str(?class), "DatPayload"), "",
+        concat("@JsonProperty(\"ids:", st:call-template(idstt:to_property_name, ?property), "\")\n\t")
+    )
     st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
     " "

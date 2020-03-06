@@ -3,8 +3,8 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-instance-to-context {
 
-    "  ,\"" str(?instance) "\" : "
-    "\"idsc:" st:call-template(idstt:to_class_name, ?instance) "\""
+    "  ,\"" st:call-template(idstt:to_class_name, ?instance) "\" : "
+    "\"idsc:" st:call-template(idstt:to_class_name, ?instance) " \""
 
 }
 where {

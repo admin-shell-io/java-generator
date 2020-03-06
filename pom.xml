@@ -48,6 +48,14 @@
                 </infomodel-sourcebase>
             </properties>
         </profile>
+		<profile>
+			<id>MB</id>
+			<properties>
+				<infomodel-sourcebase>
+					../InfoModel
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
     </profiles>
 
     <dependencies>
