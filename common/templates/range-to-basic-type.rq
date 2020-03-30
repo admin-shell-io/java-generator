@@ -10,7 +10,7 @@ template idstt:range-to-basic-type(?property, ?range) {
         # basic types
         if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:dateTimeStamp>), "XMLGregorianCalendar",
-        if (str(?range) = str(<xsd:string>), "String",
+        if (str(?range) = str(<xsd:string>), if(EXISTS { VALUES ?property { <https://w3id.org/idsa/core/description> <https://w3id.org/idsa/core/title> <https://w3id.org/idsa/core/keyword> <https://w3id.org/idsa/core/revocationReason> <https://w3id.org/idsa/core/contractRejectionReason> <https://w3id.org/idsa/core/activityDescription> } } , "de.fraunhofer.iais.eis.util.LocalizableString", "String"),
         if (str(?range) = str(<xsd:integer>), "BigInteger",
         if (str(?range) = str(<xsd:int>), "int",
         if (str(?range) = str(<xsd:nonNegativeInteger>), "int",
@@ -29,11 +29,12 @@ template idstt:range-to-basic-type(?property, ?range) {
 
         # rdf types
         if (str(?range) = str(<rdfs:Resource>), "de.fraunhofer.iais.eis.util.RdfResource",
+        if (str(?range) = str(<rdf:langString>), "de.fraunhofer.iais.eis.util.LocalizableString",
         if (str(?range) = str(<rdfs:Literal>), "de.fraunhofer.iais.eis.util.PlainLiteral",
         if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.PlainLiteral",
 
         # custom types
-        st:call-template(idstt:to_class_name, ?range))))))))))))))))))))))
+        st:call-template(idstt:to_class_name, ?range)))))))))))))))))))))))
     )
 
 }
