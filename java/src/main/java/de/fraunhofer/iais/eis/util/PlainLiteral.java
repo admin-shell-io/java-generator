@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class PlainLiteral implements Serializable {
+public class PlainLiteral extends LocalizableString {
 
     @JsonProperty("@value")
     private String value = "";
@@ -18,17 +18,15 @@ public class PlainLiteral implements Serializable {
     private String language = "";
 
     public PlainLiteral() {
+        super();
     }
 
     public PlainLiteral(String valueAndLanguage) {
-        StringTokenizer tokenizer = new StringTokenizer(valueAndLanguage, "@");
-        value = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "";
-        language = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "";
+        super(valueAndLanguage);
     }
 
     public PlainLiteral(String value, String language) {
-        this.value = value;
-        this.language = language;
+        super(value, language);
     }
 
     public String getValue() {

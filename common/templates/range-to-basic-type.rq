@@ -30,7 +30,7 @@ template idstt:range-to-basic-type(?property, ?range) {
         # rdf types
         if (str(?range) = str(<rdfs:Resource>), "de.fraunhofer.iais.eis.util.RdfResource",
         if (str(?range) = str(<rdf:langString>), "de.fraunhofer.iais.eis.util.LocalizableString",
-        if (str(?range) = str(<rdfs:Literal>), "de.fraunhofer.iais.eis.util.PlainLiteral",
+        if (str(?range) = str(<rdfs:Literal>), "de.fraunhofer.iais.eis.util.LocalizableString", #TODO
         if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.PlainLiteral",
 
         # custom types
