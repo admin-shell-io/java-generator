@@ -28,21 +28,6 @@ public class PlainLiteral extends LocalizableString {
     public PlainLiteral(String value, String language) {
         super(value, language);
     }
-
-    public String getValue() {
-        return value;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+    //Getters and Setters inherited from parent class
 
 }

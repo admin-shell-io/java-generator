@@ -30,5 +30,21 @@ public class LocalizableString implements Serializable {
         this.value = value;
         this.language = language;
     }
-    //Getters and Setters inherited from parent class
+
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
 }
