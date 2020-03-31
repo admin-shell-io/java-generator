@@ -7,15 +7,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.StringTokenizer;
 
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class PlainLiteral extends LocalizableString {
-
-    @JsonProperty("@value")
-    private String value = "";
-
-    @JsonProperty("@language")
-    private String language = "";
+@Deprecated
+/**
+ * This class is not reflecting the characteristics of rdf:Literal properly and therefore must be replaced soon.
+ * Use TypedLiteral or LocalizableString instead.
+ * 
+ * @author sbader
+ *
+ */
+public class PlainLiteral extends TypedLiteral {
 
     public PlainLiteral() {
         super();

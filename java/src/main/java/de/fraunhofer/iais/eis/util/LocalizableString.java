@@ -11,10 +11,11 @@ import java.util.StringTokenizer;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class LocalizableString implements Serializable {
     @JsonProperty("@value")
-    private String value = "";
+    protected String value = "";
 
     @JsonProperty("@language")
-    private String language = "";
+	protected String language = "";
+
 
     public LocalizableString() {
         super();
@@ -46,5 +47,12 @@ public class LocalizableString implements Serializable {
 
     public void setLanguage(String language) {
         this.language = language;
+    }
+    
+    @Override
+    public String toString() {
+    	String result = this.value;
+    	if (this.language != null && !this.language.isEmpty()) return "\"" + result + "\"@" + this.language;
+    	return result;
     }
 }
