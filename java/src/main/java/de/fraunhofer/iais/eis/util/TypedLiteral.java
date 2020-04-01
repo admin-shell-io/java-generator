@@ -6,7 +6,13 @@ import java.util.StringTokenizer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TypedLiteral extends LocalizableString {
+public class TypedLiteral implements Serializable {
+
+	@JsonProperty("@value")
+	private String value = "";
+
+	@JsonProperty("@language")
+	private String language = "";
 
 	@JsonProperty("@type")
 	private String type = "";
@@ -31,7 +37,8 @@ public class TypedLiteral extends LocalizableString {
 	}
 
 	public TypedLiteral(String value, String language) {
-		super(value,language);
+		this.value = value;
+		this.language = language;
 	}
 
 	public TypedLiteral(String value, URI type) {
