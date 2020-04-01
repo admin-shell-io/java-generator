@@ -7,44 +7,30 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.Serializable;
 import java.util.StringTokenizer;
 
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class PlainLiteral implements Serializable {
-
-    @JsonProperty("@value")
-    private String value = "";
-
-    @JsonProperty("@language")
-    private String language = "";
+@Deprecated
+/**
+ * This class is not reflecting the characteristics of rdf:Literal properly and therefore must be replaced soon.
+ * Use TypedLiteral or LocalizableString instead.
+ * 
+ * @author sbader
+ *
+ */
+public class PlainLiteral extends TypedLiteral {
 
     public PlainLiteral() {
+        super();
     }
 
     public PlainLiteral(String valueAndLanguage) {
-        StringTokenizer tokenizer = new StringTokenizer(valueAndLanguage, "@");
-        value = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "";
-        language = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "";
+        super(valueAndLanguage);
     }
 
     public PlainLiteral(String value, String language) {
-        this.value = value;
-        this.language = language;
+        super(value, language);
     }
-
-    public String getValue() {
-        return value;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
+    //Getters and Setters inherited from parent class
 
 }
