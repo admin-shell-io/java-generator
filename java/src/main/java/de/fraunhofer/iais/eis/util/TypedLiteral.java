@@ -46,6 +46,21 @@ public class TypedLiteral implements Serializable {
 		this.type = type.toString();
 	}
 
+	public String getValue() {
+		return value;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
 	public String getType() {
 		return type;
