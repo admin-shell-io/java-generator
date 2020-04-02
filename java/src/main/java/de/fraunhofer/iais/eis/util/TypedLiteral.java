@@ -4,18 +4,21 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.StringTokenizer;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+//Prevent empty values from being printed - @language AND @type in combination is forbidden
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TypedLiteral implements Serializable {
 
 	@JsonProperty("@value")
-	private String value = "";
+	private String value = null;
 
 	@JsonProperty("@language")
-	private String language = "";
+	private String language = null;
 
 	@JsonProperty("@type")
-	private String type = "";
+	private String type = null;
 
 	public TypedLiteral() {
 		super();
@@ -28,7 +31,7 @@ public class TypedLiteral implements Serializable {
 		if (tokenizer.hasMoreTokens()) {
 			this.language = tokenizer.nextToken();
 		} else {
-			tokenizer = new StringTokenizer(valueAndTypeOrLanguage, "^^");
+			tokenizer = new StringTokenizer(valueAndTypeOrLanguage, "^^"); //TODO: This is not exactly what is meant. Multiple characters as delimiter are interpreted as "OR"
 			this.value = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "";
 			this.value = this.value.replace("\"", "");
 			
@@ -71,10 +74,14 @@ public class TypedLiteral implements Serializable {
 		this.type = type;
 	}
 
+	//This override doesn't seem to do much...
 	@Override
 	public String toString() {
 		String result = this.value;
-		if (this.language != null && !this.language.isEmpty()) return "\"" + result + "\"@" + this.language;
+		if (this.language != null && !this.language.isEmpty())
+		{
+			return "\"" + result + "\"@" + this.language;
+		}
 		if (this.type != null && !this.type.isEmpty()) return "\"" + result + "\"^^" + this.type;
 		return result;
 	}
