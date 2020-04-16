@@ -31,6 +31,8 @@ template idstt:properties-to-bean-methods(?class) {
 
 }
 where  {   
-  ?property rdfs:domain ?class;
-    rdfs:label ?label.
+    {?property rdfs:domain ?class.}
+    UNION
+    {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?class.}
+    ?property rdfs:label ?label.
 }
