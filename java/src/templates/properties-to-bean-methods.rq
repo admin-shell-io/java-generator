@@ -34,5 +34,4 @@ where  {
     {?property rdfs:domain ?class.}
     UNION
     {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?class.}
-    ?property rdfs:label ?label.
 }

@@ -9,7 +9,7 @@ template idstt:process-class-to-bean(?class) {
 
     "\n"
     "\n"
-    "/** " str(?comment) " */\n"
+    "/** " st:call-template(idstt:anything-to-comment, ?class) " */\n"
     "@JsonIgnoreProperties(ignoreUnknown = true)\n"
     "@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
     "\n"
@@ -55,6 +55,7 @@ template idstt:process-class-to-bean(?class) {
 
 }
 where{
-    ?class a owl:Class;
-        rdfs:comment ?comment.
+    ?class a owl:Class .
+        #rdfs:comment ?comment.
 }
+GROUP BY ?class

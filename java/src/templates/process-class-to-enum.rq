@@ -15,7 +15,7 @@ template idstt:process-class-to-enum(?class) {
 
     "\n\n"
 
-    "/** " str(?comment) " */\n"
+    "/** " st:call-template(idstt:anything-to-comment, ?class) " */\n"
     "\n@JsonFormat(shape = JsonFormat.Shape.OBJECT)"
     "\n@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
     "\npublic enum " st:call-template(idstt:to_class_name, ?class)
@@ -90,8 +90,7 @@ template idstt:process-class-to-enum(?class) {
 }
 WHERE
 {
-    ?class a owl:Class;
-        rdfs:comment ?comment.
+    ?class a owl:Class .
 
     optional {
         ?class rdfs:subClassOf ?superClass.
