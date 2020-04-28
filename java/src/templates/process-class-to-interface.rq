@@ -28,6 +28,8 @@ template idstt:process-class-to-interface(?class) {
 
         "\n\t@JsonProperty(\"@id\")"
         "\n\t@javax.validation.constraints.NotNull URI getId();"
+		"\n\tjava.util.List<TypedLiteral> getLabel();"
+		"\n\tjava.util.List<TypedLiteral> getComment();"
         "\n\tString toRdf();"
         "\n"
         "\n\t// accessor methods as derived from information model"

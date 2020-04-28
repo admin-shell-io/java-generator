@@ -3,8 +3,8 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:get-all-comments(?thing) {
 	"new TypedLiteral("
-	#if comment contains an @, replace the @ with: end quote, comma, start quote, i.e.: ", "
-	if (bound(?lang), CONCAT(CONCAT(CONCAT(CONCAT("\"", str(?comment)), "\", \""), ?lang), "\""), ?comment)
+	#if comment contains a quotation, replace it with \" to escape it. One backslash to escape another backslash (which each need to be escaped by a backslash), plus an escaped quote. Makes 5x backslash.
+	if (bound(?lang), CONCAT(CONCAT(CONCAT(CONCAT("\"", REPLACE(str(?comment), "\"", "\\\\\"")), "\", \""), ?lang), "\""), REPLACE(?comment, "\"", "\\\\\""))
 	"),"
 }
 WHERE {

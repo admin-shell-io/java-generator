@@ -42,13 +42,4 @@ template idstt:process-enum-individuals(?class) {
 where  {
     ?individual a ?class.
 
-#Don't get labels and comments here. This can cause multiple bindings of the same individual in case of multiple labels/comments
-#    OPTIONAL {
-#        ?individual rdfs:label ?label.
-#    }
-
-#    OPTIONAL {
-#        ?individual rdfs:comment ?comment.
-#    }
-
 }
