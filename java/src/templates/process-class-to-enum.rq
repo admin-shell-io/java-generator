@@ -15,7 +15,7 @@ template idstt:process-class-to-enum(?class) {
 
     "\n\n"
 
-    "/** " st:call-template(idstt:anything-to-comment, ?class) " */\n"
+    "\t/** " st:call-template(idstt:anything-to-comment, ?class) " */\n"
     "\n@JsonFormat(shape = JsonFormat.Shape.OBJECT)"
     "\n@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
     "\npublic enum " st:call-template(idstt:to_class_name, ?class)
@@ -26,7 +26,10 @@ template idstt:process-class-to-enum(?class) {
 
     " {\n"
 
-    st:call-template(idstt:process-enum-individuals, ?class)
+	#Print all individuals and delete the last comma (must be replaced with a semi colon)
+	if(STRLEN(st:call-template(idstt:process-enum-individuals, ?class)) > 2,
+    SUBSTR(st:call-template(idstt:process-enum-individuals, ?class), 0, STRLEN(st:call-template(idstt:process-enum-individuals, ?class)) - 1),
+	st:call-template(idstt:process-enum-individuals, ?class))
 
     ";"
 
@@ -39,11 +42,15 @@ template idstt:process-class-to-enum(?class) {
     "\n\t}"
     "\n"
     "\n\tprivate URI id;"
+	"\n\tprivate java.util.List<TypedLiteral> label;"
+	"\n\tprivate java.util.List<TypedLiteral> comment;"
 
     "\n"
-	"\n\t" st:call-template(idstt:to_class_name, ?class) "(String id) {"
+	"\n\t" st:call-template(idstt:to_class_name, ?class) "(String id, java.util.List<TypedLiteral> label, java.util.List<TypedLiteral> comment) {"
 	"\n\t\ttry {"
 	"\n\t\t\tthis.id = new URI(id);"
+	"\n\t\t\tthis.label = label;"
+	"\n\t\t\tthis.comment = comment;"
     "\n\t\t}"
     "\n\t\tcatch (java.net.URISyntaxException e) {"
     "\n\t\t\tthrow new IllegalArgumentException(e);"
@@ -55,6 +62,17 @@ template idstt:process-class-to-enum(?class) {
     "\n\tfinal public URI getId() {"
     "\n\t\treturn id;"
     "\n\t}"
+	"\n"
+	"\n\t@JsonIgnore"
+    "\n\tfinal public java.util.List<TypedLiteral> getLabel() {"
+    "\n\t\treturn label;"
+    "\n\t}"
+	"\n"
+	"\n\t@JsonIgnore"
+    "\n\tfinal public java.util.List<TypedLiteral> getComment() {"
+    "\n\t\treturn comment;"
+    "\n\t}"
+	"\n"
     "\n\tpublic String toRdf() {"
     "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
     "\n\t}"

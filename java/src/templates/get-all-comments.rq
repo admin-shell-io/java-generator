@@ -1,0 +1,14 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:get-all-comments(?thing) {
+	"new TypedLiteral("
+	#if comment contains an @, replace the @ with: end quote, comma, start quote, i.e.: ", "
+	if (bound(?lang), CONCAT(CONCAT(CONCAT(CONCAT("\"", str(?comment)), "\", \""), ?lang), "\""), ?comment)
+	"),"
+}
+WHERE {
+    ?thing rdfs:comment ?comment .
+	#Test if the string is localized
+	OPTIONAL { BIND( LANG(?comment) AS ?lang ) . }
+}
