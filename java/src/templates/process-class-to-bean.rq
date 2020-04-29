@@ -26,6 +26,7 @@ template idstt:process-class-to-bean(?class) {
 	
 	#Add the labels
 	"\n\t//List of all labels of this class"
+	"\n\t@JsonIgnore"
 	"\n\tjava.util.List<TypedLiteral> label = "
 	if(STRLEN(st:call-template(idstt:get-all-labels, ?class)) > 1,
 		#"yes": create List containing all labels, split by comma. Then remove last character, which is an unwanted comma
@@ -36,6 +37,7 @@ template idstt:process-class-to-bean(?class) {
 		"java.util.Collections.emptyList();")
 	
 	"\n\t//List of all comments of this class"
+	"\n\t@JsonIgnore"
 	"\n\tjava.util.List<TypedLiteral> comment = "
 	if(STRLEN(st:call-template(idstt:get-all-comments, ?class)) > 1,
 		#"yes": create List containing all comments, split by comma. Then remove last character, which is an unwanted comma
