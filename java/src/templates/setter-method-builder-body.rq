@@ -19,5 +19,6 @@ template idstt:setter-method-builder-body(?property, ?class) {
 
 }
 where{
-    ?class rdfs:label ?classLabel.
+	#don't use label or comment here. Otherwise multiple labels or comments will cause this to be executed multiple times
+    ?class a owl:Class .
 }

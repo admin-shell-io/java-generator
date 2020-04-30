@@ -9,16 +9,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 //Prevent empty values from being printed - @language AND @type in combination is forbidden
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TypedLiteral implements Serializable {
-
-	@JsonProperty("@value")
-	private String value = null;
+public class TypedLiteral extends RdfResource implements Serializable {
 
 	@JsonProperty("@language")
 	private String language = null;
-
-	@JsonProperty("@type")
-	private String type = null;
 
 	public TypedLiteral() {
 		super();
@@ -39,39 +33,19 @@ public class TypedLiteral implements Serializable {
 		}
 	}
 
+	public TypedLiteral(String value, URI type) { super(value, type); }
+
 	public TypedLiteral(String value, String language) {
 		this.value = value;
 		this.language = language;
-	}
-
-	public TypedLiteral(String value, URI type) {
-		this.value = value;
-		this.type = type.toString();
-	}
-
-	public String getValue() {
-		return value;
 	}
 
 	public String getLanguage() {
 		return language;
 	}
 
-	public void setValue(String value) {
-		this.value = value;
-	}
-
 	public void setLanguage(String language) {
 		this.language = language;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	//This override doesn't seem to do much...
