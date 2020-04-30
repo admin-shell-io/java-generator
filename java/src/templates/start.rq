@@ -14,5 +14,7 @@ where  {
     OPTIONAL {
         ?instance a ?class
     }
+
+    FILTER (!isBlank(?class))
 }
 GROUP BY ?class

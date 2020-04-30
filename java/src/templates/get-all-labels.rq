@@ -1,0 +1,15 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:get-all-labels(?thing) {
+	"new TypedLiteral("
+	#if label is a string with language tag, then split it up into: start quote, string value, end quote, separate via comma and then start quote, language, end quote
+	#Otherwise just dump the label, which already contains quotes
+	if (bound(?lang), CONCAT(CONCAT(CONCAT(CONCAT("\"", REPLACE(str(?label), "\"", "\\\\\"")), "\", \""), ?lang), "\""), REPLACE(?label, "\"", "\\\\\""))
+	"),"
+}
+WHERE {
+    ?thing rdfs:label ?label .
+	#Test if the string is localized
+	OPTIONAL { BIND( LANG(?label) AS ?lang ) . }
+}

@@ -7,17 +7,16 @@ template idstt:properties-to-interface-methods(?class) {
     # getter method signature
 
     # javadoc
-    if (bound(?comment),
-        concat("\n\t/** ", str(?comment), " */"),
-        "")
+    "\t/**"
+    st:call-template(idstt:anything-to-comment, ?property)
+    "\n\t*/"
 
 	st:call-template(idstt:property-to-getter-method, ?property, ?class) ";"
 
 }
 where  {   
-  ?property rdfs:domain ?class.
+    {?property rdfs:domain ?class.}
+    UNION
+    {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?class.}
 
-  OPTIONAL {
-    ?property rdfs:comment ?comment.
-  }
 }

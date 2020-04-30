@@ -9,3 +9,4 @@ java/src/main/java/de/fraunhofer/iais/eis/*.java
 visualization/*.plantuml
 jsonld-context/context.json
 jsonld-context/context.jsonld
+/.project

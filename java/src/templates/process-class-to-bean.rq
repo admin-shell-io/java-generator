@@ -9,7 +9,7 @@ template idstt:process-class-to-bean(?class) {
 
     "\n"
     "\n"
-    "/** " str(?comment) " */\n"
+    "/** " st:call-template(idstt:anything-to-comment, ?class) " */\n"
     "@JsonIgnoreProperties(ignoreUnknown = true)\n"
     "@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
     "\n"
@@ -23,6 +23,30 @@ template idstt:process-class-to-bean(?class) {
     "\n\t@JsonAlias({\"@id\", \"id\"})"
     "\n\t@javax.validation.constraints.NotNull URI id;"
     "\n"
+	
+	#Add the labels
+	"\n\t//List of all labels of this class"
+	"\n\t@JsonIgnore"
+	"\n\tjava.util.List<TypedLiteral> label = "
+	if(STRLEN(st:call-template(idstt:get-all-labels, ?class)) > 1,
+		#"yes": create List containing all labels, split by comma. Then remove last character, which is an unwanted comma
+		CONCAT(CONCAT("Arrays.asList(",
+		SUBSTR(str(st:call-template(idstt:get-all-labels, ?class)), 0, STRLEN(str(st:call-template(idstt:get-all-labels, ?class))) - 1)), 
+		");"),
+		#"no": create empty list
+		"java.util.Collections.emptyList();")
+	
+	"\n\t//List of all comments of this class"
+	"\n\t@JsonIgnore"
+	"\n\tjava.util.List<TypedLiteral> comment = "
+	if(STRLEN(st:call-template(idstt:get-all-comments, ?class)) > 1,
+		#"yes": create List containing all comments, split by comma. Then remove last character, which is an unwanted comma
+		CONCAT(CONCAT("Arrays.asList(",
+		SUBSTR(str(st:call-template(idstt:get-all-comments, ?class)), 0, STRLEN(str(st:call-template(idstt:get-all-comments, ?class))) - 1)), 
+		");"),
+		#"no": create empty list
+		"java.util.Collections.emptyList();")
+		
 
     "\n\t// instance fields as derived from information model\n"
     st:call-template(idstt:subclass-properties-to-fields, ?class)
@@ -44,7 +68,14 @@ template idstt:process-class-to-bean(?class) {
     "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
     "\n\t}"
     "\n"
-
+    "\n\tpublic java.util.List<TypedLiteral> getLabel() {"
+    "\n\t\treturn this.label;"
+    "\n\t}"
+    "\n"
+    "\n\tpublic java.util.List<TypedLiteral> getComment() {"
+    "\n\t\treturn this.comment;"
+    "\n\t}"
+    "\n"
     # method implementation
 
     "\n\t// accessor method implementations as derived from information model"
@@ -55,6 +86,7 @@ template idstt:process-class-to-bean(?class) {
 
 }
 where{
-    ?class a owl:Class;
-        rdfs:comment ?comment.
+    ?class a owl:Class .
+        #rdfs:comment ?comment.
 }
+GROUP BY ?class

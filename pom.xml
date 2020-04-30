@@ -7,12 +7,11 @@
     <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>3.0.0</version>
+    <version>3.1.0</version>
     <modules>
         <module>visualization</module>
         <module>java</module>
         <module>jsonld-context</module>
-        <module>spi</module>
     </modules>
 
     <profiles>
