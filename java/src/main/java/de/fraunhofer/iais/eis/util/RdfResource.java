@@ -1,13 +1,14 @@
 package de.fraunhofer.iais.eis.util;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.*;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonTypeName("RdfResource")
 public class RdfResource implements Serializable {
 
     @JsonProperty("@value")
@@ -17,6 +18,12 @@ public class RdfResource implements Serializable {
     @JsonProperty("@type")
     @JsonAlias({"@type", "type"})
     String type = null;
+
+
+    // all classes have a generic property array
+    @JsonIgnore
+    ArrayList<Map<URI,RdfResource>> properties;
+
 
     public RdfResource() { super(); }
     public RdfResource(String value) {
