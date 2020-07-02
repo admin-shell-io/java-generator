@@ -10,3 +10,5 @@ visualization/*.plantuml
 jsonld-context/context.json
 jsonld-context/context.jsonld
 /.project
+*.settings*
+*.project
