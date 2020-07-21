@@ -5,7 +5,26 @@ template idstt:get-all-labels(?thing) {
 	"new TypedLiteral("
 	#if label is a string with language tag, then split it up into: start quote, string value, end quote, separate via comma and then start quote, language, end quote
 	#Otherwise just dump the label, which already contains quotes
-	if (bound(?lang), CONCAT(CONCAT(CONCAT(CONCAT("\"", REPLACE(str(?label), "\"", "\\\\\"")), "\", \""), ?lang), "\""), REPLACE(?label, "\"", "\\\\\""))
+	#Furthermore, a label/comment in RDF may contain multiple lines. We cannot paste it "as is" into java. So we drop the line breaks.
+	if (bound(?lang),
+	    #yes, language is present
+	    CONCAT(
+	        CONCAT(
+	            CONCAT(
+	                #Innermost first. Prepend a quotation mark
+	                CONCAT("\"",
+	                #Concatenate this with the stripped string (no line breaks)
+	                    REPLACE(REPLACE(REPLACE(str(?label), "\n", ""), "\r", ""), "\"", "\\\\\"")
+	                #Add quotation mark at the end
+	                ), "\", \""
+	            #Append language
+	            ), ?lang
+	        #Final quotation mark
+	        ), "\""
+	    ),
+
+	    #no language present. Strip string of all line breaks and escape quotation marks
+	    REPLACE(REPLACE(REPLACE(?label, "\n", ""), "\r", ""), "\"", "\\\\\""))
 	"),"
 }
 WHERE {

@@ -3,8 +3,28 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:get-all-comments(?thing) {
 	"new TypedLiteral("
-	#if comment contains a quotation, replace it with \" to escape it. One backslash to escape another backslash (which each need to be escaped by a backslash), plus an escaped quote. Makes 5x backslash.
-	if (bound(?lang), CONCAT(CONCAT(CONCAT(CONCAT("\"", REPLACE(str(?comment), "\"", "\\\\\"")), "\", \""), ?lang), "\""), REPLACE(?comment, "\"", "\\\\\""))
+	#if comment is a string with language tag, then split it up into: start quote, string value, end quote, separate via comma and then start quote, language, end quote
+	#Otherwise just dump the comment, which already contains quotes
+	#Furthermore, a label/comment in RDF may contain multiple lines. We cannot paste it "as is" into java. So we drop the line breaks.
+	if (bound(?lang),
+	    #yes, language is present
+	    CONCAT(
+	        CONCAT(
+	            CONCAT(
+	                #Innermost first. Prepend a quotation mark
+	                CONCAT("\"",
+	                #Concatenate this with the stripped string (no line breaks)
+	                    REPLACE(REPLACE(REPLACE(str(?comment), "\n", ""), "\r", ""), "\"", "\\\\\"")
+	                #Add quotation mark at the end
+	                ), "\", \""
+	            #Append language
+	            ), ?lang
+	        #Final quotation mark
+	        ), "\""
+	    ),
+
+	    #no language present. Strip string of all line breaks and escape quotation marks
+	    REPLACE(REPLACE(REPLACE(?comment, "\n", ""), "\r", ""), "\"", "\\\\\""))
 	"),"
 }
 WHERE {
