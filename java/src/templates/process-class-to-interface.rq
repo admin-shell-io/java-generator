@@ -32,6 +32,10 @@ template idstt:process-class-to-interface(?class) {
 		"\n\tjava.util.List<TypedLiteral> getComment();"
         "\n\tString toRdf();"
         "\n"
+        "\n\t// getter and setter for generic property map"
+        "\n\tpublic java.util.Map<String,Object> getProperties();"
+        "\n\tpublic void setProperty(String property, Object value);"
+        "\n"
         "\n\t// accessor methods as derived from information model"
         "\n"
 

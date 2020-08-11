@@ -5,11 +5,16 @@
     <parent>
         <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
         <artifactId>common</artifactId>
-        <version>3.1.0</version>
+        <version>4.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>java</artifactId>
+
+    <properties>
+        <jackson.version>2.11.0</jackson.version>
+    </properties>
+
 
     <dependencies>
         <dependency>
@@ -21,7 +26,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
-            <version>2.9.9</version>
+            <version>${jackson.version}</version>
         </dependency>
     </dependencies>
 
