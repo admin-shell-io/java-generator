@@ -9,5 +9,6 @@ template idstt:process-class-to-context {
 }
 where {
     ?class a owl:Class.
+    FILTER(REGEX(STR(?class), "[a-zA-Z]{2,}")) . # filter out the blank nodes
 }
 
