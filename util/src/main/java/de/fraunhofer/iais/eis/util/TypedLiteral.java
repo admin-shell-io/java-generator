@@ -1,13 +1,13 @@
 package de.fraunhofer.iais.eis.util;
 
-import java.io.Serializable;
-import java.net.URI;
-import java.util.StringTokenizer;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+import java.net.URI;
+
 //Prevent empty values from being printed - @language AND @type in combination is forbidden
+//Note that the Serializer uses this class by name. If this class is renamed, make sure to adapt the MessageParser class accordingly!
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TypedLiteral extends RdfResource implements Serializable {
 
@@ -20,16 +20,24 @@ public class TypedLiteral extends RdfResource implements Serializable {
 	
 
 	public TypedLiteral(String valueAndTypeOrLanguage) {
-		StringTokenizer tokenizer = new StringTokenizer(valueAndTypeOrLanguage, "@");
-		this.value = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "";
-		if (tokenizer.hasMoreTokens()) {
-			this.language = tokenizer.nextToken();
-		} else {
-			tokenizer = new StringTokenizer(valueAndTypeOrLanguage, "^^"); //TODO: This is not exactly what is meant. Multiple characters as delimiter are interpreted as "OR"
-			this.value = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "";
-			this.value = this.value.replace("\"", "");
-			
-			this.type = tokenizer.hasMoreTokens() ? tokenizer.nextToken() : "http://www.w3.org/2001/XMLSchema#string";
+		if(valueAndTypeOrLanguage.contains("@"))
+		{
+			String[] splitString = valueAndTypeOrLanguage.split("@");
+			this.value = splitString[0];
+			this.language = splitString[1];
+		}
+		//.contains expects character sequence. Passing "^^"
+		else if(valueAndTypeOrLanguage.contains("^^"))
+		{
+			//.split expects regex. "^" is meta character for "start of line", so it needs to be escaped
+			String[] splitString = valueAndTypeOrLanguage.split("\\^\\^");
+			this.value = splitString[0].replace("\"", "");
+			this.type = splitString[1];
+		}
+		else
+		{
+			this.value = valueAndTypeOrLanguage;
+			this.type = "http://www.w3.org/2001/XMLSchema#string";
 		}
 	}
 
