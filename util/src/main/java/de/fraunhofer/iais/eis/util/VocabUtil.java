@@ -7,7 +7,9 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.*;
+import java.util.Iterator;
+import java.util.ServiceLoader;
+import java.util.UUID;
 
 /**
  * Created by christian on 31.01.17.
@@ -22,6 +24,8 @@ public class VocabUtil {
 
     private static final VocabUtil instance = new VocabUtil();
 
+    public static String randomUrlBase;
+
     private VocabUtil() {
         serializerLoader = ServiceLoader.load(BeanSerializer.class);
         validatorLoader = ServiceLoader.load(BeanValidator.class);
@@ -31,8 +35,22 @@ public class VocabUtil {
         return instance;
     }
 
+    /**
+     * Generates a random URL starting with https://w3id.org/idsa/autogen/{path}/RANDOM-STRING
+     * This behaviour can be altered by setting the static variable randomUrlBase. Then, the URL will be randomUrlBase/{path}/RANDOM-STRING
+     * @param path Path to be appended to base URL
+     * @return randomized URL according to predefined schema
+     */
     public URI createRandomUrl(String path) {
         try {
+            if(randomUrlBase != null)
+            {
+                if(!randomUrlBase.endsWith("/"))
+                {
+                    randomUrlBase += "/";
+                }
+                return new URL(randomUrlBase + path + "/" + UUID.randomUUID()).toURI();
+            }
             return new URL(PROTOCOL, HOST, "/idsa/autogen/" + path + "/" + UUID.randomUUID()).toURI();
         }
         catch (MalformedURLException | URISyntaxException e) {

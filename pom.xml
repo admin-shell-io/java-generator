@@ -7,12 +7,16 @@
     <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.0.1-SNAPSHOT</version>
     <modules>
+        <module>util</module>
         <module>visualization</module>
         <module>java</module>
         <module>jsonld-context</module>
     </modules>
+    <properties>
+        <jackson.version>2.11.0</jackson.version>
+    </properties>
 
     <profiles>
         <profile>
