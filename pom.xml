@@ -20,22 +20,6 @@
 
     <profiles>
         <profile>
-            <id>dev-cmader</id>
-            <properties>
-                <infomodel-sourcebase>
-                    ${user.home}/projects/ids/InformationModel
-                </infomodel-sourcebase>
-            </properties>
-        </profile>
-        <profile>
-            <id>dev-bimbusch</id>
-            <properties>
-                <infomodel-sourcebase>
-                    ${user.home}/Documents/IDS/InformationModel
-                </infomodel-sourcebase>
-            </properties>
-        </profile>
-        <profile>
             <id>dev-bader</id>
             <properties>
                 <infomodel-sourcebase>
