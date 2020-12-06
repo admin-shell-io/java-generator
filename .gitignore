@@ -12,3 +12,4 @@ jsonld-context/context.jsonld
 /.project
 *.settings*
 *.project
+*.classpath

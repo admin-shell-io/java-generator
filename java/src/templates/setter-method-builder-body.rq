@@ -1,6 +1,5 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template idstt:setter-method-builder-body(?property, ?class) {
 
@@ -9,9 +8,9 @@ template idstt:setter-method-builder-body(?property, ?class) {
     "\n\t\tthis."
     lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
     "Impl._"
-    st:call-template(idstt:to_property_name, ?property)
+    st:call-template(idstt:to_class_name, ?property)
     " = _"
-    st:call-template(idstt:to_property_name, ?property)
+    st:call-template(idstt:to_class_name, ?property)
     "_;"
     "\n\t\treturn this;"
 

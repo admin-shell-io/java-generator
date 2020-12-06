@@ -1,17 +1,22 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
+prefix sh: <http://www.w3.org/ns/shacl#>
 
 template idstt:class-to-json-annotation(?class) {
 
-    if (bound(?abstract),
-        "",
-        concat(
-            "\n@JsonSubTypes.Type(value = ",
-            st:call-template(idstt:to_class_name, ?class),
+    if (bound(?message) && (
+        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is a abstract class")) ||
+        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is an abstract class"))
+      ),
+      # then
+          "",
+      # else
+          concat(
+              "\n@JsonSubTypes.Type(value = ",
+              st:call-template(idstt:to_class_name, ?class),
             "Impl.class),"
-        )
-    )
+          )
+      )
 
     st:call-template(idstt:subclass-to-json-annotation, ?class)
 }
@@ -19,9 +24,7 @@ WHERE {
     ?class a owl:Class.
 
     optional {
-        ?class idsm:abstract ?abstract.
+        ?shape sh:targetClass ?class ;
+            sh:sparql [ sh:message ?message ] .
     }
-
 }
-
-

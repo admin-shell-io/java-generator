@@ -1,7 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template idstt:process-class-to-interface(?class) {
 
@@ -39,6 +38,7 @@ template idstt:process-class-to-interface(?class) {
         "\n\t// accessor methods as derived from information model"
         "\n"
 
+        # st:call-template(idstt:subclass-properties-to-methods, ?class, "interface")
         st:call-template(idstt:properties-to-interface-methods, ?class)
 
     "\n}\n"

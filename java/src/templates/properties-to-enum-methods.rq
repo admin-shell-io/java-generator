@@ -1,7 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 
-template idstt:properties-to-enum-methods(?class) {
+template idstt:properties-to-enum-methods(?class, ?superClass) {
 
 	# Iterates on selected properties and writes getter and setter methods
 
@@ -21,8 +20,8 @@ template idstt:properties-to-enum-methods(?class) {
 	"}\n\t"
 
 }
-where  {   
-      {?property rdfs:domain ?class.}
+where  {
+      {?property rdfs:domain ?superClass.}
       UNION
-      {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?class.}
+      {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
 }

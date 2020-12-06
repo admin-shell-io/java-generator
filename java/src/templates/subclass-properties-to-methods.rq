@@ -3,10 +3,10 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:subclass-properties-to-methods(?class, ?syntax) {
 
-    if (str(?syntax) = 'bean', st:call-template(idstt:properties-to-bean-methods, ?superClass),
+    if (str(?syntax) = 'bean', st:call-template(idstt:properties-to-bean-methods, ?class, ?superClass),
     if (str(?syntax) = 'builder', st:call-template(idstt:properties-to-builder-methods, ?class, ?superClass),
-    if (str(?syntax) = 'interface', st:call-template(idstt:properties-to-interface-methods, ?superClass),
-    if (str(?syntax) = 'enum', st:call-template(idstt:properties-to-enum-methods, ?superClass),
+    if (str(?syntax) = 'interface', st:call-template(idstt:properties-to-interface-methods, ?class ),
+    if (str(?syntax) = 'enum', st:call-template(idstt:properties-to-enum-methods, ?class, ?superClass),
     ''))))
 
 }

@@ -1,11 +1,11 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template idstt:subclass-properties-to-fields(?class) {
 
     # Iterates on selected properties
-    st:call-template(idstt:property-to-field, ?property, ?superClass)
+    # st:call-template(idstt:property-to-field, ?property, ?superClass)
+    st:call-template(idstt:property-to-field, ?property, ?class)
 
 }
 where {
@@ -13,9 +13,9 @@ where {
         rdfs:subClassOf* ?superClass.
 
     {
-        ?superClass ^rdfs:domain|(idsm:validation/idsm:forProperty) ?property
+        ?superClass ^rdfs:domain ?property
     } UNION {
-        ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first|^(idsm:validation/idsm:forProperty) ?superClass
+        ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass
     }
 }
 group by ?property

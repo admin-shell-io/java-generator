@@ -19,6 +19,4 @@ template idstt:basic-imports {
     "\nimport javax.validation.constraints.*;"
     "\nimport com.fasterxml.jackson.annotation.*;"
 }
-where {
-
-}
+where {}

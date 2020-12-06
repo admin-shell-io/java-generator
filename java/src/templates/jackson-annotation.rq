@@ -1,5 +1,4 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template idstt:jackson-annotation(?range, ?isCollection) {
 
@@ -14,4 +13,3 @@ template idstt:jackson-annotation(?range, ?isCollection) {
     "Impl.class)\n\t"
 }
 where {}
-

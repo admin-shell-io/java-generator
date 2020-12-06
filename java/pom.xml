@@ -139,8 +139,9 @@
                                 <argument>-pp</argument><argument>**/*.ttl</argument>
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
                                 <argument>-pp</argument><argument>**/*.ttl</argument>
-                                <argument>-td</argument>
-                                <argument>${tmp-path}/templates</argument>
+                                <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
+                                <argument>-td</argument><argument>${tmp-path}/templates</argument>
                             </arguments>
                         </configuration>
                     </execution>

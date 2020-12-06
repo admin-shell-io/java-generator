@@ -1,8 +1,7 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template idstt:property-to-field(?property, ?class) {
-	
+
 	"\n\t"
 	#Add javadoc
 	"/**"
@@ -11,9 +10,9 @@ template idstt:property-to-field(?property, ?class) {
     "\n\t"
 
 	#Check if this property is NotNull or NotEmpty. If so, add appropriate annotations
-    st:call-template(idstt:propertyAnnotation, ?class, ?property)
+    st:call-template(idstt:property-annotation, ?class, ?property)
 
-    "@JsonAlias({\"ids:" st:call-template(idstt:to_property_name, ?property) "\", \"" st:call-template(idstt:to_property_name, ?property) "\"})"
+    "@JsonAlias({\"ids:" st:call-template(idstt:to_class_name, ?property) "\", \"" st:call-template(idstt:to_class_name, ?property) "\"})"
     "\n\t"
 
     " "
@@ -24,8 +23,8 @@ template idstt:property-to-field(?property, ?class) {
 	#Fields are prefixed with an underscore
     " _"
 	#The actual resulting field name in Java
-    st:call-template(idstt:to_property_name, ?property)
-    ";"
+    st:call-template(idstt:to_class_name, ?property)
+    ";\n"
 }
 where  {
    ?property rdfs:range ?range.

@@ -4,17 +4,20 @@ prefix dcat: <http://www.w3.org/ns/dcat#>
 template st:start {
 
     if (bound(?instance),
+        # then
         st:call-template(idstt:class-abox, ?class),
-        st:call-template(idstt:class-tbox, ?class))
+        # else
+        st:call-template(idstt:class-tbox, ?class)
+    )
+
+    st:call-template(idstt:all-classes-test, ?class)
 
 }
 where  {
     ?class a owl:Class.
-
     OPTIONAL {
         ?instance a ?class
     }
-
     FILTER (!isBlank(?class))
 }
 GROUP BY ?class

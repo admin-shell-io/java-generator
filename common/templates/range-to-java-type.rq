@@ -1,14 +1,19 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
+prefix sh: <http://www.w3.org/ns/shacl#>
 
 template idstt:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
-    if (bound(?relationType) && (?relationType = <idsm:OneToMany>), concat("java.util.ArrayList", str(?bracketOpen)), "")
-
-    st:call-template(idstt:range-to-basic-type, ?property, ?range)
-
-    if (bound(?relationType) && (?relationType = <idsm:OneToMany>), str(?bracketClose), "")
-
+    if ( (bound(?maxCount) && !(bound(?minCount)) && (?maxCount = 1) ) ||
+      (bound(?maxCount) && bound(?minCount) && ((?maxCount - ?minCount) <= 1) ),
+    # then
+        st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, false),
+    # else
+        # st:call-template(idstt:range-to-array-type, ?property, ?range, ?bracketOpen, ?bracketClose)
+        concat(
+          concat("java.util.ArrayList", str(?bracketOpen)),
+          concat(st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, true), str(?bracketClose))
+        )
+    )
 }
 where {
     ?property rdfs:range ?range.
@@ -16,9 +21,28 @@ where {
     ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first/^(rdfs:subClassOf*) ?class.}
 
     OPTIONAL {
-        ?class idsm:validation ?validation.
-        ?validation idsm:forProperty ?someProperty.
-        ?property rdfs:subPropertyOf? ?someProperty.
-        ?validation idsm:relationType ?relationType.
+        ?class rdfs:subClassOf* ?superClass .
+        ?classShape sh:targetClass ?superClass ;
+            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+        ?propertyShape sh:path ?property ;
+          sh:minCount ?minCount ;
+          sh:maxCount ?maxCount .
     }
-}
+
+    OPTIONAL {
+        ?class rdfs:subClassOf* ?superClass .
+        ?classShape sh:targetClass ?superClass ;
+            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+        ?propertyShape sh:path ?property ;
+        sh:minCount ?minCount .
+    }
+
+    OPTIONAL {
+        ?class rdfs:subClassOf* ?superClass .
+        ?classShape sh:targetClass ?superClass ;
+            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+        ?propertyShape sh:path ?property ;
+        sh:maxCount ?maxCount .
+    }
+
+} LIMIT 1

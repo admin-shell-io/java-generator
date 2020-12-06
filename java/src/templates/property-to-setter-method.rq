@@ -1,5 +1,4 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
 
 template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
 
@@ -7,11 +6,11 @@ template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
 
     if (?forBuilder,
         concat ("_",
-            str(st:call-template(idstt:to_property_name, ?property)),
+            str(st:call-template(idstt:to_class_name, ?property)),
             "_"),
         concat("set",
-            ucase(substr(str(st:call-template(idstt:to_property_name, ?property)), 1, 1)),
-            substr(str(st:call-template(idstt:to_property_name, ?property)), 2),
+            ucase(substr(str(st:call-template(idstt:to_class_name, ?property)), 1, 1)),
+            substr(str(st:call-template(idstt:to_class_name, ?property)), 2),
             " "))
 
     # method params
@@ -21,7 +20,7 @@ template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
         " _"
 
         # parameter label
-        st:call-template(idstt:to_property_name, ?property)
+        st:call-template(idstt:to_class_name, ?property)
         "_"
     ")"
 
