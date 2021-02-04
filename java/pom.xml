@@ -32,6 +32,7 @@
     </dependencies>
 
     <profiles>
+        <!-- Operation System specific profiles, activate automatically -->
         <profile>
             <id>win</id>
             <activation>
@@ -53,6 +54,78 @@
             <properties>
                 <tmp-path>/tmp</tmp-path>
             </properties>
+        </profile>
+
+        <!-- Use Case specific profiles. Default is IDS, which needs to be turned off actively for other ontologies -->
+
+        <profile>
+            <id>IDS</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>generate-java-sources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <classpathScope>compile</classpathScope>
+                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                                    <arguments>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}/codes</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
+                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>AAS</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>generate-java-sources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <classpathScope>compile</classpathScope>
+                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                                    <arguments>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument> <!-- TODO: Exclude examples -->
+                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
         </profile>
     </profiles>
 
@@ -112,37 +185,6 @@
                                     </includes>
                                 </resource>
                             </resources>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- execute the java bean generation based on the Infomodel files and the SPARQL templates -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <id>generate-java-sources</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <classpathScope>compile</classpathScope>
-                            <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
-                            <arguments>
-                                <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
-                                <argument>-vd</argument><argument>${infomodel-sourcebase}/codes</argument>
-                                <argument>-pp</argument><argument>**/*.ttl</argument>
-                                <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
-                                <argument>-pp</argument><argument>**/*.ttl</argument>
-                                <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
-                                <argument>-td</argument><argument>${tmp-path}/templates</argument>
-                            </arguments>
                         </configuration>
                     </execution>
                 </executions>
