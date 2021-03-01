@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
         <artifactId>common</artifactId>
-        <version>4.0.2-SNAPSHOT</version>
+        <version>4.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,6 +21,17 @@
     </dependencies>
 
     <build>
+
+        <!-- Including the LICENSE file -->
+        <resources>
+            <resource>
+                <directory>../</directory>
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
