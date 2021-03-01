@@ -5,18 +5,19 @@
     <parent>
         <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
         <artifactId>common</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>java</artifactId>
 
-    <properties>
-        <jackson.version>2.11.0</jackson.version>
-    </properties>
-
 
     <dependencies>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
+            <artifactId>util</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -56,6 +57,17 @@
     </profiles>
 
     <build>
+
+        <!-- Including the LICENSE file -->
+        <resources>
+            <resource>
+                <directory>../</directory>
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

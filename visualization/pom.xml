@@ -5,11 +5,87 @@
     <parent>
         <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
         <artifactId>common</artifactId>
-        <version>4.0.0</version>
+        <version>4.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>visualization</artifactId>
+	
+	<profiles>
+        <profile>
+            <id>allClasses</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <plugins><!-- execute the diagram generation based on the Infomodel files and the SPARQL templates -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>generate-plantuml-source</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <classpathScope>compile</classpathScope>
+                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                                    <arguments>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}/codes</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-td</argument>
+                                        <argument>/tmp/templates</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>majorClasses</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <build>
+                <plugins><!-- execute the diagram generation based on the Infomodel files and the SPARQL templates -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>generate-plantuml-source</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <classpathScope>compile</classpathScope>
+                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                                    <arguments>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
+                                        <!-- No codes, no taxonomies -->
+                                        <argument>-td</argument>
+                                        <argument>/tmp/templates</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+	</profiles>
 
     <build>
         <plugins>
@@ -79,35 +155,6 @@
                 </executions>
             </plugin>
 
-            <!-- execute the diagram generation based on the Infomodel files and the SPARQL templates -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                    <execution>
-                        <id>generate-plantuml-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>java</goal>
-                        </goals>
-                        <configuration>
-                            <classpathScope>compile</classpathScope>
-                            <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
-                            <arguments>
-                                <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
-                                <argument>-vd</argument><argument>${infomodel-sourcebase}/codes</argument>
-                                <argument>-pp</argument><argument>**/*.ttl</argument>
-                                <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
-                                <argument>-pp</argument><argument>**/*.ttl</argument>
-                                <argument>-td</argument>
-                                <argument>/tmp/templates</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
 
             <!-- assemble diagram files into a zip -->
             <plugin>
