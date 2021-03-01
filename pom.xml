@@ -7,7 +7,7 @@
     <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.2-SNAPSHOT</version>
+    <version>4.0.2</version>
     <modules>
         <module>util</module>
         <module>visualization</module>
@@ -76,10 +76,10 @@
         </repository>
     </repositories>
 
+    <!-- TODO: With the multi-modules approach, this currently does not work. Need to rework this plugin execution
     <build>
         <plugins>
             <plugin>
-                <!-- Plugin to activate the generation of javadocs -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.2.0</version>
@@ -94,5 +94,6 @@
             </plugin>
         </plugins>
     </build>
+    -->
 
 </project>
