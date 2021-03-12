@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
         <artifactId>common</artifactId>
-        <version>4.0.2</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

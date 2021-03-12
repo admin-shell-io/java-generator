@@ -7,7 +7,7 @@
     <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.2</version>
+    <version>${revision}</version>
     <modules>
         <module>util</module>
         <module>visualization</module>
@@ -16,6 +16,7 @@
     </modules>
     <properties>
         <jackson.version>2.11.2</jackson.version>
+        <revision>4.0.3-SNAPSHOT</revision>
     </properties>
 
     <profiles>
@@ -95,5 +96,35 @@
         </plugins>
     </build>
     -->
+
+    <build>
+        <plugins>
+            <!-- This plugin replaces the revision variable in the version by the actual variable value. Only required if submodules exist -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

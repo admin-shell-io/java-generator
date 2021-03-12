@@ -2,6 +2,7 @@
 **/*.png
 *.log
 */target/
+**/.flattened-pom.xml
 
 .idea/
 
