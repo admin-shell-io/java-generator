@@ -10,6 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>visualization</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <artifactId>generator</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 	
 	<profiles>
         <profile>

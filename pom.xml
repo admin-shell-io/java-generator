@@ -13,6 +13,7 @@
         <module>visualization</module>
         <module>java</module>
         <module>jsonld-context</module>
+        <module>generator</module>
     </modules>
     <properties>
         <revision>1.0.0-SNAPSHOT</revision>
@@ -62,15 +63,6 @@
 		</profile>
     </profiles>
 
-    <dependencies>
-        <!-- IAIS tools -->
-        <dependency>
-            <groupId>de.fraunhofer.iais.eis</groupId>
-            <artifactId>sparql-template-executor</artifactId>
-            <version>2.3-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <distributionManagement>
         <repository>

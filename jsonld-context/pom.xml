@@ -11,6 +11,14 @@
 
     <artifactId>jsonld-context</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <artifactId>generator</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <!-- don't create a jar -->
