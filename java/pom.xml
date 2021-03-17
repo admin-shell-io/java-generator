@@ -29,6 +29,11 @@
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
         </dependency>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <artifactId>generator</artifactId>
+            <version>${revision}</version>
+        </dependency>
     </dependencies>
 
     <profiles>
