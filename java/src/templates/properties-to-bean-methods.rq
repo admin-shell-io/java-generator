@@ -10,7 +10,6 @@ template idstt:properties-to-bean-methods(?class, ?superClass) {
 
     # visibility modifier
     "final public "
-		####### - PNL DEBUG ADDITION "/**" ?class " " ?superClass "*/"
     # signature
 	st:call-template(idstt:property-to-getter-method, ?property, ?class)
     # method body

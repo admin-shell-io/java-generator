@@ -1,7 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:properties-to-interface-methods(?class) {
-	# PNL: Hier nur alle classes und die superClass ignorieren?
 
 	# Iterates on selected properties and writes getter and setter methods
 

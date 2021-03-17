@@ -1,6 +1,10 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
+# Creates plantuml descriptions of classes or enums.
+# - For enums the values are listed directly within the class box.
+# - For classes the properties that can be translated in basic Java types are listed.
+
 template idstt:process-class-to-uml {
 
     "\n"
