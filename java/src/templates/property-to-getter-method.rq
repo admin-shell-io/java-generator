@@ -8,7 +8,7 @@ template idstt:property-to-getter-method(?property, ?class) {
     "\n\t"
     st:call-template(idstt:property-annotation, ?class, ?property)
     "\n\t"
-    concat("@JsonProperty(\"ids:", st:call-template(idstt:to_class_name, ?property), "\")\n\t")
+    concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t")
     st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
 
     " "
@@ -17,8 +17,8 @@ template idstt:property-to-getter-method(?property, ?class) {
     "get"
 
     concat(
-        ucase(substr(str(st:call-template(idstt:to_class_name, ?property)), 1, 1)),
-        substr(str(st:call-template(idstt:to_class_name, ?property)), 2),
+        ucase(substr(str(st:call-template(idstt:to_java_property_name, ?property)), 1, 1)),
+        substr(str(st:call-template(idstt:to_java_property_name, ?property)), 2),
         '()')
 
 }

@@ -17,16 +17,16 @@ template idstt:process-class-to-enum(?class) {
 
     "\t/** " st:call-template(idstt:anything-to-comment, ?class) " */\n"
     "\n@JsonFormat(shape = JsonFormat.Shape.OBJECT)"
-    "\n@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
+    "\n@JsonTypeName(\"" st:call-template(idstt:to_full_identifier, ?class) "\")"    
     "\npublic enum " st:call-template(idstt:to_class_name, ?class)
 
-     if (bound(?superClass),
-            concat(" implements ", strafter(st:call-template(idstt:subclasses-to-list, ?class), ", ")),
-            "")
+    # if (bound(?superClass),
+    #        concat(" implements ", strafter(st:call-template(idstt:subclasses-to-list, ?class), ", ")),
+    #        "")
 
     " {\n"
 
-	#Print all individuals and delete the last comma (must be replaced with a semi colon)
+    #Print all individuals and delete the last comma (must be replaced with a semi colon)
 	if(STRLEN(st:call-template(idstt:process-enum-individuals, ?class)) > 2,
     SUBSTR(st:call-template(idstt:process-enum-individuals, ?class), 0, STRLEN(st:call-template(idstt:process-enum-individuals, ?class)) - 1),
 	st:call-template(idstt:process-enum-individuals, ?class))
@@ -90,6 +90,7 @@ template idstt:process-class-to-enum(?class) {
     "\n\t@JsonProperty(\"@id\")"
     "\n\tfinal public URI getSerializedId() {"
     "\n\t\ttry {"
+    # TODO IDSC-PRE
     "\n\t\t\t return new URI(\"idsc:\" + id.toString().substring(id.toString().lastIndexOf(\"/\") + 1));"
     "\n\t\t} catch (Exception e) {}"
     "\n\t\treturn null;"
@@ -119,9 +120,12 @@ WHERE
 {
     ?class a owl:Class .
 
-    optional {
+    BIND( st:get-namespace() as ?ns )
+    BIND( st:get-namespace-prefix() as ?prefix )
+
+    OPTIONAL {
         ?class rdfs:subClassOf ?superClass.
-        filter(strstarts(str(?superClass), str(<ids:>)))
+        FILTER(STRSTARTS(STR(?superClass), STR(?ns)))
     }
 }
 GROUP BY ?class

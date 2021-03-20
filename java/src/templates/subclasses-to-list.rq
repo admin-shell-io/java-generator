@@ -9,6 +9,6 @@ template idstt:subclasses-to-list(?class) {
 }
 where {
     ?class rdfs:subClassOf ?superClass.
-
-    filter (strstarts(str(?superClass), str(<ids:>)))
+    BIND( st:get-namespace() as ?ns )
+    FILTER(STRSTARTS(STR(?superClass), STR(?ns)))
 }

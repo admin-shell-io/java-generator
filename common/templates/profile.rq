@@ -1,0 +1,12 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template st:profile {}
+where {}
+
+function st:get-namespace() {
+   "${ontology.namespace}"
+}
+
+function st:get-namespace-prefix() {
+   "${ontology.namespace.prefix}"
+}

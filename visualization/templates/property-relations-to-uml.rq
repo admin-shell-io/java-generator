@@ -54,5 +54,6 @@ where {
       false
       ) AS ?refByUri
     )
-    FILTER (strstarts(str(?domain), str(<ids:>)) && strstarts(str(?range), str(<ids:>)))
+    BIND( st:get-namespace() as ?ns )
+    FILTER(strstarts(str(?domain), str(?ns)) && strstarts(str(?range), str(?ns)))
 }

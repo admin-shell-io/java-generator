@@ -43,7 +43,7 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
-    <profile>
+        <profile>
 			<id>PNL</id>
 			<properties>
 				<infomodel-sourcebase>
@@ -51,6 +51,28 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
+        <profile>
+			<id>PNL-AAS</id>
+			<properties>
+				<infomodel-sourcebase>
+					../aas-specs/schemas/rdf
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+        <profile>
+        <id>InfoModel</id>
+        <properties>
+            <ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
+            <ontology.namespace.prefix>ids</ontology.namespace.prefix>
+        </properties>
+        </profile>
+        <profile>
+            <id>AAS</id>
+            <properties>
+                <ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
+                <ontology.namespace.prefix>aas</ontology.namespace.prefix>
+            </properties>
+        </profile>
     </profiles>
 
     <dependencies>

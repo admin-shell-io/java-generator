@@ -16,6 +16,10 @@ where  {
     OPTIONAL {
         ?instance a ?class
     }
+    OPTIONAL {
+        ?subClass rdfs:subClassOf* ?class .
+        ?instance a ?subClass .
+    }
     FILTER (!isBlank(?class))
 }
 GROUP BY ?class

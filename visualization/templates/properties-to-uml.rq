@@ -19,5 +19,6 @@ where {
     ?property rdfs:domain ?class;
         rdfs:range ?range.
 
-    filter (!(strstarts(str(?range), str(<ids:>))))
+    bind( st:get-namespace() as ?ns )
+    filter(strstarts(str(?range), str(?ns)))
 }

@@ -89,6 +89,7 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>
@@ -135,6 +136,7 @@
                             <arguments>
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
                                 <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
+                                <argument>-pp</argument><argument>*.ttl</argument>
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}/codes</argument>
                                 <argument>-pp</argument><argument>**/*.ttl</argument>
                                 <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>

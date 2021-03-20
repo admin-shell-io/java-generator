@@ -1,0 +1,17 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:to_full_identifier(?class) {
+
+    if ( ?nsClass = str(?class),
+        # then: class is identified via the default namespace for the ontology
+        str(?prefixClass),
+        # else: class needs to be identified via a special namespace
+        str(?class)
+    )
+}
+where {
+    BIND( st:get-namespace() as ?ns )
+    BIND( st:get-namespace-prefix() as ?prefix )
+    BIND( CONCAT(str(?ns), str(st:call-template(idstt:to_short_identifier, ?class))) as ?nsClass )
+    BIND( CONCAT(str(?prefix), CONCAT(":", str(st:call-template(idstt:to_short_identifier, ?class)))) as ?prefixClass )
+}
