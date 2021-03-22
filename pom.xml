@@ -4,17 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
+    <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
-    <version>4.0.2-SNAPSHOT</version>
+    <version>${revision}</version>
     <modules>
         <module>util</module>
         <module>visualization</module>
         <module>java</module>
         <module>jsonld-context</module>
+        <module>generator</module>
     </modules>
     <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
         <jackson.version>2.11.2</jackson.version>
     </properties>
 
@@ -43,7 +45,15 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
-        <profile>
+		<profile>
+			<id>MB-AAS</id>
+			<properties>
+				<infomodel-sourcebase>
+					../aas-specs/schemas/rdf
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+		<profile>
 			<id>PNL</id>
 			<properties>
 				<infomodel-sourcebase>
@@ -75,15 +85,6 @@
         </profile>
     </profiles>
 
-    <dependencies>
-        <!-- IAIS tools -->
-        <dependency>
-            <groupId>de.fraunhofer.iais.eis</groupId>
-            <artifactId>sparql-template-executor</artifactId>
-            <version>2.3-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <distributionManagement>
         <repository>
@@ -122,6 +123,30 @@
                         <id>attach-javadocs</id>
                         <goals>
                             <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
+                <version>1.2.2</version>
+                <configuration>
+                    <updatePomFile>true</updatePomFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>flatten</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>flatten</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>flatten.clean</id>
+                        <phase>clean</phase>
+                        <goals>
+                            <goal>clean</goal>
                         </goals>
                     </execution>
                 </executions>
