@@ -89,11 +89,8 @@ template idstt:process-class-to-enum(?class) {
     "\n"
     "\n\t@JsonProperty(\"@id\")"
     "\n\tfinal public URI getSerializedId() {"
-    "\n\t\ttry {"
-    # TODO IDSC-PRE
-    "\n\t\t\t return new URI(\"idsc:\" + id.toString().substring(id.toString().lastIndexOf(\"/\") + 1));"
-    "\n\t\t} catch (Exception e) {}"
-    "\n\t\treturn null;"
+    # TODO: Use Namespaces if possible (do not hard-code IDSC!)
+    "\n\t\treturn id;"
     "\n\t}"
     "\n\t"
 
