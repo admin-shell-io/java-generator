@@ -1,6 +1,12 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
+# Parse the "shortId" of a class or property from its URI.
+# Delimiters before the shortId are expected to be either "/" or "#".
+# E.g.
+# - https://example.de/version01#Message -> "Messege"
+# - https://example.de/version01/Message/sender -> "sender"
+
 template idstt:to_short_identifier(?class) {
-    replace(str(?class), "^.*/([^/]+)/?", "$1")
+    replace(str(?class), "^.*[/#]([^/#]+)/?", "$1")
 }
 where {}

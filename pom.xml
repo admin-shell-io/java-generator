@@ -70,7 +70,7 @@
 			</properties>
 		</profile>
         <profile>
-        <id>InfoModel</id>
+        <id>IDS</id>
         <properties>
             <ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
             <ontology.namespace.prefix>ids</ontology.namespace.prefix>

@@ -1,5 +1,4 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-enum(?class) {
@@ -113,17 +112,4 @@ template idstt:process-class-to-enum(?class) {
     "\n}\n"
 
 }
-WHERE
-{
-    ?class a owl:Class .
-
-    BIND( st:get-namespace() as ?ns )
-    BIND( st:get-namespace-prefix() as ?prefix )
-
-    OPTIONAL {
-        ?class rdfs:subClassOf ?superClass.
-        FILTER(STRSTARTS(STR(?superClass), STR(?ns)))
-    }
-}
-GROUP BY ?class
-
+WHERE {}
