@@ -1,35 +1,68 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-prefix idsm: <https://w3id.org/idsa/metamodel/>
+prefix sh: <http://www.w3.org/ns/shacl#>
+
+# Creates the cardinality descriptions for a property of a given class which points to another class within the ontology namespace.
 
 template idstt:uml-headlabel(?class, ?property) {
 
-    if (bound(?relationType) && (?relationType = <idsm:OneToMany>),
-
-        # collection
-        if (bound(?constraint) && (?constraint = <idsm:NotEmpty>),
-            " \"1..*\" ",
-            " \"*\" "),
-
-        # single reference
-        if (bound(?constraint) && ((?constraint = <idsm:NotEmpty>) || (?constraint = <idsm:NotNull>)),
-            " \"1\" ",
-            " \"0..1\" ")
-
+    if (
+        # check for the first number if min cardinality exists:
+        !(bound(?minCount)),
+        # no minimal cardinality
+        if (
+            # check if max cardinality exists
+            !(bound(?maxCount)),
+            # no min and no max cardinality:
+            " \"*\" ",
+            # no min but a max cardinality:
+            concat(" \"0..", concat(?maxCount, "\" "))
+        ),
+        # min cardinality exists
+        if (
+            # check if max cardinality exists
+            !(bound(?maxCount)),
+            # min cardinality exists and no max cardinality:
+            concat(" \"", concat(?minCount, "..*\" ")),
+            # min and a max cardinality:
+            if (?minCount = ?maxCount,
+                # min = max -> only one cardinality needed!
+                concat(" \"", concat(?minCount, "\" ")),
+                # else: print both
+                concat(" \"", concat(?minCount, concat("..", concat(?maxCount, "\" "))))
+            )
+        )
     )
-
+    
 }
 where {
-    ?class idsm:validation ?validation.
-    ?validation idsm:forProperty ?someProperty.
-    ?property rdfs:subPropertyOf? ?someProperty.
+    ?property rdfs:range ?range.
+    {?property rdfs:domain/^(rdfs:subClassOf*) ?class.} UNION {
+    ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first/^(rdfs:subClassOf*) ?class.}
 
     OPTIONAL {
-        ?validation idsm:relationType ?relationType.
+        ?class rdfs:subClassOf* ?superClass .
+        ?classShape sh:targetClass ?superClass ;
+            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+        ?propertyShape sh:path ?property ;
+          sh:minCount ?minCount ;
+          sh:maxCount ?maxCount .
     }
 
     OPTIONAL {
-        ?validation idsm:constraint ?constraint;
+        ?class rdfs:subClassOf* ?superClass .
+        ?classShape sh:targetClass ?superClass ;
+            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+        ?propertyShape sh:path ?property ;
+        sh:minCount ?minCount .
+    }
+
+    OPTIONAL {
+        ?class rdfs:subClassOf* ?superClass .
+        ?classShape sh:targetClass ?superClass ;
+            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+        ?propertyShape sh:path ?property ;
+        sh:maxCount ?maxCount .
     }
 }
 

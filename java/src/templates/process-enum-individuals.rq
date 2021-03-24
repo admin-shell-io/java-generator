@@ -32,5 +32,19 @@ template idstt:process-enum-individuals(?class) {
 	"),"
 }
 where  {
-    ?individual a ?class.
+	?classOrSubClass rdfs:subClassOf* ?class.
+	
+	optional {
+		?classIndividual a ?classOrSubClass.
+	}
+
+	optional {
+		?class (owl:oneOf/rdf:rest*/rdf:first*) ?owlIndividual.
+		?owlIndividual a ?classOrSubClass.
+		filter(!isBlank(?owlIndividual) )
+	}	
+	
+	BIND( if (bound(?owlIndividual), ?owlIndividual, ?classIndividual) as ?individual )
 }
+GROUP BY ?individual
+ORDER BY ?individual

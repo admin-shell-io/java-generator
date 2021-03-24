@@ -167,6 +167,7 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>

@@ -8,9 +8,9 @@ template idstt:setter-method-builder-body(?property, ?class) {
     "\n\t\tthis."
     lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
     "Impl._"
-    st:call-template(idstt:to_class_name, ?property)
+    st:call-template(idstt:to_java_property_name, ?property)
     " = _"
-    st:call-template(idstt:to_class_name, ?property)
+    st:call-template(idstt:to_java_property_name, ?property)
     "_;"
     "\n\t\treturn this;"
 

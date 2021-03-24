@@ -1,5 +1,4 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:subclass-to-json-annotation(?class) {
@@ -13,10 +12,11 @@ template idstt:subclass-to-json-annotation(?class) {
 WHERE {
     ?class ^rdfs:subClassOf ?subClass.
 
-    optional {
+    OPTIONAL {
         ?instance a ?subClass.
     }
 
-    filter(strstarts(str(?subClass), str(<ids:>)))
+    BIND( st:get-namespace() as ?ns )
+    FILTER(STRSTARTS(STR(?subClass), STR(?ns)))
 }
 GROUP BY ?subClass

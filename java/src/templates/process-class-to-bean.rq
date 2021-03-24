@@ -11,7 +11,7 @@ template idstt:process-class-to-bean(?class) {
     "\n"
     "/** " st:call-template(idstt:anything-to-comment, ?class) " */\n"
     "@JsonIgnoreProperties(ignoreUnknown = true)\n"
-    "@JsonTypeName(\"ids:" st:call-template(idstt:to_class_name, ?class) "\")"
+    "@JsonTypeName(\"" st:call-template(idstt:to_full_identifier, ?class) "\")"
     "\n"
     "public class " concat(st:call-template(idstt:to_class_name, ?class), "Impl")
     " implements Serializable, " st:call-template(idstt:to_class_name, ?class)
@@ -128,6 +128,5 @@ template idstt:process-class-to-bean(?class) {
 }
 where{
     ?class a owl:Class .
-        #rdfs:comment ?comment.
 }
 GROUP BY ?class

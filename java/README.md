@@ -25,6 +25,8 @@ Output:
 ...
 ```
 
+**TODO**: *How to add the ontology namespaces!!!!*
+
 Current assumptions in this step:
 - For the Generator, we hard-coded the specific paths within the ontology, that are used for the CGT.
 - These paths do not need to be adapted, if used in combination with the IDS-InformationModel.
@@ -207,6 +209,69 @@ shapes:MessageShape
 ```
 
 As a result, the property would be translated as an ArrayList of URIs.
+
+### Individuals as Java Enums (Text is still WIP)
+We consider the following cases that can be specified in the RDF ontology:
+1. Basic case where each relevant individual I for a class C is of `rdf:type C`:
+```
+	ex:Message rdf:type owl:Class.
+
+	ex:HelloWorld rdf:type ex:Message .
+```
+
+- This is translated into a Java Enum (simplified version shown here):
+```java
+	public enum Message {
+		HELLOWORLD("https://example.com/HelloWorld");
+	}
+```
+
+2. Extented basic case where there is a subclass S of a class C and both have individuals:
+```
+	ex:Message rdf:type owl:Class .
+
+	ex:SMS rdf:type owl:Class ;
+		rdfs:subClassOf ex:Message .
+
+	ex:HelloWorld rdf:type ex:Message .
+
+	ex:HelloSmartphone rdf:type ex:SMS .
+``` 
+
+- As there is no inheritance in Java Enums, we use all individuals from subclasses as individuals of the superclass:
+```java
+	public enum Message {
+		HELLOWORLD("https://example.com/HelloWorld");
+		HELLOSMARTPHONE("https://example.com/HelloSmartphone");
+	}
+
+	public enum SMS {
+		HELLOSMARTPHONE("https://example.com/HelloSmartphone");
+	}
+```
+
+3. Special definition of which individuals belong to a class via `owl:oneOf`. This allows to include/exclude certain specified individuals from the class or a subclass because if a list of individuals is specified via `owl:oneOf` only these individuals will be part of the enum. The specified individuals still need to be part of the class or a subclass of that class :
+```
+	ex:Message rdf:type owl:Class ;
+		owl:oneOf (
+			ex:HelloWorld
+			ex:HelloSmartphone
+		) .
+
+	ex:SMS rdf:type owl:Class ;
+		rdfs:subClassOf ex:Message .
+
+	ex:HelloWorld rdf:type ex:Message .
+	ex:SecretMessage rdf:type ex:Message .
+	
+	ex:HelloSmartphone rdf:type ex:SMS .
+```
+
+- This would lead to the same result as before in case 2 because the third message (`ex:SecretMessage`) is not part of the `owl:oneOf` listing.
+
+### Property name translation to Java name
+**TODO / WIP**:
+- combine name of property with its domain in the Java name to avoid possible collisions.
 
 ### Types and missing types
 **TODO**...

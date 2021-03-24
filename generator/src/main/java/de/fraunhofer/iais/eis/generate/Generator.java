@@ -16,11 +16,11 @@ import java.util.Iterator;
 
 public class Generator {
 
-    private Collection<String> vocabDirectories;
-    private Collection<String> templateDirectories;
-    private Collection<String> vocabDirPathPatterns;
-    private int maxDepth;
-    private Graph graph = Graph.create();
+    private final Collection<String> vocabDirectories;
+    private final Collection<String> templateDirectories;
+    private final Collection<String> vocabDirPathPatterns;
+    private final int maxDepth;
+    private final Graph graph = Graph.create();
 
     public static void main(String[] args) throws EngineException {
         CommandLineParser parser = new DefaultParser();

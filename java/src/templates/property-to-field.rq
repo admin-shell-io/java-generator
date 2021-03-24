@@ -12,7 +12,7 @@ template idstt:property-to-field(?property, ?class) {
 	#Check if this property is NotNull or NotEmpty. If so, add appropriate annotations
     st:call-template(idstt:property-annotation, ?class, ?property)
 
-    "@JsonAlias({\"ids:" st:call-template(idstt:to_class_name, ?property) "\", \"" st:call-template(idstt:to_class_name, ?property) "\"})"
+    "@JsonAlias({\"" st:call-template(idstt:to_full_identifier, ?property) "\", \"" st:call-template(idstt:to_java_property_name, ?property) "\"})"
     "\n\t"
 
     " "
@@ -23,7 +23,7 @@ template idstt:property-to-field(?property, ?class) {
 	#Fields are prefixed with an underscore
     " _"
 	#The actual resulting field name in Java
-    st:call-template(idstt:to_class_name, ?property)
+    st:call-template(idstt:to_java_property_name, ?property)
     ";\n"
 }
 where  {

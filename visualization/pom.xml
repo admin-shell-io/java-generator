@@ -48,6 +48,8 @@
                                         <argument>-pp</argument><argument>**/*.ttl</argument>
                                         <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
                                         <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
                                         <argument>-td</argument>
                                         <argument>/tmp/templates</argument>
                                     </arguments>
@@ -83,6 +85,8 @@
                                         <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
                                         <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
                                         <!-- No codes, no taxonomies -->
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
                                         <argument>-td</argument>
                                         <argument>/tmp/templates</argument>
                                     </arguments>
@@ -134,6 +138,7 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>

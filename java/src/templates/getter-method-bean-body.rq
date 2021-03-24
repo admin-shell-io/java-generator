@@ -7,7 +7,7 @@ template idstt:getter-method-bean-body(?property) {
 
     "\n\t\treturn _"
 
-        st:call-template(idstt:to_class_name, ?property)
+        st:call-template(idstt:to_java_property_name, ?property)
 
      ";"
 

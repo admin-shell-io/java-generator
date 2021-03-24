@@ -1,5 +1,4 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix ids: <https://w3id.org/idsa/core/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-interface(?class) {
@@ -38,7 +37,6 @@ template idstt:process-class-to-interface(?class) {
         "\n\t// accessor methods as derived from information model"
         "\n"
 
-        # st:call-template(idstt:subclass-properties-to-methods, ?class, "interface")
         st:call-template(idstt:properties-to-interface-methods, ?class)
 
     "\n}\n"
@@ -47,9 +45,11 @@ template idstt:process-class-to-interface(?class) {
 where {
     ?class a owl:Class .
 
+    BIND( st:get-namespace() as ?ns )
+
     optional {
         ?class rdfs:subClassOf ?superClass.
-        filter(strstarts(str(?superClass), str(<ids:>)))
+        filter(strstarts(str(?superClass), str(?ns)))
     }
 }
 GROUP BY ?class

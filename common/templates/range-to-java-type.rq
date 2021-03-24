@@ -3,17 +3,17 @@ prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix sh: <http://www.w3.org/ns/shacl#>
 
 template idstt:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
-    if ( (bound(?maxCount) && !(bound(?minCount)) && (?maxCount = 1) ) ||
-      (bound(?maxCount) && bound(?minCount) && ((?maxCount - ?minCount) <= 1) ),
-    # then
-        st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, false),
-    # else
-        # st:call-template(idstt:range-to-array-type, ?property, ?range, ?bracketOpen, ?bracketClose)
+   
+    if ( ?isArray,
+        # then
         concat(
-          concat("java.util.ArrayList", str(?bracketOpen)),
-          concat(st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, true), str(?bracketClose))
-        )
+            concat("java.util.ArrayList", str(?bracketOpen)),
+            concat(st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, ?isArray), str(?bracketClose))
+        ),
+        # else
+        st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, ?isArray)
     )
+
 }
 where {
     ?property rdfs:range ?range.
@@ -25,24 +25,21 @@ where {
         ?classShape sh:targetClass ?superClass ;
             (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
         ?propertyShape sh:path ?property ;
-          sh:minCount ?minCount ;
-          sh:maxCount ?maxCount .
-    }
-
-    OPTIONAL {
-        ?class rdfs:subClassOf* ?superClass .
-        ?classShape sh:targetClass ?superClass ;
-            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
-        ?propertyShape sh:path ?property ;
-        sh:minCount ?minCount .
-    }
-
-    OPTIONAL {
-        ?class rdfs:subClassOf* ?superClass .
-        ?classShape sh:targetClass ?superClass ;
-            (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
-        ?propertyShape sh:path ?property ;
         sh:maxCount ?maxCount .
     }
+
+    BIND(
+        if ( BOUND(?maxCount), 
+            # -> [?, max]
+            if ( ?maxCount > 1,
+                # then -> multiple values allowed
+                true,
+                # else -> at most 1 value allowed
+                false
+            ),
+            # no max cardinality bound [?, *]
+            true
+        ) as ?isArray
+    )
 
 } LIMIT 1

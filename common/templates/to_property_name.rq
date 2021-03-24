@@ -1,7 +1,0 @@
-prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-
-template idstt:to_property_name(?property) {
-    st:call-template(idstt:to_class_name, ?property)
-}
-where {
-}

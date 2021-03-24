@@ -9,14 +9,16 @@ template st:start {
         # else
         st:call-template(idstt:class-tbox, ?class)
     )
-
-    st:call-template(idstt:all-classes-test, ?class)
-
+    
 }
 where  {
     ?class a owl:Class.
     OPTIONAL {
         ?instance a ?class
+    }
+    OPTIONAL {
+        ?subClass rdfs:subClassOf* ?class .
+        ?instance a ?subClass .
     }
     FILTER (!isBlank(?class))
 }
