@@ -77,26 +77,6 @@
         </repository>
     </repositories>
 
-    <!-- TODO: With the multi-modules approach, this currently does not work. Need to rework this plugin execution
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
-    -->
-
     <build>
         <plugins>
             <!-- This plugin replaces the revision variable in the version by the actual variable value. Only required if submodules exist -->
