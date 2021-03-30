@@ -16,23 +16,28 @@ import java.util.UUID;
  */
 public class VocabUtil {
 
-    private ServiceLoader<BeanSerializer> serializerLoader;
-    private ServiceLoader<BeanValidator> validatorLoader;
+    private final ServiceLoader<BeanSerializer> serializerLoader;
+    private final ServiceLoader<BeanValidator> validatorLoader;
 
     private final static String PROTOCOL = "https";
     private final static String HOST = "w3id.org";
 
-    private static final VocabUtil instance = new VocabUtil();
-
     public static String randomUrlBase;
 
-    private VocabUtil() {
+    public VocabUtil() {
         serializerLoader = ServiceLoader.load(BeanSerializer.class);
         validatorLoader = ServiceLoader.load(BeanValidator.class);
     }
 
+    /**
+     * This function used to be the sole access point to the private constructor in a singleton class
+     * Seeing the issues regarding thread safety, this approach was abandoned, making this function unnecessary
+     * @return new VocabUtil instance
+     * @deprecated use constructor directly instead
+     */
+    @Deprecated
     public static VocabUtil getInstance() {
-        return instance;
+        return new VocabUtil();
     }
 
     /**
@@ -59,9 +64,8 @@ public class VocabUtil {
     }
 
     public <T> void validate(T objToValidate) throws ConstraintViolationException {
-        Iterator<BeanValidator> validators = validatorLoader.iterator();
-        while (validators.hasNext()) {
-            validators.next().validate(objToValidate);
+        for (BeanValidator beanValidator : validatorLoader) {
+            beanValidator.validate(objToValidate);
         }
     }
 
