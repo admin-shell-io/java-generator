@@ -18,11 +18,7 @@
     <properties>
         <revision>1.0.0-SNAPSHOT</revision>
         <jackson.version>2.11.2</jackson.version>
-<<<<<<< HEAD
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-=======
-        <revision>4.0.3-SNAPSHOT</revision>
->>>>>>> d872daf24feac0a0090d2f84712aeb6b772c5bb4
     </properties>
 
     <profiles>
