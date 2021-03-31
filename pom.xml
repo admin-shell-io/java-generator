@@ -18,7 +18,11 @@
     <properties>
         <revision>1.0.0-SNAPSHOT</revision>
         <jackson.version>2.11.2</jackson.version>
+<<<<<<< HEAD
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+=======
+        <revision>4.0.3-SNAPSHOT</revision>
+>>>>>>> d872daf24feac0a0090d2f84712aeb6b772c5bb4
     </properties>
 
     <profiles>
@@ -110,6 +114,7 @@
 
     <build>
         <plugins>
+            <!-- This plugin replaces the revision variable in the version by the actual variable value. Only required if submodules exist -->
             <plugin>
                 <!-- Plugin to activate the generation of javadocs -->
                 <groupId>org.apache.maven.plugins</groupId>
@@ -119,14 +124,6 @@
                   <source>8</source>
                   <detectJavaApiLink>false</detectJavaApiLink>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
