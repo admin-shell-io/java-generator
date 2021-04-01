@@ -109,8 +109,8 @@
                                     <directory>${basedir}/../common/templates</directory>
                                     <filtering>true</filtering>
                                 </resource>
-								<resource>
-                                    <directory>${basedir}/../java-common/src/templates</directory>
+                                <resource>
+                                    <directory>${basedir}/../common/java/templates</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>

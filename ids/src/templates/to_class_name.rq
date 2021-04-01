@@ -1,0 +1,6 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:to_class_name(?class) {
+    CONCAT(replace(str(?class), "^.*/([^/]+)/?", "$1"), "Impl")
+}
+where {}
