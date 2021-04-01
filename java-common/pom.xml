@@ -8,10 +8,26 @@
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>java-common</artifactId>
 
-    <artifactId>visualization</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <artifactId>util</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
         <dependency>
             <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
             <artifactId>generator</artifactId>
@@ -19,22 +35,48 @@
             <optional>true</optional>
         </dependency>
     </dependencies>
-	
-	<profiles>
+
+    <profiles>
+        <!-- Operation System specific profiles, activate automatically -->
         <profile>
-            <id>allClasses</id>
+            <id>win</id>
+            <activation>
+                <os>
+                    <family>Windows</family>
+                </os>
+            </activation>
+            <properties>
+                <tmp-path>C:/tmp</tmp-path>
+            </properties>
+        </profile>
+        <profile>
+            <id>unix</id>
+            <activation>
+                <os>
+                    <family>Unix</family>
+                </os>
+            </activation>
+            <properties>
+                <tmp-path>/tmp</tmp-path>
+            </properties>
+        </profile>
+
+        <!-- Use Case specific profiles. Default is IDS, which needs to be turned off actively for other ontologies -->
+
+        <profile>
+            <id>IDS</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <build>
-                <plugins><!-- execute the diagram generation based on the Infomodel files and the SPARQL templates -->
+                <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <version>1.6.0</version>
                         <executions>
                             <execution>
-                                <id>generate-plantuml-source</id>
+                                <id>generate-java-sources</id>
                                 <phase>generate-sources</phase>
                                 <goals>
                                     <goal>java</goal>
@@ -51,8 +93,7 @@
                                         <argument>-pp</argument><argument>**/*.ttl</argument>
                                         <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
                                         <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
-                                        <argument>-td</argument>
-                                        <argument>/tmp/templates</argument>
+                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
@@ -62,19 +103,16 @@
             </build>
         </profile>
         <profile>
-            <id>majorClasses</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
+            <id>AAS</id>
             <build>
-                <plugins><!-- execute the diagram generation based on the Infomodel files and the SPARQL templates -->
+                <plugins>
                     <plugin>
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>exec-maven-plugin</artifactId>
                         <version>1.6.0</version>
                         <executions>
                             <execution>
-                                <id>generate-plantuml-source</id>
+                                <id>generate-java-sources</id>
                                 <phase>generate-sources</phase>
                                 <goals>
                                     <goal>java</goal>
@@ -84,12 +122,8 @@
                                     <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
                                     <arguments>
                                         <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                        <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
-                                        <!-- No codes, no taxonomies -->
-                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                        <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
-                                        <argument>-td</argument>
-                                        <argument>/tmp/templates</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument> <!-- TODO: Exclude examples -->
+                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
                                     </arguments>
                                 </configuration>
                             </execution>
@@ -98,24 +132,29 @@
                 </plugins>
             </build>
         </profile>
-	</profiles>
+    </profiles>
 
     <build>
+
+        <!-- Including the LICENSE file -->
+        <resources>
+            <resource>
+                <directory>../</directory>
+                <includes>
+                    <include>LICENSE</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
-            <!-- don't create a jar -->
             <plugin>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <executions>
-                    <execution>
-                        <id>default-jar</id>
-                        <phase>none</phase>
-                        <configuration>
-                            <finalName>unwanted</finalName>
-                            <classifier>unwanted</classifier>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -123,7 +162,7 @@
                 <artifactId>maven-resources-plugin</artifactId>
                 <version>3.0.2</version>
                 <executions>
-                    <!-- assemble the relevant templates into /tmp/templates -->
+                    <!-- assemble the relevant templates into ${tmp-path}/templates -->
                     <execution>
                         <id>assemble-templates</id>
                         <phase>initialize</phase>
@@ -132,10 +171,10 @@
                         </goals>
 
                         <configuration>
-                            <outputDirectory>/tmp/templates</outputDirectory>
+                            <outputDirectory>${tmp-path}/templates</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>${basedir}/templates</directory>
+                                    <directory>${basedir}/src/templates</directory>
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
@@ -145,10 +184,10 @@
                         </configuration>
                     </execution>
 
-                    <!-- copy generated sources to package resources directory -->
+                    <!-- copy generated sources to package src directory -->
                     <execution>
-                        <id>copy-diagram</id>
-                        <phase>package</phase>
+                        <id>copy-java-beans</id>
+                        <phase>process-sources</phase>
                         <goals>
                             <goal>copy-resources</goal>
                         </goals>
@@ -156,11 +195,10 @@
                             <outputDirectory>${basedir}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <targetPath>${basedir}</targetPath>
-                                    <directory>/tmp</directory>
+                                    <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
+                                    <directory>${tmp-path}</directory>
                                     <includes>
-                                        <include>**/*.plantuml</include>
-                                        <include>**/*.png</include>
+                                        <include>**/*.java</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -169,53 +207,31 @@
                 </executions>
             </plugin>
 
-
-            <!-- assemble diagram files into a zip -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.1.0</version>
-
-                <configuration>
-                    <finalName>${project.artifactId}-${project.version}-diagrams</finalName>
-                    <appendAssemblyId>false</appendAssemblyId>
-                    <descriptors>
-                        <descriptor>${basedir}/distribution.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>assemble-diagrams</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- cleanup generated java sources and temporary stuff in /tmp -->
+            <!-- cleanup generated java sources and temporary stuff in ${tmp-path} -->
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
                 <version>3.1.0</version>
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${basedir}</directory>
+                            <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
                             <includes>
-                                <include>**/*.plantuml</include>
-                                <include>all_classes.png</include>
+                                <include>**/*.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>util/</exclude>
+                                <exclude>spi/</exclude>
+                                <exclude>annotation/</exclude>
+                            </excludes>
+                        </fileset>
+                        <fileset>
+                            <directory>${tmp-path}/</directory>
+                            <includes>
+                                <include>**/*.java</include>
                             </includes>
                         </fileset>
                         <fileset>
-                            <directory>/tmp/</directory>
-                            <includes>
-                                <include>**/*.plantuml</include>
-                                <include>all_classes.png</include>
-                            </includes>
-                        </fileset>
-                        <fileset>
-                            <directory>/tmp/templates</directory>
+                            <directory>${tmp-path}/templates</directory>
                             <includes>
                                 <include>**/*.rq</include>
                             </includes>
@@ -223,7 +239,24 @@
                     </filesets>
                 </configuration>
             </plugin>
-        </plugins>
 
+            <!-- create a jar with sources -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.0.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+        </plugins>
     </build>
+
 </project>
