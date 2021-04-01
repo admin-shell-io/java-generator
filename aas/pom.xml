@@ -5,12 +5,37 @@
     <parent>
         <artifactId>common</artifactId>
         <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
     <artifactId>aas</artifactId>
+	
+	<dependencies>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <artifactId>util</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <artifactId>generator</artifactId>
+            <version>${revision}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 
     <profiles>
         <!-- Operation System specific profiles, activate automatically -->
@@ -82,6 +107,10 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+								<resource>
+                                    <directory>${basedir}/../java-common/src/templates</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
