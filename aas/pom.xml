@@ -14,7 +14,7 @@
 	
 	<dependencies>
         <dependency>
-            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
             <artifactId>util</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -30,7 +30,7 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
             <artifactId>generator</artifactId>
             <version>${revision}</version>
             <optional>true</optional>

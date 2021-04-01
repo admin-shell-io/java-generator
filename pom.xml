@@ -11,7 +11,7 @@
     <modules>
         <module>util</module>
         <module>visualization</module>
-        <module>java-common</module>
+        <!--<module>java-common</module>-->
         <module>jsonld-context</module>
         <module>generator</module>
         <module>ids</module>
