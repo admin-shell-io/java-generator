@@ -12,6 +12,11 @@
     <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
     <artifactId>aas</artifactId>
 	
+	<properties>
+		<ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
+		<ontology.namespace.prefix>aas</ontology.namespace.prefix>
+	</properties>
+	
 	<dependencies>
         <dependency>
             <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
@@ -61,6 +66,9 @@
                 <tmp-path>/tmp</tmp-path>
             </properties>
         </profile>
+		
+		<!-- Developer specific profiles, indicating the location of sources -->
+		<!-- TODO: While it would be very nice to put profiles here for the Java generation, it would kind of kill things like Visualization and JSONLD-Context. Any ideas? -->
     </profiles>
 
     <build>
