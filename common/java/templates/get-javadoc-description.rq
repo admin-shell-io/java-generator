@@ -3,7 +3,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
 template idstt:get-javadoc-description(?thing) {
-	"\n\t" ?com
+	group { "\n\t* " ?com ; separator = "" }
 }
 WHERE {
 	{ ?thing rdfs:comment ?com . }

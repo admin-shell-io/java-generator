@@ -3,19 +3,18 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template idstt:get-javadoc-return(?class, ?property) {
 
     "\n\t"
-    "@return the "
-
+    "* @return Returns the "
     IF ( CONTAINS(?javaRetType, "<"),
         # then
-        REPLACE(STRBEFORE(?javaRetType, "<"), "\"", ""),
+        CONCAT(CONCAT(REPLACE(STRBEFORE(?javaRetType, "<"), "\"", ""), " of "), STRBEFORE(STRAFTER(?javaRetType, "extends "), ">")),
 
         # else
         REPLACE(?javaRetType, "\"", "")
     )
 
-    " of "
+    " for the property "
     st:call-template(idstt:to_java_property_name, ?property)
-
+    "."
 }
 where  {
     {

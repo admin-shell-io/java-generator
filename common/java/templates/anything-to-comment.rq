@@ -2,8 +2,14 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
-template idstt:anything-to-comment(?thing) {
-	"\n\t" ?com
+template idstt:anything-to-comment(?thing, ?hasIndentation) {
+	group {
+		if (?hasIndentation,
+			"\n\t* ",
+			"\n* "
+		)
+		?com ; separator = ""
+	}
 }
 WHERE {
     { ?thing rdfs:label ?com . }

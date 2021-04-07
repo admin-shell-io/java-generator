@@ -5,6 +5,7 @@ template idstt:get-javadoc(?class, ?property) {
     "\n\t/**"
     st:call-template(idstt:get-javadoc-description, ?property)
     st:call-template(idstt:get-javadoc-return, ?class, ?property)
+    "\n\t* More information under " str(?property)
     "\n\t*/"
 
 }

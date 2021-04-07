@@ -2,30 +2,32 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:get-all-comments(?thing) {
-	"new TypedLiteral("
-	#if comment is a string with language tag, then split it up into: start quote, string value, end quote, separate via comma and then start quote, language, end quote
-	#Otherwise just dump the comment, which already contains quotes
-	#Furthermore, a label/comment in RDF may contain multiple lines. We cannot paste it "as is" into java. So we drop the line breaks.
-	if (bound(?lang),
-	    #yes, language is present
-	    CONCAT(
-	        CONCAT(
-	            CONCAT(
-	                #Innermost first. Prepend a quotation mark
-	                CONCAT("\"",
-	                #Concatenate this with the stripped string (no line breaks)
-	                    REPLACE(REPLACE(REPLACE(str(?comment), "\n", ""), "\r", ""), "\"", "\\\\\"")
-	                #Add quotation mark at the end
-	                ), "\", \""
-	            #Append language
-	            ), ?lang
-	        #Final quotation mark
-	        ), "\""
-	    ),
+	group {
+		"new TypedLiteral("
+		#if comment is a string with language tag, then split it up into: start quote, string value, end quote, separate via comma and then start quote, language, end quote
+		#Otherwise just dump the comment, which already contains quotes
+		#Furthermore, a label/comment in RDF may contain multiple lines. We cannot paste it "as is" into java. So we drop the line breaks.
+		if (bound(?lang),
+			#yes, language is present
+			CONCAT(
+				CONCAT(
+					CONCAT(
+						#Innermost first. Prepend a quotation mark
+						CONCAT("\"",
+						#Concatenate this with the stripped string (no line breaks)
+							REPLACE(REPLACE(REPLACE(str(?comment), "\n", ""), "\r", ""), "\"", "\\\\\"")
+						#Add quotation mark at the end
+						), "\", \""
+					#Append language
+					), ?lang
+				#Final quotation mark
+				), "\""
+			),
 
-	    #no language present. Strip string of all line breaks and escape quotation marks
-	    REPLACE(REPLACE(REPLACE(?comment, "\n", ""), "\r", ""), "\"", "\\\\\""))
-	"),"
+			#no language present. Strip string of all line breaks and escape quotation marks
+			REPLACE(REPLACE(REPLACE(?comment, "\n", ""), "\r", ""), "\"", "\\\\\""))
+		")" ; separator = ", "
+	}
 }
 WHERE {
     ?thing rdfs:comment ?comment .

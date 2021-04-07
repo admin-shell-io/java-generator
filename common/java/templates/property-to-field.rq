@@ -5,7 +5,7 @@ template idstt:property-to-field(?property, ?class) {
 	"\n\t"
 	# Add property descriptions
 	"/**"
-    st:call-template(idstt:anything-to-comment, ?property)
+    st:call-template(idstt:anything-to-comment, ?property, true)
     "\n\t*/"
     "\n\t"
 

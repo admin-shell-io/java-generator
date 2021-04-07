@@ -10,14 +10,21 @@ template idstt:process-class-to-interface(?class) {
 
     "\n\n"
 
-    "/**" st:call-template(idstt:anything-to-comment, ?class) "\n*/"
+    "/**" st:call-template(idstt:anything-to-comment, ?class, false) "\n*/"
     "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
-    "\n@JsonSubTypes({" st:call-template(idstt:class-to-json-annotation, ?class) "})"
+    "\n@JsonSubTypes({"
+        st:call-template(idstt:class-to-json-annotation, ?class)
+        if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
+            CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class)),
+            ""
+        )
+        
+    "\n})"
     "\n"
     "public interface " st:call-template(idstt:to_interface_name, ?class)
 
     if (bound(?superClass),
-        concat(" extends ", strafter(st:call-template(idstt:subclasses-to-list, ?class), ", ")),
+        concat(" extends ", st:call-template(idstt:subclasses-to-list, ?class)),
         "")
 
     " {\n"
@@ -25,9 +32,11 @@ template idstt:process-class-to-interface(?class) {
         "\n\t// standard methods\n"
         st:call-template(idstt:interface-default-methods)
         
-        "\n\t// accessor methods as derived from the " st:get-title() " ontology"
-        "\n\n"
-        st:call-template(idstt:properties-to-interface-methods, ?class)
+        if (STRLEN(STR(?interfacePropertyMethods)) > 1,
+            CONCAT(CONCAT(CONCAT("\n\t// accessor methods as derived from the ", st:get-title()), " ontology\n\n"), STR(?interfacePropertyMethods)),
+            ""
+        )
+        "\n"
 
     "\n}\n"
 
@@ -36,6 +45,8 @@ where {
     ?class a owl:Class .
 
     BIND( st:get-namespace() as ?ns )
+    BIND( st:call-template(idstt:properties-to-interface-methods, ?class) as ?interfacePropertyMethods )
+
 
     optional {
         ?class rdfs:subClassOf ?superClass.

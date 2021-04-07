@@ -3,11 +3,13 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:subclass-to-json-annotation(?class) {
 
-    "\n@JsonSubTypes.Type(value = "
+    group {
+        "\n\t@JsonSubTypes.Type(value = "
 
-    st:call-template(idstt:to_interface_name, ?subClass)
+        st:call-template(idstt:to_interface_name, ?subClass)
 
-    ".class),"
+        ".class)" ; separator = ","
+    }
 }
 WHERE {
     ?class ^rdfs:subClassOf ?subClass.
@@ -19,4 +21,3 @@ WHERE {
     BIND( st:get-namespace() as ?ns )
     FILTER(STRSTARTS(STR(?subClass), STR(?ns)))
 }
-GROUP BY ?subClass

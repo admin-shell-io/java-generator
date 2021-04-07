@@ -1,5 +1,6 @@
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix sh: <http://www.w3.org/ns/shacl#>
 
 template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
@@ -22,7 +23,7 @@ template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
         # basic types
         if (str(?range) = str(<xsd:decimal>), "java.math.BigDecimal",
         if (str(?range) = str(<xsd:integer>), "BigInteger",
-        if (str(?range) = str(<xsd:string>), if(EXISTS { VALUES ?property { <https://w3id.org/idsa/core/description> <https://w3id.org/idsa/core/title> <https://w3id.org/idsa/core/keyword> <https://w3id.org/idsa/core/revocationReason> <https://w3id.org/idsa/core/contractRejectionReason> <https://w3id.org/idsa/core/activityDescription> <https://w3id.org/idsa/core/endpointInformation> } } , "TypedLiteral", "String"),
+        if (str(?range) = str(<xsd:string>), "String", # if(EXISTS { VALUES ?property { <https://w3id.org/idsa/core/description> <https://w3id.org/idsa/core/title> <https://w3id.org/idsa/core/keyword> <https://w3id.org/idsa/core/revocationReason> <https://w3id.org/idsa/core/contractRejectionReason> <https://w3id.org/idsa/core/activityDescription> <https://w3id.org/idsa/core/endpointInformation> } } , "TypedLiteral", "String"),
         if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
@@ -39,7 +40,6 @@ template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
 
 
         # custom types
-        # interface or enum need to be checked!!??
         if (bound(?instance),
           st:call-template(idstt:to_enum_name, ?range),
           st:call-template(idstt:to_interface_name, ?range)

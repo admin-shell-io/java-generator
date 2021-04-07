@@ -3,7 +3,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:subclasses-to-list(?class) {
 
-    ", " st:call-template(idstt:to_interface_name, ?superClass)
+    group { st:call-template(idstt:to_interface_name, ?superClass) ; separator = ", " }
 
 }
 where {
