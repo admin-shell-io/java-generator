@@ -18,14 +18,16 @@ template idstt:get-javadoc-return(?class, ?property) {
 }
 where  {
     {
-        ?property rdfs:domain ?class;
+        ?class rdfs:subClassOf* ?superClass .
+        ?property rdfs:domain ?superClass;
             rdfs:range ?range .
     }
     UNION
-    {
-        ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?class ;
+    {   
+        ?class rdfs:subClassOf* ?superClass .
+        ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass ;
             rdfs:range ?range .
     }
 
-    BIND( st:call-template(idstt:range-to-getter-return-type, ?class, ?property, ?range, "<? extends ", ">") as ?javaRetType)
+    BIND( st:call-template(idstt:range-to-getter-return-type, ?superClass, ?property, ?range, "<? extends ", ">") as ?javaRetType)
 }
