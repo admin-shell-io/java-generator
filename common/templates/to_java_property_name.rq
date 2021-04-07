@@ -12,6 +12,7 @@ template idstt:to_java_property_name(?property) {
         # THEN:
         # Yes it does, choose a more complex property name to avoid collisions
         # e.g. http://myExample/SubClass/property -> subClassProperty
+        # TODO: Careful: Especially in the case that no namespace is defined (e.g. this if clause is always true), this can cause compile errors if blank nodes are involved
         CONCAT(CONCAT(CONCAT(
             LCASE( SUBSTR( STR(?shortDomain), 1, 1)), SUBSTR( STR(?shortDomain), 2)),
             UCASE( SUBSTR( STR(?shortId), 1, 1))), SUBSTR( STR(?shortId), 2)),

@@ -4,16 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+    <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
     <modules>
         <module>util</module>
         <module>visualization</module>
-        <module>java</module>
+        <!--<module>java-common</module>-->
         <module>jsonld-context</module>
         <module>generator</module>
+        <module>ids</module>
+        <module>aas</module>
     </modules>
     <properties>
         <revision>1.0.0-SNAPSHOT</revision>
@@ -70,20 +72,6 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
-        <profile>
-        <id>IDS</id>
-        <properties>
-            <ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
-            <ontology.namespace.prefix>ids</ontology.namespace.prefix>
-        </properties>
-        </profile>
-        <profile>
-            <id>AAS</id>
-            <properties>
-                <ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
-                <ontology.namespace.prefix>aas</ontology.namespace.prefix>
-            </properties>
-        </profile>
     </profiles>
 
 

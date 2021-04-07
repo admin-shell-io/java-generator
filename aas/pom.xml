@@ -3,18 +3,23 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
         <artifactId>common</artifactId>
+        <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>java</artifactId>
-
-
-    <dependencies>
+    <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+    <artifactId>aas</artifactId>
+	
+	<properties>
+		<ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
+		<ontology.namespace.prefix>aas</ontology.namespace.prefix>
+	</properties>
+	
+	<dependencies>
         <dependency>
-            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
             <artifactId>util</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -30,7 +35,7 @@
             <version>${jackson.version}</version>
         </dependency>
         <dependency>
-            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
             <artifactId>generator</artifactId>
             <version>${revision}</version>
             <optional>true</optional>
@@ -61,78 +66,9 @@
                 <tmp-path>/tmp</tmp-path>
             </properties>
         </profile>
-
-        <!-- Use Case specific profiles. Default is IDS, which needs to be turned off actively for other ontologies -->
-
-        <profile>
-            <id>IDS</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.6.0</version>
-                        <executions>
-                            <execution>
-                                <id>generate-java-sources</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>java</goal>
-                                </goals>
-                                <configuration>
-                                    <classpathScope>compile</classpathScope>
-                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
-                                    <arguments>
-                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                        <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
-                                        <argument>-vd</argument><argument>${infomodel-sourcebase}/codes</argument>
-                                        <argument>-pp</argument><argument>**/*.ttl</argument>
-                                        <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
-                                        <argument>-pp</argument><argument>**/*.ttl</argument>
-                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                        <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
-                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>AAS</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>exec-maven-plugin</artifactId>
-                        <version>1.6.0</version>
-                        <executions>
-                            <execution>
-                                <id>generate-java-sources</id>
-                                <phase>generate-sources</phase>
-                                <goals>
-                                    <goal>java</goal>
-                                </goals>
-                                <configuration>
-                                    <classpathScope>compile</classpathScope>
-                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
-                                    <arguments>
-                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
-                                        <argument>-pp</argument><argument>**/*.ttl</argument> <!-- TODO: Exclude examples -->
-                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
-                                    </arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
+		
+		<!-- Developer specific profiles, indicating the location of sources -->
+		<!-- TODO: While it would be very nice to put profiles here for the Java generation, it would kind of kill things like Visualization and JSONLD-Context. Any ideas? -->
     </profiles>
 
     <build>
@@ -179,6 +115,10 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                                <resource>
+                                    <directory>${basedir}/../common/java/templates</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>
@@ -257,6 +197,29 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-java-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <classpathScope>compile</classpathScope>
+                            <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                            <arguments>
+                                <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                <argument>-pp</argument><argument>**/*.ttl</argument> <!-- TODO: Exclude examples -->
+                                <argument>-td</argument><argument>${tmp-path}/templates</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 

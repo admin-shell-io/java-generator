@@ -3,7 +3,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+        <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
         <artifactId>common</artifactId>
         <version>${revision}</version>
     </parent>
