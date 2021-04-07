@@ -6,7 +6,7 @@ prefix dct: <http://purl.org/dc/terms/>
 
 template idstt:enum-values-to-uml(?class) {
 
-    "# " ucase(st:call-template(idstt:to_class_name, ?instance))
+    "# " ucase(st:call-template(idstt:to_enum_name, ?instance))
 
 }
 where {

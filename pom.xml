@@ -12,8 +12,8 @@
         <module>util</module>
         <module>visualization</module>
         <!--<module>java-common</module>-->
-        <module>jsonld-context</module>
         <module>generator</module>
+        <module>jsonld-context</module>
         <module>ids</module>
         <module>aas</module>
     </modules>
@@ -72,6 +72,22 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
+        <profile>
+        <id>IDS</id>
+        <properties>
+            <ontology.title>IDSA Information Model</ontology.title>
+            <ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
+            <ontology.namespace.prefix>ids</ontology.namespace.prefix>
+        </properties>
+        </profile>
+        <profile>
+            <id>AAS</id>
+            <properties>
+                <ontology.title>Asset Administration Shell</ontology.title>
+                <ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
+                <ontology.namespace.prefix>aas</ontology.namespace.prefix>
+            </properties>
+        </profile>
     </profiles>
 
 
@@ -108,6 +124,14 @@
                   <source>8</source>
                   <detectJavaApiLink>false</detectJavaApiLink>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

@@ -1,6 +1,0 @@
-prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-
-template idstt:to_class_name(?class) {
-    replace(str(?class), "^.*/([^/]+)/?", "$1")
-}
-where {}

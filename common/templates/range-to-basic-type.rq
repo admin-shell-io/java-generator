@@ -22,7 +22,7 @@ template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
         # basic types
         if (str(?range) = str(<xsd:decimal>), "java.math.BigDecimal",
         if (str(?range) = str(<xsd:integer>), "BigInteger",
-        if (str(?range) = str(<xsd:string>), if(EXISTS { VALUES ?property { <https://w3id.org/idsa/core/description> <https://w3id.org/idsa/core/title> <https://w3id.org/idsa/core/keyword> <https://w3id.org/idsa/core/revocationReason> <https://w3id.org/idsa/core/contractRejectionReason> <https://w3id.org/idsa/core/activityDescription> <https://w3id.org/idsa/core/endpointInformation> } } , "de.fraunhofer.iais.eis.util.TypedLiteral", "String"),
+        if (str(?range) = str(<xsd:string>), if(EXISTS { VALUES ?property { <https://w3id.org/idsa/core/description> <https://w3id.org/idsa/core/title> <https://w3id.org/idsa/core/keyword> <https://w3id.org/idsa/core/revocationReason> <https://w3id.org/idsa/core/contractRejectionReason> <https://w3id.org/idsa/core/activityDescription> <https://w3id.org/idsa/core/endpointInformation> } } , "TypedLiteral", "String"),
         if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
         if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
@@ -32,14 +32,18 @@ template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
 
 
         # rdf types
-        if (str(?range) = str(<rdfs:Resource>), "de.fraunhofer.iais.eis.util.RdfResource",
-        if (str(?range) = str(<rdfs:Literal>), "de.fraunhofer.iais.eis.util.TypedLiteral",
-        if (str(?range) = str(<rdf:PlainLiteral>), "de.fraunhofer.iais.eis.util.TypedLiteral", #Should not be used anywhere anymore
-        if (str(?range) = str(<rdf:langString>), "de.fraunhofer.iais.eis.util.TypedLiteral",
+        if (str(?range) = str(<rdfs:Resource>), "RdfResource",
+        if (str(?range) = str(<rdfs:Literal>), "TypedLiteral",
+        if (str(?range) = str(<rdf:PlainLiteral>), "TypedLiteral", #Should not be used anywhere anymore
+        if (str(?range) = str(<rdf:langString>), "TypedLiteral",
 
 
         # custom types
-        st:call-template(idstt:to_class_name, ?range)))))))))))))))))))))))
+        # interface or enum need to be checked!!??
+        if (bound(?instance),
+          st:call-template(idstt:to_enum_name, ?range),
+          st:call-template(idstt:to_interface_name, ?range)
+        )))))))))))))))))))))))
       )
 
 }
@@ -79,4 +83,9 @@ where {
       false
       ) AS ?refByUri
     )
+
+    OPTIONAL {
+        ?subClass rdfs:subClassOf* ?range .
+        ?instance a ?subClass .
+    }
 } LIMIT 1

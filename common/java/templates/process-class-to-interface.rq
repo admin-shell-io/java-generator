@@ -10,11 +10,11 @@ template idstt:process-class-to-interface(?class) {
 
     "\n\n"
 
-    "/**" st:call-template(idstt:anything-to-comment, ?class) "*/"
+    "/**" st:call-template(idstt:anything-to-comment, ?class) "\n*/"
     "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
     "\n@JsonSubTypes({" st:call-template(idstt:class-to-json-annotation, ?class) "})"
     "\n"
-    "public interface " st:call-template(idstt:to_class_name, ?class)
+    "public interface " st:call-template(idstt:to_interface_name, ?class)
 
     if (bound(?superClass),
         concat(" extends ", strafter(st:call-template(idstt:subclasses-to-list, ?class), ", ")),
@@ -23,20 +23,10 @@ template idstt:process-class-to-interface(?class) {
     " {\n"
 
         "\n\t// standard methods\n"
-
-        "\n\t@JsonProperty(\"@id\")"
-        "\n\t@javax.validation.constraints.NotNull URI getId();"
-		"\n\tjava.util.List<TypedLiteral> getLabel();"
-		"\n\tjava.util.List<TypedLiteral> getComment();"
-        "\n\tString toRdf();"
-        "\n"
-        "\n\t// getter and setter for generic property map"
-        "\n\tpublic java.util.Map<String,Object> getProperties();"
-        "\n\tpublic void setProperty(String property, Object value);"
-        "\n"
-        "\n\t// accessor methods as derived from information model"
-        "\n"
-
+        st:call-template(idstt:interface-default-methods)
+        
+        "\n\t// accessor methods as derived from the " st:get-title() " ontology"
+        "\n\n"
         st:call-template(idstt:properties-to-interface-methods, ?class)
 
     "\n}\n"

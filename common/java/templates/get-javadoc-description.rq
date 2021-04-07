@@ -2,12 +2,10 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix skos: <http://www.w3.org/2004/02/skos/core#>
 
-template idstt:anything-to-comment(?thing) {
+template idstt:get-javadoc-description(?thing) {
 	"\n\t" ?com
 }
 WHERE {
-    { ?thing rdfs:label ?com . }
-	UNION
 	{ ?thing rdfs:comment ?com . }
 	UNION
 	{ ?thing skos:note ?com . }

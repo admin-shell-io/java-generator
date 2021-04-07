@@ -7,11 +7,9 @@ template idstt:properties-to-interface-methods(?class) {
     # getter method signature
 
     # javadoc
-    "\t/**"
-    st:call-template(idstt:anything-to-comment, ?property)
-    "\n\t*/"
+    st:call-template(idstt:get-javadoc, ?class, ?property)
 
-	st:call-template(idstt:property-to-getter-method, ?property, ?class) ";"
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, true) ";"
 
 }
 where  {

@@ -3,19 +3,27 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template idstt:property-to-field(?property, ?class) {
 
 	"\n\t"
-	#Add javadoc
+	# Add property descriptions
 	"/**"
     st:call-template(idstt:anything-to-comment, ?property)
     "\n\t*/"
     "\n\t"
 
 	#Check if this property is NotNull or NotEmpty. If so, add appropriate annotations
-    st:call-template(idstt:property-annotation, ?class, ?property)
+    IF(STRLEN(st:call-template(idstt:property-annotation, ?class, ?property)) > 1,
+        # then
+        CONCAT(
+            st:call-template(idstt:property-annotation, ?class, ?property),
+            "\n\t"
+        ),
+        # else
+        ""
+    )
 
     "@JsonAlias({\"" st:call-template(idstt:to_full_identifier, ?property) "\", \"" st:call-template(idstt:to_java_property_name, ?property) "\"})"
     "\n\t"
 
-    " "
+    "protected "
 
 	#Turn the RDF type of the range into a java type for this field
     st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")

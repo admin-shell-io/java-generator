@@ -8,11 +8,8 @@ template idstt:properties-to-enum-methods(?class, ?superClass) {
     "\n\t@JsonIgnore"
 	"\n\t"
 
-    # visibility modifier
-    "final public "
-
     # signature
-	st:call-template(idstt:property-to-getter-method, ?property, ?class)
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
 
 	" {\n\t"
 	"\t//not implemented for enums\n\t"

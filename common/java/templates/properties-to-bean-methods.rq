@@ -6,12 +6,11 @@ template idstt:properties-to-bean-methods(?class, ?superClass) {
 
     # getter method
 
-	"\n\t"
+    # add javadoc
+    st:call-template(idstt:get-javadoc, ?class, ?property)
 
-    # visibility modifier
-    "final public "
     # signature
-	st:call-template(idstt:property-to-getter-method, ?property, ?class)
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
     # method body
 	st:call-template(idstt:getter-method-bean-body, ?property)
 

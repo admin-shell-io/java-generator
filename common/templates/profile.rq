@@ -14,3 +14,7 @@ function st:get-namespace() {
 function st:get-namespace-prefix() {
    "${ontology.namespace.prefix}"
 }
+
+function st:get-title() {
+   "${ontology.title}"
+}

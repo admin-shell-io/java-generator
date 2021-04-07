@@ -1,0 +1,37 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:bean-default-properties (?class) {
+    "\n\t@JsonProperty(\"@id\")"
+    "\n\t@JsonAlias({\"@id\", \"id\"})"
+    "\n\t@NotNull"
+    "\n\tprotected URI id;"
+    "\n"
+	
+	#Add the labels
+	"\n\t//List of all labels of this class"
+	"\n\t@JsonIgnore"
+	"\n\tprotected List<TypedLiteral> label = "
+	if(STRLEN(st:call-template(idstt:get-all-labels, ?class)) > 1,
+		#"yes": create List containing all labels, split by comma. Then remove last character, which is an unwanted comma
+		CONCAT(CONCAT("Arrays.asList(",
+		SUBSTR(str(st:call-template(idstt:get-all-labels, ?class)), 0, STRLEN(str(st:call-template(idstt:get-all-labels, ?class))) - 1)), 
+		");"),
+		#"no": create empty list
+		"Collections.emptyList();")
+	
+	"\n\n\t//List of all comments of this class"
+	"\n\t@JsonIgnore"
+	"\n\tprotected List<TypedLiteral> comment = "
+	if(STRLEN(st:call-template(idstt:get-all-comments, ?class)) > 1,
+		#"yes": create List containing all comments, split by comma. Then remove last character, which is an unwanted comma
+		CONCAT(CONCAT("Arrays.asList(",
+		SUBSTR(str(st:call-template(idstt:get-all-comments, ?class)), 0, STRLEN(str(st:call-template(idstt:get-all-comments, ?class))) - 1)), 
+		");"),
+		#"no": create empty list
+		"Collections.emptyList();")
+		
+    "\n\n\t// all classes have a generic property array"
+	"\n\t@JsonIgnore"
+    "\n\tprotected Map<String,Object> properties;"
+} 
+where {}

@@ -1,6 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:to_class_name(?class) {
+template idstt:to_interface_name(?class) {
     #In AAS, we opt for interface names starting with upper case "i"
     replace(str(?class), "^.*/([^/]+)/?", "$1")
 }

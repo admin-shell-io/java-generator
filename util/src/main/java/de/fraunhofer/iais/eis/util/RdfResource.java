@@ -1,6 +1,10 @@
 package de.fraunhofer.iais.eis.util;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import java.io.Serializable;
 import java.net.URI;
@@ -20,6 +24,7 @@ public class RdfResource implements Serializable {
     String type = null;
 
 
+    // @-properties
     // all classes have a generic property array
     @JsonIgnore
     ArrayList<Map<URI,RdfResource>> properties;

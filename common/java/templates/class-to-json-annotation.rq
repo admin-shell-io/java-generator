@@ -5,16 +5,16 @@ prefix sh: <http://www.w3.org/ns/shacl#>
 template idstt:class-to-json-annotation(?class) {
 
     if (bound(?message) && (
-        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is a abstract class")) ||
-        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is an abstract class"))
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
       ),
       # then
           "",
       # else
           concat(
               "\n@JsonSubTypes.Type(value = ",
-              st:call-template(idstt:to_class_name, ?class),
-            "Impl.class),"
+              st:call-template(idstt:to_bean_name, ?class),
+            ".class),"
           )
       )
 

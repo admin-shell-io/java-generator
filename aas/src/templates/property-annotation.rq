@@ -1,0 +1,9 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix sh: <http://www.w3.org/ns/shacl#>
+
+# No annotations for the AAS for now!
+
+template idstt:property-annotation(?class, ?property) {
+    ""
+}
+where {}

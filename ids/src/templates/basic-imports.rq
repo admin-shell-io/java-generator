@@ -1,0 +1,38 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:basic-imports {
+
+    "\nimport de.fraunhofer.iais.eis.util.*;"
+    "\nimport de.fraunhofer.iais.eis.*;"
+    "\n"
+    "\nimport javax.xml.datatype.XMLGregorianCalendar;"
+    "\nimport java.lang.String;"
+    "\nimport java.math.BigInteger;"
+    "\nimport java.net.URL;"
+    "\nimport java.net.URI;"
+    "\nimport java.util.ArrayList;"
+    "\nimport java.util.Arrays;"
+    "\nimport java.util.Collections;"
+    "\nimport java.util.HashMap;"
+    "\nimport java.util.Iterator;"
+    "\nimport java.util.List;"
+    "\nimport java.util.Map;"
+    "\nimport javax.validation.constraints.NotNull;"
+    "\nimport javax.validation.constraints.NotEmpty;"
+    "\nimport java.io.Serializable;"
+    "\n"
+    "\nimport com.fasterxml.jackson.annotation.JsonAlias;"
+    "\nimport com.fasterxml.jackson.annotation.JsonAnyGetter;"
+    "\nimport com.fasterxml.jackson.annotation.JsonAnySetter;"
+    "\nimport com.fasterxml.jackson.annotation.JsonCreator;"
+    "\nimport com.fasterxml.jackson.annotation.JsonFormat;"
+    "\nimport com.fasterxml.jackson.annotation.JsonIgnore;"
+    "\nimport com.fasterxml.jackson.annotation.JsonIgnoreProperties;"
+    "\nimport com.fasterxml.jackson.annotation.JsonInclude;"
+    "\nimport com.fasterxml.jackson.annotation.JsonProperty;"
+    "\nimport com.fasterxml.jackson.annotation.JsonSubTypes;"
+    "\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
+    "\nimport com.fasterxml.jackson.annotation.JsonTypeName;"
+}
+where {}

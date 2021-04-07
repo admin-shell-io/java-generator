@@ -5,34 +5,34 @@ prefix sh: <http://www.w3.org/ns/shacl#>
 template idstt:class-tbox(?class) {
 
     if (bound(?message) && (
-        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is a abstract class")) ||
-        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is an abstract class"))
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
       ),
       # then
           "",
       # else
           kg:write(
-              concat("/tmp/", st:call-template(idstt:to_class_name, ?class), "Impl.java"),
+              concat("/tmp/", st:call-template(idstt:to_bean_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-bean, ?class)
           )
       )
 
 
       if (bound(?message) && (
-        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is a abstract class")) ||
-        contains(str(?message), concat(st:call-template(idstt:to_class_name), " is an abstract class"))
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
       ),
       # then
           "",
       # else
           kg:write(
-              concat("/tmp/", st:call-template(idstt:to_class_name, ?class), "Builder.java"),
+              concat("/tmp/", st:call-template(idstt:to_builder_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-builder, ?class)
           )
       )
 
     kg:write(
-        concat("/tmp/", st:call-template(idstt:to_class_name, ?class), ".java"),
+        concat("/tmp/", st:call-template(idstt:to_interface_name, ?class), ".java"),
         st:call-template(idstt:process-class-to-interface, ?class)
     )
 

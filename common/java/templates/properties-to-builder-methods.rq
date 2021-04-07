@@ -11,7 +11,7 @@ template idstt:properties-to-builder-methods(?class, ?superClass) {
     "final public "
 
     # return type and name
-    st:call-template(idstt:to_class_name, ?class) "Builder "
+    st:call-template(idstt:to_builder_name, ?class) " "
 
 	st:call-template(idstt:property-to-setter-method, ?property, ?class, true)
 

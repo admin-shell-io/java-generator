@@ -1,0 +1,15 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:interface-default-methods {
+
+    "\n\t@JsonProperty(\"@id\")"
+    # "\n\t@NotNull"
+    "\n\tpublic URI getId();"
+
+    "\n\tpublic List<TypedLiteral> getLabel();"
+    
+    "\n\tpublic List<TypedLiteral> getComment();"
+    "\n"
+
+}
+where {}

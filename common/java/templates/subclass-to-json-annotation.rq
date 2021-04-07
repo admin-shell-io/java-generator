@@ -5,7 +5,7 @@ template idstt:subclass-to-json-annotation(?class) {
 
     "\n@JsonSubTypes.Type(value = "
 
-    st:call-template(idstt:to_class_name, ?subClass)
+    st:call-template(idstt:to_interface_name, ?subClass)
 
     ".class),"
 }

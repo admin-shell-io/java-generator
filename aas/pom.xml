@@ -13,6 +13,7 @@
     <artifactId>aas</artifactId>
 	
 	<properties>
+        <ontology.title>Asset Administration Shell</ontology.title>
 		<ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
 		<ontology.namespace.prefix>aas</ontology.namespace.prefix>
 	</properties>
