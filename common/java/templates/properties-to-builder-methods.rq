@@ -5,6 +5,15 @@ template idstt:properties-to-builder-methods(?class, ?superClass) {
 	# Iterates on selected properties and writes getter and setter methods
 
     "\n"
+    "\n\t/**"
+    "\n\t* This function allows setting a value for "
+    st:call-template(idstt:to_java_property_name, ?property)
+    "\n\t* @param _"
+    st:call-template(idstt:to_java_property_name, ?property)
+    "_ desired value to be set"
+    "\n\t* @return Builder object with new value for "
+    st:call-template(idstt:to_java_property_name, ?property)
+    "\n\t*/"
 	"\n\t"
 
     # visibility modifier

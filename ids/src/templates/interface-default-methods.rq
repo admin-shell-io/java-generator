@@ -2,14 +2,29 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:interface-default-methods {
 
+    "\n\t/**"
+    "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
+    "\n\t* @return ID of current object as URI"
+    "\n\t*/"
     "\n\t@JsonProperty(\"@id\")"
     "\n\t@NotNull"
     "\n\tpublic URI getId();"
-    
+
+    "\n\n\t/**"
+    "\n\t* This function retrieves a human readable label about the current class, as defined in the ontology."
+    "\n\t* This label could, for example, be used as a field heading in a user interface"
+    "\n\t* @return Human readable label"
+    "\n\t*/"
     "\n\tpublic List<TypedLiteral> getLabel();"
-    
+
+    "\n\n\t/**"
+    "\n\t* This function retrieves a human readable explanatory comment about the current class, as defined in the ontology."
+    "\n\t* This comment could, for example, be used as a tooltip in a user interface"
+    "\n\t* @return Human readable explanatory comment"
+    "\n\t*/"
     "\n\tpublic List<TypedLiteral> getComment();"
-    
+    "\n"
+
     "\n\tpublic String toRdf();"
     "\n"
     
