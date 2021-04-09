@@ -1,0 +1,74 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:enum-default-methods(?class) {
+
+    "\n\t//TODO dummy method for generic properties, should be deleted in future versions"
+    
+    "\n\tpublic Map<String,Object> getProperties() {"
+    "\n\t\treturn null ;"
+    "\n\t}"
+    "\n"
+
+    "\tpublic void setProperty(String property, Object value) {"
+    "\n\t\t//do nothing"
+    "\n\t}"
+
+    "\n\t/**"
+    "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
+    "\n\t* @return ID of current object as URI"
+    "\n\t*/"
+    "\n"
+	"\n\t@JsonIgnore"
+    "\n\tfinal public URI getId() {"
+    "\n\t\treturn id;"
+    "\n\t}"
+	"\n"
+
+    "\n\t/**"
+    "\n\t* This function retrieves a human readable label about the current class, as defined in the ontology."
+    "\n\t* This label could, for example, be used as a field heading in a user interface"
+    "\n\t* @return Human readable label"
+    "\n\t*/"
+	"\n\t@JsonIgnore"
+    "\n\tfinal public List<TypedLiteral> getLabel() {"
+    "\n\t\treturn label;"
+    "\n\t}"
+	"\n"
+
+    "\n\t/**"
+    "\n\t* This function retrieves a human readable explanatory comment about the current class, as defined in the ontology."
+    "\n\t* This comment could, for example, be used as a tooltip in a user interface"
+    "\n\t* @return Human readable explanatory comment"
+    "\n\t*/"
+	"\n\t@JsonIgnore"
+    "\n\tfinal public List<TypedLiteral> getComment() {"
+    "\n\t\treturn comment;"
+    "\n\t}"
+	"\n"
+
+    "\n\tpublic String toRdf() {"
+    "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
+    "\n\t}"
+
+    "\n"
+    "\n\t@JsonProperty(\"@id\")"
+    "\n\tfinal public URI getSerializedId() {"
+    # TODO: Use Namespaces if possible (do not hard-code IDSC!)
+    "\n\t\treturn id;"
+    "\n\t}"
+    "\n\t"
+
+    "\n"
+    "\n\t@JsonCreator"
+    "\n\tpublic static " st:call-template(idstt:to_enum_name, ?class) " deserialize(JsonNode node) {"
+    "\n\t\treturn uriInstanceMapping.get(node.has(\"@id\") ? node.get(\"@id\").textValue() : node.textValue());"
+    "\n\t}"
+
+    "\n"
+	"\n\t@Override"
+	"\n\tpublic String toString() {"
+		"\n\t\treturn id.toString();"
+	"\n\t}"
+
+}
+where {}

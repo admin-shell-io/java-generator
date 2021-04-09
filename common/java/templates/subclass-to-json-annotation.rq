@@ -1,0 +1,23 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:subclass-to-json-annotation(?class) {
+
+    group {
+        "\n\t@JsonSubTypes.Type(value = "
+
+        st:call-template(idstt:to_interface_name, ?subClass)
+
+        ".class)" ; separator = ","
+    }
+}
+WHERE {
+    ?class ^rdfs:subClassOf ?subClass.
+
+    OPTIONAL {
+        ?instance a ?subClass.
+    }
+
+    BIND( st:get-namespace() as ?ns )
+    FILTER(STRSTARTS(STR(?subClass), STR(?ns)))
+}

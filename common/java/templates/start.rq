@@ -1,0 +1,25 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix dcat: <http://www.w3.org/ns/dcat#>
+
+template st:start {
+
+    if (bound(?instance),
+        # then
+        st:call-template(idstt:class-abox, ?class),
+        # else
+        st:call-template(idstt:class-tbox, ?class)
+    )
+    
+}
+where  {
+    ?class a owl:Class.
+    OPTIONAL {
+        ?instance a ?class
+    }
+    OPTIONAL {
+        ?subClass rdfs:subClassOf* ?class .
+        ?instance a ?subClass .
+    }
+    FILTER (!isBlank(?class))
+}
+GROUP BY ?class

@@ -1,0 +1,47 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix dcat: <http://www.w3.org/ns/dcat#>
+prefix sh: <http://www.w3.org/ns/shacl#>
+
+template idstt:class-tbox(?class) {
+
+    if (bound(?message) && (
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
+      ),
+      # then
+          "",
+      # else
+          kg:write(
+              concat("/tmp/", st:call-template(idstt:to_bean_name, ?class), ".java"),
+              st:call-template(idstt:process-class-to-bean, ?class)
+          )
+      )
+
+
+      if (bound(?message) && (
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
+      ),
+      # then
+          "",
+      # else
+          kg:write(
+              concat("/tmp/", st:call-template(idstt:to_builder_name, ?class), ".java"),
+              st:call-template(idstt:process-class-to-builder, ?class)
+          )
+      )
+
+    kg:write(
+        concat("/tmp/", st:call-template(idstt:to_interface_name, ?class), ".java"),
+        st:call-template(idstt:process-class-to-interface, ?class)
+    )
+
+}
+where  {
+    ?class a owl:Class.
+
+    optional {
+        ?shape sh:targetClass ?class ;
+            sh:sparql [ sh:message ?message ] .
+    }
+}

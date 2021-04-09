@@ -4,19 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
+    <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
     <modules>
         <module>util</module>
         <module>visualization</module>
-        <module>java</module>
+        <!--<module>java-common</module>-->
+        <module>generator</module>
         <module>jsonld-context</module>
+        <module>ids</module>
+        <module>aas</module>
     </modules>
     <properties>
+        <revision>1.0.0-SNAPSHOT</revision>
         <jackson.version>2.11.2</jackson.version>
-        <revision>4.0.3-SNAPSHOT</revision>
+        <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
     </properties>
 
     <profiles>
@@ -44,17 +48,48 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
+		<profile>
+			<id>MB-AAS</id>
+			<properties>
+				<infomodel-sourcebase>
+					../aas-specs/schemas/rdf
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+		<profile>
+			<id>PNL</id>
+			<properties>
+				<infomodel-sourcebase>
+					../InformationModel
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+        <profile>
+			<id>PNL-AAS</id>
+			<properties>
+				<infomodel-sourcebase>
+					../aas-specs/schemas/rdf
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+        <profile>
+        <id>IDS</id>
+        <properties>
+            <ontology.title>IDSA Information Model</ontology.title>
+            <ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
+            <ontology.namespace.prefix>ids</ontology.namespace.prefix>
+        </properties>
+        </profile>
+        <profile>
+            <id>AAS</id>
+            <properties>
+                <ontology.title>Asset Administration Shell</ontology.title>
+                <ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
+                <ontology.namespace.prefix>aas</ontology.namespace.prefix>
+            </properties>
+        </profile>
     </profiles>
 
-    <dependencies>
-        <!-- IAIS tools -->
-        <dependency>
-            <groupId>de.fraunhofer.iais.eis</groupId>
-            <artifactId>sparql-template-executor</artifactId>
-            <version>2.3-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
 
     <distributionManagement>
         <repository>
@@ -80,6 +115,24 @@
     <build>
         <plugins>
             <!-- This plugin replaces the revision variable in the version by the actual variable value. Only required if submodules exist -->
+            <plugin>
+                <!-- Plugin to activate the generation of javadocs -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                  <source>8</source>
+                  <detectJavaApiLink>false</detectJavaApiLink>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>

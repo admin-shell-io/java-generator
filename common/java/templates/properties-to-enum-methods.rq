@@ -1,0 +1,24 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:properties-to-enum-methods(?class, ?superClass) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    "\n"
+    "\n\t@JsonIgnore"
+	"\n\t"
+
+    # signature
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
+
+	" {\n\t"
+	"\t//not implemented for enums\n\t"
+	"\tthrow new UnsupportedOperationException();\n\t"
+	"}\n\t"
+
+}
+where  {
+      {?property rdfs:domain ?superClass.}
+      UNION
+      {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
+}

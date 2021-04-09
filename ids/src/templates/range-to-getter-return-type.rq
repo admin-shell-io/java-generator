@@ -1,0 +1,12 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+# Replace in the getter signatures the ArrayList by List 
+
+template idstt:range-to-getter-return-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
+    
+    STR(?javaTypeRange)
+    
+}
+where {
+    BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">") as ?javaTypeRange)
+}

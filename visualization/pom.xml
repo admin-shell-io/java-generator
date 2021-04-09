@@ -3,13 +3,22 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>de.fraunhofer.iais.eis.ids.infomodel</groupId>
+        <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
         <artifactId>common</artifactId>
         <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>visualization</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
+            <artifactId>generator</artifactId>
+            <version>${revision}</version>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 	
 	<profiles>
         <profile>
@@ -40,6 +49,8 @@
                                         <argument>-pp</argument><argument>**/*.ttl</argument>
                                         <argument>-vd</argument><argument>${infomodel-sourcebase}/taxonomies</argument>
                                         <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
                                         <argument>-td</argument>
                                         <argument>/tmp/templates</argument>
                                     </arguments>
@@ -75,6 +86,8 @@
                                         <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
                                         <argument>-pp</argument><argument>**/model/*/*.ttl</argument>
                                         <!-- No codes, no taxonomies -->
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/testing/*/*.ttl</argument>
                                         <argument>-td</argument>
                                         <argument>/tmp/templates</argument>
                                     </arguments>
@@ -126,6 +139,7 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <filtering>true</filtering>
                                 </resource>
                             </resources>
                         </configuration>

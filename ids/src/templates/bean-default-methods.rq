@@ -1,0 +1,82 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:bean-default-methods {
+
+    "\n\t/**"
+    "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
+    "\n\t* @return ID of current object as URI"
+    "\n\t*/"
+    "\n\t@JsonProperty(\"@id\")"
+    "\n\tfinal public URI getId() {"
+    "\n\t\treturn id;"
+    "\n\t}"
+    "\n"
+
+    "\n\tpublic String toRdf() {"
+    "\n\t\treturn VocabUtil.getInstance().toRdf(this);"
+    "\n\t}"
+    "\n"
+
+    "\n\t/**"
+    "\n\t* This function retrieves a human readable label about the current class, as defined in the ontology."
+    "\n\t* This label could, for example, be used as a field heading in a user interface"
+    "\n\t* @return Human readable label"
+    "\n\t*/"
+    "\n\tpublic List<TypedLiteral> getLabel() {"
+    "\n\t\treturn this.label;"
+    "\n\t}"
+    "\n"
+
+    "\n\t/**"
+    "\n\t* This function retrieves a human readable explanatory comment about the current class, as defined in the ontology."
+    "\n\t* This comment could, for example, be used as a tooltip in a user interface"
+    "\n\t* @return Human readable explanatory comment"
+    "\n\t*/"
+    "\n\tpublic List<TypedLiteral> getComment() {"
+    "\n\t\treturn this.comment;"
+    "\n\t}"
+    "\n"
+
+    # method implementation
+
+    "\n\t// getter and setter for generic property map"
+    "\n\t@JsonAnyGetter"
+    "\n\tpublic Map<String,Object> getProperties() {"
+	"\n\t\tif (this.properties == null) return null;"
+	"\n\t\tIterator<String> iter = this.properties.keySet().iterator();"
+	"\n\t\tMap<String,Object> resultset = new HashMap<String, Object>();"
+	"\n\t\twhile (iter.hasNext()) {"
+	"\n\t\t\tString key = iter.next();"
+	"\n\t\t\tresultset.put(key,urifyObjects(this.properties.get(key)));"
+	"\n\t\t}"
+	"\n\t\treturn resultset ;"
+	"\n\t}"
+    "\n"
+	
+    "\n\tpublic Object urifyObjects(Object value) {"
+	"\n\t\tif (value instanceof String && value.toString().startsWith(\"http\")) {"
+	"\n\t\t\ttry {"
+	"\n\t\t\t\tvalue = new URI(value.toString());"
+	"\n\t\t\t} catch (Exception e) { /* do nothing */ }"
+	"\n\t\t} else if (value instanceof ArrayList) {"
+	"\n\t\t\tArrayList<Object> result_array = new ArrayList<Object>();"
+    "\n\t\t\t((ArrayList) value).forEach(x -> result_array.add(urifyObjects(x)));"
+    "\n\t\t\treturn result_array;"
+	"\n\t\t} else if (value instanceof Map) {"
+	"\n\t\t\tMap<String, Object> result_map = new HashMap<String, Object>();"
+    "\n\t\t\t((Map) value).forEach((k,v) -> result_map.put(k.toString(), urifyObjects(v)));"
+    "\n\t\t\treturn result_map;"
+	"\n\t\t}"
+	"\n\t\treturn value;"
+	"\n\t}"
+    "\n"
+    
+    "\n\t@JsonAnySetter"
+    "\n\tpublic void setProperty(String property, Object value) {"
+    "\n\t\tif (this.properties == null) this.properties = new HashMap<String,Object>();"
+    "\n\t\tif (property.startsWith(\"@\")) {return ;};"
+    "\n\t\tthis.properties.put(property, value) ;"
+    "\n\t}"
+
+}
+where {}

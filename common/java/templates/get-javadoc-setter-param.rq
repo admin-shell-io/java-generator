@@ -1,0 +1,13 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-javadoc-setter-param(?property) {
+
+    "\n\t"
+    "* @param _"
+    st:call-template(idstt:to_java_property_name, ?property)
+    "_ desired value for the property "
+    st:call-template(idstt:to_java_property_name, ?property)
+    "."
+}
+where  {
+}

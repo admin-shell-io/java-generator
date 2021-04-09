@@ -1,0 +1,12 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-javadoc(?class, ?property, ?isSetterFunction) {
+
+    "\n\t/**"
+    st:call-template(idstt:get-javadoc-description, ?property)
+    if(?isSetterFunction, st:call-template(idstt:get-javadoc-setter-param, ?property) , st:call-template(idstt:get-javadoc-return, ?class, ?property))
+    "\n\t* More information under " str(?property)
+    "\n\t*/"
+
+}
+where  {}

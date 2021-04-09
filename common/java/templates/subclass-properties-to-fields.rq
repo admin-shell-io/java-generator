@@ -1,0 +1,20 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:subclass-properties-to-fields(?class) {
+
+    # Iterates on selected properties
+    st:call-template(idstt:property-to-field, ?property, ?class)
+
+}
+where {
+    ?class a owl:Class;
+        rdfs:subClassOf* ?superClass.
+
+    {
+        ?superClass ^rdfs:domain ?property
+    } UNION {
+        ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass
+    }
+}
+group by ?property

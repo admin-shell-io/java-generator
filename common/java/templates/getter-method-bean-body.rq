@@ -1,0 +1,17 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:getter-method-bean-body(?property) {
+
+    " {"
+
+    "\n\t\treturn _"
+
+        st:call-template(idstt:to_java_property_name, ?property)
+
+     ";"
+
+    "\n\t}"
+
+}
+where {}

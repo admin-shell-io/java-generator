@@ -1,0 +1,23 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:setter-method-builder-body(?property, ?class) {
+
+    " {"
+
+    "\n\t\tthis."
+    lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2)
+    "._"
+    st:call-template(idstt:to_java_property_name, ?property)
+    " = _"
+    st:call-template(idstt:to_java_property_name, ?property)
+    "_;"
+    "\n\t\treturn this;"
+
+    "\n\t}"
+
+}
+where{
+	#don't use label or comment here. Otherwise multiple labels or comments will cause this to be executed multiple times
+    ?class a owl:Class .
+}
