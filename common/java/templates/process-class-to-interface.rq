@@ -13,11 +13,24 @@ template idstt:process-class-to-interface(?class) {
     "/**" st:call-template(idstt:anything-to-comment, ?class, false) "\n*/"
     "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
     "\n@JsonSubTypes({"
-        st:call-template(idstt:class-to-json-annotation, ?class)
-        if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
-            CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class)),
-            ""
+        
+        if (STRLEN(st:call-template(idstt:class-to-json-annotation, ?class)) > 1,
+            # there is an implementation for this interface
+            CONCAT(
+                st:call-template(idstt:class-to-json-annotation, ?class),
+                # there might also be sub interfaces -> if so, concatenate with comma
+                if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
+                    CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class)),
+                    ""
+                )
+            ),
+            # there is no implementation (abstract class), only possibly sub interfaces
+            if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
+                    st:call-template(idstt:subclass-to-json-annotation, ?class),
+                    ""
+            )
         )
+        
         
     "\n})"
     "\n"
