@@ -13,7 +13,7 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
+            <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
             <artifactId>generator</artifactId>
             <version>${revision}</version>
             <optional>true</optional>
