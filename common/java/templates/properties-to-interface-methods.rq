@@ -7,7 +7,7 @@ template idstt:properties-to-interface-methods(?class) {
     # getter method signature
 
     # javadoc
-    st:call-template(idstt:get-javadoc, ?class, ?property)
+    st:call-template(idstt:get-javadoc, ?class, ?property, false)
 
 	st:call-template(idstt:property-to-getter-method, ?property, ?class, true) ";"
 
