@@ -7,7 +7,7 @@ template idstt:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?brac
     if ( ?isArray,
         # then
         concat(
-            concat("ArrayList", str(?bracketOpen)),
+            concat("List", str(?bracketOpen)),
             concat(st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, ?isArray), str(?bracketClose))
         ),
         # else

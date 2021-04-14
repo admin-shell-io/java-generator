@@ -1,6 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:bean-default-methods {
+template idstt:bean-default-methods (?class) {
 
     "\n\t/**"
     "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
@@ -77,6 +77,9 @@ template idstt:bean-default-methods {
     "\n\t\tif (property.startsWith(\"@\")) {return ;};"
     "\n\t\tthis.properties.put(property, value) ;"
     "\n\t}"
+
+    st:call-template(idstt:get-class-to-hash-code, ?class, false)
+    st:call-template(idstt:get-class-equals, ?class, false)
 
 }
 where {}

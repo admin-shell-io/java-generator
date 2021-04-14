@@ -1,0 +1,19 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-class-equals(?class, ?forInterface) {
+
+    "\n\t/**"
+    "\n\t* This function indicates wheather some other object is equal to this one."
+    "\n\t* @param obj the reference object with which to compare."
+    "\n\t* @return true if this " st:call-template(idstt:to_class_name, ?class) " is the same as the obj argument; false otherwise."
+    "\n\t*/"
+    "\n\tpublic boolean equals(Object obj)"
+    if (?forInterface,
+        # no body for interface
+        ";",
+        # with body for bean
+        st:call-template(idstt:get-class-equals-body, ?class)
+    )
+    "\n"
+}
+WHERE  {}

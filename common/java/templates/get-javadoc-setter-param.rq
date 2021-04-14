@@ -3,9 +3,9 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template idstt:get-javadoc-setter-param(?property) {
 
     "\n\t"
-    "* @param _"
-    st:call-template(idstt:to_java_property_name, ?property)
-    "_ desired value for the property "
+    "* @param "
+    st:call-template(idstt:to_java_param_name, ?property)
+    " desired value for the property "
     st:call-template(idstt:to_java_property_name, ?property)
     "."
 }

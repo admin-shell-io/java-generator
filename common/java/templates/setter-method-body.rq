@@ -6,7 +6,7 @@ template idstt:setter-method-body(?property) {
     " {"
 
     "\n\t\t"
-    "this._" st:call-template(idstt:to_java_property_name, ?property) " = _"  st:call-template(idstt:to_java_property_name, ?property) "_;"
+    "this." st:call-template(idstt:to_java_field_name, ?property) " = "  st:call-template(idstt:to_java_param_name, ?property) ";"
     "\n\t}"
 
 }

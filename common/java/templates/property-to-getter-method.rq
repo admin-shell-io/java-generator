@@ -31,7 +31,7 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
         "final public "
     )
 
-    st:call-template(idstt:range-to-getter-return-type, ?class, ?property, ?range, "<? extends ", ">")
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
 
     " "
 

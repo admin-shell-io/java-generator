@@ -9,7 +9,7 @@ template idstt:property-to-field(?property, ?class) {
     "\n\t*/"
     "\n\t"
 
-	#Check if this property is NotNull or NotEmpty. If so, add appropriate annotations
+	# Check if this property is NotNull or NotEmpty. If so, add appropriate annotations
     IF(STRLEN(st:call-template(idstt:property-annotation, ?class, ?property)) > 1,
         # then
         CONCAT(
@@ -25,13 +25,12 @@ template idstt:property-to-field(?property, ?class) {
 
     "protected "
 
-	#Turn the RDF type of the range into a java type for this field
-    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<? extends ", ">")
+	# Turn the RDF type of the range into a java type for this field
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
 
-	#Fields are prefixed with an underscore
-    " _"
-	#The actual resulting field name in Java
-    st:call-template(idstt:to_java_property_name, ?property)
+	# Fields are prefixed with an underscore
+	# The actual resulting field name in Java
+    " " st:call-template(idstt:to_java_field_name, ?property)
     ";\n"
 }
 where  {
