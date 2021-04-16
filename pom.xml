@@ -40,6 +40,14 @@
                 </infomodel-sourcebase>
             </properties>
         </profile>
+        <profile>
+            <id>CI-AAS</id>
+            <properties>
+                <infomodel-sourcebase>
+                    aas-specs/schemas/rdf
+                </infomodel-sourcebase>
+            </properties>
+        </profile>
 		<profile>
 			<id>MB</id>
 			<properties>
