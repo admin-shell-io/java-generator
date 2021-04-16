@@ -1,6 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:interface-default-methods (class) {
+template idstt:interface-default-methods (?class) {
 
     "\n\t/**"
     "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"

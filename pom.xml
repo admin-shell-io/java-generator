@@ -52,7 +52,23 @@
 			<id>MB-AAS</id>
 			<properties>
 				<infomodel-sourcebase>
-					../aas-specs/schemas/rdf
+					../aas-specs/schemas/rdf/full
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+		<profile>
+			<id>MB-AAS-minimal</id>
+			<properties>
+				<infomodel-sourcebase>
+					../aas-specs/schemas/rdf/minimal
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+		<profile>
+			<id>MB-GAIA</id>
+			<properties>
+				<infomodel-sourcebase>
+					../gaia-x-self-descriptions/implementation/ont-combined
 				</infomodel-sourcebase>
 			</properties>
 		</profile>

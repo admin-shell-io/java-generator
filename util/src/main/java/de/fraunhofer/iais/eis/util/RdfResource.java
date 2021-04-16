@@ -31,9 +31,26 @@ public class RdfResource implements Serializable {
 
 
     public RdfResource() { super(); }
-    public RdfResource(String value) {
-        this.value = value;
+    //public RdfResource(String value) {
+    //    this.value = value;
+    //}
+
+    public RdfResource(String valueAndType) {
+        //.contains expects character sequence. Passing "^^"
+        if(valueAndType.contains("^^"))
+        {
+            //.split expects regex. "^" is meta character for "start of line", so it needs to be escaped
+            String[] splitString = valueAndType.split("\\^\\^");
+            this.value = splitString[0].replace("\"", "");
+            this.type = splitString[1];
+        }
+        else
+        {
+            this.value = valueAndType;
+            this.type = "http://www.w3.org/2001/XMLSchema#string";
+        }
     }
+
     public RdfResource(String value, URI type) {
         this.value = value;
         this.type = type.toString();
