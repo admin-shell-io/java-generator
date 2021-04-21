@@ -1,7 +1,7 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 
-template idstt:to_java_param_name(?property) {
+template idstt:to_java_param_name(?property, ?class) {
     CONCAT(CONCAT("_", st:call-template(idstt:to_java_property_name, ?property)), "_")
 }
 where {}

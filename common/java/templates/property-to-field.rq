@@ -30,7 +30,7 @@ template idstt:property-to-field(?property, ?class) {
 
 	# Fields are prefixed with an underscore
 	# The actual resulting field name in Java
-    " " st:call-template(idstt:to_java_field_name, ?property)
+    " " st:call-template(idstt:to_java_field_name, ?property, ?class)
     ";\n"
 }
 where  {

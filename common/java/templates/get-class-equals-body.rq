@@ -9,10 +9,21 @@ template idstt:get-class-equals-body(?class) {
     "\n\t\t\treturn false;"
     "\n\t\t} else if (this.getClass() != obj.getClass()) {"
     "\n\t\t\treturn false;"
-    "\n\t\t} else {"
-    "\n\t\t\t" st:call-template(idstt:to_bean_name, ?class) " other = (" st:call-template(idstt:to_bean_name, ?class) ") obj;"
-    "\n\t\t\treturn super.equals(other)" st:call-template(idstt:get-class-equals-body-properties, ?class) ";"
     "\n\t\t}"
+    
+    # if no properties are present, only check the above
+    if (bound(?hasProperties) && strlen(?hasProperties) > 1,
+        # then
+        concat(concat(concat(concat(concat(concat(concat(concat(
+            " else {\n\t\t\t",
+            st:call-template(idstt:to_bean_name, ?class)), " other = ("), st:call-template(idstt:to_bean_name, ?class)), ") obj;"),
+            "\n\t\t\treturn "), st:call-template(idstt:get-class-equals-body-properties, ?class)), ";"),
+            "\n\t\t}"),
+        # else
+        "\n\t\treturn true;"
+    )   
     "\n\t}"
 }
-WHERE  {}
+WHERE  {
+    BIND(st:call-template(idstt:list-class-properties, ?class) AS ?hasProperties)
+}

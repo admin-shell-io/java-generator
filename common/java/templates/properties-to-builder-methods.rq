@@ -7,12 +7,12 @@ template idstt:properties-to-builder-methods(?class, ?superClass) {
     "\n"
     "\n\t/**"
     "\n\t* This function allows setting a value for "
-    st:call-template(idstt:to_java_property_name, ?property)
+    st:call-template(idstt:to_java_field_name, ?property, ?superClass)
     "\n\t* @param "
-    st:call-template(idstt:to_java_param_name, ?property)
+    st:call-template(idstt:to_java_param_name, ?property, ?superClass)
     " desired value to be set"
     "\n\t* @return Builder object with new value for "
-    st:call-template(idstt:to_java_property_name, ?property)
+    st:call-template(idstt:to_java_field_name, ?property, ?superClass)
     "\n\t*/"
 	"\n\t"
 

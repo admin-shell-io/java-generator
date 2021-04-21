@@ -11,18 +11,18 @@ template idstt:interface-default-methods (?class) {
     "\n\tpublic URI getId();"
 
     "\n\n\t/**"
-    "\n\t* This function retrieves a human readable label about the current class, as defined in the ontology."
+    "\n\t* This function retrieves a human readable labels about the current class, as defined in the ontology."
     "\n\t* This label could, for example, be used as a field heading in a user interface"
-    "\n\t* @return Human readable label"
+    "\n\t* @return Human readable labels"
     "\n\t*/"
-    "\n\tpublic List<TypedLiteral> getLabel();"
+    "\n\tpublic List<TypedLiteral> getLabels();"
 
     "\n\n\t/**"
-    "\n\t* This function retrieves a human readable explanatory comment about the current class, as defined in the ontology."
+    "\n\t* This function retrieves a human readable explanatory comments about the current class, as defined in the ontology."
     "\n\t* This comment could, for example, be used as a tooltip in a user interface"
-    "\n\t* @return Human readable explanatory comment"
+    "\n\t* @return Human readable explanatory comments"
     "\n\t*/"
-    "\n\tpublic List<TypedLiteral> getComment();"
+    "\n\tpublic List<TypedLiteral> getComments();"
     "\n"
 
     st:call-template(idstt:get-class-to-hash-code, ?class, true)

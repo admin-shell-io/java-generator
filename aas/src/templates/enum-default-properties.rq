@@ -11,8 +11,8 @@ template idstt:enum-default-properties (?class) {
     "\n\t}"
     "\n"
     "\n\tprivate URI id;"
-	"\n\tprivate List<TypedLiteral> label;"
-	"\n\tprivate List<TypedLiteral> comment;"
+	"\n\tprivate List<TypedLiteral> labels;"
+	"\n\tprivate List<TypedLiteral> comments;"
 	"\n"
 
 }

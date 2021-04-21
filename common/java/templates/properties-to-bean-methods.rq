@@ -7,26 +7,26 @@ template idstt:properties-to-bean-methods(?class, ?superClass) {
     # getter method
 
     # add javadoc
-    st:call-template(idstt:get-javadoc, ?class, ?property, false)
+    # st:call-template(idstt:get-javadoc, ?class, ?property, false)
 
     # signature
 	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
     # method body
-	st:call-template(idstt:getter-method-bean-body, ?property)
+	st:call-template(idstt:getter-method-bean-body, ?property, ?superClass)
 
     # setter method
 
-    "\n\n\t"
+    "\n\t"
     # add javadoc
     # skip @return due to void function
-    st:call-template(idstt:get-javadoc, ?class, ?property, true)
+    # st:call-template(idstt:get-javadoc, ?class, ?property, true)
     # visibility modifier
     "\n\tfinal public void "
 
     st:call-template(idstt:property-to-setter-method, ?property, ?class, false)
 
     # method body
-    st:call-template(idstt:setter-method-body, ?property)
+    st:call-template(idstt:setter-method-body, ?property, ?superClass)
 
 }
 where  {

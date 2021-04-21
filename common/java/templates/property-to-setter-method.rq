@@ -6,11 +6,11 @@ template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
 
     if (?forBuilder,
         # then
-        st:call-template(idstt:property-to-builder-signature, ?property),
+        st:call-template(idstt:property-to-builder-signature, ?property, ?class),
         # else
         concat("set",
-        ucase(substr(str(st:call-template(idstt:to_java_property_name, ?property)), 1, 1)),
-        substr(str(st:call-template(idstt:to_java_property_name, ?property)), 2),
+        ucase(substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 1, 1)),
+        substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 2),
         " "))
 
     # method params
@@ -20,7 +20,7 @@ template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
         " "
 
         # parameter label
-        st:call-template(idstt:to_java_param_name, ?property)
+        st:call-template(idstt:to_java_param_name, ?property, ?class)
     ")"
 
 }

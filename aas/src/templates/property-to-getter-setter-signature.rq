@@ -1,7 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-
-template idstt:property-to-builder-signature(?property, ?class) {
+template idstt:property-to-getter-setter-signature(?property, ?class) {
     st:call-template(idstt:to_java_field_name, ?property, ?class)
 }
 where {}

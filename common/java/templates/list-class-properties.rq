@@ -1,0 +1,22 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:list-class-properties(?class) {
+
+    group { ?property ; separator = " "}
+
+}
+WHERE  {
+    OPTIONAL {
+        {
+            ?class rdfs:subClassOf* ?superClass .
+            ?property rdfs:domain ?superClass .
+        }
+        UNION
+        {   
+            ?class rdfs:subClassOf* ?superClass .
+            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass .
+        }
+    }
+}
+
+

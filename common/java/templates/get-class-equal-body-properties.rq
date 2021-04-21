@@ -2,28 +2,25 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:get-class-equals-body-properties(?class) {
 
-    if(bound(?property),
-            " ",
-            ""
-        )
-        group {
-            format {
-                "&& Objects.equals(this.%s, other.%s)"
-                ?field ?field
-            }
-            ; separator = " "}
+    group {
+        format {
+            "Objects.equals(this.%s, other.%s)"
+            ?field ?field
+        }
+        ; separator = " &&\n\t\t\t\t"}
     
 }
 WHERE  {
+    ?class rdfs:subClassOf* ?superClass .
     OPTIONAL {
         {
-            ?property rdfs:domain ?class .
-            BIND(st:call-template(idstt:to_java_field_name, ?property) as ?field )
+            ?property rdfs:domain ?superClass .
+            BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
         }
         UNION
         {   
-            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?class .
-            BIND(st:call-template(idstt:to_java_field_name, ?property) as ?field )
+            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass .
+            BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
         }
     }
 }

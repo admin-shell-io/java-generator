@@ -2,22 +2,37 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:get-class-to-hash-code(?class, ?forInterface) {
 
-    "\n\t/**"
-    "\n\t* This function returns a hash code value for the " st:call-template(idstt:to_class_name, ?class) " for the benefit of e.g. hash tables."
-    "\n\t* @return a hash code value for the " st:call-template(idstt:to_class_name, ?class)
-    "\n\t*/"
+    if (?forInterface,
+        # javadoc for interface only 
+        concat(concat(concat(concat(concat(concat(
+        "\n\t/**",
+        "\n\t* This function returns a hash code value for the "), st:call-template(idstt:to_class_name, ?class)),
+            " for the benefit of e.g. hash tables."),
+        "\n\t* @return a hash code value for the "), st:call-template(idstt:to_class_name, ?class)),
+        "\n\t*/"),
+        # no javadoc for bean
+        ""
+    )
+     
     "\n\tpublic int hashCode()"
+    
     if (?forInterface,
         # no body for interface
         ";",
         # with body for bean
         concat(concat(
-        " {\n\t\treturn Objects.hash(new Object[]{super.hashCode()",
-            st:call-template(idstt:get-class-field-names-formatted, ?class)),
-        "});\n\t}")
+            " {\n\t\treturn Objects.hash(new Object[]{",
+            if(bound(?hasProperties) && strlen(?hasProperties) > 1,
+                # then
+                st:call-template(idstt:get-class-field-names-formatted, ?class),
+                # else
+                "super.hashCode()"
+            )), "});\n\t}")
     )
     "\n"
 }
-WHERE  {}
+WHERE  {
+    BIND(st:call-template(idstt:list-class-properties, ?class) AS ?hasProperties)
+} 
 
 

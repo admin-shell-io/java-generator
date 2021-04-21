@@ -6,14 +6,14 @@ template idstt:get-javadoc-return(?class, ?property) {
     "* @return Returns the "
     IF ( CONTAINS(?javaRetType, "<"),
         # then
-        CONCAT(CONCAT(REPLACE(STRBEFORE(?javaRetType, "<"), "\"", ""), " of "), STRBEFORE(STRAFTER(?javaRetType, "<"), ">")),
+        CONCAT(CONCAT(REPLACE(STRBEFORE(?javaRetType, "<"), "\"", ""), " of "), CONCAT(STRBEFORE(STRAFTER(?javaRetType, "<"), ">"), "s")),
 
         # else
         REPLACE(?javaRetType, "\"", "")
     )
 
     " for the property "
-    st:call-template(idstt:to_java_property_name, ?property)
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
     "."
 }
 where  {

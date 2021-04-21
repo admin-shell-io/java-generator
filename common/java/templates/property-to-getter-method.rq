@@ -39,8 +39,8 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
     "get"
 
     concat(
-        ucase(substr(str(st:call-template(idstt:to_java_property_name, ?property)), 1, 1)),
-        substr(str(st:call-template(idstt:to_java_property_name, ?property)), 2),
+        ucase(substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 1, 1)),
+        substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 2),
         '()')
 
 }
