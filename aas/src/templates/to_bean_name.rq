@@ -2,8 +2,8 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:to_bean_name(?class) {
     concat(
-        replace(str(?class), "^.*[/#]([^/#]+)/?", "$1"),
-        "Impl"
+        "Default",
+        replace(str(?class), "^.*[/#]([^/#]+)/?", "$1")
     )
 }
 where {}

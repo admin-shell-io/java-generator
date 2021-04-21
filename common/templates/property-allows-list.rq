@@ -2,21 +2,17 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix sh: <http://www.w3.org/ns/shacl#>
 
-template idstt:range-to-java-type(?class, ?property, ?range, ?bracketOpen, ?bracketClose) {
+template idstt:property-allows-list(?property) {
    
     if ( ?isArray,
         # then
-        concat(
-            concat("List", str(?bracketOpen)),
-            concat(st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, ?isArray), str(?bracketClose))
-        ),
+        true,
         # else
-        st:call-template(idstt:range-to-basic-type, ?property, ?range, ?class, ?isArray)
+        false
     )
 
 }
-where {
-    ?property rdfs:range ?range.
+WHERE {
     {?property rdfs:domain/^(rdfs:subClassOf*) ?class.} UNION {
     ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first/^(rdfs:subClassOf*) ?class.}
 
@@ -39,7 +35,7 @@ where {
             ),
             # no max cardinality bound [?, *]
             true
-        ) as ?isArray
+        ) AS ?isArray
     )
 
 } LIMIT 1

@@ -1,34 +1,34 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:bean-default-methods {
+template idstt:bean-default-methods (?class) {
 
-    "\n\t/**"
-    "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
-    "\n\t* @return ID of current object as URI"
-    "\n\t*/"
+    # "\n\t/**"
+    # "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
+    # "\n\t* @return ID of current object as URI"
+    # "\n\t*/"
     "\n\t@JsonProperty(\"@id\")"
     "\n\tfinal public URI getId() {"
     "\n\t\treturn id;"
     "\n\t}"
     "\n"
 
-    "\n\t/**"
-    "\n\t* This function retrieves a human readable label about the current class, as defined in the ontology."
-    "\n\t* This label could, for example, be used as a field heading in a user interface"
-    "\n\t* @return Human readable label"
-    "\n\t*/"
-    "\n\tpublic List<TypedLiteral> getLabel() {"
-    "\n\t\treturn this.label;"
+    # "\n\t/**"
+    # "\n\t* This function retrieves a human readable labels about the current class, as defined in the ontology."
+    # "\n\t* This label could, for example, be used as a field heading in a user interface"
+    # "\n\t* @return Human readable labels"
+    # "\n\t*/"
+    "\n\tpublic List<TypedLiteral> getLabels() {"
+    "\n\t\treturn this.labels;"
     "\n\t}"
     "\n"
 
-    "\n\t/**"
-    "\n\t* This function retrieves a human readable explanatory comment about the current class, as defined in the ontology."
-    "\n\t* This comment could, for example, be used as a tooltip in a user interface"
-    "\n\t* @return Human readable explanatory comment"
-    "\n\t*/"
-    "\n\tpublic List<TypedLiteral> getComment() {"
-    "\n\t\treturn this.comment;"
+    # "\n\t/**"
+    # "\n\t* This function retrieves a human readable explanatory comment about the current class, as defined in the ontology."
+    # "\n\t* This comment could, for example, be used as a tooltip in a user interface"
+    # "\n\t* @return Human readable explanatory comments"
+    # "\n\t*/"
+    "\n\tpublic List<TypedLiteral> getComments() {"
+    "\n\t\treturn this.comments;"
     "\n\t}"
     "\n"
 
@@ -52,5 +52,7 @@ template idstt:bean-default-methods {
 	"\n\t}"
     "\n"
 
+    st:call-template(idstt:get-class-to-hash-code, ?class, false)
+    st:call-template(idstt:get-class-equals, ?class, false)
 }
 where {}

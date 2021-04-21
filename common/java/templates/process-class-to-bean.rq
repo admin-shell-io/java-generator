@@ -34,7 +34,7 @@ template idstt:process-class-to-bean(?class) {
     "\n"
     
     # add default methods for all beans
-    st:call-template(idstt:bean-default-methods)
+    st:call-template(idstt:bean-default-methods, ?class)
 
     if (STRLEN(STR(?subclassPropertyMethods)) > 1,
         CONCAT(CONCAT(CONCAT("\n\n\t// accessor method implementations as derived from the ", st:get-title()), " ontology\n\n"), STR(?subclassPropertyMethods)),

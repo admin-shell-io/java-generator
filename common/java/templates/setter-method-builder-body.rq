@@ -7,11 +7,11 @@ template idstt:setter-method-builder-body(?property, ?class) {
 
     "\n\t\tthis."
     lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2)
-    "._"
-    st:call-template(idstt:to_java_property_name, ?property)
-    " = _"
-    st:call-template(idstt:to_java_property_name, ?property)
-    "_;"
+    "."
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
+    " = "
+    st:call-template(idstt:to_java_param_name, ?property, ?class)
+    ";"
     "\n\t\treturn this;"
 
     "\n\t}"

@@ -43,7 +43,7 @@ template idstt:process-class-to-interface(?class) {
     " {\n"
 
         "\n\t// standard methods\n"
-        st:call-template(idstt:interface-default-methods)
+        st:call-template(idstt:interface-default-methods, ?class)
         
         if (STRLEN(STR(?interfacePropertyMethods)) > 1,
             CONCAT(CONCAT(CONCAT("\n\t// accessor methods as derived from the ", st:get-title()), " ontology\n\n"), STR(?interfacePropertyMethods)),

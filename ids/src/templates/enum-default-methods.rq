@@ -2,6 +2,18 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:enum-default-methods(?class) {
 
+    "\n"
+	"\n\t" st:call-template(idstt:to_enum_name, ?class) "(String id, List<TypedLiteral> label, List<TypedLiteral> comment) {"
+	"\n\t\ttry {"
+	"\n\t\t\tthis.id = new URI(id);"
+	"\n\t\t\tthis.label = label;"
+	"\n\t\t\tthis.comment = comment;"
+    "\n\t\t}"
+    "\n\t\tcatch (java.net.URISyntaxException e) {"
+    "\n\t\t\tthrow new IllegalArgumentException(e);"
+    "\n\t\t}"
+	"\n\t}"
+    
     "\n\t//TODO dummy method for generic properties, should be deleted in future versions"
     
     "\n\tpublic Map<String,Object> getProperties() {"

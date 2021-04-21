@@ -1,12 +1,12 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idstt:setter-method-body(?property) {
+template idstt:setter-method-body(?property, ?class) {
 
     " {"
 
     "\n\t\t"
-    "this._" st:call-template(idstt:to_java_property_name, ?property) " = _"  st:call-template(idstt:to_java_property_name, ?property) "_;"
+    "this." st:call-template(idstt:to_java_field_name, ?property, ?class) " = "  st:call-template(idstt:to_java_param_name, ?property, ?class) ";"
     "\n\t}"
 
 }

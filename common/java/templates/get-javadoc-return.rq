@@ -6,14 +6,14 @@ template idstt:get-javadoc-return(?class, ?property) {
     "* @return Returns the "
     IF ( CONTAINS(?javaRetType, "<"),
         # then
-        CONCAT(CONCAT(REPLACE(STRBEFORE(?javaRetType, "<"), "\"", ""), " of "), STRBEFORE(STRAFTER(?javaRetType, "extends "), ">")),
+        CONCAT(CONCAT(REPLACE(STRBEFORE(?javaRetType, "<"), "\"", ""), " of "), CONCAT(STRBEFORE(STRAFTER(?javaRetType, "<"), ">"), "s")),
 
         # else
         REPLACE(?javaRetType, "\"", "")
     )
 
     " for the property "
-    st:call-template(idstt:to_java_property_name, ?property)
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
     "."
 }
 where  {
@@ -29,5 +29,5 @@ where  {
             rdfs:range ?range .
     }
 
-    BIND( st:call-template(idstt:range-to-getter-return-type, ?superClass, ?property, ?range, "<? extends ", ">") as ?javaRetType)
+    BIND( st:call-template(idstt:range-to-java-type, ?superClass, ?property, ?range, "<", ">") as ?javaRetType)
 }
