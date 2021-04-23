@@ -11,7 +11,6 @@ template idstt:basic-imports {
     "\nimport java.math.BigInteger;"
     "\nimport java.net.URL;"
     "\nimport java.net.URI;"
-    "\nimport java.util.ArrayList;"
     "\nimport java.util.Arrays;"
     "\nimport java.util.Collections;"
     "\nimport java.util.HashMap;"
