@@ -1,0 +1,36 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-class-to-mixin(?class) {
+
+    "package de.fraunhofer.iais.eis;\n"
+
+    st:call-template(idstt:basic-imports)
+
+    "\n\npublic class " st:call-template(idstt:to_mixin_name, ?class) " extends " st:call-template(idstt:to_bean_name, ?class)
+    " {\n"
+    
+    "\n\t/**"
+    "\n\t* Your advertisement could be right here!"
+    "\n\t* Contact Fraunhofer IAIS for further information on pricing and conditions."
+    "\n\t*/\n"
+
+    # add default properties for all mixins
+
+    # "\n\n\t// instance fields as derived from the " st:get-title() " ontology\n"
+    # st:call-template(idstt:subclass-properties-to-fields, ?class)
+
+    # if (STRLEN(STR(?subclassPropertyMethods)) > 1,
+    #     CONCAT(CONCAT(CONCAT("\n\n\t// accessor method implementations as derived from the ", st:get-title()), " ontology\n\n"), STR(?subclassPropertyMethods)),
+    #     ""
+    # )
+
+    "\n}\n"
+
+}
+where{
+    ?class a owl:Class .
+
+    BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'mixin') as ?subclassPropertyMethods )
+}
+GROUP BY ?class

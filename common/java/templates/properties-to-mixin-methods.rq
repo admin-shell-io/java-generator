@@ -1,0 +1,33 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:properties-to-mixin-methods(?class, ?superClass) {
+
+    # Getter method
+    
+    # ---- TODO ---- add some annotations etc. here ...
+
+    # signature
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
+    # method body
+	st:call-template(idstt:getter-method-bean-body, ?property)
+
+    # Setter method
+
+    "\n\n\t"
+    
+    # ---- TODO ---- add some annotations etc. here ...
+    
+    # visibility modifier
+    "\n\tfinal public void "
+
+    st:call-template(idstt:property-to-setter-method, ?property, ?class, false)
+
+    # method body
+    st:call-template(idstt:setter-method-body, ?property)
+
+}
+where  {
+    {?property rdfs:domain ?superClass.}
+    UNION
+    {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
+}
