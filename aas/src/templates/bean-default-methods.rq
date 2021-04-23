@@ -34,24 +34,6 @@ template idstt:bean-default-methods (?class) {
 
     # method implementation
 
-	"\n\tpublic Object urifyObjects(Object value) {"
-	"\n\t\tif (value instanceof String && value.toString().startsWith(\"http\")) {"
-	"\n\t\t\ttry {"
-	"\n\t\t\t\tvalue = new URI(value.toString());"
-	"\n\t\t\t} catch (Exception e) { /* do nothing */ }"
-	"\n\t\t} else if (value instanceof ArrayList) {"
-	"\n\t\t\tArrayList<Object> result_array = new ArrayList<Object>();"
-    "\n\t\t\t((ArrayList) value).forEach(x -> result_array.add(urifyObjects(x)));"
-    "\n\t\t\treturn result_array;"
-	"\n\t\t} else if (value instanceof Map) {"
-	"\n\t\t\tMap<String, Object> result_map = new HashMap<String, Object>();"
-    "\n\t\t\t((Map) value).forEach((k,v) -> result_map.put(k.toString(), urifyObjects(v)));"
-    "\n\t\t\treturn result_map;"
-	"\n\t\t}"
-	"\n\t\treturn value;"
-	"\n\t}"
-    "\n"
-
     st:call-template(idstt:get-class-to-hash-code, ?class, false)
     st:call-template(idstt:get-class-equals, ?class, false)
 }
