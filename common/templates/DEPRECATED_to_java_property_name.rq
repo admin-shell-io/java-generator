@@ -1,6 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:to_java_property_name(?property) {
+template idstt:DEPRECATED_to_java_property_name(?property) {
     # We need to avoid name collisions on properties. Taking the trivial way of only using the property name
     # can cause issues, e.g. in the case of
     # http://myExample/property
