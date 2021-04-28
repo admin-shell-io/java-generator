@@ -14,7 +14,7 @@ template idstt:process-class-to-bean(?class) {
     "@JsonTypeName(\"" st:call-template(idstt:to_full_identifier, ?class) "\")"
     "\n"
     "public class " st:call-template(idstt:to_bean_name, ?class)
-    " implements Serializable, " st:call-template(idstt:to_interface_name, ?class)
+    " implements " st:call-template(idstt:to_interface_name, ?class)
 
     " {\n"
     
