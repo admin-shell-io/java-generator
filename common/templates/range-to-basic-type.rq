@@ -3,7 +3,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 prefix sh: <http://www.w3.org/ns/shacl#>
 
-template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
+template idstt:range-to-basic-type(?property, ?ontologyRange, ?class, ?isArray) {
 
     if (bound(?refByUri) && (?refByUri = true),
         "URI",
@@ -16,7 +16,7 @@ template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
         if ( str(?range) = str(<xsd:float>), if (?isArray = false, "float", "Float"),
         if ( str(?range) = str(<xsd:double>), if (?isArray = false, "double", "Double"),
         if ( str(?range) = str(<xsd:boolean>), if (?isArray = false, "boolean", "Boolean"),
-        if ( str(?range) = str(<xsd:byte>), if (?isArray = false, "byte", "Byte"),
+        if ( str(?range) = str(<xsd:byte>), if (?isArray = false, "byte[]", "Byte[]"),
         if ( str(?range) = str(<xsd:base64Binary>), if (?isArray = false, "byte[]", "Byte[]"),
 
 
@@ -48,7 +48,10 @@ template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
 
 }
 where {
-    ?property rdfs:range ?range.
+    # Get the range as defined in the ontology
+    ?property rdfs:range ?ontologyRange.
+    
+    # Check with the following three OPTIONAL blocks if there exist an object to sh:nodeKind, sh:datatype, or sh:class
     OPTIONAL {
       ?class rdfs:subClassOf* ?superClass .
       ?classShape sh:targetClass ?superClass ;
@@ -73,9 +76,10 @@ where {
         (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:class ?propertyClass .
     }
 
+    # Check if the object linked via the property is allowed to be a URI link to the Class specified by the rdfs:range
     BIND(
       IF(
-        (BOUND(?propertyType) && (?propertyType != ?range) && (?propertyType = xsd:anyURI)) ||
+        (BOUND(?propertyType) && (?propertyType != ?ontologyRange) && (?propertyType = xsd:anyURI)) ||
         (BOUND(?propertyKind) && (?propertyKind = sh:IRI)),
       # THEN
       true,
@@ -84,8 +88,32 @@ where {
       ) AS ?refByUri
     )
 
+    # Check if the range specified by the ontology is an Enum value
     OPTIONAL {
-        ?subClass rdfs:subClassOf* ?range .
+        ?subClass rdfs:subClassOf* ?ontologyRange .
         ?instance a ?subClass .
     }
+
+    # Check if the ontologyRange is a super class of the the range specified in the shacl shape by the object of sh:class
+    # If that is the case, use the range from the ontology to ensure, all necessary interface method signatures are
+    # overridden and not overloaded (which would lead to an error).
+    BIND(
+      IF(BOUND(?propertyClass),
+        st:call-template(idstt:check-subclass-relation, ?ontologyRange, ?propertyClass),
+        false
+      )
+      AS ?propertyClassIsSubclassOfRange
+    )
+    
+    # If the ontology and the shacl shapes define a range for the property, the range defined by the shapes get priority.
+    # Exception to this rule is the case where the range by the shapes is a subclass of the range by the ontology.
+    # => in this case, the ontology range gets priority as explained above.
+    BIND(
+      IF(BOUND(?propertyClass) && (?propertyClass != ?ontologyRange) && !?propertyClassIsSubclassOfRange,
+      # THEN
+      ?propertyClass,
+      # ELSE
+      ?ontologyRange
+      ) AS ?range
+    )
 } LIMIT 1
