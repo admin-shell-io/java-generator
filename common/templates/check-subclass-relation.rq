@@ -11,6 +11,6 @@ template idstt:check-subclass-relation(?superClass, ?class) {
 
 }
 WHERE {
-    BIND(st:call-template(idstt:get-subclass-relation, ?superClass, ?class) AS ?foundRelated)
-    BIND(IF(BOUND(?foundRelated), true, false) AS ?isSubclass)
+    BIND(st:call-template(idstt:get-subclass-relation, ?superClass, ?class) AS ?relationString )
+    BIND(IF(CONTAINS(STR(?relationString), "1"), true, false) AS ?isSubclass)
 }

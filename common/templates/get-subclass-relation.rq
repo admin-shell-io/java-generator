@@ -5,10 +5,10 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:get-subclass-relation(?superClass, ?class) {
 
-    true
+    group { ?isSubClass ; separator = "" }
 
 }
 WHERE {
     ?class rdfs:subClassOf* ?otherClass .
-    FILTER(?otherClass = ?superClass)
+    BIND(IF(?otherClass = ?superClass, "1", "0") AS ?isSubClass)
 }
