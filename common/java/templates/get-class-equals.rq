@@ -10,8 +10,8 @@ template idstt:get-class-equals(?class, ?forInterface) {
             "\n\t* @param obj the reference object with which to compare."),
             "\n\t* @return true if this "), st:call-template(idstt:to_class_name, ?class)), " is the same as the obj argument; false otherwise."),  
             "\n\t*/"),
-        # no javadoc for bean
-        ""
+        # no javadoc for bean, but @Override
+        "\n\t@Override"
     )
     
     "\n\tpublic boolean equals(Object obj)"
