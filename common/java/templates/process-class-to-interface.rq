@@ -12,7 +12,7 @@ template idstt:process-class-to-interface(?class) {
 
     "/**" st:call-template(idstt:anything-to-comment, ?class, false) "\n*/"
     "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
-    "\n@JsonSubTypes({"
+    "\n@KnownSubtypes({"
         
         if (STRLEN(st:call-template(idstt:class-to-json-annotation, ?class)) > 1,
             # there is an implementation for this interface
