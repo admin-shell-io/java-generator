@@ -25,8 +25,9 @@ template idstt:interface-default-methods (?class) {
     "\n\tpublic List<TypedLiteral> getComments();"
     "\n"
 
-    st:call-template(idstt:get-class-to-hash-code, ?class, true)
-    st:call-template(idstt:get-class-equals, ?class, true)
+	#This is not required on interface level, as these two methods are already provided by Java Object
+    #st:call-template(idstt:get-class-to-hash-code, ?class, true)
+    #st:call-template(idstt:get-class-equals, ?class, true)
 
 }
 where {}

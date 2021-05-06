@@ -10,8 +10,8 @@ template idstt:get-class-to-hash-code(?class, ?forInterface) {
             " for the benefit of e.g. hash tables."),
         "\n\t* @return a hash code value for the "), st:call-template(idstt:to_class_name, ?class)),
         "\n\t*/"),
-        # no javadoc for bean
-        ""
+        # no javadoc for bean, but @Override
+        "\n\t@Override"
     )
      
     "\n\tpublic int hashCode()"

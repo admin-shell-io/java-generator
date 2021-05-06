@@ -21,7 +21,6 @@ template idstt:basic-imports {
     "\nimport java.util.Objects;"
     "\nimport javax.validation.constraints.NotNull;"
     "\nimport javax.validation.constraints.NotEmpty;"
-    "\nimport java.io.Serializable;"
     "\n"
     "\nimport com.fasterxml.jackson.annotation.JsonAlias;"
     "\nimport com.fasterxml.jackson.annotation.JsonAnyGetter;"
