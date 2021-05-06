@@ -48,7 +48,7 @@ template idstt:enum-default-methods(?class) {
 	"\n"
 
     "\n"
-    "\n\t@JsonProperty(\"@id\")"
+    #"\n\t@JsonProperty(\"@id\")"
     "\n\tfinal public URI getSerializedId() {"
     # TODO: Use Namespaces if possible (do not hard-code IDSC!)
     "\n\t\treturn id;"

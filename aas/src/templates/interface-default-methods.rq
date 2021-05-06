@@ -6,7 +6,7 @@ template idstt:interface-default-methods (?class) {
     "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
     "\n\t* @return ID of current object as URI"
     "\n\t*/"
-    "\n\t@JsonProperty(\"@id\")"
+    #"\n\t@JsonProperty(\"@id\")"
     # "\n\t@NotNull"
     "\n\tpublic URI getId();"
 
