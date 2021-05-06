@@ -13,7 +13,7 @@ template idstt:class-to-json-annotation(?class) {
             "",
         # else
             concat(
-                "\n\t@JsonSubTypes.Type(value = ",
+                "\n\t@KnownSubtypes.Type(value = ",
                 st:call-template(idstt:to_bean_name, ?class),
                 ".class)"
             ) 
