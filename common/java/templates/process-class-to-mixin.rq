@@ -6,14 +6,25 @@ template idstt:process-class-to-mixin(?class) {
     "package de.fraunhofer.iais.eis;\n"
 
     st:call-template(idstt:basic-imports)
-
-    "\n\npublic class " st:call-template(idstt:to_mixin_name, ?class) " extends " st:call-template(idstt:to_bean_name, ?class)
+	"\nimport com.fasterxml.jackson.annotation.JsonTypeName;"
+	"\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
+	"\n"
+	
+	#The @JsonTypeName property. Value is just the interface name
+	concat(
+		concat(
+			"\n@JsonTypeName(\"",
+			st:call-template(idstt:to_interface_name, ?class)
+		),
+		"\")"
+	)
+	
+	#The @JsonTypeInfo property with a fixed value
+	"\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"modelType\")"
+	
+    "\npublic abstract class " st:call-template(idstt:to_mixin_name, ?class) " extends " st:call-template(idstt:to_bean_name, ?class)
     " {\n"
-    
-    "\n\t/**"
-    "\n\t* Your advertisement could be right here!"
-    "\n\t* Contact Fraunhofer IAIS for further information on pricing and conditions."
-    "\n\t*/\n"
+	
 
     # add default properties for all mixins
 
