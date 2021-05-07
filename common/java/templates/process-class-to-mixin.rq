@@ -22,7 +22,7 @@ template idstt:process-class-to-mixin(?class) {
 	#The @JsonTypeInfo property with a fixed value
 	"\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"modelType\")"
 	
-    "\npublic abstract class " st:call-template(idstt:to_mixin_name, ?class) " extends " st:call-template(idstt:to_bean_name, ?class)
+    "\npublic abstract class " st:call-template(idstt:to_mixin_name, ?class)
     " {\n"
 	
 
