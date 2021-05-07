@@ -1,0 +1,16 @@
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh: <http://www.w3.org/ns/shacl#>
+
+# Returns true if ?class is a subclass of ?superClass, else false is returned.
+
+template idstt:check-subclass-relation(?superClass, ?class) {
+
+    ?isSubclass
+
+}
+WHERE {
+    BIND(st:call-template(idstt:get-subclass-relation, ?superClass, ?class) AS ?relationString )
+    BIND(IF(CONTAINS(STR(?relationString), "1"), true, false) AS ?isSubclass)
+}

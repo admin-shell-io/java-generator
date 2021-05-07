@@ -1,0 +1,28 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix sh: <http://www.w3.org/ns/shacl#>
+prefix dash: <http://datashapes.org/dash#>
+
+template idstt:class-is-abstract(?class) {
+
+    if (bound(?message) && (
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
+        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
+        ) ||
+        bound(?isAbstract) && ?isAbstract,
+        # then
+        true,
+        # else
+        false
+      )
+}
+where  {
+    
+    optional {
+        ?shape sh:targetClass ?class ;
+            sh:sparql [ sh:message ?message ] .
+    }
+
+    # optional {
+    #     ?class dash:abstract ?isAbstract .
+    # }
+}

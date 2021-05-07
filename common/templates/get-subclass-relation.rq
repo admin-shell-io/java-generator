@@ -1,0 +1,14 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+# Helper template, only returns anything, if there is a subclass relation.
+# Not to be used directly from outside of "check-subclass-relation.rq"
+
+template idstt:get-subclass-relation(?superClass, ?class) {
+
+    group { ?isSubClass ; separator = "" }
+
+}
+WHERE {
+    ?class rdfs:subClassOf* ?otherClass .
+    BIND(IF(?otherClass = ?superClass, "1", "0") AS ?isSubClass)
+}
