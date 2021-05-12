@@ -1,0 +1,12 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:get-superclass-count(?class) {
+
+    count(?superClass)
+}
+where {
+    ?class rdfs:subClassOf ?superClass.
+    BIND( st:get-namespace() as ?ns )
+    FILTER(STRSTARTS(STR(?superClass), STR(?ns)))
+}

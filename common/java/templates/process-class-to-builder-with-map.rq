@@ -1,7 +1,7 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idstt:process-class-to-builder(?class) {
+template idstt:process-class-to-builder-with-map(?class) {
 
     "package de.fraunhofer.iais.eis;\n"
 
@@ -13,26 +13,36 @@ template idstt:process-class-to-builder(?class) {
 
     " {\n"
 
-    "\n\tprivate " st:call-template(idstt:to_bean_name, ?class) " "
-
-    lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1))
-    substr(st:call-template(idstt:to_bean_name, ?class), 2)
-
-    ";"
+    "\n\tprivate Map<String, Object> map;"
+    "\n\tprivate URI id = null;"
 
     # constructor
 
     "\n"
     "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "() {"
-    "\n\t\t"
-        lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) " = new " st:call-template(idstt:to_bean_name, ?class) "();"
+    "\n\t\tthis.map = new HashMap<>();"
     "\n\t}"
     "\n"
+
     "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "(URI id) {"
     "\n\t\t"
     "this();"
     "\n\t\t"
-    lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ".id = id;"
+    "this.id = id;"
+    "\n\t}"
+    "\n"
+
+    "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "(Map<String, Object> map) {"
+    "\n\t\tthis();"
+    "\n\t\tfor (Map.Entry<String, Object> entry : map.entrySet()){"
+    "\n\t\t\tthis.map.put(entry.getKey(), Util.clone(entry.getValue()));"
+    "\n\t\t}"
+    "\n\t}"
+    "\n"
+
+    "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "(URI id, Map<String, Object> map) {"
+    "\n\t\tthis(map);"
+    "\n\t\tthis.id = id;"
     "\n\t}"
 
     # method implementation
@@ -47,6 +57,11 @@ template idstt:process-class-to-builder(?class) {
     "\n\t* @throws ConstraintViolationException This exception is thrown, if a validator is used and a violation is found."
     "\n\t*/"
     "\n\tfinal public " st:call-template(idstt:to_interface_name, ?class) " build() throws ConstraintViolationException {"
+    "\n\t\t" st:call-template(idstt:to_bean_name, ?class) " " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2)
+        " = Util.fillInstanceFromMap(new " st:call-template(idstt:to_bean_name, ?class) "(), this.map);"
+    "\n\t\t if (this.id != null) {"
+    "\n\t\t\t " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ".id = this.id;"
+    "\n\t\t}"
     "\n\t\tVocabUtil.getInstance().validate(" lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ");"
     "\n\t\treturn " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ";"
     "\n\t}"

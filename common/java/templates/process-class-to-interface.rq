@@ -36,9 +36,11 @@ template idstt:process-class-to-interface(?class) {
     "\n"
     "public interface " st:call-template(idstt:to_interface_name, ?class)
 
+    " extends ModelClass"
+
     if (bound(?superClass),
-        concat(" extends ", st:call-template(idstt:subclasses-to-list, ?class)),
-        "")
+            concat(", ", st:call-template(idstt:subclasses-to-list, ?class)),
+            "")
 
     " {\n"
 

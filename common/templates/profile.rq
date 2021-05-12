@@ -18,3 +18,16 @@ function st:get-namespace-prefix() {
 function st:get-title() {
    "${ontology.title}"
 }
+
+function st:has-builder-with-map() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> don't create this builders ?? But test for now
+      true,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> create map based builders
+         true,
+         # default assumtion for other ontology -> currently don't use this feature
+         false
+      )
+   )
+}

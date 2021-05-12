@@ -19,10 +19,17 @@ template idstt:class-tbox(?class) {
       # then
           "",
       # else
-          kg:write(
+        if (?hasMap,
+            kg:write(
+              concat("/tmp/", st:call-template(idstt:to_builder_name, ?class), ".java"),
+              st:call-template(idstt:process-class-to-builder-with-map, ?class)
+            ),
+            kg:write(
               concat("/tmp/", st:call-template(idstt:to_builder_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-builder, ?class)
           )
+        )
+          
       )
 
 
@@ -34,6 +41,6 @@ template idstt:class-tbox(?class) {
 }
 where  {
     ?class a owl:Class.
-
+    BIND( st:has-builder-with-map() as ?hasMap )
     BIND( st:call-template(idstt:class-is-abstract, ?class) AS ?isAbstract )
 }
