@@ -1,0 +1,47 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-class-to-mixin(?class) {
+
+    "package de.fraunhofer.iais.eis;\n"
+
+    st:call-template(idstt:basic-imports)
+	"\nimport com.fasterxml.jackson.annotation.JsonTypeName;"
+	"\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
+	"\n"
+	
+	#The @JsonTypeName property. Value is just the interface name
+	concat(
+		concat(
+			"\n@JsonTypeName(\"",
+			st:call-template(idstt:to_interface_name, ?class)
+		),
+		"\")"
+	)
+	
+	#The @JsonTypeInfo property with a fixed value
+	"\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"modelType\")"
+	
+    "\npublic abstract class " st:call-template(idstt:to_mixin_name, ?class)
+    " {\n"
+	
+
+    # add default properties for all mixins
+
+    # "\n\n\t// instance fields as derived from the " st:get-title() " ontology\n"
+    # st:call-template(idstt:subclass-properties-to-fields, ?class)
+
+    # if (STRLEN(STR(?subclassPropertyMethods)) > 1,
+    #     CONCAT(CONCAT(CONCAT("\n\n\t// accessor method implementations as derived from the ", st:get-title()), " ontology\n\n"), STR(?subclassPropertyMethods)),
+    #     ""
+    # )
+
+    "\n}\n"
+
+}
+where{
+    ?class a owl:Class .
+
+    BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'mixin') as ?subclassPropertyMethods )
+}
+GROUP BY ?class

@@ -2,6 +2,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix sh: <http://www.w3.org/ns/shacl#>
 prefix dash: <http://datashapes.org/dash#>
 
+
 template idstt:class-is-abstract(?class) {
 
     if (bound(?message) && (
@@ -16,7 +17,6 @@ template idstt:class-is-abstract(?class) {
       )
 }
 where  {
-    
     optional {
         ?shape sh:targetClass ?class ;
             sh:sparql [ sh:message ?message ] .

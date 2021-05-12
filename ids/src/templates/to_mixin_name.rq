@@ -1,0 +1,9 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:to_mixin_name(?class) {
+    concat(
+        replace(str(?class), "^.*[/#]([^/#]+)/?", "$1"),
+        "Mixin"
+    )
+}
+where {}

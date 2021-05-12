@@ -10,8 +10,8 @@ template idstt:process-class-to-bean(?class) {
     "\n"
     "\n"
     "/** " st:call-template(idstt:anything-to-comment, ?class, false) " \n*/\n"
-    "@JsonIgnoreProperties(ignoreUnknown = true)\n"
-    "@JsonTypeName(\"" st:call-template(idstt:to_full_identifier, ?class) "\")"
+    #"@JsonIgnoreProperties(ignoreUnknown = true)\n"
+    #"@JsonTypeName(\"" st:call-template(idstt:to_full_identifier, ?class) "\")"
     "\n"
     "public class " st:call-template(idstt:to_bean_name, ?class)
     " implements " st:call-template(idstt:to_interface_name, ?class)

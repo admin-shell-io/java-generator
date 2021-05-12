@@ -20,7 +20,7 @@ template idstt:property-to-field(?property, ?class) {
         ""
     )
 
-    "@JsonAlias({\"" st:call-template(idstt:to_full_identifier, ?property) "\", \"" st:call-template(idstt:to_java_property_name, ?property) "\"})"
+    "@IRI(\"" st:call-template(idstt:to_full_identifier, ?property) "\")"
     "\n\t"
 
     "protected "

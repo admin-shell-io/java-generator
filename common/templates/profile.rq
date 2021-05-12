@@ -31,3 +31,16 @@ function st:has-builder-with-map() {
       )
    )
 }
+
+function st:has-mixin() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> create Mixins
+      true,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> currently not
+         false,
+         # default assumtion for other ontology -> currently not
+         false
+      )
+   )
+}

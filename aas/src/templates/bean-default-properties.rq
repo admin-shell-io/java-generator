@@ -1,8 +1,8 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:bean-default-properties (?class) {
-    "\n\t@JsonProperty(\"@id\")"
-    "\n\t@JsonAlias({\"@id\", \"id\"})"
+    #"\n\t@JsonProperty(\"@id\")"
+    #"\n\t@JsonAlias({\"@id\", \"id\"})"
     # "\n\t@NotNull"
     "\n\tprotected URI id;"
     "\n"

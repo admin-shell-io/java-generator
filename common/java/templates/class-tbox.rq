@@ -32,6 +32,15 @@ template idstt:class-tbox(?class) {
           
       )
 
+      if (?hasMixin,
+      # then
+          kg:write(
+              concat("/tmp/", st:call-template(idstt:to_mixin_name, ?class), ".java"),
+              st:call-template(idstt:process-class-to-mixin, ?class)
+          ),
+      # else
+          ""
+      )
 
     kg:write(
         concat("/tmp/", st:call-template(idstt:to_interface_name, ?class), ".java"),
@@ -43,4 +52,5 @@ where  {
     ?class a owl:Class.
     BIND( st:has-builder-with-map() as ?hasMap )
     BIND( st:call-template(idstt:class-is-abstract, ?class) AS ?isAbstract )
+    BIND( st:has-mixin() AS ?hasMixin )
 }
