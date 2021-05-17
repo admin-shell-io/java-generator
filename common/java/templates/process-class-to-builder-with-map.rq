@@ -14,7 +14,13 @@ template idstt:process-class-to-builder-with-map(?class) {
     " {\n"
 
     "\n\tprivate Map<String, Object> map;"
-    "\n\tprivate URI id = null;"
+	
+	if (?hasId,
+      # then
+          "\n\tprivate URI id = null;",
+      # else
+          ""
+      )
 
     # constructor
 
@@ -24,13 +30,18 @@ template idstt:process-class-to-builder-with-map(?class) {
     "\n\t}"
     "\n"
 
-    "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "(URI id) {"
-    "\n\t\t"
-    "this();"
-    "\n\t\t"
-    "this.id = id;"
-    "\n\t}"
-    "\n"
+	if (?hasId,
+      # then
+          CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(
+		  "\n\tpublic ", 
+		  st:call-template(idstt:to_builder_name, ?class)),
+		  "(URI id) {"),
+		  "\n\t\tthis();"),
+		  "\n\t\tthis.id = id;"),
+		  "\n\t}\n"),
+      # else
+          ""
+    )
 
     "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "(Map<String, Object> map) {"
     "\n\t\tthis();"
@@ -40,10 +51,20 @@ template idstt:process-class-to-builder-with-map(?class) {
     "\n\t}"
     "\n"
 
-    "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "(URI id, Map<String, Object> map) {"
-    "\n\t\tthis(map);"
-    "\n\t\tthis.id = id;"
-    "\n\t}"
+	
+	if (?hasId,
+      # then
+	  CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(
+			"\n\tpublic ",
+			st:call-template(idstt:to_builder_name, ?class)),
+			"(URI id, Map<String, Object> map) {"),
+		    "\n\t\tthis(map);"),
+			"\n\t\tthis.id = id;"),
+			"\n\t}"),
+      # else
+          ""
+    )
+
 
     # method implementation
 
@@ -59,14 +80,28 @@ template idstt:process-class-to-builder-with-map(?class) {
     "\n\tfinal public " st:call-template(idstt:to_interface_name, ?class) " build() throws ConstraintViolationException {"
     "\n\t\t" st:call-template(idstt:to_bean_name, ?class) " " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2)
         " = Util.fillInstanceFromMap(new " st:call-template(idstt:to_bean_name, ?class) "(), this.map);"
-    "\n\t\t if (this.id != null) {"
-    "\n\t\t\t " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ".id = this.id;"
-    "\n\t\t}"
-    "\n\t\tVocabUtil.getInstance().validate(" lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ");"
-    "\n\t\treturn " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ";"
+	if (?hasId,
+      # then
+	  CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(
+		"\n\t\t if (this.id != null) {",
+		"\n\t\t\t "),
+		lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1))),
+		substr(st:call-template(idstt:to_bean_name, ?class), 2)),
+		".id = this.id;\n\t\t}"),
+		"\n\t\tVocabUtil.getInstance().validate("),
+		lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1))),
+		substr(st:call-template(idstt:to_bean_name, ?class), 2)),
+		");"),
+		
+      # else
+          ""
+    )
+	"\n\t\treturn " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ";"
     "\n\t}"
 
     "\n}\n"
 
 }
-WHERE {}
+WHERE {
+	BIND( st:has-id-label-comment() as ?hasId )
+}

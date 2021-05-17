@@ -44,3 +44,16 @@ function st:has-mixin() {
       )
    )
 }
+
+function st:has-id-label-comment() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> no IDs, labels or comments
+      false,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> yes
+         true,
+         # default assumtion for other ontology -> follow RDF standard
+         true
+      )
+   )
+}

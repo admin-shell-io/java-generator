@@ -27,11 +27,18 @@ template idstt:process-class-to-bean(?class) {
     "\n"
     "\n\t// no manual construction"
     "\n\tprotected " st:call-template(idstt:to_bean_name, ?class) "() {"
-    "\n\t\tid = VocabUtil.getInstance().createRandomUrl(\""
-                             lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
-                             "\");"
-    "\n\t}"
-    "\n"
+	
+	if (?hasId,
+      # then
+		CONCAT(CONCAT(CONCAT("\n\t\tid = VocabUtil.getInstance().createRandomUrl(\"",
+        lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1))),
+		substr(st:call-template(idstt:to_class_name, ?class), 2)),
+		"\");"),
+	  # else
+	    ""
+	)
+	"\n\t}"
+	"\n"
     
     # add default methods for all beans
     st:call-template(idstt:bean-default-methods, ?class)
@@ -48,5 +55,6 @@ where{
     ?class a owl:Class .
 
     BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'bean') as ?subclassPropertyMethods )
+	BIND( st:has-id-label-comment() as ?hasId )
 }
 GROUP BY ?class
