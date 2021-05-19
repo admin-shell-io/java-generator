@@ -36,11 +36,28 @@ template idstt:process-class-to-interface(?class) {
     "\n"
     "public interface " st:call-template(idstt:to_interface_name, ?class)
 
-    " extends ModelClass"
+	if(?hasModelSuperclass,
+		#then
+		" extends ModelClass",
+		#else
+		""
+	)
 
-    if (bound(?superClass),
-            concat(", ", st:call-template(idstt:subclasses-to-list, ?class)),
-            "")
+    if (bound(?superClass) && ?hasModelSuperclass,
+		#then
+		", ",
+		#else
+		if(bound(?superClass),
+			" extends ",
+			""
+		)
+	)
+	if(bound(?superClass),
+		#then
+		st:call-template(idstt:subclasses-to-list, ?class),
+		#else
+		""
+	)
 
     " {\n"
 
@@ -61,7 +78,8 @@ where {
 
     BIND( st:get-namespace() as ?ns )
     BIND( st:call-template(idstt:properties-to-interface-methods, ?class) as ?interfacePropertyMethods )
-
+	BIND( st:has-superclass-of-all-classes() as ?hasModelSuperclass )
+	
 
     optional {
         ?class rdfs:subClassOf ?superClass.

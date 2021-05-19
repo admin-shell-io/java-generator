@@ -57,3 +57,29 @@ function st:has-id-label-comment() {
       )
    )
 }
+
+function st:has-superclass-of-all-classes() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> Yet unclear, possibly not
+      true,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> yes
+         true,
+         # default assumtion for other ontology -> yes
+         true
+      )
+   )
+}
+
+function st:use-langString-over-typedLiteral() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> no usage of TypedLiteral wanted
+      true,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> no, we want to use TypedLiteral instead
+         false,
+         # default assumtion for other ontology -> same as for IDS
+         false
+      )
+   )
+}

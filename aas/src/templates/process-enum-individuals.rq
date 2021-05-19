@@ -1,0 +1,30 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix dct: <http://purl.org/dc/terms/>
+
+template idstt:process-enum-individuals(?class) {
+
+	"\n\t/** "
+	st:call-template(idstt:anything-to-comment, ?individual, true)
+	"\n\t*/"
+
+    "\n\t"
+    ucase(st:call-template(idstt:to_class_name, ?individual))
+    ","
+}
+where  {
+	?classOrSubClass rdfs:subClassOf* ?class.
+	
+	optional {
+		?classIndividual a ?classOrSubClass.
+	}
+
+	optional {
+		?class (owl:oneOf/rdf:rest*/rdf:first*) ?owlIndividual.
+		?owlIndividual a ?classOrSubClass.
+		filter(!isBlank(?owlIndividual) )
+	}	
+	
+	BIND( if (bound(?owlIndividual), ?owlIndividual, ?classIndividual) as ?individual )
+}
+GROUP BY ?individual
+ORDER BY ?individual

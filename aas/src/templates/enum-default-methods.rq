@@ -2,8 +2,8 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:enum-default-methods(?class) {
 
-    "\n"
-	"\n\t" st:call-template(idstt:to_enum_name, ?class) "(String id, List<TypedLiteral> labels, List<TypedLiteral> comments) {"
+    #"\n"
+	#"\n\t" st:call-template(idstt:to_enum_name, ?class) "(String id, List<TypedLiteral> labels, List<TypedLiteral> comments) {"
 	#"\n\t\ttry {"
 	#"\n\t\t\tthis.id = new URI(id);"
 	#"\n\t\t\tthis.labels = labels;"
@@ -12,7 +12,7 @@ template idstt:enum-default-methods(?class) {
     #"\n\t\tcatch (java.net.URISyntaxException e) {"
     #"\n\t\t\tthrow new IllegalArgumentException(e);"
     #"\n\t\t}"
-	"\n\t}"
+	#"\n\t}"
 
     #"\n\t/**"
     #"\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
