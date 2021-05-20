@@ -72,6 +72,14 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
+        <profile>
+            <id>format</id>
+            <properties>
+                <infomodel-sourcebase>
+                    ../rdf
+                </infomodel-sourcebase>
+            </properties>
+        </profile>
 		<profile>
 			<id>MB-GAIA</id>
 			<properties>
