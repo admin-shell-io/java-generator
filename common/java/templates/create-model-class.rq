@@ -1,0 +1,14 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-model-class {
+
+    "package de.fraunhofer.iais.eis;\n"
+
+    "\npublic interface ModelClass {\n"
+
+    "\n\tpublic Object deepCopy();"
+
+    "\n\n}"
+
+}
+WHERE {}

@@ -8,7 +8,7 @@ template idstt:process-class-to-builder-with-map(?class) {
     st:call-template(idstt:basic-imports)
 
     "\npublic class " st:call-template(idstt:to_builder_name, ?class)
-    " extends AbstractBuilder<" st:call-template(idstt:to_interface_name, ?class) "> {\n"
+    " extends AbstractBuilder<" st:call-template(idstt:to_bean_name, ?class) "> {\n"
 	
     # constructors
 
@@ -63,7 +63,7 @@ template idstt:process-class-to-builder-with-map(?class) {
         ""
     )
     "\n\t*/"
-    "\n\tfinal public " st:call-template(idstt:to_interface_name, ?class) " build() "
+    "\n\tfinal public " st:call-template(idstt:to_bean_name, ?class) " build() "
     if(?hasId, 
         "throws ConstraintViolationException ",
         ""
