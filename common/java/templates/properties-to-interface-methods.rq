@@ -6,10 +6,18 @@ template idstt:properties-to-interface-methods(?class) {
 
     # getter method signature
 
-    # javadoc
+    # javadoc getter
     st:call-template(idstt:get-javadoc, ?class, ?property, false)
 
 	st:call-template(idstt:property-to-getter-method, ?property, ?class, true) ";"
+	
+	"\n"
+	# javadoc setter
+	st:call-template(idstt:get-javadoc, ?class, ?property, true)
+	
+	"\n\tpublic void "
+	st:call-template(idstt:property-to-setter-method, ?property, ?class, false) ";"
+	
 
 }
 where  {
