@@ -18,6 +18,7 @@ template idstt:basic-imports {
     "\nimport java.util.List;"
     "\nimport java.util.Map;"
     "\nimport java.util.Objects;"
+	"\nimport java.util.Collection;"
     # "\nimport javax.validation.constraints.NotNull;"
     # "\nimport javax.validation.constraints.NotEmpty;"
     "\n"
