@@ -14,6 +14,7 @@ template idstt:create-util {
     "import java.util.stream.Collectors;\n"
     "import javax.xml.datatype.XMLGregorianCalendar;\n"
     "import de.fraunhofer.iais.eis.util.RdfResource;\n"
+	"import de.fraunhofer.iais.eis.util.TypedLiteral;\n"
 
     "\npublic class Util {\n"
 
