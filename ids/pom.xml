@@ -68,6 +68,37 @@
                 <tmp-path>/tmp</tmp-path>
             </properties>
         </profile>
+		<profile>
+			<id>MB-GAIA</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>generate-java-sources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <classpathScope>compile</classpathScope>
+                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                                    <arguments>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+			
+		</profile>
     </profiles>
 
     <build>
