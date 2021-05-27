@@ -46,6 +46,14 @@ public class LangString implements Serializable {
         this.language = language;
     }
 
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
     //This override doesn't seem to do much...
     @Override
     public String toString() {
