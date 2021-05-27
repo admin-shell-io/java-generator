@@ -13,7 +13,7 @@ template idstt:class-to-json-annotation(?class) {
             "",
         # else
             concat(
-                "\n\t@KnownSubtypes.Type(value = ",
+                if(?useJackson, "\n\t@JsonSubTypes.Type(value = ", "\n\t@KnownSubtypes.Type(value = "),
                 st:call-template(idstt:to_bean_name, ?class),
                 ".class)"
             ) 
@@ -22,6 +22,8 @@ template idstt:class-to-json-annotation(?class) {
 }
 WHERE {
     ?class a owl:Class.
+
+    BIND(st:add-jackson-annotations() AS ?useJackson)
 
     optional {
         ?shape sh:targetClass ?class ;

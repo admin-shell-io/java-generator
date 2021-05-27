@@ -20,7 +20,22 @@ template idstt:property-to-field(?property, ?class) {
         ""
     )
 
-    "@IRI(\"" st:call-template(idstt:to_full_identifier, ?property) "\")"
+    if(?useJackson,
+        #then
+        CONCAT(
+               "@JsonAlias({\"",
+               st:call-template(idstt:to_full_identifier, ?property),
+               "\", \"",
+               st:call-template(idstt:to_java_property_name, ?property),
+               "\"})"
+        ),
+        #else
+        CONCAT(
+                "@IRI(\"",
+                st:call-template(idstt:to_full_identifier, ?property),
+                "\")"
+        )
+    )
     "\n\t"
 
     "protected "
@@ -35,4 +50,5 @@ template idstt:property-to-field(?property, ?class) {
 }
 where  {
    ?property rdfs:range ?range.
+   BIND(st:add-jackson-annotations() AS ?useJackson)
 }

@@ -10,8 +10,16 @@ template idstt:process-class-to-bean(?class) {
     "\n"
     "\n"
     "/** " st:call-template(idstt:anything-to-comment, ?class, false) " \n*/\n"
-    #"@JsonIgnoreProperties(ignoreUnknown = true)\n"
-    #"@JsonTypeName(\"" st:call-template(idstt:to_full_identifier, ?class) "\")"
+    if(?useJackson,
+        #then
+        CONCAT(
+            "@JsonIgnoreProperties(ignoreUnknown = true)\n@JsonTypeName(\"",
+            st:call-template(idstt:to_full_identifier, ?class),
+            "\")"
+        ),
+        #else
+        ""
+    )
     "\n"
     "public class " st:call-template(idstt:to_bean_name, ?class)
     " implements " st:call-template(idstt:to_interface_name, ?class)
@@ -30,10 +38,13 @@ template idstt:process-class-to-bean(?class) {
 	
 	if (?hasId,
       # then
-		CONCAT(CONCAT(CONCAT("\n\t\tid = VocabUtil.getInstance().createRandomUrl(\"",
-        lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1))),
-		substr(st:call-template(idstt:to_class_name, ?class), 2)),
-		"\");"),
+		CONCAT(
+		    "\n\t\t",
+		    "id = VocabUtil.getInstance().createRandomUrl(\"",
+            lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)),
+		    substr(st:call-template(idstt:to_class_name, ?class), 2),
+		    "\");"
+		),
 	  # else
 	    ""
 	)
@@ -44,7 +55,13 @@ template idstt:process-class-to-bean(?class) {
     st:call-template(idstt:bean-default-methods, ?class)
 
     if (STRLEN(STR(?subclassPropertyMethods)) > 1,
-        CONCAT(CONCAT(CONCAT("\n\n\t// accessor method implementations as derived from the ", st:get-title()), " ontology\n\n"), STR(?subclassPropertyMethods)),
+        CONCAT(
+            "\n\n\t",
+            "// accessor method implementations as derived from the ",
+            st:get-title(),
+            " ontology\n\n",
+            STR(?subclassPropertyMethods)
+        ),
         ""
     )
 
@@ -56,5 +73,6 @@ where{
 
     BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'bean') as ?subclassPropertyMethods )
 	BIND( st:has-id-label-comment() as ?hasId )
+    BIND(st:add-jackson-annotations() AS ?useJackson)
 }
 GROUP BY ?class

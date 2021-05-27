@@ -11,8 +11,10 @@ template idstt:process-class-to-interface(?class) {
     "\n\n"
 
     "/**" st:call-template(idstt:anything-to-comment, ?class, false) "\n*/"
-    #"\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
-    "\n@KnownSubtypes({"
+    if(?useJackson,
+        "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")\n@JsonSubTypes({",
+
+        "\n@KnownSubtypes({")
         
         if (STRLEN(st:call-template(idstt:class-to-json-annotation, ?class)) > 1,
             # there is an implementation for this interface
@@ -79,6 +81,7 @@ where {
     BIND( st:get-namespace() as ?ns )
     BIND( st:call-template(idstt:properties-to-interface-methods, ?class) as ?interfacePropertyMethods )
 	BIND( st:has-superclass-of-all-classes() as ?hasModelSuperclass )
+    BIND(st:add-jackson-annotations() AS ?useJackson)
 	
 
     optional {

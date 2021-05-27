@@ -23,7 +23,9 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
     )
 
     "\n\t"
-    concat("@IRI(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t")
+    if(?useJackson,
+        concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"),
+        concat("@IRI(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"))
     
     # visibility modifier (public for interfaces, final public for enum/impl)
     if (?isInterface,
@@ -46,4 +48,5 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
 }
 where  {
     ?property rdfs:range ?range.
+    BIND(st:add-jackson-annotations() AS ?useJackson)
 }

@@ -26,7 +26,7 @@ function st:has-builder-with-map() {
       if (contains("${ontology.namespace.prefix}", "ids"),
          # for IDS -> create map based builders
          true,
-         # default assumtion for other ontology -> currently don't use this feature
+         # default assumption for other ontology -> currently don't use this feature
          false
       )
    )
@@ -39,7 +39,7 @@ function st:has-mixin() {
       if (contains("${ontology.namespace.prefix}", "ids"),
          # for IDS -> currently not
          false,
-         # default assumtion for other ontology -> currently not
+         # default assumption for other ontology -> currently not
          false
       )
    )
@@ -52,7 +52,7 @@ function st:has-id-label-comment() {
       if (contains("${ontology.namespace.prefix}", "ids"),
          # for IDS -> yes
          true,
-         # default assumtion for other ontology -> follow RDF standard
+         # default assumption for other ontology -> follow RDF standard
          true
       )
    )
@@ -65,7 +65,7 @@ function st:has-superclass-of-all-classes() {
       if (contains("${ontology.namespace.prefix}", "ids"),
          # for IDS -> yes
          true,
-         # default assumtion for other ontology -> yes
+         # default assumption for other ontology -> yes
          true
       )
    )
@@ -78,8 +78,21 @@ function st:use-langString-over-typedLiteral() {
       if (contains("${ontology.namespace.prefix}", "ids"),
          # for IDS -> no, we want to use TypedLiteral instead
          false,
-         # default assumtion for other ontology -> same as for IDS
+         # default assumption for other ontology -> same as for IDS
          false
+      )
+   )
+}
+
+function st:add-jackson-annotations() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> no serialization specific information wanted
+      false,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> yes, RDF serializer depends on it
+         true,
+         # default assumption for other ontology -> same as for IDS
+         true
       )
    )
 }
