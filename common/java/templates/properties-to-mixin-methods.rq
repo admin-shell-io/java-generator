@@ -1,33 +1,54 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:properties-to-mixin-methods(?class, ?superClass) {
 
     # Getter method
     
     # ---- TODO ---- add some annotations etc. here ...
-
-    # signature
-	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
-    # method body
-	st:call-template(idstt:getter-method-bean-body, ?property)
+	
+	if(?allowsList, #potential plural form used
+		if(
+			STR(st:call-template(idstt:to_short_identifier, ?class))
+			!=
+			STR(st:call-template(idstt:to_java_field_name, ?property, ?class)),
+			CONCAT(
+				#getters
+				"\t@JsonProperty(\"",
+				st:call-template(idstt:to_short_identifier, ?property),
+				"\")",
+				st:call-template(idstt:property-to-getter-method, ?property, ?class, 'mixin'),
+				
+				#setters
+				"\n\n\t@JsonProperty(\"",
+				st:call-template(idstt:to_short_identifier, ?property),
+				"\")\n\tpublic void ",
+				st:call-template(idstt:property-to-setter-method, ?property, ?class, 'mixin')
+			),
+			""
+		),
+		""
+	)
 
     # Setter method
 
-    "\n\n\t"
+    #"\n\n\t"
     
     # ---- TODO ---- add some annotations etc. here ...
     
     # visibility modifier
-    "\n\tfinal public void "
+    #"\n\tfinal public void "
 
-    st:call-template(idstt:property-to-setter-method, ?property, ?class, false)
+    #st:call-template(idstt:property-to-setter-method, ?property, ?class, false)
 
     # method body
-    st:call-template(idstt:setter-method-body, ?property)
+    #st:call-template(idstt:setter-method-body, ?property)
 
 }
 where  {
     {?property rdfs:domain ?superClass.}
     UNION
     {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
+	
+	BIND( st:call-template(idstt:property-allows-list, ?property, ?class) AS ?allowsList)
 }

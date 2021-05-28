@@ -1,10 +1,10 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
+template idstt:property-to-setter-method(?property, ?class, ?syntax) {
 
     # method name
 
-    if (?forBuilder,
+    if (?syntax = 'builder',
         # then
         st:call-template(idstt:property-to-builder-signature, ?property, ?class),
         # else
@@ -22,6 +22,7 @@ template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
         # parameter label
         st:call-template(idstt:to_java_param_name, ?property, ?class)
     ")"
+	if(?syntax = 'mixin', ";", "")
 
 }
 where  {

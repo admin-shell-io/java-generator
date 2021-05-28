@@ -9,6 +9,7 @@ template idstt:process-class-to-mixin(?class) {
 	"\nimport com.fasterxml.jackson.annotation.JsonTypeName;"
 	"\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
 	"\nimport com.fasterxml.jackson.annotation.JsonSubTypes;"
+	"\nimport com.fasterxml.jackson.annotation.JsonProperty;"
 	"\n"
 	
 	#The @JsonTypeName property. Value is just the interface name
@@ -32,25 +33,24 @@ template idstt:process-class-to-mixin(?class) {
     "\npublic interface " st:call-template(idstt:to_mixin_name, ?class)
     " {\n"
 	
-
-    # add default properties for all mixins
-
-    # "\n\n\t// instance fields as derived from the " st:get-title() " ontology\n"
-    # st:call-template(idstt:subclass-properties-to-fields, ?class)
-
-    # if (STRLEN(STR(?subclassPropertyMethods)) > 1,
-    #     CONCAT(CONCAT(CONCAT("\n\n\t// accessor method implementations as derived from the ", st:get-title()), " ontology\n\n"), STR(?subclassPropertyMethods)),
-    #     ""
-    # )
+	st:call-template(idstt:properties-to-mixin-methods, ?class, ?superClass)
+	
 
     "\n}\n"
 
 }
 where{
-    ?class a owl:Class .
+    ?class a owl:Class ;
+		rdfs:subClassOf* ?superClass.
 
     #BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'mixin') as ?subclassPropertyMethods )
 	BIND (st:call-template(idstt:subclass-to-json-annotation, ?class, 'mixin') as ?subclassJsonAnnotations )
+	
+	OPTIONAL {
+		{?property rdfs:domain ?class.}
+		UNION
+		{?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?class.}
+	}
 	
 }
 GROUP BY ?class

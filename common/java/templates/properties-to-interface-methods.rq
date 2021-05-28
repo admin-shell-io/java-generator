@@ -9,14 +9,14 @@ template idstt:properties-to-interface-methods(?class) {
     # javadoc getter
     st:call-template(idstt:get-javadoc, ?class, ?property, false)
 
-	st:call-template(idstt:property-to-getter-method, ?property, ?class, true) ";"
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, 'interface') ";"
 	
 	"\n"
 	# javadoc setter
 	st:call-template(idstt:get-javadoc, ?class, ?property, true)
 	
 	"\n\tpublic void "
-	st:call-template(idstt:property-to-setter-method, ?property, ?class, false) ";"
+	st:call-template(idstt:property-to-setter-method, ?property, ?class, 'interface') ";"
 	
 
 }

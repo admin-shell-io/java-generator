@@ -23,7 +23,7 @@ template idstt:properties-to-builder-methods(?class, ?superClass) {
     st:call-template(idstt:to_builder_name, ?class) " "
 
     # method body
-	st:call-template(idstt:property-to-setter-method, ?property, ?class, true)
+	st:call-template(idstt:property-to-setter-method, ?property, ?class, 'builder')
     if (?hasMap,
         st:call-template(idstt:setter-method-builder-body-with-map, ?property, ?class),
 	    st:call-template(idstt:setter-method-builder-body, ?property, ?class)

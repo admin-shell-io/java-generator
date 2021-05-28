@@ -9,7 +9,7 @@ template idstt:properties-to-enum-methods(?class, ?superClass) {
 	"\n\t"
 
     # signature
-	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, 'enum')
 
 	" {\n\t"
 	"\t//not implemented for enums\n\t"

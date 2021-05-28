@@ -10,7 +10,7 @@ template idstt:properties-to-bean-methods(?class, ?superClass) {
     # st:call-template(idstt:get-javadoc, ?class, ?property, false)
 
     # signature
-	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, 'bean')
     # method body
 	st:call-template(idstt:getter-method-bean-body, ?property, ?superClass)
 
@@ -23,7 +23,7 @@ template idstt:properties-to-bean-methods(?class, ?superClass) {
     # visibility modifier
     "\n\tfinal public void "
 
-    st:call-template(idstt:property-to-setter-method, ?property, ?class, false)
+    st:call-template(idstt:property-to-setter-method, ?property, ?class, 'bean')
 
     # method body
     st:call-template(idstt:setter-method-body, ?property, ?superClass)

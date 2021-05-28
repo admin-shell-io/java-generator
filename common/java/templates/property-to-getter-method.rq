@@ -1,6 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
+template idstt:property-to-getter-method(?property, ?class, ?syntax) {
 
     IF(STRLEN(st:call-template(idstt:range-jackson-annotation, ?property, ?range)) > 1,
         # then
@@ -23,12 +23,14 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
     )
 
     "\n\t"
-    if(?useJackson,
-        concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"),
-        concat("@IRI(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"))
+	if(?syntax = 'mixin', "", 
+		if(?useJackson,
+			concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"),
+			concat("@IRI(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"))
+	)
     
     # visibility modifier (public for interfaces, final public for enum/impl)
-    if (?isInterface,
+    if (?syntax = 'interface' || ?syntax = 'mixin',
         "public ",
         "final public "
     )
@@ -44,6 +46,7 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
         ucase(substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 1, 1)),
         substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 2),
         '()')
+	if(?syntax = 'mixin', ";", "")
 
 }
 where  {
