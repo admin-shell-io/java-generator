@@ -21,14 +21,14 @@ template idstt:process-class-to-interface(?class) {
             CONCAT(
                 st:call-template(idstt:class-to-json-annotation, ?class),
                 # there might also be sub interfaces -> if so, concatenate with comma
-                if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
-                    CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class)),
+                if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface')) > 1,
+                    CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface')),
                     ""
                 )
             ),
             # there is no implementation (abstract class), only possibly sub interfaces
-            if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
-                    st:call-template(idstt:subclass-to-json-annotation, ?class),
+            if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface')) > 1,
+                    st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface'),
                     ""
             )
         )

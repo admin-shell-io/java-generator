@@ -8,21 +8,28 @@ template idstt:process-class-to-mixin(?class) {
     st:call-template(idstt:basic-imports)
 	"\nimport com.fasterxml.jackson.annotation.JsonTypeName;"
 	"\nimport com.fasterxml.jackson.annotation.JsonTypeInfo;"
+	"\nimport com.fasterxml.jackson.annotation.JsonSubTypes;"
 	"\n"
 	
 	#The @JsonTypeName property. Value is just the interface name
 	concat(
-		concat(
-			"\n@JsonTypeName(\"",
-			st:call-template(idstt:to_interface_name, ?class)
-		),
+		"\n@JsonTypeName(\"",
+		st:call-template(idstt:to_interface_name, ?class),
 		"\")"
 	)
 	
 	#The @JsonTypeInfo property with a fixed value
 	"\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"modelType\")"
 	
-    "\npublic abstract class " st:call-template(idstt:to_mixin_name, ?class)
+	if (STRLEN(STR(?subclassJsonAnnotations)) > 1, 
+		CONCAT(
+			"\n@JsonSubTypes({",
+			?subclassJsonAnnotations,
+			"\n})"
+		),
+		""
+	)
+    "\npublic interface " st:call-template(idstt:to_mixin_name, ?class)
     " {\n"
 	
 
@@ -42,6 +49,8 @@ template idstt:process-class-to-mixin(?class) {
 where{
     ?class a owl:Class .
 
-    BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'mixin') as ?subclassPropertyMethods )
+    #BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'mixin') as ?subclassPropertyMethods )
+	BIND (st:call-template(idstt:subclass-to-json-annotation, ?class, 'mixin') as ?subclassJsonAnnotations )
+	
 }
 GROUP BY ?class

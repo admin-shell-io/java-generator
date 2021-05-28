@@ -1,14 +1,16 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
-template idstt:subclass-to-json-annotation(?class) {
+template idstt:subclass-to-json-annotation(?class, ?target) {
 
     group {
         "\n\t"
-        if(?useJackson,
-            "@JsonSubTypes",
-            "@KnownSubtypes"
-        )
+		if(str(?target) = 'mixin', "@JsonSubTypes", #in Mixins, we always want Jackson
+			if(?useJackson,
+				"@JsonSubTypes",
+				"@KnownSubtypes"
+			)
+		)
         ".Type(value = "
 
         st:call-template(idstt:to_interface_name, ?subClass)
