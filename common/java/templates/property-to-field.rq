@@ -45,10 +45,13 @@ template idstt:property-to-field(?property, ?class) {
 
 	# Fields are prefixed with an underscore
 	# The actual resulting field name in Java
-    " " st:call-template(idstt:to_java_field_name, ?property, ?class)
+    " "
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
+    if( (STRSTARTS(?dataType, "List<")) || (STRSTARTS(?dataType, "Collection<")), " = new ArrayList<>()", "")
     ";\n"
 }
 where  {
    ?property rdfs:range ?range.
    BIND(st:add-jackson-annotations() AS ?useJackson)
+   BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">") AS ?dataType)
 }

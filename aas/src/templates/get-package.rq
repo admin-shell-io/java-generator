@@ -1,0 +1,10 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-package (?type) {
+    #if ?type = bean --> impl ... TODO
+    "io.adminshell.aas.v3.model"
+}
+where
+{
+
+}
