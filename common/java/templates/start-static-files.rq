@@ -1,5 +1,4 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template idstt:start-static-files {
 
@@ -14,6 +13,8 @@ template idstt:start-static-files {
 
     kg:write(concat("/tmp/", "Util.java"),
         st:call-template(idstt:create-util))
+
+    st:call-template(idstt:custom-static-files)
         
 }
 where  {}

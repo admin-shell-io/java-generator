@@ -1,0 +1,45 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-deserializer-interface {
+
+    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:basic-imports)
+
+
+    "\npublic interface Deserializer {\n"
+    "\n\t"
+    "public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;"
+    "\n\n\t"
+    "public AssetAdministrationShellEnvironment read(String value) throws Exception;"
+    "\n\n\t"
+    "public default AssetAdministrationShellEnvironment read(InputStream src) throws Exception {"
+    "\n\t\treturn read(src, DEFAULT_CHARSET);"
+    "\n\t}"
+
+    "\n\n\t"
+    "public default AssetAdministrationShellEnvironment read(InputStream src, Charset charset) throws Exception {"
+    "\n\t\treturn read(new BufferedReader("
+    "\n\t\t\tnew InputStreamReader(src, charset))"
+    "\n\t\t\t.lines()"
+    "\n\t\t\t.collect(Collectors.joining(System.lineSeparator())));"
+    "\n\t}"
+
+    "\n\n\t//Note that the AAS also defines a file class"
+    "\n\n\t"
+    "public default AssetAdministrationShellEnvironment read(java.io.File file, Charset charset) throws FileNotFoundException, Exception {"
+    "\n\t\treturn read(new FileInputStream(file), charset);"
+    "\n\t}"
+
+    "\n\n\t"
+    "public default AssetAdministrationShellEnvironment read(java.io.File file) throws FileNotFoundException, Exception {"
+    "\n\t\treturn read(file, DEFAULT_CHARSET);"
+    "\n\t}"
+
+    "\n\n\t"
+    "public <T> void useImplementation(Class<T> aasInterface, Class<? extends T> implementation);"
+
+    "\n\n}"
+}
+WHERE {
+    BIND( st:has-id-label-comment() as ?hasId )
+}

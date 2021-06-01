@@ -20,6 +20,23 @@ template idstt:basic-imports {
     "\nimport java.util.Map;"
     "\nimport java.util.Objects;"
 	"\nimport java.util.Collection;"
+	"\nimport java.io.OutputStream;"
+	"\nimport java.io.OutputStreamWriter;"
+	"\nimport java.io.IOException;"
+	"\nimport java.io.FileNotFoundException;"
+	"\nimport java.io.FileOutputStream;"
+
+
+	"\nimport java.io.InputStream;"
+	"\nimport java.util.stream.Collectors;"
+	"\nimport java.io.InputStreamReader;"
+	"\nimport java.io.BufferedReader;"
+	"\nimport java.io.FileInputStream;"
+
+
+
+	"\nimport java.nio.charset.Charset;"
+	"\nimport java.nio.charset.StandardCharsets;"
     # "\nimport javax.validation.constraints.NotNull;"
     # "\nimport javax.validation.constraints.NotEmpty;"
     "\n"

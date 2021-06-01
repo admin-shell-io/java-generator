@@ -1,0 +1,10 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:custom-static-files {
+    kg:write(concat("/tmp/", "Serializer.java"),
+            st:call-template(idstt:create-serializer-interface))
+    kg:write(concat("/tmp/", "Deserializer.java"),
+            st:call-template(idstt:create-deserializer-interface))
+}
+where  {}
+

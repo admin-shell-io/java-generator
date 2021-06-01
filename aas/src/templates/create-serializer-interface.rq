@@ -1,0 +1,43 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-serializer-interface {
+
+    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:basic-imports)
+
+
+    "\npublic interface Serializer {\n"
+    "\n\t"
+    "public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;"
+    "\n\n\t"
+    "public String write(AssetAdministrationShellEnvironment aasEnvironment) throws IOException;"
+    "\n\n\t"
+    "public default void write(OutputStream out, AssetAdministrationShellEnvironment aasEnvironment) throws IOException {"
+    "\n\t\twrite(out, DEFAULT_CHARSET, aasEnvironment);"
+    "\n\t}"
+
+    "\n\n\t"
+    "public default void write(OutputStream out, Charset charset, AssetAdministrationShellEnvironment aasEnvironment) throws IOException {"
+    "\n\t\ttry (OutputStreamWriter writer = new OutputStreamWriter(out, charset)) {"
+    "\n\t\t\twriter.write(write(aasEnvironment));"
+    "\n\t\t}"
+    "\n\t}"
+
+    "\n\n\t//Note that the AAS also defines a file class"
+    "\n\n\t"
+    "public default void write(java.io.File file, Charset charset, AssetAdministrationShellEnvironment aasEnvironment) throws FileNotFoundException, IOException {"
+    "\n\t\ttry (OutputStream out = new FileOutputStream(file)) {"
+    "\n\t\t\twrite(out, charset, aasEnvironment);"
+    "\n\t\t}"
+    "\n\t}"
+
+    "\n\n\t"
+    "public default void write(java.io.File file, AssetAdministrationShellEnvironment aasEnvironment) throws FileNotFoundException, IOException {"
+    "\n\t\twrite(file, DEFAULT_CHARSET, aasEnvironment);"
+    "\n\t}"
+
+    "\n\n}"
+}
+WHERE {
+    BIND( st:has-id-label-comment() as ?hasId )
+}
