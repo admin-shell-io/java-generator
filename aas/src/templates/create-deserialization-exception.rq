@@ -1,0 +1,17 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-deserialization-exception {
+
+    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:basic-imports)
+
+
+    "\npublic class DeserializationException extends Exception {\n"
+    "\n\n\t"
+    "public DeserializationException(String msg) { super(msg); }"
+    "\n\n\t"
+    "public DeserializationException(String msg, Throwable err) { super(msg, err); }"
+    "\n\n}"
+}
+WHERE {
+}

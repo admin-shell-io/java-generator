@@ -5,6 +5,10 @@ template idstt:custom-static-files {
             st:call-template(idstt:create-serializer-interface))
     kg:write(concat("/tmp/", "Deserializer.java"),
             st:call-template(idstt:create-deserializer-interface))
+    kg:write(concat("/tmp/", "SerializationException.java"),
+                st:call-template(idstt:create-serialization-exception))
+    kg:write(concat("/tmp/", "DeserializationException.java"),
+                st:call-template(idstt:create-deserialization-exception))
 }
 where  {}
 
