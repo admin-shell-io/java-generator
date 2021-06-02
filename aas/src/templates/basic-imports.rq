@@ -31,6 +31,7 @@ template idstt:basic-imports {
 	"\nimport java.io.IOException;"
 	"\nimport java.io.FileNotFoundException;"
 	"\nimport java.io.FileOutputStream;"
+	"\nimport java.io.Serializable;"
 
 
 	"\nimport java.io.InputStream;"
