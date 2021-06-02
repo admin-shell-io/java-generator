@@ -1,13 +1,13 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:custom-static-files {
-    kg:write(concat("/tmp/", "Serializer.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "Serializer.java"),
             st:call-template(idstt:create-serializer-interface))
-    kg:write(concat("/tmp/", "Deserializer.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "Deserializer.java"),
             st:call-template(idstt:create-deserializer-interface))
-    kg:write(concat("/tmp/", "SerializationException.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "SerializationException.java"),
                 st:call-template(idstt:create-serialization-exception))
-    kg:write(concat("/tmp/", "DeserializationException.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "DeserializationException.java"),
                 st:call-template(idstt:create-deserialization-exception))
 }
 where  {}

@@ -2,7 +2,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:create-util {
 
-    "package de.fraunhofer.iais.eis;\n\n"
+    st:call-template(idstt:get-package, 'interface')
 
     "import java.lang.reflect.Method;\n"
     "import java.lang.reflect.InvocationTargetException;\n"

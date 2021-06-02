@@ -96,3 +96,15 @@ function st:add-jackson-annotations() {
       )
    )
 }
+function st:default-constructor-visibility() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> builders in different module than beans
+      "public",
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> in same module, keep protected
+         "protected",
+         # default assumption for other ontology -> same as for IDS
+         "protected"
+      )
+   )
+}

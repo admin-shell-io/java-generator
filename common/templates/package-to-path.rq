@@ -1,0 +1,10 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:package-to-path(?type)  {
+    #Remove "package " and ";", then turn "." into "/"
+    REPLACE(REPLACE(REPLACE(?javaPackageString, "package ", ""), ";\n", ""), "\\.", "/")
+    "/"
+}
+where  {
+    BIND(st:call-template(idstt:get-package, ?type) AS ?javaPackageString)
+}

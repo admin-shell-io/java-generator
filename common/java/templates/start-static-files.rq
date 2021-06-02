@@ -2,16 +2,16 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:start-static-files {
 
-    kg:write(concat("/tmp/", "Builder.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), "Builder.java"),
         st:call-template(idstt:create-builder-interface))
 
-    kg:write(concat("/tmp/", "AbstractBuilder.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), "AbstractBuilder.java"),
         st:call-template(idstt:create-abstract-builder))
 
-    kg:write(concat("/tmp/", "ModelClass.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), "ModelClass.java"),
         st:call-template(idstt:create-model-class))
 
-    kg:write(concat("/tmp/", "Util.java"),
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), "Util.java"),
         st:call-template(idstt:create-util))
 
     st:call-template(idstt:custom-static-files)

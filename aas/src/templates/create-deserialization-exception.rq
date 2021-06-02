@@ -2,7 +2,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:create-deserialization-exception {
 
-    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:get-package, 'serialization')
     st:call-template(idstt:basic-imports)
 
 

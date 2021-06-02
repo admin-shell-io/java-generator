@@ -3,7 +3,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-bean(?class) {
 
-    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:get-package, 'bean')
 
     st:call-template(idstt:basic-imports)
 
@@ -33,8 +33,12 @@ template idstt:process-class-to-bean(?class) {
     st:call-template(idstt:subclass-properties-to-fields, ?class)
 
     "\n"
-    "\n\t// no manual construction"
-    "\n\tprotected " st:call-template(idstt:to_bean_name, ?class) "() {"
+    #"\n\t// no manual construction"
+    "\n\t"
+    st:default-constructor-visibility()
+    " "
+
+    st:call-template(idstt:to_bean_name, ?class) "() {"
 	
 	if (?hasId,
       # then

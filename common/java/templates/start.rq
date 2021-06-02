@@ -1,5 +1,4 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template st:start {
 

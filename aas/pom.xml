@@ -137,7 +137,7 @@
                             <outputDirectory>${basedir}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
+                                    <targetPath>${basedir}/src/main/java/</targetPath>
                                     <directory>${tmp-path}</directory>
                                     <includes>
                                         <include>**/*.java</include>
@@ -156,14 +156,12 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
+                            <directory>${basedir}/src/main/java</directory>
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
                             <excludes>
                                 <exclude>util/</exclude>
-                                <exclude>spi/</exclude>
-                                <exclude>annotation/</exclude>
                             </excludes>
                         </fileset>
                         <fileset>
@@ -254,6 +252,29 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- create required directories -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>createDirs</id>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/impl/builder"/>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/dataformat/json/mixins"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

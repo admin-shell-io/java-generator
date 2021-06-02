@@ -9,7 +9,7 @@ template idstt:class-tbox(?class) {
           "",
       # else
           kg:write(
-              concat("/tmp/", st:call-template(idstt:to_bean_name, ?class), ".java"),
+              concat("/tmp/", st:call-template(idstt:package-to-path, 'bean'), st:call-template(idstt:to_bean_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-bean, ?class)
           )
       )
@@ -21,11 +21,11 @@ template idstt:class-tbox(?class) {
       # else
         if (?hasMap,
             kg:write(
-              concat("/tmp/", st:call-template(idstt:to_builder_name, ?class), ".java"),
+              concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), st:call-template(idstt:to_builder_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-builder-with-map, ?class)
             ),
             kg:write(
-              concat("/tmp/", st:call-template(idstt:to_builder_name, ?class), ".java"),
+              concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), st:call-template(idstt:to_builder_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-builder, ?class)
           )
         )
@@ -35,7 +35,7 @@ template idstt:class-tbox(?class) {
       if (?hasMixin,
       # then
           kg:write(
-              concat("/tmp/", st:call-template(idstt:to_mixin_name, ?class), ".java"),
+              concat("/tmp/", st:call-template(idstt:package-to-path, 'mixin'), st:call-template(idstt:to_mixin_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-mixin, ?class)
           ),
       # else
@@ -43,7 +43,7 @@ template idstt:class-tbox(?class) {
       )
 
     kg:write(
-        concat("/tmp/", st:call-template(idstt:to_interface_name, ?class), ".java"),
+        concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), st:call-template(idstt:to_interface_name, ?class), ".java"),
         st:call-template(idstt:process-class-to-interface, ?class)
     )
 
