@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
-    <artifactId>java</artifactId>
+    <groupId>io.adminshell.aas</groupId>
+    <artifactId>model</artifactId>
 	
 	<properties>
         <ontology.title>Asset Administration Shell</ontology.title>
