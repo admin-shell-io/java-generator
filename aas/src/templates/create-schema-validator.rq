@@ -1,0 +1,26 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-schema-validator {
+
+    st:call-template(idstt:get-package, 'serialization')
+    st:call-template(idstt:basic-imports)
+
+    "\n\t/**"
+    "\n\t* Validator that can validate a serialized AASEnvironment according to a"
+    "\n\t* specific schema."
+    "\n\t*/"
+    "\npublic interface SchemaValidator {\n"
+    "\n\n\t"
+         "\n\t\t/**"
+         "\n\t\t* Validate a serialized AASEnvironment according to a specific Schema. Does not"
+         "\n\t\t* contain any additional validation, but is restricted to schema validation"
+         "\n\t\t* only."
+         "\n\t\t* "
+         "\n\t\t* @param serializedAASEnvironment A string-serialized AASEnvironment."
+         "\n\t\t* @return Set of validation errors. If validation succeeds, the Set is empty."
+         "\n\t\t*/"
+        "public Set<String> validateSchema(String serializedAASEnvironment);"
+    "\n\n}"
+}
+WHERE {
+}

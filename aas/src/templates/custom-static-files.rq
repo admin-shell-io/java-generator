@@ -9,6 +9,8 @@ template idstt:custom-static-files {
                 st:call-template(idstt:create-serialization-exception))
     kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "DeserializationException.java"),
                 st:call-template(idstt:create-deserialization-exception))
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "SchemaValidator.java"),
+                    st:call-template(idstt:create-schema-validator))
 }
 where  {}
 
