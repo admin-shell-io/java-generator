@@ -14,7 +14,7 @@ template idstt:create-deserializer-interface {
     "/**"
           "* Default charset that will be used when no charset is specified"
           "*/\n"
-    "public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;"
+    "Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;"
     "\n\n\t"
 
     "/**"
@@ -25,7 +25,7 @@ template idstt:create-deserializer-interface {
           "\n* @return an instance of AssetAdministrationShellEnvironment"
           "\n* @throws DeserializationException if deserialization fails"
           "*/\n"
-    "public AssetAdministrationShellEnvironment read(String value) throws DeserializationException;"
+    "AssetAdministrationShellEnvironment read(String value) throws DeserializationException;"
     "\n\n\t"
 
     "/**"
@@ -37,7 +37,7 @@ template idstt:create-deserializer-interface {
           "\n* @return an instance of AssetAdministrationShellEnvironment"
           "\n* @throws DeserializationException if deserialization fails"
           "*/\n"
-    "public default AssetAdministrationShellEnvironment read(InputStream src) throws DeserializationException {"
+    "default AssetAdministrationShellEnvironment read(InputStream src) throws DeserializationException {"
     "\n\t\treturn read(src, DEFAULT_CHARSET);"
     "\n\t}"
 
@@ -52,7 +52,7 @@ template idstt:create-deserializer-interface {
           "\n* @return an instance of AssetAdministrationShellEnvironment"
           "\n* @throws DeserializationException if deserialization fails"
           "*/\n"
-    "public default AssetAdministrationShellEnvironment read(InputStream src, Charset charset) throws DeserializationException {"
+    "default AssetAdministrationShellEnvironment read(InputStream src, Charset charset) throws DeserializationException {"
     "\n\t\treturn read(new BufferedReader("
     "\n\t\t\tnew InputStreamReader(src, charset))"
     "\n\t\t\t.lines()"
@@ -71,7 +71,7 @@ template idstt:create-deserializer-interface {
           "\n* @throws FileNotFoundException if file is not present"
           "\n* @throws DeserializationException if deserialization fails"
           "*/\n"
-    "public default AssetAdministrationShellEnvironment read(java.io.File file, Charset charset) throws FileNotFoundException, DeserializationException {"
+    "default AssetAdministrationShellEnvironment read(java.io.File file, Charset charset) throws FileNotFoundException, DeserializationException {"
     "\n\t\treturn read(new FileInputStream(file), charset);"
     "\n\t}"
 
@@ -86,7 +86,7 @@ template idstt:create-deserializer-interface {
           "\n* @throws FileNotFoundException if the file is not present"
           "\n* @throws DeserializationException if deserialization fails"
           "*/\n"
-    "public default AssetAdministrationShellEnvironment read(java.io.File file) throws FileNotFoundException, DeserializationException {"
+    "default AssetAdministrationShellEnvironment read(java.io.File file) throws FileNotFoundException, DeserializationException {"
     "\n\t\treturn read(file, DEFAULT_CHARSET);"
     "\n\t}"
 
@@ -107,7 +107,7 @@ template idstt:create-deserializer-interface {
           "\n* @param implementation the class implementing the interface that should be"
           " used for deserialization."
           "*/\n"
-    "public <T> void useImplementation(Class<T> aasInterface, Class<? extends T> implementation);"
+    "<T> void useImplementation(Class<T> aasInterface, Class<? extends T> implementation);"
 
     "\n\n}"
 }
