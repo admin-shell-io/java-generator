@@ -81,6 +81,14 @@
 			</properties>
 		</profile>
 		<profile>
+			<id>MB-MDP</id>
+			<properties>
+				<infomodel-sourcebase>
+					../mdp_infomodel/ontology
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+		<profile>
 			<id>PNL</id>
 			<properties>
 				<infomodel-sourcebase>

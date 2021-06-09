@@ -156,7 +156,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
+                            <directory>${basedir}/src/main/java/io/adminshell</directory>
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
