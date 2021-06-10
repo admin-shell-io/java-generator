@@ -80,7 +80,12 @@ template idstt:bean-default-methods (?class) {
 
     st:call-template(idstt:get-class-to-hash-code, ?class, false)
     st:call-template(idstt:get-class-equals, ?class, false)
-    st:call-template(idstt:get-class-deep-copy, ?class)
+    if(?hasMap,
+        st:call-template(idstt:get-class-deep-copy, ?class),
+        ""
+    )
 
 }
-where {}
+where {
+    BIND( st:has-builder-with-map() as ?hasMap )
+}

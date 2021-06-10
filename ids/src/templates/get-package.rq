@@ -1,7 +1,7 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:get-package (?type) {
-    "de.fraunhofer.iais.eis"
+    "package de.fraunhofer.iais.eis;\n"
 }
 where
 {

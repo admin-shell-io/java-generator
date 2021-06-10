@@ -21,11 +21,24 @@ function st:get-title() {
 
 function st:has-builder-with-map() {
    if (contains("${ontology.namespace.prefix}", "aas"),
-      # for AAS -> don't create this builders ?? But test for now
+      # for AAS -> don't create this builders
+      false,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> don't create this builders
+         false,
+         # default assumption for other ontology -> currently don't use this feature
+         false
+      )
+   )
+}
+
+function st:has-extendable-builder() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> use this builder approach
       true,
       if (contains("${ontology.namespace.prefix}", "ids"),
-         # for IDS -> create map based builders
-         true,
+         # for IDS -> don't create this builders
+         false,
          # default assumption for other ontology -> currently don't use this feature
          false
       )
@@ -60,8 +73,8 @@ function st:has-id-label-comment() {
 
 function st:has-superclass-of-all-classes() {
    if (contains("${ontology.namespace.prefix}", "aas"),
-      # for AAS -> Yet unclear, possibly not
-      true,
+      # for AAS -> no
+      false,
       if (contains("${ontology.namespace.prefix}", "ids"),
          # for IDS -> yes
          true,

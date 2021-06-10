@@ -1,0 +1,18 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:static-builder-in-bean(?class) {
+    
+    "\n\tpublic static class Builder extends " st:call-template(idstt:to_builder_name, ?class) "<" st:call-template(idstt:to_bean_name, ?class) ", Builder> {"
+    "\n"
+    "\n\t\t@Override"
+    "\n\t\tprotected Builder getSelf() {"
+    "\n\t\t\treturn this;"
+    "\n\t}"
+    "\n"
+    "\n\t\t@Override"
+    "\n\t\tprotected " st:call-template(idstt:to_bean_name, ?class) " newBuildingInstance() {"
+    "\n\t\t\treturn new " st:call-template(idstt:to_bean_name, ?class) "();"
+    "\n\t\t}"
+    "\n\t}"
+}
+where {}

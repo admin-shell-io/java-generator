@@ -69,6 +69,11 @@ template idstt:process-class-to-bean(?class) {
         ""
     )
 
+    if(?hasExtendable,
+        st:call-template(idstt:static-builder-in-bean, ?class),
+        ""
+    )
+
     "\n}\n"
 
 }
@@ -78,5 +83,6 @@ where{
     BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'bean') as ?subclassPropertyMethods )
 	BIND( st:has-id-label-comment() as ?hasId )
     BIND(st:add-jackson-annotations() AS ?useJackson)
+    BIND( st:has-extendable-builder() as ?hasExtendable )
 }
 GROUP BY ?class

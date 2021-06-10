@@ -9,79 +9,15 @@ template idstt:process-class-to-abstract-builder(?class) {
 
     "\n"
     "\n"
-    if(BOUND(?superClassCount) && STRLEN(STR(?superClassCount)) > 0 && ?superClassCount > 1,
-        CONCAT(CONCAT("// No Builder inheritance possible due to multiple (", ?superClassCount), ") super classes.\n"),
-        ""
-    )
+    "public abstract class " st:call-template(idstt:to_builder_name, ?class) "<T extends " st:call-template(idstt:to_interface_name, ?class)
+        ", B extends " st:call-template(idstt:to_builder_name, ?class) "<T, B>> extends ExtendableBuilder<T, B> {"
 
-    "public class " st:call-template(idstt:to_builder_name, ?class)
-
-    st:call-template(idstt:builder-inheritance-list, ?class)
-    
-    " {\n"
-
-    "\n\tprivate " st:call-template(idstt:to_bean_name, ?class) " "
-
-    lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1))
-    substr(st:call-template(idstt:to_bean_name, ?class), 2)
-
-    ";"
-
-    # constructor
-
-    "\n"
-    "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "() {"
-    "\n\t\t"
-        lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) " = new " st:call-template(idstt:to_bean_name, ?class) "();"
-    "\n\t}"
-    "\n"
-    "\n\tpublic " st:call-template(idstt:to_builder_name, ?class) "(URI id) {"
-    "\n\t\t"
-    "this();"
-    "\n\t\t"
-    lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ".id = id;"
-    "\n\t}"
 
     # method implementation
-    # only use properties defined by the class itself, not those of superclasses?
     
-    
-    if(BOUND(?superClassCount) && STRLEN(STR(?superClassCount)) > 0 && ?superClassCount < 2,
-        # THEN
-        # if zero superclasses -> no diff
-        # if one superclass -> methods are defined via inheritance
-        st:call-template(idstt:properties-to-builder-methods, ?class, ?class),
-        # ELSE
-        # if more than two superclasses -> need to define props from superclasses as well
-        st:call-template(idstt:subclass-properties-to-methods, ?class, 'builder')
-    )
-    
-
-    # build method
-
-    "\n\n\t/**"
-    "\n\t* This function takes the values that were set previously via the other functions of this class and turns them into a Java bean."
-    "\n\t* @return Bean with specified values"
-    "\n\t* @throws ConstraintViolationException This exception is thrown, if a validator is used and a violation is found."
-    "\n\t*/"
-    "\n\tpublic " st:call-template(idstt:to_interface_name, ?class) " build() throws ConstraintViolationException {"
-    if(?isAbstract,
-        # THEN
-        CONCAT(CONCAT("\n\t\tthrow new NotImplementedException(\"The Builder.build() method for the abstract class ", 
-            st:call-template(idstt:to_interface_name, ?class)), " cannot be called directly! Use the builder of a subclass!\");;"),
-        # ELSE
-        CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(CONCAT(
-            "\n\t\tVocabUtil.getInstance().validate(", 
-            lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1))), substr(st:call-template(idstt:to_bean_name, ?class), 2)), ");"),
-            "\n\t\treturn "), lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1))), substr(st:call-template(idstt:to_bean_name, ?class), 2)), ";")
-    )      
-    
-    "\n\t}"
+    st:call-template(idstt:subclass-properties-to-methods, ?class, 'builder')
 
     "\n}\n"
 
 }
-WHERE {
-    BIND(st:call-template(idstt:get-superclass-count, ?class) AS ?superClassCount)
-    BIND(st:call-template(idstt:class-is-abstract, ?class) AS ?isAbstract)
-}
+WHERE {}

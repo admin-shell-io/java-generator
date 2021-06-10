@@ -1,0 +1,27 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:setter-method-builder-single-item-signature(?property, ?class, ?range) {
+    
+    "\n"
+    "\n\t/**"
+    "\n\t* This function allows adding a value to the List "
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
+    "\n\t* @param "
+    st:call-template(idstt:to_java_property_name, ?property)
+    " desired value to be added"
+    "\n\t* @return Builder object with new value for "
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
+    "\n\t*/"
+	"\n\t"
+    
+    "public "
+
+    if(?hasExtendable,
+        "B ",
+        concat(st:call-template(idstt:to_builder_name, ?class), " ")
+    )
+    st:call-template(idstt:to_java_property_name, ?property) "(" IRI(?range) " " st:call-template(idstt:to_java_property_name, ?property) ")"
+}
+where {
+    BIND( st:has-extendable-builder() as ?hasExtendable )
+}

@@ -13,6 +13,13 @@ template idstt:custom-static-files {
                     st:call-template(idstt:create-schema-validator))
     kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), "LangString.java"),
                     st:call-template(idstt:create-lang-string))
+
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), "Builder.java"),
+        st:call-template(idstt:create-builder-interface))
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), "AbstractBuilder.java"),
+            st:call-template(idstt:create-abstract-builder))
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), "ExtendableBuilder.java"),
+            st:call-template(idstt:create-extendable-builder))
 }
 where  {}
 

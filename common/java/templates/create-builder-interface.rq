@@ -2,26 +2,12 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:create-builder-interface {
 
-    st:call-template(idstt:get-package, 'interface')
-
-    "\nimport java.util.Map;\n"
-
-    if(?hasId,
-        "import de.fraunhofer.iais.eis.util.*;\n",
-        ""
-    )
+    st:call-template(idstt:get-package, 'builder')
 
     "\npublic interface Builder<T> {\n"
 
-    "\n\tT build()"
-    if(?hasId,
-        " throws ConstraintViolationException;",
-        ";"
-    )
-    "\n\tMap<String, Object> getValueMap();"
+    "\n\tpublic T build();"
 
     "\n\n}"
 }
-WHERE {
-    BIND( st:has-id-label-comment() as ?hasId )
-}
+WHERE {}

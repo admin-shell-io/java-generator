@@ -6,9 +6,14 @@ template idstt:create-model-class {
 
     "\npublic interface ModelClass {\n"
 
-    "\n\tpublic Object deepCopy();"
+    if(?hasMap,
+        "\n\tpublic Object deepCopy();",
+        ""
+    )
 
     "\n\n}"
 
 }
-WHERE {}
+WHERE {
+    BIND( st:has-builder-with-map() as ?hasMap )
+}
