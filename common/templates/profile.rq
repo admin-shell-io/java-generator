@@ -47,8 +47,8 @@ function st:has-extendable-builder() {
 
 function st:has-mixin() {
    if (contains("${ontology.namespace.prefix}", "aas"),
-      # for AAS -> create Mixins
-      true,
+      # As of now, Mixins are no longer required
+      false,
       if (contains("${ontology.namespace.prefix}", "ids"),
          # for IDS -> currently not
          false,
