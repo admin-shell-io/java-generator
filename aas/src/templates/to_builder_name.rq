@@ -2,7 +2,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:to_builder_name(?class) {
     concat(
-        st:call-template(idstt:to_bean_name, ?class),
+        st:call-template(idstt:to_interface_name, ?class),
         "Builder"
     )
 }

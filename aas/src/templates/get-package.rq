@@ -5,7 +5,7 @@ template idstt:get-package (?type) {
     if(str(?type) = 'interface', "io.adminshell.aas.v3.model",
     if(str(?type) = 'bean', "io.adminshell.aas.v3.model.impl",
     if(str(?type) = 'mixin', "io.adminshell.aas.v3.dataformat.json.mixins",
-    if(str(?type) = 'builder', "io.adminshell.aas.v3.model.impl.builder",
+    if(str(?type) = 'builder', "io.adminshell.aas.v3.model.builder",
     if(str(?type) = 'serialization', "io.adminshell.aas.v3.dataformat",
     if(str(?type) = 'enum', "io.adminshell.aas.v3.model",
     "io.adminshell.aas.v3.model" #default
