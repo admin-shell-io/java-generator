@@ -9,7 +9,9 @@ template idstt:process-class-to-bean(?class) {
 
     "\n"
     "\n"
-    "/** \n\t* Default implementation of " st:call-template(idstt:to_interface_name, ?class)
+    "/** \n\t* Default implementation of "
+	SUBSTR(?package, 1, STRLEN(?package) - 2) "."
+	st:call-template(idstt:to_interface_name, ?class)
 	"\n\t" st:call-template(idstt:anything-to-comment, ?class, false) " \n*/\n"
     if(?useJackson,
         #then
@@ -85,5 +87,6 @@ where{
 	BIND( st:has-id-label-comment() as ?hasId )
     BIND(st:add-jackson-annotations() AS ?useJackson)
     BIND( st:has-extendable-builder() as ?hasExtendable )
+	BIND( st:call-template(idstt:get-package, 'interface') AS ?package )
 }
 GROUP BY ?class
