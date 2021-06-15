@@ -8,7 +8,7 @@ template idstt:anything-to-comment(?thing, ?hasIndentation) {
 			"\n\t* ",
 			"\n* "
 		)
-		?com ; separator = ""
+		STR(?com) ; separator = ""
 	}
 }
 WHERE {
