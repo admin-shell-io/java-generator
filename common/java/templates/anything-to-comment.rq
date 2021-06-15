@@ -12,8 +12,9 @@ template idstt:anything-to-comment(?thing, ?hasIndentation) {
 	}
 }
 WHERE {
-    { ?thing rdfs:label ?com . }
-	UNION
+    ## Not using rdfs:label for Javadoc
+    #{ ?thing rdfs:label ?com . }
+	#UNION
 	{ ?thing rdfs:comment ?com . }
 	UNION
 	{ ?thing skos:note ?com . }
