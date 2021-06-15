@@ -9,7 +9,8 @@ template idstt:process-class-to-bean(?class) {
 
     "\n"
     "\n"
-    "/** " st:call-template(idstt:anything-to-comment, ?class, false) " \n*/\n"
+    "/** \n\t* Default implementation of " st:call-template(idstt:to_interface_name, ?class)
+	"\n\t" st:call-template(idstt:anything-to-comment, ?class, false) " \n*/\n"
     if(?useJackson,
         #then
         CONCAT(
