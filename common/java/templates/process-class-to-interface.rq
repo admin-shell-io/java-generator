@@ -63,11 +63,11 @@ template idstt:process-class-to-interface(?class) {
 
     " {\n"
 
-        "\n\t// standard methods\n"
+        if(?addSectionComments, "\n\t// standard methods\n", "")
         st:call-template(idstt:interface-default-methods, ?class)
         
         if (STRLEN(STR(?interfacePropertyMethods)) > 1,
-            CONCAT(CONCAT(CONCAT("\n\t// accessor methods as derived from the ", st:get-title()), " ontology\n\n"), STR(?interfacePropertyMethods)),
+            CONCAT(if(?addSectionComments, CONCAT("\n\t// accessor methods as derived from the ", st:get-title(), " ontology\n\n"), ""), STR(?interfacePropertyMethods)),
             ""
         )
         "\n"
@@ -82,6 +82,7 @@ where {
     BIND( st:call-template(idstt:properties-to-interface-methods, ?class) as ?interfacePropertyMethods )
 	BIND( st:has-superclass-of-all-classes() as ?hasModelSuperclass )
     BIND(st:add-jackson-annotations() AS ?useJackson)
+    BIND( st:section-comments() AS ?addSectionComments )
 	
 
     optional {

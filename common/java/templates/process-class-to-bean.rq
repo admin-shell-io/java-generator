@@ -32,7 +32,7 @@ template idstt:process-class-to-bean(?class) {
     # add default properties for all beans
     st:call-template(idstt:bean-default-properties, ?class)
 
-    "\n\n\t// instance fields as derived from the " st:get-title() " ontology\n"
+    if(?addSectionComments, CONCAT("\n\n\t// instance fields as derived from the ", st:get-title(), " ontology\n"), "")
     st:call-template(idstt:subclass-properties-to-fields, ?class)
 
     "\n"
@@ -64,9 +64,9 @@ template idstt:process-class-to-bean(?class) {
     if (STRLEN(STR(?subclassPropertyMethods)) > 1,
         CONCAT(
             "\n\n\t",
-            "// accessor method implementations as derived from the ",
-            st:get-title(),
-            " ontology\n\n",
+            if(?addSectionComments, CONCAT("// accessor method implementations as derived from the ",
+                st:get-title(),
+                " ontology\n\n"), ""),
             STR(?subclassPropertyMethods)
         ),
         ""
@@ -88,5 +88,7 @@ where{
     BIND(st:add-jackson-annotations() AS ?useJackson)
     BIND( st:has-extendable-builder() as ?hasExtendable )
 	BIND( st:call-template(idstt:get-package, 'interface') AS ?package )
+    BIND( st:section-comments() AS ?addSectionComments )
+
 }
 GROUP BY ?class

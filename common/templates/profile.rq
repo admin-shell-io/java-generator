@@ -121,3 +121,16 @@ function st:default-constructor-visibility() {
       )
    )
 }
+
+function st:section-comments() {
+   if (contains("${ontology.namespace.prefix}", "aas"),
+      # for AAS -> no inline comments desired
+      false,
+      if (contains("${ontology.namespace.prefix}", "ids"),
+         # for IDS -> add inline comments
+         true,
+         # default assumption for other ontology -> same as for IDS
+         true
+      )
+   )
+}

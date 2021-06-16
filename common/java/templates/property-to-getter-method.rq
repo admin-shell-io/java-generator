@@ -23,14 +23,16 @@ template idstt:property-to-getter-method(?property, ?class, ?syntax) {
     )
 
     "\n\t"
-	if(?syntax = 'mixin', "", 
-		if(?useJackson,
+	if(?syntax = 'mixin' || ?syntax = 'bean',
+	    #No need to add annotations here, as they are inherited from interface
+	    "",
+	    if(?useJackson,
 			concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"),
 			concat("@IRI(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"))
 	)
     
-    # visibility modifier (public for interfaces, final public for enum/impl)
-    if (?syntax = 'interface' || ?syntax = 'mixin',
+    # visibility modifier (public for interfaces, final public for enum)
+    if (?syntax = 'interface' || ?syntax = 'mixin' || ?syntax = 'bean',
         "public ",
         "final public "
     )

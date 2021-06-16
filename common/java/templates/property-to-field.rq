@@ -4,9 +4,9 @@ template idstt:property-to-field(?property, ?class) {
 
 	"\n\t"
 	# Add property descriptions
-	"/**"
-    st:call-template(idstt:anything-to-comment, ?property, true)
-    "\n\t*/"
+	#"/**"
+    #st:call-template(idstt:anything-to-comment, ?property, true)
+    #"\n\t*/"
     "\n\t"
 
 	# Check if this property is NotNull or NotEmpty. If so, add appropriate annotations

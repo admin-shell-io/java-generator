@@ -10,6 +10,7 @@ template idstt:properties-to-bean-methods(?class, ?superClass) {
     # st:call-template(idstt:get-javadoc, ?class, ?property, false)
 
     # signature
+    "\n\t@Override "
 	st:call-template(idstt:property-to-getter-method, ?property, ?class, 'bean')
     # method body
 	st:call-template(idstt:getter-method-bean-body, ?property, ?superClass)
@@ -20,8 +21,9 @@ template idstt:properties-to-bean-methods(?class, ?superClass) {
     # add javadoc
     # skip @return due to void function
     # st:call-template(idstt:get-javadoc, ?class, ?property, true)
+    "\n\t@Override "
     # visibility modifier
-    "\n\tfinal public void "
+    "\n\t public void "
 
     st:call-template(idstt:property-to-setter-method, ?property, ?class, 'bean')
 
