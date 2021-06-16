@@ -3,7 +3,9 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template idstt:static-builder-in-bean(?class) {
 
     "\n/**"
-    "\n\t* This builder class can be used to construct a " st:call-template(idstt:to_bean_name, ?class) " bean."
+    "\n\t* This builder class can be used to construct a "
+    st:call-template(idstt:to_bean_name, ?class)
+    " bean."
     "\n*/"
     "\n\tpublic static class Builder extends " st:call-template(idstt:to_builder_name, ?class) "<" st:call-template(idstt:to_bean_name, ?class) ", Builder> {"
     "\n"
@@ -16,6 +18,6 @@ template idstt:static-builder-in-bean(?class) {
     "\n\t\tprotected " st:call-template(idstt:to_bean_name, ?class) " newBuildingInstance() {"
     "\n\t\t\treturn new " st:call-template(idstt:to_bean_name, ?class) "();"
     "\n\t\t}"
-    "\n\t}""
+    "\n\t}"
 }
 where {}

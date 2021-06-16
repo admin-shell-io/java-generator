@@ -15,7 +15,7 @@ template idstt:properties-to-interface-methods(?class) {
 	# javadoc setter
 	st:call-template(idstt:get-javadoc, ?class, ?property, true)
 	
-	"\n\tpublic void "
+	"\n\t void "
 	st:call-template(idstt:property-to-setter-method, ?property, ?class, 'interface') ";"
 	
 

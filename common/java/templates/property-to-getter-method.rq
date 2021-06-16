@@ -31,10 +31,12 @@ template idstt:property-to-getter-method(?property, ?class, ?syntax) {
 			concat("@IRI(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"))
 	)
     
-    # visibility modifier (public for interfaces, final public for enum)
-    if (?syntax = 'interface' || ?syntax = 'mixin' || ?syntax = 'bean',
-        "public ",
-        "final public "
+    # visibility modifier (interfaces need none, final public for enum)
+    if(?syntax = 'interface', "",
+        if (?syntax = 'mixin' || ?syntax = 'bean',
+            "public ",
+            "final public "
+        )
     )
 
     st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
