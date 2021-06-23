@@ -86,4 +86,12 @@ public class TypedLiteral extends RdfResource implements Serializable {
 					Objects.equals(this.properties, other.properties);
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.value,
+				this.type,
+				this.language,
+				this.properties);
+	}
 }

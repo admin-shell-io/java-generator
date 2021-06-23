@@ -37,6 +37,13 @@ public class RdfResource implements Serializable {
     //}
 
     @Override
+    public int hashCode() {
+        return Objects.hash(this.value,
+                this.type,
+                this.properties);
+    }
+
+    @Override
     public boolean equals(Object obj)
     {
         if (this == obj) {
