@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonTypeName("RdfResource")
@@ -34,6 +35,23 @@ public class RdfResource implements Serializable {
     //public RdfResource(String value) {
     //    this.value = value;
     //}
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj) {
+            return true;
+        } else if (obj == null) {
+            return false;
+        } else if (this.getClass() != obj.getClass()) {
+            return false;
+        } else {
+            RdfResource other = (RdfResource) obj;
+            return Objects.equals(this.value, other.value) &&
+                    Objects.equals(this.type, other.type) &&
+                    Objects.equals(this.properties, other.properties);
+        }
+    }
 
     public RdfResource(String valueAndType) {
         //.contains expects character sequence. Passing "^^"

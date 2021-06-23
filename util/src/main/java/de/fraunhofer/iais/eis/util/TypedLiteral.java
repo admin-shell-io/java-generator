@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.Objects;
 
 //Prevent empty values from being printed - @language AND @type in combination is forbidden
 //Note that the Serializer uses this class by name. If this class is renamed, make sure to adapt the MessageParser class accordingly!
@@ -66,5 +67,23 @@ public class TypedLiteral extends RdfResource implements Serializable {
 		}
 		if (this.type != null && !this.type.isEmpty()) return "\"" + result + "\"^^" + this.type;
 		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj) {
+			return true;
+		} else if (obj == null) {
+			return false;
+		} else if (this.getClass() != obj.getClass()) {
+			return false;
+		} else {
+			TypedLiteral other = (TypedLiteral) obj;
+			return Objects.equals(this.value, other.value) &&
+					Objects.equals(this.type, other.type) &&
+					Objects.equals(this.language, other.language) &&
+					Objects.equals(this.properties, other.properties);
+		}
 	}
 }
