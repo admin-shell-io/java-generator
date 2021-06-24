@@ -30,9 +30,9 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
         "public ",
         "final public "
     )
-
-    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
-
+	if( ! BOUND(?range) || COUNT(?range) > 1 || isBlank(?range), "RdfResource", 
+		st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+	)
     " "
 
     # method name
@@ -44,6 +44,8 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
         '()')
 
 }
-where  {
-    ?property rdfs:range ?range.
-}
+where {
+	OPTIONAL {
+		?property rdfs:range ?range.
+	}
+} GROUP BY ?property

@@ -13,11 +13,10 @@
     <artifactId>java</artifactId>
 	
 	<properties>
-        <ontology.title>IDSA Information Model</ontology.title>
+        <ontology.title>IDS Information Model</ontology.title>
 		<ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
 		<ontology.namespace.prefix>ids</ontology.namespace.prefix>
 	</properties>
-
 
     <dependencies>
         <dependency>
@@ -97,7 +96,36 @@
                     </plugin>
                 </plugins>
             </build>
-			
+		</profile>
+		<profile>
+			<id>MB-MDP</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                            <execution>
+                                <id>generate-java-sources</id>
+                                <phase>generate-sources</phase>
+                                <goals>
+                                    <goal>java</goal>
+                                </goals>
+                                <configuration>
+                                    <classpathScope>compile</classpathScope>
+                                    <mainClass>de.fraunhofer.iais.eis.generate.Generator</mainClass>
+                                    <arguments>
+                                        <argument>-vd</argument><argument>${infomodel-sourcebase}</argument>
+                                        <argument>-pp</argument><argument>**/*.ttl</argument>
+                                        <argument>-td</argument><argument>${tmp-path}/templates</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
 		</profile>
     </profiles>
 

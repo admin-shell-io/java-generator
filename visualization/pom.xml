@@ -20,6 +20,13 @@
         </dependency>
     </dependencies>
 	
+	<!-- TODO: Make dynamic via Profiles -->
+	<properties>
+        <ontology.title>IDS Information Model</ontology.title>
+		<ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
+		<ontology.namespace.prefix>ids</ontology.namespace.prefix>
+	</properties>
+	
 	<profiles>
         <profile>
             <id>allClasses</id>
@@ -139,6 +146,12 @@
                                 </resource>
                                 <resource>
                                     <directory>${basedir}/../common/templates</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+								<!-- Contains templates indicating naming conventions, e.g. ClassName conventions
+									 TODO: Hard-Coded to IDS. In case of different use cases, this needs to be dynamic, e.g. via profiles -->
+								<resource>
+                                    <directory>${basedir}/../ids/src/templates</directory>
                                     <filtering>true</filtering>
                                 </resource>
                             </resources>

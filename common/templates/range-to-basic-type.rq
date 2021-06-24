@@ -18,6 +18,7 @@ template idstt:range-to-basic-type(?property, ?ontologyRange, ?class, ?isArray) 
         if ( str(?range) = str(<xsd:boolean>), if (?isArray = false, "boolean", "Boolean"),
         if ( str(?range) = str(<xsd:byte>), if (?isArray = false, "byte[]", "Byte[]"),
         if ( str(?range) = str(<xsd:base64Binary>), if (?isArray = false, "byte[]", "Byte[]"),
+		if ( str(?range) = str(<xsd:hexBinary>), if (?isArray = false, "byte[]", "Byte[]"),
 
 
         # basic types
@@ -43,7 +44,7 @@ template idstt:range-to-basic-type(?property, ?ontologyRange, ?class, ?isArray) 
         if (bound(?instance),
           st:call-template(idstt:to_enum_name, ?range),
           st:call-template(idstt:to_interface_name, ?range)
-        )))))))))))))))))))))))
+        ))))))))))))))))))))))))
       )
 
 }
