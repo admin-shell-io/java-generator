@@ -19,5 +19,5 @@ where {
         rdfs:range ?range.
 
     bind( st:get-namespace() as ?ns )
-    filter(strstarts(str(?range), str(?ns)))
+    #filter(strstarts(str(?range), str(?ns)))
 }

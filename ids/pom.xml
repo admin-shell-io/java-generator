@@ -13,7 +13,7 @@
     <artifactId>java</artifactId>
 	
 	<properties>
-        <ontology.title>IDSA Information Model</ontology.title>
+        <ontology.title>IDS Information Model</ontology.title>
 		<ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
 		<ontology.namespace.prefix>ids</ontology.namespace.prefix>
 	</properties>
