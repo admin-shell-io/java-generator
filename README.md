@@ -1,2 +1,2 @@
 # java-generator
-AAS model generator in Java
+AAS model generator implemented in Java
