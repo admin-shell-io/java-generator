@@ -8,7 +8,9 @@ template idstt:process-enum-individuals(?class) {
 	"\n\t*/"
 
     "\n\t"
-    ucase(st:call-template(idstt:to_class_name, ?individual))
+    #ucase(st:call-template(idstt:to_class_name, ?individual))
+	#Enums are no longer fully capitalized
+	ucase(st:call-template(idstt:to_class_name, ?individual))
     ","
 }
 where  {
