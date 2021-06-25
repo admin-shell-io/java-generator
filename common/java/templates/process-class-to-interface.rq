@@ -1,0 +1,69 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-class-to-interface(?class) {
+
+    "package de.fraunhofer.iais.eis;"
+    "\n"
+
+    st:call-template(idstt:basic-imports)
+
+    "\n\n"
+
+    "/**" st:call-template(idstt:anything-to-comment, ?class, false) "\n*/"
+    "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
+    "\n@JsonSubTypes({"
+        
+        if (STRLEN(st:call-template(idstt:class-to-json-annotation, ?class)) > 1,
+            # there is an implementation for this interface
+            CONCAT(
+                st:call-template(idstt:class-to-json-annotation, ?class),
+                # there might also be sub interfaces -> if so, concatenate with comma
+                if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
+                    CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class)),
+                    ""
+                )
+            ),
+            # there is no implementation (abstract class), only possibly sub interfaces
+            if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
+                    st:call-template(idstt:subclass-to-json-annotation, ?class),
+                    ""
+            )
+        )
+        
+        
+    "\n})"
+    "\n"
+    "public interface " st:call-template(idstt:to_interface_name, ?class)
+
+    if (bound(?superClass),
+        concat(" extends ", st:call-template(idstt:subclasses-to-list, ?class)),
+        "")
+
+    " {\n"
+
+        "\n\t// standard methods\n"
+        st:call-template(idstt:interface-default-methods, ?class)
+        
+        if (STRLEN(STR(?interfacePropertyMethods)) > 1,
+            CONCAT(CONCAT(CONCAT("\n\t// accessor methods as derived from the ", st:get-title()), " ontology\n\n"), STR(?interfacePropertyMethods)),
+            ""
+        )
+        "\n"
+
+    "\n}\n"
+
+}
+where {
+    ?class a owl:Class .
+
+    BIND( st:get-namespace() as ?ns )
+    BIND( st:call-template(idstt:properties-to-interface-methods, ?class) as ?interfacePropertyMethods )
+
+
+    optional {
+        ?class rdfs:subClassOf ?superClass.
+        filter(strstarts(str(?superClass), str(?ns)))
+    }
+}
+GROUP BY ?class

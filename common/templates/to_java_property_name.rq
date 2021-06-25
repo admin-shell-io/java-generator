@@ -1,0 +1,9 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:to_java_property_name(?property) {
+    # e.g. http://myExample/SubClass/property -> "property"
+    CONCAT(LCASE( SUBSTR( STR(?shortId), 1, 1)), SUBSTR( STR(?shortId), 2))
+}
+where {
+    BIND( st:call-template(idstt:to_short_identifier, ?property) as ?shortId )
+}

@@ -1,0 +1,16 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+
+template idstt:to_java_field_name(?property, ?class) {
+    if (?allowsList,
+        # then
+        IRI(st:call-template(idstt:to_plural_form, ?propertyFieldName)),
+        # else
+        IRI(?propertyFieldName)
+    )
+    
+}
+WHERE {
+    BIND( st:call-template(idstt:property-allows-list, ?property, ?class) AS ?allowsList)
+    BIND( st:call-template(idstt:to_java_property_name, ?property) AS ?propertyFieldName)
+}

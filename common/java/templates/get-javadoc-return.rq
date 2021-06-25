@@ -1,0 +1,33 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-javadoc-return(?class, ?property) {
+
+    "\n\t"
+    "* @return Returns the "
+    IF ( CONTAINS(?javaRetType, "<"),
+        # then
+        CONCAT(CONCAT(REPLACE(STRBEFORE(?javaRetType, "<"), "\"", ""), " of "), CONCAT(STRBEFORE(STRAFTER(?javaRetType, "<"), ">"), "s")),
+
+        # else
+        REPLACE(?javaRetType, "\"", "")
+    )
+
+    " for the property "
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
+    "."
+}
+where  {
+    {
+        ?class rdfs:subClassOf* ?superClass .
+        ?property rdfs:domain ?superClass;
+            rdfs:range ?range .
+    }
+    UNION
+    {   
+        ?class rdfs:subClassOf* ?superClass .
+        ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass ;
+            rdfs:range ?range .
+    }
+
+    BIND( st:call-template(idstt:range-to-java-type, ?superClass, ?property, ?range, "<", ">") as ?javaRetType)
+}

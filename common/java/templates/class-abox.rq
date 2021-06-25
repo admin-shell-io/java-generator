@@ -1,0 +1,12 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix dcat: <http://www.w3.org/ns/dcat#>
+
+template idstt:class-abox(?class) {
+
+    kg:write(concat("/tmp/", st:call-template(idstt:to_enum_name, ?class), ".java"),
+        st:call-template(idstt:process-class-to-enum, ?class))
+
+}
+where  {}
+
+

@@ -1,0 +1,28 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+# Check if the property URI is equal to the ontology prefix + the short name of the property.
+# (NOTE: same logic is applied to class names, only the explanation here uses properties as example!)
+# If so -> the full identifier URI can be expressed as prefix:shortName
+# else -> use the full URI of the property
+# e.g. a) https://example.de/sender vs b) https://example.de/Message/sender
+# shortName of property = "sender"
+# prefix = ex: <https://example.de/>
+#
+# --- Case a) -> property URI can be written as: ex:sender
+# --- Case b) -> property URI has to be written as: https://example.de/Message/sender
+
+template idstt:to_full_identifier(?class) {
+
+    if ( ?nsClass = str(?class),
+        # then: class is identified via the default namespace for the ontology
+        str(?prefixClass),
+        # else: class needs to be identified via a special namespace
+        str(?class)
+    )
+}
+where {
+    BIND( st:get-namespace() as ?ns )
+    BIND( st:get-namespace-prefix() as ?prefix )
+    BIND( CONCAT(str(?ns), str(st:call-template(idstt:to_short_identifier, ?class))) as ?nsClass )
+    BIND( CONCAT(str(?prefix), CONCAT(":", str(st:call-template(idstt:to_short_identifier, ?class)))) as ?prefixClass )
+}

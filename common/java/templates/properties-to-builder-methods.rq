@@ -1,0 +1,35 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:properties-to-builder-methods(?class, ?superClass) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    "\n"
+    "\n\t/**"
+    "\n\t* This function allows setting a value for "
+    st:call-template(idstt:to_java_field_name, ?property, ?superClass)
+    "\n\t* @param "
+    st:call-template(idstt:to_java_param_name, ?property, ?superClass)
+    " desired value to be set"
+    "\n\t* @return Builder object with new value for "
+    st:call-template(idstt:to_java_field_name, ?property, ?superClass)
+    "\n\t*/"
+	"\n\t"
+
+    # visibility modifier
+    "final public "
+
+    # return type and name
+    st:call-template(idstt:to_builder_name, ?class) " "
+
+	st:call-template(idstt:property-to-setter-method, ?property, ?class, true)
+
+    # method body
+	st:call-template(idstt:setter-method-builder-body, ?property, ?class)
+
+}
+where  {
+      {?property rdfs:domain ?superClass.}
+      UNION
+      {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
+}

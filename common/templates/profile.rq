@@ -1,0 +1,20 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+# Helper template which defines functions available for all other templates.
+# This allows for the dynamic definition of a ontology namespace and prefix from the
+# pom.xml in the main directory via <property> tags.
+
+template st:profile {}
+where {}
+
+function st:get-namespace() {
+   "${ontology.namespace}"
+}
+
+function st:get-namespace-prefix() {
+   "${ontology.namespace.prefix}"
+}
+
+function st:get-title() {
+   "${ontology.title}"
+}

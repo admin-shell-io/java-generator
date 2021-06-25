@@ -1,0 +1,49 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
+
+    IF(STRLEN(st:call-template(idstt:range-jackson-annotation, ?property, ?range)) > 1,
+        # then
+        CONCAT(
+            "\n\t",
+            st:call-template(idstt:range-jackson-annotation, ?property, ?range)
+        ),
+        # else
+        ""
+    )
+
+    IF(STRLEN(st:call-template(idstt:property-annotation, ?class, ?property)) > 1,
+        # then
+        CONCAT(
+            "\n\t",
+            st:call-template(idstt:property-annotation, ?class, ?property)
+        ),
+        # else
+        ""
+    )
+
+    "\n\t"
+    concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t")
+    
+    # visibility modifier (public for interfaces, final public for enum/impl)
+    if (?isInterface,
+        "public ",
+        "final public "
+    )
+
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+
+    " "
+
+    # method name
+    "get"
+
+    concat(
+        ucase(substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 1, 1)),
+        substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 2),
+        '()')
+
+}
+where  {
+    ?property rdfs:range ?range.
+}

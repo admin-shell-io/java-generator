@@ -1,0 +1,91 @@
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh: <http://www.w3.org/ns/shacl#>
+
+template idstt:range-to-basic-type(?property, ?range, ?class, ?isArray) {
+
+    if (bound(?refByUri) && (?refByUri = true),
+        "URI",
+
+        # primitive types - distinguish between field (isArray = false) and array (isArray = true) types
+        if ( str(?range) = str(<xsd:int>), if (?isArray = false, "int", "Integer"),
+        if ( str(?range) = str(<xsd:nonNegativeInteger>), if (?isArray = false, "int", "Integer"),
+        if ( str(?range) = str(<xsd:long>), if (?isArray = false, "long", "Long"),
+        if ( str(?range) = str(<xsd:short>), if (?isArray = false, "short", "Short"),
+        if ( str(?range) = str(<xsd:float>), if (?isArray = false, "float", "Float"),
+        if ( str(?range) = str(<xsd:double>), if (?isArray = false, "double", "Double"),
+        if ( str(?range) = str(<xsd:boolean>), if (?isArray = false, "boolean", "Boolean"),
+        if ( str(?range) = str(<xsd:byte>), if (?isArray = false, "byte", "Byte"),
+        if ( str(?range) = str(<xsd:base64Binary>), if (?isArray = false, "byte[]", "Byte[]"),
+
+
+        # basic types
+        if (str(?range) = str(<xsd:decimal>), "java.math.BigDecimal",
+        if (str(?range) = str(<xsd:integer>), "BigInteger",
+        if (str(?range) = str(<xsd:string>), if(EXISTS { VALUES ?property { <https://w3id.org/idsa/core/description> <https://w3id.org/idsa/core/title> <https://w3id.org/idsa/core/keyword> <https://w3id.org/idsa/core/revocationReason> <https://w3id.org/idsa/core/contractRejectionReason> <https://w3id.org/idsa/core/activityDescription> <https://w3id.org/idsa/core/endpointInformation> } } , "TypedLiteral", "String"),
+        if (str(?range) = str(<xsd:time>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:date>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:dateTime>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:dateTimeStamp>), "XMLGregorianCalendar",
+        if (str(?range) = str(<xsd:duration>), "javax.xml.datatype.Duration",
+        if (str(?range) = str(<xsd:anyURI>), "URI",
+
+
+        # rdf types
+        if (str(?range) = str(<rdfs:Resource>), "RdfResource",
+        if (str(?range) = str(<rdfs:Literal>), "TypedLiteral",
+        if (str(?range) = str(<rdf:PlainLiteral>), "TypedLiteral", #Should not be used anywhere anymore
+        if (str(?range) = str(<rdf:langString>), "TypedLiteral",
+
+
+        # custom types
+        if (bound(?instance),
+          st:call-template(idstt:to_enum_name, ?range),
+          st:call-template(idstt:to_interface_name, ?range)
+        )))))))))))))))))))))))
+      )
+
+}
+where {
+    ?property rdfs:range ?range.
+    OPTIONAL {
+      ?class rdfs:subClassOf* ?superClass .
+      ?classShape sh:targetClass ?superClass ;
+        (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+      ?propertyShape sh:path ?property ;
+        (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:nodeKind ?propertyKind .
+    }
+
+    OPTIONAL {
+      ?class rdfs:subClassOf* ?superClass .
+      ?classShape sh:targetClass ?superClass ;
+        (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+      ?propertyShape sh:path ?property ;
+        (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:datatype ?propertyType .
+    }
+
+    OPTIONAL {
+      ?class rdfs:subClassOf* ?superClass .
+      ?classShape sh:targetClass ?superClass ;
+        (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:property ?propertyShape .
+      ?propertyShape sh:path ?property ;
+        (sh:xone|sh:or)*/rdf:rest*/rdf:first*/sh:class ?propertyClass .
+    }
+
+    BIND(
+      IF(
+        (BOUND(?propertyType) && (?propertyType != ?range) && (?propertyType = xsd:anyURI)) ||
+        (BOUND(?propertyKind) && (?propertyKind = sh:IRI)),
+      # THEN
+      true,
+      # ELSE
+      false
+      ) AS ?refByUri
+    )
+
+    OPTIONAL {
+        ?subClass rdfs:subClassOf* ?range .
+        ?instance a ?subClass .
+    }
+} LIMIT 1

@@ -1,0 +1,38 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:property-to-field(?property, ?class) {
+
+	"\n\t"
+	# Add property descriptions
+	"/**"
+    st:call-template(idstt:anything-to-comment, ?property, true)
+    "\n\t*/"
+    "\n\t"
+
+	# Check if this property is NotNull or NotEmpty. If so, add appropriate annotations
+    IF(STRLEN(st:call-template(idstt:property-annotation, ?class, ?property)) > 1,
+        # then
+        CONCAT(
+            st:call-template(idstt:property-annotation, ?class, ?property),
+            "\n\t"
+        ),
+        # else
+        ""
+    )
+
+    "@JsonAlias({\"" st:call-template(idstt:to_full_identifier, ?property) "\", \"" st:call-template(idstt:to_java_property_name, ?property) "\"})"
+    "\n\t"
+
+    "protected "
+
+	# Turn the RDF type of the range into a java type for this field
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+
+	# Fields are prefixed with an underscore
+	# The actual resulting field name in Java
+    " " st:call-template(idstt:to_java_field_name, ?property, ?class)
+    ";\n"
+}
+where  {
+   ?property rdfs:range ?range.
+}

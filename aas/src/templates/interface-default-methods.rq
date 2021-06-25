@@ -1,0 +1,33 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:interface-default-methods (?class) {
+
+    "\n\t/**"
+    "\n\t* This function retrieves the ID of the current object (can be set via the constructor of the builder class)"
+    "\n\t* @return ID of current object as URI"
+    "\n\t*/"
+    "\n\t@JsonProperty(\"@id\")"
+    # "\n\t@NotNull"
+    "\n\tpublic URI getId();"
+
+    "\n\n\t/**"
+    "\n\t* This function retrieves a human readable labels about the current class, as defined in the ontology."
+    "\n\t* This label could, for example, be used as a field heading in a user interface"
+    "\n\t* @return Human readable labels"
+    "\n\t*/"
+    "\n\tpublic List<TypedLiteral> getLabels();"
+
+    "\n\n\t/**"
+    "\n\t* This function retrieves a human readable explanatory comments about the current class, as defined in the ontology."
+    "\n\t* This comment could, for example, be used as a tooltip in a user interface"
+    "\n\t* @return Human readable explanatory comments"
+    "\n\t*/"
+    "\n\tpublic List<TypedLiteral> getComments();"
+    "\n"
+
+	#This is not required on interface level, as these two methods are already provided by Java Object
+    #st:call-template(idstt:get-class-to-hash-code, ?class, true)
+    #st:call-template(idstt:get-class-equals, ?class, true)
+
+}
+where {}

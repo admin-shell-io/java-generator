@@ -1,0 +1,36 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:properties-to-bean-methods(?class, ?superClass) {
+
+	# Iterates on selected properties and writes getter and setter methods
+
+    # getter method
+
+    # add javadoc
+    # st:call-template(idstt:get-javadoc, ?class, ?property, false)
+
+    # signature
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
+    # method body
+	st:call-template(idstt:getter-method-bean-body, ?property, ?superClass)
+
+    # setter method
+
+    "\n\t"
+    # add javadoc
+    # skip @return due to void function
+    # st:call-template(idstt:get-javadoc, ?class, ?property, true)
+    # visibility modifier
+    "\n\tfinal public void "
+
+    st:call-template(idstt:property-to-setter-method, ?property, ?class, false)
+
+    # method body
+    st:call-template(idstt:setter-method-body, ?property, ?superClass)
+
+}
+where  {
+    {?property rdfs:domain ?superClass.}
+    UNION
+    {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
+}

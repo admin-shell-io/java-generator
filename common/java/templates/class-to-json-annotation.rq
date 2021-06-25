@@ -1,0 +1,30 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sh: <http://www.w3.org/ns/shacl#>
+
+template idstt:class-to-json-annotation(?class) {
+
+    group {
+        if (bound(?message) && (
+            contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
+            contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
+        ),
+        # then
+            "",
+        # else
+            concat(
+                "\n\t@JsonSubTypes.Type(value = ",
+                st:call-template(idstt:to_bean_name, ?class),
+                ".class)"
+            ) 
+        ) ; separator = ","
+    }
+}
+WHERE {
+    ?class a owl:Class.
+
+    optional {
+        ?shape sh:targetClass ?class ;
+            sh:sparql [ sh:message ?message ] .
+    }
+}
