@@ -1,0 +1,23 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-iri {
+
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'annotations')
+
+    "\nimport java.lang.annotation.Retention;"
+    "\nimport java.lang.annotation.RetentionPolicy;\n"
+
+    "\n//Retention policy runtime required for reflective access"
+    "\n@Retention(RetentionPolicy.RUNTIME)"
+    "\npublic @interface IRI {"
+        "\n/**"
+        "\n* This annotation stores the IRI under which a certain element of a model is defined."
+        "\n* Expected behaviour when de-referencing the value of this annotation is a definition and further information about this element."
+        "\n* @return IRI defining an element"
+        "\n*/"
+        "\npublic String[] value() default {};"
+    "\n}"
+
+}
+where{}

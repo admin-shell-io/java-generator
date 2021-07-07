@@ -15,13 +15,14 @@ WHERE  {
     OPTIONAL {
         {
             ?property rdfs:domain ?superClass ;
-            rdfs:range ?range .
+                rdfs:range ?range .
             BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
             BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, '<', '>') as ?fieldType )
         }
         UNION
         {   
-            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass .
+            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass ;
+                rdfs:range ?range .
             BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
             BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, '<', '>') as ?fieldType )
         }

@@ -2,6 +2,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:create-extendable-builder {
 
+    st:call-template(idstt:get-license)
     st:call-template(idstt:get-package, 'builder')
 
     "\npublic abstract class ExtendableBuilder<T, B extends ExtendableBuilder<T, B>> extends AbstractBuilder<T> {\n"

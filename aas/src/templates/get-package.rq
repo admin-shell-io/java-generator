@@ -8,8 +8,9 @@ template idstt:get-package (?type) {
     if(str(?type) = 'builder', "io.adminshell.aas.v3.model.builder",
     if(str(?type) = 'serialization', "io.adminshell.aas.v3.dataformat",
     if(str(?type) = 'enum', "io.adminshell.aas.v3.model",
+    if(str(?type) = 'annotations', "io.adminshell.aas.v3.model.annotations",
     "io.adminshell.aas.v3.model" #default
-    ))))))
+    )))))))
     ";\n"
 
 }

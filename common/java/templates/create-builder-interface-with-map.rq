@@ -2,6 +2,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:create-builder-interface-with-map {
 
+    st:call-template(idstt:get-license)
     st:call-template(idstt:get-package, 'builder')
 
     "\nimport java.util.Map;\n"

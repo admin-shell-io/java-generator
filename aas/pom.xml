@@ -266,7 +266,7 @@
                             <target>
                                 <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/impl"/>
                                 <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/builder"/>
-                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/dataformat/json/mixins"/>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/annotations"/>
                             </target>
                         </configuration>
                         <goals>

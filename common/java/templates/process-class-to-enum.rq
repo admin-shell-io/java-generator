@@ -3,6 +3,7 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-enum(?class) {
 
+    st:call-template(idstt:get-license)
     st:call-template(idstt:get-package, 'interface')
 
     st:call-template(idstt:basic-imports)

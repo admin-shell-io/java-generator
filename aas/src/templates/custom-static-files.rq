@@ -1,18 +1,12 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:custom-static-files {
-    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "Serializer.java"),
-            st:call-template(idstt:create-serializer-interface))
-    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "Deserializer.java"),
-            st:call-template(idstt:create-deserializer-interface))
-    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "SerializationException.java"),
-                st:call-template(idstt:create-serialization-exception))
-    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "DeserializationException.java"),
-                st:call-template(idstt:create-deserialization-exception))
-    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'serialization'), "SchemaValidator.java"),
-                    st:call-template(idstt:create-schema-validator))
     kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), "LangString.java"),
                     st:call-template(idstt:create-lang-string))
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'annotations'), "IRI.java"),
+                    st:call-template(idstt:create-iri))
+    kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'annotations'), "KnownSubtypes.java"),
+                    st:call-template(idstt:create-known-subtypes))
 
     kg:write(concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), "Builder.java"),
         st:call-template(idstt:create-builder-interface))

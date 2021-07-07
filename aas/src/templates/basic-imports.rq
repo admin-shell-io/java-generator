@@ -3,12 +3,13 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:basic-imports {
 
-    "\nimport de.fraunhofer.iais.eis.util.*;"
+    #"\nimport de.fraunhofer.iais.eis.util.*;"
     "\nimport io.adminshell.aas.v3.model.*;"
     "\nimport io.adminshell.aas.v3.model.impl.*;"
     #"\nimport io.adminshell.aas.v3.dataformat.json.mixins.*;"
     "\nimport io.adminshell.aas.v3.model.builder.*;"
-    "\nimport io.adminshell.aas.v3.dataformat.*;"
+    "\nimport io.adminshell.aas.v3.model.annotations.IRI;"
+    "\nimport io.adminshell.aas.v3.model.annotations.KnownSubtypes;"
     #"\nimport de.fraunhofer.iais.eis.*;"
     "\n"
     "\nimport javax.xml.datatype.XMLGregorianCalendar;"

@@ -2,6 +2,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:create-abstract-builder {
 
+    st:call-template(idstt:get-license)
     st:call-template(idstt:get-package, 'builder')
 
     "\npublic abstract class AbstractBuilder<T> implements Builder<T> {"
