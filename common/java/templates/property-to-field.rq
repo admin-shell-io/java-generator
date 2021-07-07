@@ -1,7 +1,6 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:property-to-field(?property, ?class) {
-
 	"\n\t"
 	# Add property descriptions
 	#"/**"
@@ -41,8 +40,9 @@ template idstt:property-to-field(?property, ?class) {
     "protected "
 
 	# Turn the RDF type of the range into a java type for this field
-    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
-
+	if(COUNT(?property) > 1 || isBlank(?range), "RdfResource", 
+		st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+	)
 	# Fields are prefixed with an underscore
 	# The actual resulting field name in Java
     " "
@@ -51,7 +51,10 @@ template idstt:property-to-field(?property, ?class) {
     ";\n"
 }
 where  {
-   ?property rdfs:range ?range.
-   BIND(st:add-jackson-annotations() AS ?useJackson)
-   BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">") AS ?dataType)
-}
+    OPTIONAL{
+        ?property rdfs:range ?pRange.
+    }
+    BIND(if(BOUND(?pRange), ?pRange, "RdfResource") AS ?range)
+    BIND(st:add-jackson-annotations() AS ?useJackson)
+    BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">") AS ?dataType)
+} GROUP BY ?property

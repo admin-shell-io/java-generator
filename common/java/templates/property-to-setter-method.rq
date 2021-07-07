@@ -16,7 +16,9 @@ template idstt:property-to-setter-method(?property, ?class, ?syntax) {
     # method params
     "("
         # parameter type
-        st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+		if( ! BOUND(?range) || COUNT(?range) > 1 || isBlank(?range), "RdfResource", 
+			st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+		)
         " "
 
         # parameter label
@@ -26,5 +28,7 @@ template idstt:property-to-setter-method(?property, ?class, ?syntax) {
 
 }
 where  {
-    ?property rdfs:range ?range.
-}
+	OPTIONAL {
+		?property rdfs:range ?range.
+	}
+} GROUP BY ?property

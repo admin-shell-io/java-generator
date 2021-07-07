@@ -83,7 +83,15 @@
 			<id>MB-GAIA</id>
 			<properties>
 				<infomodel-sourcebase>
-					../gaia-x-self-descriptions/implementation/ont-combined
+					../gaia-x-self-descriptions/implementation/combined-ont
+				</infomodel-sourcebase>
+			</properties>
+		</profile>
+		<profile>
+			<id>MB-MDP</id>
+			<properties>
+				<infomodel-sourcebase>
+					../mdp_infomodel/ontology
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
@@ -190,5 +198,13 @@
             </plugin>
         </plugins>
     </build>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
 
 </project>

@@ -54,5 +54,9 @@ where {
       ) AS ?refByUri
     )
     BIND( st:get-namespace() as ?ns )
-    FILTER(strstarts(str(?domain), str(?ns)) && strstarts(str(?range), str(?ns)))
+    FILTER(
+			(strstarts(str(?domain), str(?ns)) || strstarts(str(?domain), str(<https://w3id.org/mdp/>)))
+			&& 
+			(strstarts(str(?range), str(?ns)) || strstarts(str(?range), str(<https://w3id.org/mdp/>)))
+		)
 }
