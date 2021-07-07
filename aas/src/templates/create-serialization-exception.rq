@@ -1,0 +1,17 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-serialization-exception {
+
+    st:call-template(idstt:get-package, 'serialization')
+    st:call-template(idstt:basic-imports)
+
+
+    "\npublic class SerializationException extends Exception {\n"
+    "\n\n\t"
+    "public SerializationException(String msg) { super(msg); }"
+    "\n\n\t"
+    "public SerializationException(String msg, Throwable err) { super(msg, err); }"
+    "\n\n}"
+}
+WHERE {
+}

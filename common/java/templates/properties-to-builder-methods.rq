@@ -16,20 +16,36 @@ template idstt:properties-to-builder-methods(?class, ?superClass) {
     "\n\t*/"
 	"\n\t"
 
-    # visibility modifier
-    "final public "
+    # visibility modifier -> not final to enable builder inheritance
+    "public "
 
     # return type and name
-    st:call-template(idstt:to_builder_name, ?class) " "
-
-	st:call-template(idstt:property-to-setter-method, ?property, ?class, true)
+    if(?hasExtendable,
+        "B ",
+        concat(st:call-template(idstt:to_builder_name, ?class), " ")
+    )
 
     # method body
-	st:call-template(idstt:setter-method-builder-body, ?property, ?class)
+	st:call-template(idstt:property-to-setter-method, ?property, ?class, 'builder')
+    if (?hasMap,
+        st:call-template(idstt:setter-method-builder-body-with-map, ?property, ?class),
+	    if (?hasExtendable,
+            st:call-template(idstt:setter-method-extendable-builder-body, ?property, ?class, false),
+            st:call-template(idstt:setter-method-builder-body, ?property, ?class, false)
+        )
+    )
+
+    if(?isArray,
+        st:call-template(idstt:setter-method-builder-list-single-element, ?property, ?class),
+        ""
+    )
 
 }
 where  {
       {?property rdfs:domain ?superClass.}
       UNION
       {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
+      BIND( st:has-builder-with-map() as ?hasMap )
+      BIND( st:has-extendable-builder() as ?hasExtendable )
+      BIND( st:call-template(idstt:property-allows-list, ?property, ?class) as ?isArray )
 }

@@ -4,7 +4,7 @@ template idstt:get-class-equals-body-properties(?class) {
 
     group {
         format {
-            "Objects.equals(this.%s, other.%s)"
+            CONCAT(if(regex(?fieldType, "\\[\\]"), "Arrays.equals", "Objects.equals"), "(this.%s, other.%s)")
             ?field ?field
         }
         ; separator = " &&\n\t\t\t\t"}
@@ -14,13 +14,17 @@ WHERE  {
     ?class rdfs:subClassOf* ?superClass .
     OPTIONAL {
         {
-            ?property rdfs:domain ?superClass .
+            ?property rdfs:domain ?superClass ;
+                rdfs:range ?range .
             BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
+            BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, '<', '>') as ?fieldType )
         }
         UNION
         {   
-            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass .
+            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass ;
+                rdfs:range ?range .
             BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
+            BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, '<', '>') as ?fieldType )
         }
     }
 }

@@ -3,15 +3,27 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-bean(?class) {
 
-    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'bean')
 
     st:call-template(idstt:basic-imports)
 
     "\n"
     "\n"
-    "/** " st:call-template(idstt:anything-to-comment, ?class, false) " \n*/\n"
-    "@JsonIgnoreProperties(ignoreUnknown = true)\n"
-    "@JsonTypeName(\"" st:call-template(idstt:to_full_identifier, ?class) "\")"
+    "/** \n\t* Default implementation of "
+	SUBSTR(?package, 1, STRLEN(?package) - 2) "."
+	st:call-template(idstt:to_interface_name, ?class)
+	"\n\t" st:call-template(idstt:anything-to-comment, ?class, false) " \n*/\n"
+    if(?useJackson,
+        #then
+        CONCAT(
+            "@JsonIgnoreProperties(ignoreUnknown = true)\n@JsonTypeName(\"",
+            st:call-template(idstt:to_full_identifier, ?class),
+            "\")"
+        ),
+        #else
+        ""
+    )
     "\n"
     "public class " st:call-template(idstt:to_bean_name, ?class)
     " implements " st:call-template(idstt:to_interface_name, ?class)
@@ -21,23 +33,48 @@ template idstt:process-class-to-bean(?class) {
     # add default properties for all beans
     st:call-template(idstt:bean-default-properties, ?class)
 
-    "\n\n\t// instance fields as derived from the " st:get-title() " ontology\n"
+    if(?addSectionComments, CONCAT("\n\n\t// instance fields as derived from the ", st:get-title(), " ontology\n"), "")
     st:call-template(idstt:subclass-properties-to-fields, ?class)
 
     "\n"
-    "\n\t// no manual construction"
-    "\n\tprotected " st:call-template(idstt:to_bean_name, ?class) "() {"
-    "\n\t\tid = VocabUtil.getInstance().createRandomUrl(\""
-                             lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)) substr(st:call-template(idstt:to_class_name, ?class), 2)
-                             "\");"
-    "\n\t}"
-    "\n"
+    #"\n\t// no manual construction"
+    "\n\t"
+    st:default-constructor-visibility()
+    " "
+
+    st:call-template(idstt:to_bean_name, ?class) "() {"
+	
+	if (?hasId,
+      # then
+		CONCAT(
+		    "\n\t\t",
+		    "id = VocabUtil.getInstance().createRandomUrl(\"",
+            lcase(substr(st:call-template(idstt:to_class_name, ?class), 1, 1)),
+		    substr(st:call-template(idstt:to_class_name, ?class), 2),
+		    "\");"
+		),
+	  # else
+	    ""
+	)
+	"\n\t}"
+	"\n"
     
     # add default methods for all beans
     st:call-template(idstt:bean-default-methods, ?class)
 
     if (STRLEN(STR(?subclassPropertyMethods)) > 1,
-        CONCAT(CONCAT(CONCAT("\n\n\t// accessor method implementations as derived from the ", st:get-title()), " ontology\n\n"), STR(?subclassPropertyMethods)),
+        CONCAT(
+            "\n\n\t",
+            if(?addSectionComments, CONCAT("// accessor method implementations as derived from the ",
+                st:get-title(),
+                " ontology\n\n"), ""),
+            STR(?subclassPropertyMethods)
+        ),
+        ""
+    )
+
+    if(?hasExtendable,
+        st:call-template(idstt:static-builder-in-bean, ?class),
         ""
     )
 
@@ -48,5 +85,11 @@ where{
     ?class a owl:Class .
 
     BIND (st:call-template(idstt:subclass-properties-to-methods, ?class, 'bean') as ?subclassPropertyMethods )
+	BIND( st:has-id-label-comment() as ?hasId )
+    BIND(st:add-jackson-annotations() AS ?useJackson)
+    BIND( st:has-extendable-builder() as ?hasExtendable )
+	BIND( st:call-template(idstt:get-package, 'interface') AS ?package )
+    BIND( st:section-comments() AS ?addSectionComments )
+
 }
 GROUP BY ?class

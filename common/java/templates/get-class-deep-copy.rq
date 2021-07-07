@@ -1,0 +1,13 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-class-deep-copy(?class) {
+
+    "\n\t@Override"
+    "\n\tpublic Object deepCopy() {"
+    "\n\t\t" st:call-template(idstt:to_bean_name, ?class) " other = new " st:call-template(idstt:to_bean_name, ?class) "();"
+    "\n\t\t" st:call-template(idstt:get-class-deep-copy-body-properties, ?class)
+    "\n\t\treturn other;"
+    "\n\t}"
+   "\n"
+}
+WHERE  {}

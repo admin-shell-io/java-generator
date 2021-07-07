@@ -1,0 +1,20 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:builder-inheritance-list(?class) {
+    if(contains(str(?superClassList), ","),
+        # then: multiple superclasses but only single class inheritance possible -> blank for now
+        "",
+        # else: only one or zero superclasses
+        if(strlen(str(?superClassList)) > 1,
+            # then: one superclass for the builder is possible
+            concat(" extends ", IRI(?superClassList)),
+            # else: zero superclasses
+            ""
+        )
+    )
+
+}
+where  {
+    BIND( st:call-template(idstt:subclasses-to-builder-list, ?class) AS ?superClassList)
+}
+

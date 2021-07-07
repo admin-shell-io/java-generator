@@ -11,7 +11,6 @@
     <modules>
         <module>util</module>
         <module>visualization</module>
-        <!--<module>java-common</module>-->
         <module>generator</module>
         <module>jsonld-context</module>
         <module>ids</module>
@@ -72,6 +71,14 @@
 				</infomodel-sourcebase>
 			</properties>
 		</profile>
+        <profile>
+            <id>format</id>
+            <properties>
+                <infomodel-sourcebase>
+                    ../rdf
+                </infomodel-sourcebase>
+            </properties>
+        </profile>
 		<profile>
 			<id>MB-GAIA</id>
 			<properties>

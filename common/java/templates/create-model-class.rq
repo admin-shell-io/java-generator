@@ -1,0 +1,20 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-model-class {
+
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'interface')
+
+    "\npublic interface ModelClass {\n"
+
+    if(?hasMap,
+        "\n\tpublic Object deepCopy();",
+        ""
+    )
+
+    "\n\n}"
+
+}
+WHERE {
+    BIND( st:has-builder-with-map() as ?hasMap )
+}

@@ -1,0 +1,20 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:setter-method-builder-body-with-map(?property, ?class) {
+
+    " {"
+
+    "\n\t\tthis.map.put(\""
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
+    "\", "
+    st:call-template(idstt:to_java_param_name, ?property, ?class)
+    ");"
+    "\n\t\treturn this;"
+
+    "\n\t}"
+
+}
+where{
+    ?class a owl:Class .
+}

@@ -1,0 +1,30 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-class-deep-copy-body-properties(?class) {
+
+    group {
+        format {
+            "other.%s = (%s) Util.clone(this.%s);"
+            ?field ?javaType ?field
+        }
+        ; separator = "\n\t\t"}
+
+    
+}
+WHERE  {
+    ?class rdfs:subClassOf* ?superClass .
+    OPTIONAL {
+        {
+            ?property rdfs:domain ?superClass .
+            ?property rdfs:range ?range .
+            BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
+        }
+        UNION
+        {   
+            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass .
+            ?property rdfs:range ?range .
+            BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
+        }
+    }
+    BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">") as ?javaType)
+}

@@ -3,9 +3,9 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template idstt:property-to-field(?property, ?class) {
 	"\n\t"
 	# Add property descriptions
-	"/**"
-    st:call-template(idstt:anything-to-comment, ?property, true)
-    "\n\t*/"
+	#"/**"
+    #st:call-template(idstt:anything-to-comment, ?property, true)
+    #"\n\t*/"
     "\n\t"
 
 	# Check if this property is NotNull or NotEmpty. If so, add appropriate annotations
@@ -19,7 +19,22 @@ template idstt:property-to-field(?property, ?class) {
         ""
     )
 
-    "@JsonAlias({\"" st:call-template(idstt:to_full_identifier, ?property) "\", \"" st:call-template(idstt:to_java_property_name, ?property) "\"})"
+    if(?useJackson,
+        #then
+        CONCAT(
+               "@JsonAlias({\"",
+               st:call-template(idstt:to_full_identifier, ?property),
+               "\", \"",
+               st:call-template(idstt:to_java_property_name, ?property),
+               "\"})"
+        ),
+        #else
+        CONCAT(
+                "@IRI(\"",
+                st:call-template(idstt:to_full_identifier, ?property),
+                "\")"
+        )
+    )
     "\n\t"
 
     "protected "
@@ -31,9 +46,15 @@ template idstt:property-to-field(?property, ?class) {
 	# Fields are prefixed with an underscore
 	# The actual resulting field name in Java
     " "
-	st:call-template(idstt:to_java_field_name, ?property, ?class)
+    st:call-template(idstt:to_java_field_name, ?property, ?class)
+    if( (STRSTARTS(?dataType, "List<")) || (STRSTARTS(?dataType, "Collection<")), " = new ArrayList<>()", "")
     ";\n"
 }
 where  {
-   ?property rdfs:range ?range.
+    OPTIONAL{
+        ?property rdfs:range ?pRange.
+    }
+    BIND(if(BOUND(?pRange), ?pRange, "RdfResource") AS ?range)
+    BIND(st:add-jackson-annotations() AS ?useJackson)
+    BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">") AS ?dataType)
 } GROUP BY ?property

@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
-    <artifactId>java</artifactId>
+    <groupId>io.adminshell.aas</groupId>
+    <artifactId>model</artifactId>
 	
 	<properties>
         <ontology.title>Asset Administration Shell</ontology.title>
@@ -137,7 +137,7 @@
                             <outputDirectory>${basedir}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
+                                    <targetPath>${basedir}/src/main/java/</targetPath>
                                     <directory>${tmp-path}</directory>
                                     <includes>
                                         <include>**/*.java</include>
@@ -162,8 +162,6 @@
                             </includes>
                             <excludes>
                                 <exclude>util/</exclude>
-                                <exclude>spi/</exclude>
-                                <exclude>annotation/</exclude>
                             </excludes>
                         </fileset>
                         <fileset>
@@ -180,6 +178,39 @@
                         </fileset>
                     </filesets>
                 </configuration>
+            </plugin>
+
+            <!--  formatting plugin based on eclipse formatter configuration file -->
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+                <version>1.20.0</version>
+                <configuration>
+                    <java>
+                        <includes>
+                            <include>src/main/java/**/*.java</include>
+                            <include>src/test/java/**/*.java</include>
+                        </includes>
+                        <importOrder>  <!-- a custom import ordering -->
+                            <order>java,javax,org,com,</order>
+                        </importOrder>
+                        <eclipse>
+                            <!-- AAS Code Style -->
+                            <file>${basedir}/eclipse-java-formatter.xml</file>
+                            <version>4.10.0</version>
+                        </eclipse>
+                        <removeUnusedImports/>
+                    </java>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>spotless-process</id>
+                        <phase>process-sources</phase>
+                        <goals>
+                            <goal>apply</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- create a jar with sources -->
@@ -221,6 +252,30 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- create required directories -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>createDirs</id>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/impl"/>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/builder"/>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/annotations"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

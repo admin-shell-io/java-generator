@@ -1,0 +1,24 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:process-class-to-abstract-builder(?class) {
+
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'builder')
+
+    st:call-template(idstt:basic-imports)
+
+    "\n"
+    "\n"
+    "public abstract class " st:call-template(idstt:to_builder_name, ?class) "<T extends " st:call-template(idstt:to_interface_name, ?class)
+        ", B extends " st:call-template(idstt:to_builder_name, ?class) "<T, B>> extends ExtendableBuilder<T, B> {"
+
+
+    # method implementation
+    
+    st:call-template(idstt:subclass-properties-to-methods, ?class, 'builder')
+
+    "\n}\n"
+
+}
+WHERE {}

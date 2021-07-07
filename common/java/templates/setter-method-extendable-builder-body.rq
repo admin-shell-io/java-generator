@@ -1,0 +1,31 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+template idstt:setter-method-extendable-builder-body(?property, ?class, ?addSingleArrayElement) {
+
+    " {"
+
+    "\n\t\tgetBuildingInstance()"
+    if(?addSingleArrayElement,
+        concat(
+            ".get",
+            ucase(substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 1, 1)),
+            substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 2),
+            "().add(", st:call-template(idstt:to_java_property_name, ?property)
+        ),
+        concat(
+            ".set",
+            ucase(substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 1, 1)),
+            substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 2),
+            "(", st:call-template(idstt:to_java_param_name, ?property, ?class)
+        )
+    )
+     ");"
+    "\n\t\treturn getSelf();"
+
+    "\n\t}"
+
+}
+where{
+    ?class a owl:Class .
+}

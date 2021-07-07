@@ -1,0 +1,9 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:start-static-files {
+
+    st:call-template(idstt:custom-static-files)
+        
+}
+where  {}
+

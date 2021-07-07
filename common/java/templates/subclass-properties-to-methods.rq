@@ -7,7 +7,8 @@ template idstt:subclass-properties-to-methods(?class, ?syntax) {
     if (str(?syntax) = 'builder', st:call-template(idstt:properties-to-builder-methods, ?class, ?superClass),
     if (str(?syntax) = 'interface', st:call-template(idstt:properties-to-interface-methods, ?class ),
     if (str(?syntax) = 'enum', st:call-template(idstt:properties-to-enum-methods, ?class, ?superClass),
-    ''))))
+    if (str(?syntax) = 'mixin', st:call-template(idstt:properties-to-mixin-methods, ?class, ?superClass),
+    '')))))
 
 }
 where {

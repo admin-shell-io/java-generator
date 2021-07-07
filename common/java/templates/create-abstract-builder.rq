@@ -1,0 +1,29 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:create-abstract-builder {
+
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'builder')
+
+    "\npublic abstract class AbstractBuilder<T> implements Builder<T> {"
+    "\n"
+    "\n\tprivate final T buildingInstance;"
+    "\n"
+    "\n\tprotected AbstractBuilder(){"
+    "\n\t\tbuildingInstance = newBuildingInstance();"
+    "\n\t}"
+    "\n"
+    "\n\tprotected abstract T newBuildingInstance();"
+    "\n"
+    "\n\tprotected T getBuildingInstance() {"
+    "\n\t\treturn buildingInstance;"
+    "\n\t}"
+    "\n"
+    "\n\t@Override"
+    "\n\tpublic T build() {"
+    "\n\t\treturn buildingInstance;"
+    "\n\t}"
+
+    "\n\n}"
+}
+WHERE {}
