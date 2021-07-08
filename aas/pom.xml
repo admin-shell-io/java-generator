@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.adminshell.aas</groupId>
+    <groupId>io.admin-shell.aas</groupId>
     <artifactId>model</artifactId>
 	
 	<properties>
