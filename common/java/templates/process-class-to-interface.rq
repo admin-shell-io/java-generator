@@ -1,3 +1,19 @@
+#
+# Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -13,7 +29,7 @@ template idstt:process-class-to-interface(?class) {
     "/**" st:call-template(idstt:anything-to-comment, ?class, false) "\n*/"
     "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
     "\n@JsonSubTypes({"
-        
+
         if (STRLEN(st:call-template(idstt:class-to-json-annotation, ?class)) > 1,
             # there is an implementation for this interface
             CONCAT(
@@ -30,8 +46,8 @@ template idstt:process-class-to-interface(?class) {
                     ""
             )
         )
-        
-        
+
+
     "\n})"
     "\n"
     "public interface " st:call-template(idstt:to_interface_name, ?class)
@@ -44,7 +60,7 @@ template idstt:process-class-to-interface(?class) {
 
         "\n\t// standard methods\n"
         st:call-template(idstt:interface-default-methods, ?class)
-        
+
         if (STRLEN(STR(?interfacePropertyMethods)) > 1,
             CONCAT(CONCAT(CONCAT("\n\t// accessor methods as derived from the ", st:get-title()), " ontology\n\n"), STR(?interfacePropertyMethods)),
             ""

@@ -1,0 +1,23 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+# Lists the properties that have the given class as domain and can be translated into basic Java types.
+
+template idstt:properties-to-uml(?class) {
+
+    "# "
+
+    st:call-template(idstt:to_class_name, ?property)
+
+    " : "
+
+    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+
+}
+where {
+    ?property rdfs:domain ?class;
+        rdfs:range ?range.
+
+    bind( st:get-namespace() as ?ns )
+    #filter(strstarts(str(?range), str(?ns)))
+}

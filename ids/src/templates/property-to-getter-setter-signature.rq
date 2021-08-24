@@ -1,0 +1,6 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:property-to-getter-setter-signature(?property, ?class) {
+    st:call-template(idstt:to_java_property_name, ?property)
+}
+where {}

@@ -1,3 +1,16 @@
+Copyright (C) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
+
+The Serializers contained in this repository provide the functionalities to
+serialize and deserialize instances of the Asset Administration Shell data model
+from and to the AAS Java Model library. It is licensed under the Apache License
+2.0 (Apache-2.0, see below).
+The Model uses the concepts of the document "Details of the Asset
+Administration Shell" published on www.plattform-i40.de which is licensed
+under Creative Commons CC BY-ND 3.0 DE.
+
+-------------------------------------------------------------------------------
+
+
                                  Apache License
                            Version 2.0, January 2004
                         http://www.apache.org/licenses/
@@ -175,6 +188,16 @@
 
    END OF TERMS AND CONDITIONS
 
+<<<<<<< HEAD
+Copyright 2021-today Fraunhofer IAIS/EIS
+
+Contact:
+Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS
+Department Enterprise Information Systems
+Schloss Birlinghoven
+53757 Sankt Augustin
+E-Mail: ids-support@iais.fraunhofer.de
+=======
    APPENDIX: How to apply the Apache License to your work.
 
       To apply the Apache License to your work, attach the following
@@ -187,6 +210,7 @@
       identification within third-party archives.
 
    Copyright 2020 Fraunhofer IAIS
+>>>>>>> admin-shell-io/main
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

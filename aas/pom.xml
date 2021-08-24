@@ -11,13 +11,13 @@
 
     <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
     <artifactId>java</artifactId>
-	
+
 	<properties>
         <ontology.title>Asset Administration Shell</ontology.title>
 		<ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
 		<ontology.namespace.prefix>aas</ontology.namespace.prefix>
 	</properties>
-	
+
 	<dependencies>
         <dependency>
             <groupId>io.adminshell.aas</groupId>
@@ -67,9 +67,6 @@
                 <tmp-path>/tmp</tmp-path>
             </properties>
         </profile>
-		
-		<!-- Developer specific profiles, indicating the location of sources -->
-		<!-- TODO: While it would be very nice to put profiles here for the Java generation, it would kind of kill things like Visualization and JSONLD-Context. Any ideas? -->
     </profiles>
 
     <build>
@@ -137,7 +134,7 @@
                             <outputDirectory>${basedir}</outputDirectory>
                             <resources>
                                 <resource>
-                                    <targetPath>${basedir}/src/main/java/de/fraunhofer/iais/eis</targetPath>
+                                    <targetPath>${basedir}/src/main/java/</targetPath>
                                     <directory>${tmp-path}</directory>
                                     <includes>
                                         <include>**/*.java</include>
@@ -156,7 +153,7 @@
                 <configuration>
                     <filesets>
                         <fileset>
-                            <directory>${basedir}/src/main/java/de/fraunhofer/iais/eis</directory>
+                            <directory>${basedir}/src/main/java/io/adminshell</directory>
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
@@ -221,6 +218,30 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- create required directories -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <id>createDirs</id>
+                        <phase>initialize</phase>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/impl"/>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/builder"/>
+                                <mkdir dir="${tmp-path}/io/adminshell/aas/v3/model/annotations"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

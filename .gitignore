@@ -6,7 +6,7 @@
 
 .idea/
 
-aas/src/main/java/de/fraunhofer/iais/eis/*.java
+aas/src/main/java/**/*.java
 ids/src/main/java/de/fraunhofer/iais/eis/*.java
 
 visualization/*.plantuml
