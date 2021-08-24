@@ -32,6 +32,14 @@
             </properties>
         </profile>
         <profile>
+            <id>dev-bader-aas</id>
+            <properties>
+                <infomodel-sourcebase>
+                    ../aas-spec/schemas/rdf/full
+                </infomodel-sourcebase>
+            </properties>
+        </profile>
+        <profile>
             <id>CI</id>
             <properties>
                 <infomodel-sourcebase>
