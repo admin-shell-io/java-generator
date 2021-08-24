@@ -1,3 +1,19 @@
+#
+# Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
@@ -10,7 +26,7 @@ template idstt:process-class-to-builder-with-map(?class) {
 
     "\npublic class " st:call-template(idstt:to_builder_name, ?class)
     " extends AbstractBuilder<" st:call-template(idstt:to_bean_name, ?class) "> {\n"
-	
+
     # constructors
 
     "\n"
@@ -22,7 +38,7 @@ template idstt:process-class-to-builder-with-map(?class) {
 	if (?hasId,
       # then
           CONCAT(CONCAT(CONCAT(CONCAT(
-		  "\n\tpublic ", 
+		  "\n\tpublic ",
 		  st:call-template(idstt:to_builder_name, ?class)),
 		  "(URI id) {"),
 		  "\n\t\tsuper(id);"),
@@ -36,7 +52,7 @@ template idstt:process-class-to-builder-with-map(?class) {
     "\n\t}"
     "\n"
 
-	
+
 	if (?hasId,
       # then
 	  CONCAT(CONCAT(CONCAT(CONCAT(
@@ -65,7 +81,7 @@ template idstt:process-class-to-builder-with-map(?class) {
     )
     "\n\t*/"
     "\n\tfinal public " st:call-template(idstt:to_bean_name, ?class) " build() "
-    if(?hasId, 
+    if(?hasId,
         "throws ConstraintViolationException ",
         ""
     )
@@ -85,7 +101,7 @@ template idstt:process-class-to-builder-with-map(?class) {
 		lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1))),
 		substr(st:call-template(idstt:to_bean_name, ?class), 2)),
 		");"),
-		
+
       # else
           ""
     )

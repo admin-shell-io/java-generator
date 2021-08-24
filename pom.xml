@@ -1,3 +1,17 @@
+<!--
+    Copyright 2021 Fraunhofer Institute for Software and Systems Engineering
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -8,29 +22,71 @@
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
+
+
+
+    <name>AAS Code Gen Tool</name>
+    <description>The Code Generation Tool to create Java classes of the AAS Metamodel.</description>
+    <url>https://github.com/admin-shell-io/java-generator</url>
+    <inceptionYear>2021</inceptionYear>
+    <organization>
+      <name>Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS</name>
+      <url>https://www.iais.fraunhofer.de/</url>
+    </organization>
+    <licenses>
+      <license>
+        <name>Apache License, Version 2.0</name>
+        <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+
+	<developers>
+		<developer>
+			<name>Sebastian Bader</name>
+			<email>sebastian.bader@iais.fraunhofer.de</email>
+			<organization>Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS</organization>
+			<organizationUrl>https://www.iais.fraunhofer.de/</organizationUrl>
+			<roles>
+				<role>lead</role>
+				<role>developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Matthias Böckmann</name>
+			<email>matthias.boeckmann@iais.fraunhofer.de</email>
+			<organization>Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS</organization>
+			<organizationUrl>https://www.iais.fraunhofer.de/</organizationUrl>
+			<roles>
+				<role>developer</role>
+			</roles>
+		</developer>
+	</developers>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/admin-shell-io/java-generator/issues</url>
+	</issueManagement>
+
     <modules>
         <module>util</module>
-        <module>visualization</module>
         <module>generator</module>
-        <module>jsonld-context</module>
-        <module>ids</module>
         <module>aas</module>
     </modules>
     <properties>
-        <revision>1.0.0-SNAPSHOT</revision>
+  		  <!-- General -->
+        <revision>1.0.4-SNAPSHOT</revision>
         <jackson.version>2.11.2</jackson.version>
         <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-    </properties>
+    		<email>contact@ids.fraunhofer.de</email>
+
+    		<!-- Build info -->
+    		<java.version>11</java.version>
+    		<maven.compiler.release>${java.version}</maven.compiler.release>
+    		<maven.minimum.version>3.3.9</maven.minimum.version>
+  	</properties>
 
     <profiles>
-        <profile>
-            <id>dev-bader</id>
-            <properties>
-                <infomodel-sourcebase>
-                    /Users/sbader/git/InformationModel
-                </infomodel-sourcebase>
-            </properties>
-        </profile>
         <profile>
             <id>dev-bader-aas</id>
             <properties>
@@ -55,30 +111,30 @@
                 </infomodel-sourcebase>
             </properties>
         </profile>
-		<profile>
-			<id>MB</id>
-			<properties>
-				<infomodel-sourcebase>
-					../InfoModel
-				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>MB-AAS</id>
-			<properties>
-				<infomodel-sourcebase>
-					../aas-specs/schemas/rdf/full
-				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>MB-AAS-minimal</id>
-			<properties>
-				<infomodel-sourcebase>
-					../aas-specs/schemas/rdf/minimal
-				</infomodel-sourcebase>
-			</properties>
-		</profile>
+    		<profile>
+    			<id>MB</id>
+    			<properties>
+    				<infomodel-sourcebase>
+    					../InfoModel
+    				</infomodel-sourcebase>
+    			</properties>
+    		</profile>
+    		<profile>
+    			<id>MB-AAS</id>
+    			<properties>
+    				<infomodel-sourcebase>
+    					../aas-specs/schemas/rdf/full
+    				</infomodel-sourcebase>
+    			</properties>
+    		</profile>
+    		<profile>
+    			<id>MB-AAS-minimal</id>
+    			<properties>
+    				<infomodel-sourcebase>
+    					../aas-specs/schemas/rdf/minimal
+    				</infomodel-sourcebase>
+    			</properties>
+    		</profile>
         <profile>
             <id>format</id>
             <properties>
@@ -87,46 +143,22 @@
                 </infomodel-sourcebase>
             </properties>
         </profile>
-		<profile>
-			<id>MB-GAIA</id>
-			<properties>
-				<infomodel-sourcebase>
-					../gaia-x-self-descriptions/implementation/combined-ont
-				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>MB-MDP</id>
-			<properties>
-				<infomodel-sourcebase>
-					../mdp_infomodel/ontology
-				</infomodel-sourcebase>
-			</properties>
-		</profile>
-		<profile>
-			<id>PNL</id>
-			<properties>
-				<infomodel-sourcebase>
-					../InformationModel
-				</infomodel-sourcebase>
-			</properties>
-		</profile>
+    		<profile>
+    			<id>PNL</id>
+    			<properties>
+    				<infomodel-sourcebase>
+    					../InformationModel
+    				</infomodel-sourcebase>
+    			</properties>
+    		</profile>
         <profile>
-			<id>PNL-AAS</id>
-			<properties>
-				<infomodel-sourcebase>
-					../aas-specs/schemas/rdf
-				</infomodel-sourcebase>
-			</properties>
-		</profile>
-        <profile>
-        <id>IDS</id>
-        <properties>
-            <ontology.title>IDSA Information Model</ontology.title>
-            <ontology.namespace>https://w3id.org/idsa/core/</ontology.namespace>
-            <ontology.namespace.prefix>ids</ontology.namespace.prefix>
-        </properties>
-        </profile>
+    			<id>PNL-AAS</id>
+    			<properties>
+    				<infomodel-sourcebase>
+    					../aas-specs/schemas/rdf
+    				</infomodel-sourcebase>
+    			</properties>
+    		</profile>
         <profile>
             <id>AAS</id>
             <properties>

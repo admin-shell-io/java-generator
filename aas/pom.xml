@@ -1,23 +1,37 @@
+<!--
+    Copyright 2021 Fraunhofer Institute for Software and Systems Engineering
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>common</artifactId>
-        <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
-        <version>${revision}</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+  <parent>
+      <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
+      <artifactId>common</artifactId>
+      <version>${revision}</version>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.admin-shell.aas</groupId>
-    <artifactId>model</artifactId>
-	
+  <groupId>io.admin-shell.aas</groupId>
+  <artifactId>model</artifactId>
+
 	<properties>
-        <ontology.title>Asset Administration Shell</ontology.title>
-		<ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace>
-		<ontology.namespace.prefix>aas</ontology.namespace.prefix>
+    <ontology.title>Asset Administration Shell</ontology.title>
+    <ontology.namespace>https://admin-shell.io/aas/3/0/RC01/</ontology.namespace
+    <ontology.namespace.prefix>aas</ontology.namespace.prefix>
 	</properties>
-	
+
 	<dependencies>
         <dependency>
             <groupId>de.fraunhofer.iais.eis.infomodel</groupId>
@@ -67,9 +81,6 @@
                 <tmp-path>/tmp</tmp-path>
             </properties>
         </profile>
-		
-		<!-- Developer specific profiles, indicating the location of sources -->
-		<!-- TODO: While it would be very nice to put profiles here for the Java generation, it would kind of kill things like Visualization and JSONLD-Context. Any ideas? -->
     </profiles>
 
     <build>
