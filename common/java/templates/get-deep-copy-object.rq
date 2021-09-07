@@ -1,0 +1,52 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-deep-copy-object (?class, ?property, ?innerType, ?range, ?field, ?isArray) {
+
+        # DEBUG Statement - check cases: 
+        # "\n//" IRI(?copyCase) "\n"
+
+        if(?copyCase = "PRIMITIVE",
+            CONCAT("builder.", ?builderSig, "(", IRI(?fieldOrItem), ");"),
+
+        if(?copyCase = "CLONABLE",
+            CONCAT(
+                "if (", IRI(?fieldOrItem), " != null){", 
+                    "builder.", ?builderSig, "((", IRI(?innerType), ") ", IRI(?fieldOrItem), ".clone());",
+                "}"),
+
+        if(?copyCase = "URI",
+            CONCAT(
+                "if (", IRI(?fieldOrItem), " != null){", 
+                    "builder.", ?builderSig, "(", "URI.create(", IRI(?fieldOrItem), ".toString()));",
+                "}"),
+
+        if(?copyCase = "TYPEDLITERAL",
+            CONCAT(
+                "if (", IRI(?fieldOrItem), " != null &&", IRI(?fieldOrItem), ".getLanguage() != null){",
+                    "builder.", ?builderSig, "(new TypedLiteral(", IRI(?fieldOrItem), ".getValue(), ", IRI(?fieldOrItem), ".getLanguage()));",
+                "} else {",
+                    "builder.", ?builderSig, "(new TypedLiteral(", IRI(?fieldOrItem), ".getValue(), URI.create(", IRI(?fieldOrItem), ".getType())));",
+                "}"),
+        
+        if(?copyCase = "RDFRESOURCE",
+            CONCAT(
+                "if (", IRI(?fieldOrItem), " != null){",
+                    "builder.", ?builderSig, "(new RdfResource(", IRI(?fieldOrItem), ".getValue(), URI.create(", IRI(?fieldOrItem) ,".getType())));",
+                "}"),
+
+        if(?copyCase = "ENUM",
+            CONCAT("builder.", ?builderSig, "(", IRI(?fieldOrItem), ");"),
+
+        # ELSE: a class from the model which is also implements deepCopy
+            CONCAT(
+                "if (", IRI(?fieldOrItem), " != null){",
+                    "builder.", ?builderSig, "(", IRI(?fieldOrItem), ".deepCopy());",
+                "}")    
+        ))))))
+        
+}
+WHERE  {
+	BIND(st:call-template(idstt:get-deep-copy-case, ?innerType, ?range) AS ?copyCase)
+    BIND(if(?isArray, "item", CONCAT("this.", STR(?field))) AS ?fieldOrItem)
+    BIND(st:call-template(idstt:property-to-builder-signature, ?property, ?class) AS ?builderSig)
+}

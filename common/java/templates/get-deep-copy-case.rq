@@ -1,0 +1,35 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-deep-copy-case (?innerType, ?range) {
+
+        # TODO: LangString? Currently not used in IDS
+
+        # check primitives - no additional steps necessary
+		if(EXISTS { VALUES ?innerType { "String" "int" "Integer" "long" "Long" "short" "Short" "float" "Float" "double" "Double" "boolean" "Boolean" "java.math.BigDecimal" "BigInteger" "javax.xml.datatype.Duration" } },
+            "PRIMITIVE",
+
+        if(EXISTS { VALUES ?innerType {"XMLGregorianCalendar" "byte[]" "Byte[]"}},
+            "CLONABLE",
+
+        if(?innerType = "URI",
+            "URI",
+
+        if(?innerType = "TypedLiteral",
+            "TYPEDLITERAL",
+        
+        if(?innerType = "RdfResource",
+            "RDFRESOURCE",
+
+        if(?isEnum,
+            "ENUM",
+
+        # ELSE: a class from the model which is also implements deepCopy
+            "MODELCLASS"        
+        ))))))
+        
+
+    
+}
+WHERE  {
+    BIND(st:call-template(idstt:get-class-is-enum, ?range) AS ?isEnum)
+}

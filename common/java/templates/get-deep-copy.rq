@@ -1,0 +1,21 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-deep-copy (?class, ?forInterface) {
+	
+	if(?forInterface, 
+        # interface signature
+        CONCAT("\n\t@Beta\n\tpublic ", st:call-template(idstt:to_interface_name, ?class), " deepCopy();\n"),
+        # for bean:
+        CONCAT("\n\t@Override\n\tpublic ", st:call-template(idstt:to_interface_name, ?class), " deepCopy() {",
+            "\n\t\t", st:call-template(idstt:to_builder_name, ?class), " builder = new ", st:call-template(idstt:to_builder_name, ?class), "();\n",
+            st:call-template(idstt:get-deep-copy-properties, ?class),
+            "\n\t\treturn builder.build();",
+            "\n\t}\n\n"
+        )
+    )
+    
+
+}
+where {
+    
+}

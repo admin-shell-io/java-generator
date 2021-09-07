@@ -1,0 +1,14 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-deep-copy-array (?class, ?property, ?javaType, ?range, ?field) {
+
+		"\t\tfor (" IRI(?innerType) " item : this." IRI(?field) ") {"
+		"\n\t\t\t" st:call-template(idstt:get-deep-copy-object, ?class, ?property, ?innerType, ?range, ?field, true)
+		"\n\t\t}"
+        
+
+    
+}
+WHERE  {
+    BIND(STRBEFORE(STRAFTER(STR(?javaType), "List<"), ">") AS ?innerType)
+}

@@ -1,13 +1,15 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:get-class-deep-copy-body-properties(?class) {
+template idstt:get-deep-copy-properties (?class) {
 
-    group {
-        format {
-            "other.%s = (%s) Util.clone(this.%s);"
-            ?field ?javaType ?field
-        }
-        ; separator = "\n\t\t"}
+		if(STRSTARTS(STR(?javaType), "List<"),
+			# Array: need to go elemetwise
+            st:call-template(idstt:get-deep-copy-array, ?class, ?property, ?javaType, ?range, ?field),
+			# Object: directly copy the element
+            CONCAT("\t\t",
+            st:call-template(idstt:get-deep-copy-object, ?class, ?property, ?javaType, ?range, ?field, false))
+		)
+        
 
     
 }
@@ -27,4 +29,5 @@ WHERE  {
         }
     }
     BIND(st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">") as ?javaType)
+	# make range optional, use bind range or rdf:resource
 }

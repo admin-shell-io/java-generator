@@ -1,0 +1,13 @@
+prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
+
+template idstt:get-class-is-enum (?class) {
+    if(BOUND(?instance), true, false)
+}
+
+WHERE{
+    OPTIONAL {
+        ?class a owl:Class.
+        ?subClass rdfs:subClassOf* ?class .
+        ?instance a ?subClass .
+    }
+}

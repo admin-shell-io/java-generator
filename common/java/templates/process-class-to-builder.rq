@@ -1,31 +1,16 @@
-#
-# Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-builder(?class) {
 
-    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'builder')
 
     st:call-template(idstt:basic-imports)
 
     "\n"
     "\n"
-    "public class " st:call-template(idstt:to_builder_name, ?class)
+    "public class " st:call-template(idstt:to_builder_name, ?class) " implements Builder<" st:call-template(idstt:to_interface_name, ?class) ">"
 
     " {\n"
 
@@ -57,13 +42,13 @@ template idstt:process-class-to-builder(?class) {
 
     # build method
 
-    "\n\t/**"
+    "\n\n\t/**"
     "\n\t* This function takes the values that were set previously via the other functions of this class and turns them into a Java bean."
     "\n\t* @return Bean with specified values"
     "\n\t* @throws ConstraintViolationException This exception is thrown, if a validator is used and a violation is found."
     "\n\t*/"
-    "\n"
-    "\n\tfinal public " st:call-template(idstt:to_interface_name, ?class) " build() throws ConstraintViolationException {"
+    "\n\t@Override"
+    "\n\tpublic " st:call-template(idstt:to_interface_name, ?class) " build() throws ConstraintViolationException {"
     "\n\t\tVocabUtil.getInstance().validate(" lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ");"
     "\n\t\treturn " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ";"
     "\n\t}"
@@ -71,4 +56,4 @@ template idstt:process-class-to-builder(?class) {
     "\n}\n"
 
 }
-where {}
+WHERE {}
