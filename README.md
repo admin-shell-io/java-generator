@@ -9,7 +9,7 @@ This is a tool for the automated creation of a Java library containing all class
 You can build the project using Maven by simply executing at the repository
 root:
 
-`mvn clean package -P <Profile Name> -pl aas`
+`mvn clean package -P <Profile Name>`
 
 
 # Project Structure
