@@ -19,7 +19,8 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-interface(?class) {
 
-    "package de.fraunhofer.iais.eis;"
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'interface')
     "\n"
 
     st:call-template(idstt:basic-imports)
@@ -27,42 +28,64 @@ template idstt:process-class-to-interface(?class) {
     "\n\n"
 
     "/**" st:call-template(idstt:anything-to-comment, ?class, false) "\n*/"
-    "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")"
-    "\n@JsonSubTypes({"
+    if(?useJackson,
+        "\n@JsonTypeInfo(use=JsonTypeInfo.Id.NAME, property=\"@type\")\n@JsonSubTypes({",
 
+        "\n@KnownSubtypes({")
+        
         if (STRLEN(st:call-template(idstt:class-to-json-annotation, ?class)) > 1,
             # there is an implementation for this interface
             CONCAT(
                 st:call-template(idstt:class-to-json-annotation, ?class),
                 # there might also be sub interfaces -> if so, concatenate with comma
-                if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
-                    CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class)),
+                if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface')) > 1,
+                    CONCAT(",", st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface')),
                     ""
                 )
             ),
             # there is no implementation (abstract class), only possibly sub interfaces
-            if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class)) > 1,
-                    st:call-template(idstt:subclass-to-json-annotation, ?class),
+            if (STRLEN(st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface')) > 1,
+                    st:call-template(idstt:subclass-to-json-annotation, ?class, 'interface'),
                     ""
             )
         )
-
-
+        
+        
     "\n})"
     "\n"
     "public interface " st:call-template(idstt:to_interface_name, ?class)
 
-    if (bound(?superClass),
-        concat(" extends ", st:call-template(idstt:subclasses-to-list, ?class)),
-        "")
+    # check, if there should be a ModelClass interface
+	if(?hasModelSuperclass,
+		if(!bound(?superClass),
+            #then - has ModelClass because no other interface is implemented
+            " extends ModelClass ",
+            #else - would have ModelClass, but already fulfilled via super interfaces
+            " extends "
+        ),
+        if(bound(?superClass),
+            # no ModelClass interface, but other interfaces
+            " extends ",
+            # no ModelClass and no other interfaces
+            ""
+        )
+	)
+
+    # list the other interfaces to extend, if any
+	if(bound(?superClass),
+		#then
+		st:call-template(idstt:subclasses-to-list, ?class),
+		#else
+		""
+	)
 
     " {\n"
 
-        "\n\t// standard methods\n"
+        if(?addSectionComments, "\n\t// standard methods\n", "")
         st:call-template(idstt:interface-default-methods, ?class)
-
+        
         if (STRLEN(STR(?interfacePropertyMethods)) > 1,
-            CONCAT(CONCAT(CONCAT("\n\t// accessor methods as derived from the ", st:get-title()), " ontology\n\n"), STR(?interfacePropertyMethods)),
+            CONCAT(if(?addSectionComments, CONCAT("\n\t// accessor methods as derived from the ", st:get-title(), " ontology\n\n"), ""), STR(?interfacePropertyMethods)),
             ""
         )
         "\n"
@@ -75,7 +98,10 @@ where {
 
     BIND( st:get-namespace() as ?ns )
     BIND( st:call-template(idstt:properties-to-interface-methods, ?class) as ?interfacePropertyMethods )
-
+	BIND( st:has-superclass-of-all-classes() as ?hasModelSuperclass )
+    BIND(st:add-jackson-annotations() AS ?useJackson)
+    BIND( st:section-comments() AS ?addSectionComments )
+	
 
     optional {
         ?class rdfs:subClassOf ?superClass.

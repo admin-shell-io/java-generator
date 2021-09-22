@@ -1,7 +1,0 @@
-prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
-
-
-template idstt:property-to-builder-signature(?property, ?class) {
-    CONCAT(st:call-template(idstt:to_java_field_name, ?property, ?class), "_")
-}
-where {}

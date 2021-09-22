@@ -20,9 +20,9 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 template idstt:to_java_param_name(?property, ?class) {
     if (?allowsList,
         # then
-        IRI(st:call-template(idstt:to_plural_form, ?propertyFieldName)),
+        REPLACE(IRI(st:call-template(idstt:to_plural_form, ?propertyFieldName)), "\"", ""),
         # else
-        IRI(?propertyFieldName)
+        REPLACE(IRI(?propertyFieldName), "\"", "")
     )
 
 }

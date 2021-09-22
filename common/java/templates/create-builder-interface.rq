@@ -21,10 +21,22 @@ template idstt:create-builder-interface {
     st:call-template(idstt:get-license)
     st:call-template(idstt:get-package, 'builder')
 
+    if(?hasBuilderException,
+        "\nimport de.fraunhofer.iais.eis.util.ConstraintViolationException\n",
+        ""
+    )
+
     "\npublic interface Builder<T> {\n"
 
-    "\n\tpublic T build();"
+    "\n\tpublic T build()" 
+    if(?hasBuilderException,
+        " throws ConstraintViolationException",
+        ""
+    )
+    ";"
 
     "\n\n}"
 }
-WHERE {}
+WHERE {
+    BIND(st:has-builder-exception() AS ?hasBuilderException)
+}

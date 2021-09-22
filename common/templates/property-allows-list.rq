@@ -18,7 +18,7 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 prefix sh: <http://www.w3.org/ns/shacl#>
 
-template idstt:property-allows-list(?property) {
+template idstt:property-allows-list(?property, ?class) {
 
     if ( ?isArray,
         # then

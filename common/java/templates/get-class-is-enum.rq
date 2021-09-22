@@ -16,27 +16,14 @@
 
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:get-class-field-names-formatted(?class) {
-
-    group {
-        format {
-            "this.%s"
-            ?field
-        }
-        ; separator = ",\n\t\t\t"}
-
+template idstt:get-class-is-enum (?class) {
+    if(BOUND(?instance), true, false)
 }
-WHERE  {
-    ?class rdfs:subClassOf* ?superClass .
+
+WHERE{
     OPTIONAL {
-        {
-            ?property rdfs:domain ?superClass .
-            BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
-        }
-        UNION
-        {
-            ?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass .
-            BIND(st:call-template(idstt:to_java_field_name, ?property, ?superClass) as ?field )
-        }
+        ?class a owl:Class.
+        ?subClass rdfs:subClassOf* ?class .
+        ?instance a ?subClass .
     }
 }

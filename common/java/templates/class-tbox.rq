@@ -20,44 +20,59 @@ prefix sh: <http://www.w3.org/ns/shacl#>
 
 template idstt:class-tbox(?class) {
 
-    if (bound(?message) && (
-        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
-        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
-      ),
+    if (?isAbstract,
       # then
           "",
       # else
           kg:write(
-              concat("/tmp/", st:call-template(idstt:to_bean_name, ?class), ".java"),
+              concat("/tmp/", st:call-template(idstt:package-to-path, 'bean'), st:call-template(idstt:to_bean_name, ?class), ".java"),
               st:call-template(idstt:process-class-to-bean, ?class)
           )
       )
 
 
-      if (bound(?message) && (
-        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is a abstract class")) ||
-        contains(str(?message), concat(st:call-template(idstt:to_class_name, ?class), " is an abstract class"))
-      ),
+      if (?isAbstract,
       # then
           "",
       # else
+        if (?hasMap,
+            kg:write(
+              concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), st:call-template(idstt:to_builder_name, ?class), ".java"),
+              st:call-template(idstt:process-class-to-builder-with-map, ?class)
+            ),
+            if(?hasExtendable,
+                kg:write(
+                    concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), st:call-template(idstt:to_builder_name, ?class), ".java"),
+                    st:call-template(idstt:process-class-to-abstract-builder, ?class)
+                ),
+                kg:write(
+                    concat("/tmp/", st:call-template(idstt:package-to-path, 'builder'), st:call-template(idstt:to_builder_name, ?class), ".java"),
+                    st:call-template(idstt:process-class-to-builder, ?class)
+                )
+            )
+        ) 
+      )
+
+      if (?hasMixin,
+      # then
           kg:write(
-              concat("/tmp/", st:call-template(idstt:to_builder_name, ?class), ".java"),
-              st:call-template(idstt:process-class-to-builder, ?class)
-          )
+              concat("/tmp/", st:call-template(idstt:package-to-path, 'mixin'), st:call-template(idstt:to_mixin_name, ?class), ".java"),
+              st:call-template(idstt:process-class-to-mixin, ?class)
+          ),
+      # else
+          ""
       )
 
     kg:write(
-        concat("/tmp/", st:call-template(idstt:to_interface_name, ?class), ".java"),
+        concat("/tmp/", st:call-template(idstt:package-to-path, 'interface'), st:call-template(idstt:to_interface_name, ?class), ".java"),
         st:call-template(idstt:process-class-to-interface, ?class)
     )
 
 }
 where  {
     ?class a owl:Class.
-
-    optional {
-        ?shape sh:targetClass ?class ;
-            sh:sparql [ sh:message ?message ] .
-    }
+    BIND( st:has-builder-with-map() as ?hasMap )
+    BIND( st:has-extendable-builder() as ?hasExtendable )
+    BIND( st:call-template(idstt:class-is-abstract, ?class) AS ?isAbstract )
+    BIND( st:has-mixin() AS ?hasMixin )
 }

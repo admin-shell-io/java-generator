@@ -19,23 +19,8 @@ prefix dcat: <http://www.w3.org/ns/dcat#>
 
 template st:start {
 
-    if (bound(?instance),
-        # then
-        st:call-template(idstt:class-abox, ?class),
-        # else
-        st:call-template(idstt:class-tbox, ?class)
-    )
-
+        st:call-template(idstt:start-static-files)
+    st:call-template(idstt:start-classes-and-instances)
+    
 }
-where  {
-    ?class a owl:Class.
-    OPTIONAL {
-        ?instance a ?class
-    }
-    OPTIONAL {
-        ?subClass rdfs:subClassOf* ?class .
-        ?instance a ?subClass .
-    }
-    FILTER (!isBlank(?class))
-}
-GROUP BY ?class
+where  {}
