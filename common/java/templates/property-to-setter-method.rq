@@ -17,11 +17,11 @@
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
+template idstt:property-to-setter-method(?property, ?class, ?syntax) {
 
     # method name
 
-    if (?forBuilder,
+    if (?syntax = 'builder',
         # then
         st:call-template(idstt:property-to-builder-signature, ?property, ?class),
         # else
@@ -33,14 +33,19 @@ template idstt:property-to-setter-method(?property, ?class, ?forBuilder) {
     # method params
     "("
         # parameter type
-        st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+		if( ! BOUND(?range) || COUNT(?range) > 1 || isBlank(?range), "RdfResource", 
+			st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+		)
         " "
 
         # parameter label
         st:call-template(idstt:to_java_param_name, ?property, ?class)
     ")"
+	if(?syntax = 'mixin', ";", "")
 
 }
 where  {
-    ?property rdfs:range ?range.
-}
+	OPTIONAL {
+		?property rdfs:range ?range.
+	}
+} GROUP BY ?property

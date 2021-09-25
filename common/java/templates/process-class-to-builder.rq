@@ -19,13 +19,14 @@ prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 template idstt:process-class-to-builder(?class) {
 
-    "package de.fraunhofer.iais.eis;\n"
+    st:call-template(idstt:get-license)
+    st:call-template(idstt:get-package, 'builder')
 
     st:call-template(idstt:basic-imports)
 
     "\n"
     "\n"
-    "public class " st:call-template(idstt:to_builder_name, ?class)
+    "public class " st:call-template(idstt:to_builder_name, ?class) " implements Builder<" st:call-template(idstt:to_interface_name, ?class) ">"
 
     " {\n"
 
@@ -57,13 +58,13 @@ template idstt:process-class-to-builder(?class) {
 
     # build method
 
-    "\n\t/**"
+    "\n\n\t/**"
     "\n\t* This function takes the values that were set previously via the other functions of this class and turns them into a Java bean."
     "\n\t* @return Bean with specified values"
     "\n\t* @throws ConstraintViolationException This exception is thrown, if a validator is used and a violation is found."
     "\n\t*/"
-    "\n"
-    "\n\tfinal public " st:call-template(idstt:to_interface_name, ?class) " build() throws ConstraintViolationException {"
+    "\n\t@Override"
+    "\n\tpublic " st:call-template(idstt:to_interface_name, ?class) " build() throws ConstraintViolationException {"
     "\n\t\tVocabUtil.getInstance().validate(" lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ");"
     "\n\t\treturn " lcase(substr(st:call-template(idstt:to_bean_name, ?class), 1, 1)) substr(st:call-template(idstt:to_bean_name, ?class), 2) ";"
     "\n\t}"

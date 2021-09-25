@@ -16,7 +16,7 @@
 
 prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
-template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
+template idstt:property-to-getter-method(?property, ?class, ?syntax) {
 
     IF(STRLEN(st:call-template(idstt:range-jackson-annotation, ?property, ?range)) > 1,
         # then
@@ -39,16 +39,24 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
     )
 
     "\n\t"
-    concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t")
-
-    # visibility modifier (public for interfaces, final public for enum/impl)
-    if (?isInterface,
-        "public ",
-        "final public "
+	if(?syntax = 'mixin' || ?syntax = 'bean',
+	    #No need to add annotations here, as they are inherited from interface
+	    "",
+	    if(?useJackson,
+			concat("@JsonProperty(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"),
+			concat("@IRI(\"", st:call-template(idstt:to_full_identifier, ?property), "\")\n\t"))
+	)
+    
+    # visibility modifier (interfaces need none, final public for enum)
+    if(?syntax = 'interface', "",
+        if (?syntax = 'mixin' || ?syntax = 'bean',
+            "public ",
+            "final public "
+        )
     )
-
-    st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
-
+	if( ! BOUND(?range) || COUNT(?range) > 1 || isBlank(?range), "RdfResource", 
+		st:call-template(idstt:range-to-java-type, ?class, ?property, ?range, "<", ">")
+	)
     " "
 
     # method name
@@ -58,8 +66,12 @@ template idstt:property-to-getter-method(?property, ?class, ?isInterface) {
         ucase(substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 1, 1)),
         substr(str(st:call-template(idstt:property-to-getter-setter-signature, ?property, ?class)), 2),
         '()')
+	if(?syntax = 'mixin', ";", "")
 
 }
 where  {
-    ?property rdfs:range ?range.
-}
+    OPTIONAL {
+        ?property rdfs:range ?range.
+    }
+    BIND(st:add-jackson-annotations() AS ?useJackson)
+} GROUP BY ?property

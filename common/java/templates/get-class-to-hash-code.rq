@@ -37,13 +37,13 @@ template idstt:get-class-to-hash-code(?class, ?forInterface) {
         ";",
         # with body for bean
         concat(concat(
-            " {\n\t\treturn Objects.hash(new Object[]{",
+            " {\n\t\treturn Objects.hash(",
             if(bound(?hasProperties) && strlen(?hasProperties) > 1,
                 # then
-                st:call-template(idstt:get-class-field-names-formatted, ?class),
+                st:call-template(idstt:get-class-hash-code-property-list, ?class),
                 # else
                 "super.hashCode()"
-            )), "});\n\t}")
+            )), ");\n\t}")
     )
     "\n"
 }
