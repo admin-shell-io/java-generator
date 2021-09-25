@@ -6,8 +6,9 @@ This is a tool for the automated creation of a Java library containing all class
 
 # Build and Use
 
-You can build the project using Maven by simply executing at the repository
-root:
+Before running the tool, a profile needs to be created. This profile contains information about where the ontology sources reside. In the [pom.xml](pom.xml), add your own profile with a (local) path to your ontology. There are multiple profiles present already which can be used as reference.
+
+Once the profile has been created, you can build the project using Maven by simply executing at the repository root:
 
 `mvn clean package -P <Profile Name>`
 
@@ -16,9 +17,10 @@ root:
 
 The project contains several modules:
 
-- `aas` Maven parent module that contains the respective de-/serializers for the different data formats.
-- `util` Location of the general classes and interfaces that are used by more than one de-/serializer.
-- `generator` AASX de-/serializer
+- `aas` Module containing shapes translating RDF into Java classes matching specific requirements of projects regarding the Asset Administration Shell.
+- `common` Module containing shapes translating RDF into Java classes.
+- `util` Module containing some generic utility classes, such as custom annotations.
+- `generator` This module loads all data required for the translation process from RDF ontologies to Java classes, including the shapes and the ontology.
 
 
 # How to Contribute
@@ -35,6 +37,7 @@ A detailed documentation how to use the tool and how to prepare the input and th
 --- | --- | --- | :---: | :---: | :---: | :---: |
 | Sebastian Bader | Fraunhofer IAIS | [sebbader](https://github.com/sebbader) | x | x | x | x |
 | Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x | x | x | x |
+| Pascal Linden | Fraunhofer IAIS | [plinden](https://github.com/plinden) | x | x | x | x |
 
 This project was initiated by SAP and Fraunhofer to provide a foundation for the
 AAS development and to foster its dissemination.
