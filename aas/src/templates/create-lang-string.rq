@@ -22,6 +22,7 @@ template idstt:create-lang-string {
     st:call-template(idstt:get-package, 'interface')
     st:call-template(idstt:basic-imports)
 
+    "\n@IRI(\"rdf:langString\")"
     "\npublic class LangString implements Serializable {\n"
     "\n\n\t"
 

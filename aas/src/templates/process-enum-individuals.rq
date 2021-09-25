@@ -29,6 +29,12 @@ template idstt:process-enum-individuals(?class) {
 	#Strategy: Find upper case letters preceeded by lower case letters,
 	#split them into different capturing groups, then put an underscore in between
 	#Finally, turn all of that into upper case
+	if(?useJackson, "",
+		CONCAT(
+		"@IRI(\"",
+		st:call-template(idstt:to_full_identifier, ?individual),
+		"\")\n")
+	)
 	ucase(replace(st:call-template(idstt:to_class_name, ?individual), "([a-z])([A-Z])", CONCAT("$1", "_", "$2")))
     ","
 }
@@ -46,6 +52,7 @@ where  {
 	}
 
 	BIND( if (bound(?owlIndividual), ?owlIndividual, ?classIndividual) as ?individual )
+	BIND(st:add-jackson-annotations() AS ?useJackson)
 }
 GROUP BY ?individual
 ORDER BY ?individual

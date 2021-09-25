@@ -18,18 +18,18 @@ prefix idstt: <https://w3id.org/idsa/transformationtemplates/>
 
 template idstt:enum-default-properties (?class) {
 
-    "\n"
-    "\n\tprivate static final Map<String," st:call-template(idstt:to_enum_name, ?class) "> uriInstanceMapping;"
-    "\n\tstatic {"
-    "\n\t\turiInstanceMapping = new HashMap<>();"
-    "\n\t\turiInstanceMapping.putAll(Stream.of(values()).collect(Collectors.toMap(instance -> instance.toString(), instance -> instance)));"
-    "\n\t\turiInstanceMapping.putAll(Stream.of(values()).collect(Collectors.toMap(instance -> instance.getSerializedId().toString(), instance -> instance)));"
-    "\n\t}"
-    "\n"
-    "\n\tprivate URI id;"
-	"\n\tprivate List<TypedLiteral> labels;"
-	"\n\tprivate List<TypedLiteral> comments;"
-	"\n"
+    # "\n"
+    # "\n\tprivate static final Map<String," st:call-template(idstt:to_enum_name, ?class) "> uriInstanceMapping;"
+    # "\n\tstatic {"
+    # "\n\t\turiInstanceMapping = new HashMap<>();"
+    # "\n\t\turiInstanceMapping.putAll(Stream.of(values()).collect(Collectors.toMap(instance -> instance.toString(), instance -> instance)));"
+    # "\n\t\turiInstanceMapping.putAll(Stream.of(values()).collect(Collectors.toMap(instance -> instance.getSerializedId().toString(), instance -> instance)));"
+    # "\n\t}"
+    # "\n"
+    # "\n\tprivate URI id;"
+	# "\n\tprivate List<TypedLiteral> labels;"
+	# "\n\tprivate List<TypedLiteral> comments;"
+	# "\n"
 
 }
 where {}

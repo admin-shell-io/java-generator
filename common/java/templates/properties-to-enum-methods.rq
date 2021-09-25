@@ -21,11 +21,11 @@ template idstt:properties-to-enum-methods(?class, ?superClass) {
 	# Iterates on selected properties and writes getter and setter methods
 
     "\n"
-    "\n\t@JsonIgnore"
+    if(?useJackson, "\n\t@JsonIgnore", "")
 	"\n\t"
 
     # signature
-	st:call-template(idstt:property-to-getter-method, ?property, ?class, false)
+	st:call-template(idstt:property-to-getter-method, ?property, ?class, 'enum')
 
 	" {\n\t"
 	"\t//not implemented for enums\n\t"
@@ -37,4 +37,5 @@ where  {
       {?property rdfs:domain ?superClass.}
       UNION
       {?property rdfs:domain/owl:unionOf/rdf:rest*/rdf:first ?superClass.}
+      BIND(st:add-jackson-annotations() AS ?useJackson)
 }
