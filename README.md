@@ -37,7 +37,7 @@ A detailed documentation how to use the tool and how to prepare the input and th
 --- | --- | --- | :---: | :---: | :---: | :---: |
 | Sebastian Bader | Fraunhofer IAIS | [sebbader](https://github.com/sebbader) | x | x | x | x |
 | Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x | x | x | x |
-| Pascal Linden | Fraunhofer IAIS | [plinden](https://github.com/plinden) | x | x | x | x |
+| Pascal Linden | Fraunhofer IAIS | [pnlinden](https://github.com/pnlinden) | x | x | x | x |
 
 This project was initiated by SAP and Fraunhofer to provide a foundation for the
 AAS development and to foster its dissemination.
