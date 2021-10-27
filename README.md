@@ -37,4 +37,4 @@ A detailed documentation how to use the tool and how to prepare the input and th
 | Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x | x | x | x |
 
 This project was initiated by SAP and Fraunhofer to provide a foundation for the
-AAS development and to foster its dissemination.
+AAS development and to foster its dissemination. 
