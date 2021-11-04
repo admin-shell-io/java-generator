@@ -5,18 +5,25 @@ name: Deploy the
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
 
 jobs:
 
 
-  clone:
+  publish:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
         with:
           name: https://github.com/admin-shell-io/aas-specs
           ref: refs/heads/release
           path: ./aas-specs
+
+      - uses: actions/checkout@master
+        with:
+          name: https://github.com/admin-shell-io/java-model
+          ref: refs/heads/release
+          path: ./java-model          
 
       - name: Show Working directory
         run: ls
@@ -36,13 +43,6 @@ jobs:
 #    - name: Build with Maven
 #      run: mvn -P CI-AAS -B package --file pom.xml
 
-  deploy:
-    steps:
-      - uses: actions/checkout@master
-        with:
-          name: https://github.com/admin-shell-io/java-model
-          ref: refs/heads/release
-          path: ./java-model
 
       - name: Show Working directory
         run: ls
