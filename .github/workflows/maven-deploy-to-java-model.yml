@@ -15,15 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@master
         with:
-          name: https://github.com/admin-shell-io/aas-specs
+          repository: https://github.com/admin-shell-io/aas-specs
           ref: refs/heads/release
           path: ./aas-specs
 
       - uses: actions/checkout@master
         with:
-          name: https://github.com/admin-shell-io/java-model
-          ref: refs/heads/release
-          path: ./java-model          
+          repository: https://github.com/admin-shell-io/java-model
+          path: ./java-model
 
       - name: Show Working directory
         run: ls
