@@ -16,7 +16,6 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: admin-shell-io/aas-specs
-          ref: refs/heads/release
           path: ./aas-specs
 
       - uses: actions/checkout@master
