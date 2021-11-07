@@ -44,7 +44,7 @@ jobs:
 
 
       - name: Show Working directory
-        run: ls **
+        run: ls -R
         
     #  - name: Remove the old Files
     #    run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
