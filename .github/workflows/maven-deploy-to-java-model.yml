@@ -24,7 +24,7 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: admin-shell-io/java-model
-          path: ./java-model
+          path: ../java-model
 
 
       - name: Show current Working directory
