@@ -48,9 +48,12 @@ jobs:
 
       - name: Show Working directory
         run: ls
+        
+      - name: Remove the old Files
+        run: rm -R ../java-model/src/main/java/io/adminshell/aas/v3/model/*
 
       - name: Copy the generated files into the cloned repo
-        run: cp aas/src/main/java/io/adminshell/aas/v3/model/* ../java-model/aas/src/main/java/io/adminshell/aas/v3/model/
+        run: cp aas/src/main/java/io/adminshell/aas/v3/model/* ../java-model/src/main/java/io/adminshell/aas/v3/model/
 
       - name: Add all new files
         run: git add ../java-model/aas/src/main/java/io/adminshell/aas/v3/model/*
