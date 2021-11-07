@@ -41,10 +41,6 @@ jobs:
           cache: maven
     #  - name: Build with Maven
     #    run: mvn -P CI-AAS -B package --file pom.xml
-
-
-      - name: Show Working directory
-        run: ls -R
         
     #  - name: Remove the old Files
     #    run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
@@ -55,8 +51,11 @@ jobs:
       - name: Go into the Java-Model Repo
         run: cd java-model
 
+      - name: Show Working directory
+        run: ls -R
+
       - name: Add all new files
-        run: git add src/main/java/io/adminshell/aas/v3/model
+        run: git add src/main/java/io/adminshell/aas/v3/model/**
 
       - name: Write a commit message
         run: git commit -m "this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/"
