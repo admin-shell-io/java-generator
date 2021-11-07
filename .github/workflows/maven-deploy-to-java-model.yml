@@ -21,12 +21,6 @@ jobs:
           path: aas-specs
           ref: 81e9f3b7aabe4c0a77e738ba9f52415daf589cd6
 
-      - uses: actions/checkout@master
-        with:
-          repository: admin-shell-io/java-model
-          path: java-model
-
-
       - name: Show current Working directory
         run: ls
         
@@ -39,27 +33,18 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
+      
       - name: Build with Maven
         run: mvn -P CI-AAS -B package --file pom.xml
-        
-      - name: Remove the old Files
-        run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
 
-      - name: Copy the generated files into the cloned repo
-        run: cp -r aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
-
-      - name: Show Working directory
-        run: ls -R 
-
-      - name: Add all new files
-        run: git add java-model/src/main/java/io/adminshell/aas/v3/model/**
-
-      - name: Write a commit message 
-        run: | 
-            git config user.email "sebastian.r.bader@web.de"
-            git config user.name "Sebastian Bader"
-            git status
-            git commit -m "this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/"
-
-      - name: Git Push
-        run: git push
+      - name: Pushes test file
+        uses: dmnemec/copy_file_to_another_repo_action@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source_file: 'aas/src/main/java/io/adminshell/aas/v3/model'
+          destination_repo: 'sebbader/java-model'
+          destination_folder: 'src/main/java/io/adminshell/aas/v3/model'
+          user_email: 'sebastian.r.bader@web.de'
+          user_name: 'Sebastian Bader'
+          commit_message: 'this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/'
