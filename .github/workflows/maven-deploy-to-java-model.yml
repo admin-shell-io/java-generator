@@ -54,8 +54,11 @@ jobs:
       - name: Add all new files
         run: git add java-model/src/main/java/io/adminshell/aas/v3/model/**
 
-      - name: Write a commit message
-        run: git commit -m "this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/"
+      - name: Write a commit message 
+        run: | 
+            git config user.email "sebastian.r.bader@web.de"
+            git config user.name "Sebastian Bader"
+            git commit -m "this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/"
 
       - name: Git Push
         run: git push
