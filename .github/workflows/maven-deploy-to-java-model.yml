@@ -1,14 +1,13 @@
 # This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Deploy the
+name: Generate and Deploy new source classes to the Java-Model Repo
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-
 
   publish:
     runs-on: ubuntu-latest
@@ -19,7 +18,7 @@ jobs:
         with:
           repository: admin-shell-io/aas-specs
           path: aas-specs
-          ref: 81e9f3b7aabe4c0a77e738ba9f52415daf589cd6
+          #ref: 81e9f3b7aabe4c0a77e738ba9f52415daf589cd6 # use only until the latest bugfix is merged (state: November 2021)
 
       - name: Show current Working directory
         run: ls
@@ -37,14 +36,14 @@ jobs:
       - name: Build with Maven
         run: mvn -P CI-AAS -B package --file pom.xml
 
-      - name: Pushes test file
+      - name: Push Generated Files
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'aas/src/main/java/io/adminshell/aas/v3/model'
-          destination_repo: 'sebbader/java-model'
-          destination_folder: 'src/main/java/io/adminshell/aas/v3/model'
+          destination_repo: 'admin-shell-io/java-model'
+          destination_folder: 'src/main/java/io/adminshell/aas/v3/'
           user_email: 'sebastian.r.bader@web.de'
           user_name: 'Sebastian Bader'
-          commit_message: 'this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/'
+          commit_message: 'This is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/'
