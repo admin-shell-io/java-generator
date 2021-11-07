@@ -56,7 +56,7 @@ jobs:
         run: cd java-model
 
       - name: Add all new files
-        run: git add src/main/java/io/adminshell/aas/v3/model/*
+        run: git add src/main/java/io/adminshell/aas/v3/model
 
       - name: Write a commit message
         run: git commit -m "this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/"
