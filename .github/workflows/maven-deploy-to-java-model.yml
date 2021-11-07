@@ -24,14 +24,11 @@ jobs:
       - uses: actions/checkout@master
         with:
           repository: admin-shell-io/java-model
-          path: ../java-model
+          path: java-model
 
 
       - name: Show current Working directory
         run: ls
-        
-      - name: Show top Working directory
-        run: ls ../
         
       - name: Remove the examples
         run: rm -R aas-specs/schemas/rdf/examples
@@ -50,13 +47,16 @@ jobs:
         run: ls
         
       - name: Remove the old Files
-        run: rm -R ../java-model/src/main/java/io/adminshell/aas/v3/model/*
+        run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
 
       - name: Copy the generated files into the cloned repo
-        run: cp aas/src/main/java/io/adminshell/aas/v3/model/* ../java-model/src/main/java/io/adminshell/aas/v3/model/
+        run: cp aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
+        
+      - name: Go into the Java-Model Repo
+        run: cd java-model
 
       - name: Add all new files
-        run: git add ../java-model/aas/src/main/java/io/adminshell/aas/v3/model/*
+        run: git add src/main/java/io/adminshell/aas/v3/model/*
 
       - name: Write a commit message
         run: git commit -m "this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/"
