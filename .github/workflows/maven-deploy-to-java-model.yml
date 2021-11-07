@@ -39,14 +39,14 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
-    #  - name: Build with Maven
-    #    run: mvn -P CI-AAS -B package --file pom.xml
+      - name: Build with Maven
+        run: mvn -P CI-AAS -B package --file pom.xml
         
-    #  - name: Remove the old Files
-    #    run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
+      - name: Remove the old Files
+        run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
 
-    #  - name: Copy the generated files into the cloned repo
-    #    run: cp -r aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
+      - name: Copy the generated files into the cloned repo
+        run: cp -r aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
 
       - name: Show Working directory
         run: ls -R 
@@ -58,6 +58,7 @@ jobs:
         run: | 
             git config user.email "sebastian.r.bader@web.de"
             git config user.name "Sebastian Bader"
+            git status
             git commit -m "this is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/"
 
       - name: Git Push
