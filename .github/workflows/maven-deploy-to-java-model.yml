@@ -39,18 +39,18 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           cache: maven
-      - name: Build with Maven
-        run: mvn -P CI-AAS -B package --file pom.xml
+    #  - name: Build with Maven
+    #    run: mvn -P CI-AAS -B package --file pom.xml
 
 
       - name: Show Working directory
-        run: ls
+        run: ls **
         
-      - name: Remove the old Files
-        run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
+    #  - name: Remove the old Files
+    #    run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
 
-      - name: Copy the generated files into the cloned repo
-        run: cp -r aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
+    #  - name: Copy the generated files into the cloned repo
+    #    run: cp -r aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
         
       - name: Go into the Java-Model Repo
         run: cd java-model
