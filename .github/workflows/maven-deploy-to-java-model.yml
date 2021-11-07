@@ -50,7 +50,7 @@ jobs:
         run: rm -R java-model/src/main/java/io/adminshell/aas/v3/model/*
 
       - name: Copy the generated files into the cloned repo
-        run: cp aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
+        run: cp -r aas/src/main/java/io/adminshell/aas/v3/model/* java-model/src/main/java/io/adminshell/aas/v3/model/
         
       - name: Go into the Java-Model Repo
         run: cd java-model
