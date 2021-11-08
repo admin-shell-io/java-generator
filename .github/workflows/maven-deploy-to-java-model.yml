@@ -1,5 +1,7 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+# This workflow will execute the AAS Code Generation Tool for Java based on the latest version of the AAS RDF Ontology
+# (see: https://github.com/admin-shell-io/aas-specs/)
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven and
+# https://github.com/dmnemec/copy_file_to_another_repo_action
 
 name: Generate and Deploy new source classes to the Java-Model Repo
 
@@ -46,4 +48,4 @@ jobs:
           destination_folder: 'src/main/java/io/adminshell/aas/v3/'
           user_email: 'sebastian.r.bader@web.de'
           user_name: 'Sebastian Bader'
-          commit_message: 'This is an automated commit that was triggered by a change in the master branch of https://github.com/admin-shell-io/java-generator/'
+          commit_message: 'This is an automated commit that was triggered by a change in the main branch of https://github.com/admin-shell-io/java-generator/'
