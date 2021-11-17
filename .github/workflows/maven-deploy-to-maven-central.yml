@@ -1,0 +1,56 @@
+# This workflow will execute the AAS Code Generation Tool for Java based on the latest version of the AAS RDF Ontology
+# (see: https://github.com/admin-shell-io/aas-specs/)
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
+
+name: Generate and Deploy the new Library to Sonatype
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/checkout@master
+        with:
+          repository: admin-shell-io/aas-specs
+          path: aas-specs
+          #ref: 81e9f3b7aabe4c0a77e738ba9f52415daf589cd6 # use only until the latest bugfix is merged (state: November 2021)
+
+      - uses: s4u/maven-settings-action@v2.4.1
+        with:
+          servers: |
+          [{
+            "id": "ossrh",
+            "username": "sebbader",
+            "password": "${{ secrets.SEBBADER_OSSHR_PASSWORD }}"
+          },{
+            "id": "0xDFCC34A6",
+            "passphrase": "${{ secrets.GPG_KEY_PASSWORD }}"
+          }]
+
+      - name: Show current Working directory
+        run: ls
+
+      - name: Remove the examples
+        run: rm -R aas-specs/schemas/rdf/examples
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          cache: maven
+
+      - name: Import the GPG key
+        run: gpg --allow-secret-key-import --batch --import ${{ secrets.MYGPGKEY_SEC }} # mygpgkey_sec.gpg
+
+      - name: Build with Maven
+        run: mvn -P CI-AAS -B install --file pom.xml
+
+      - name: deploy library to sonatype
+        run: mvn license:format deploy
