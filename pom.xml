@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.adminshell.aas</groupId>
+    <groupId>io.admin-shell.aas</groupId>
     <artifactId>common</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
@@ -60,7 +60,7 @@
     </modules>
     <properties>
   		  <!-- General -->
-        <revision>1.0.0-SNAPSHOT</revision>
+        <revision>1.2.0</revision>
         <jackson.version>2.11.2</jackson.version>
         <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
     		<email>contact@ids.fraunhofer.de</email>
@@ -69,6 +69,10 @@
     		<java.version>11</java.version>
     		<maven.compiler.release>${java.version}</maven.compiler.release>
     		<maven.minimum.version>3.3.9</maven.minimum.version>
+
+        <gpg.keyname>0xDFCC34A6</gpg.keyname>
+        <plugin.license.version>4.1</plugin.license.version>
+        <plugin.gpg.version>3.0.1</plugin.gpg.version>
   	</properties>
 
     <profiles>
@@ -152,10 +156,45 @@
                 <ontology.namespace.prefix>aas</ontology.namespace.prefix>
             </properties>
         </profile>
+
+        <!-- This profile is for the continuous integration pipeline for deploying to the central repository, which requires artifacts to be signed -->
+        <profile>
+            <id>MavenCentral</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${plugin.gpg.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+
+            <!-- Central Repository deployment configuration -->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
     </profiles>
 
 
-    <distributionManagement>
+<!--    <distributionManagement>
         <repository>
             <id>eis-release-repo</id>
             <name>maven-releases</name>
@@ -174,7 +213,7 @@
             <name>maven-snapshots</name>
             <url>http://maven.iais.fraunhofer.de/artifactory/eis-ids-snapshot</url>
         </repository>
-    </repositories>
+    </repositories>-->
 
     <build>
         <plugins>
@@ -217,6 +256,32 @@
                         <phase>clean</phase>
                         <goals>
                             <goal>clean</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.mycila</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>${plugin.license.version}</version>
+                <configuration>
+                    <licenseSets>
+                        <licenseSet>
+                            <header>license-header.txt</header>
+                            <includes>
+                                <include>**/src/**/*.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/target/generated/**/*.java</exclude>
+                                <exclude>**/src/main/java/org/opcfoundation/ua/_2008/_02/types/*.java</exclude>
+                            </excludes>
+                        </licenseSet>
+                    </licenseSets>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
                         </goals>
                     </execution>
                 </executions>
