@@ -60,7 +60,7 @@
     </modules>
     <properties>
   		  <!-- General -->
-        <revision>1.2.0</revision>
+        <revision>2.0.0-SNAPSHOT</revision>
         <jackson.version>2.11.2</jackson.version>
         <!--<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
     		<email>contact@ids.fraunhofer.de</email>
@@ -80,7 +80,7 @@
             <id>dev-bader-aas</id>
             <properties>
                 <infomodel-sourcebase>
-                    C:\Users\sbader\git\AAS\aas-spec\schemas\rdf\full
+                    ../aas-specs/schemas/rdf
                 </infomodel-sourcebase>
             </properties>
         </profile>
